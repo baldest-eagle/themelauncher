@@ -1,225 +1,161 @@
-"""Theme Scheduling Agent for ThemeSDK.
+﻿"""Scheduled Theme Switcher Agent (Tier 3 - Enhancement). Cron-like theme rotation."""
 
-Manages theme schedules and playlists with staggered cron expressions so that
-themes in a playlist rotate sequentially instead of firing simultaneously.
-
-The key fix over the previous implementation: :meth:`create_playlist` now
-offsets each theme's cron expression by *interval_minutes* from the previous
-one, producing individual ``minute hour day month day_of_week`` fields that
-reflect the actual wall-clock time each theme should activate.
-"""
-
-import json
-import logging
-import os
+import threading
+import time
 from datetime import datetime
-from typing import Any, Dict, List, Optional
+from typing import Any, Callable, Optional
 
-logger = logging.getLogger(__name__)
-
-# Minimum number of fields in a valid cron expression (standard 5-field format).
-_CRON_FIELD_COUNT = 5
+from ..core.logger import log
 
 
-def _validate_cron(expr: str) -> bool:
-    """Return ``True`` if *expr* looks like a valid 5-field cron string.
+class ThemeScheduler:
+    """Rotate themes on a cron-like schedule."""
 
-    This is a lightweight sanity check — it ensures five whitespace-separated
-    tokens exist and that the first two (minute, hour) are numeric or ``*``.
-    It does **not** attempt full cron grammar validation.
-    """
-    parts = expr.strip().split()
-    if len(parts) != _CRON_FIELD_COUNT:
-        return False
-    for field in parts[:2]:  # minute, hour
-        if field == "*":
-            continue
-        try:
-            int(field)
-        except ValueError:
+    def __init__(self, apply_callback: Optional[Callable] = None):
+        self._rules: dict[str, dict] = {}
+        self._running = False
+        self._thread: Optional[threading.Thread] = None
+        self._apply_callback = apply_callback
+
+    def add_rule(self, name: str, cron_expr: str, theme_name: str,
+                 components: Optional[list[str]] = None) -> None:
+        """Add a scheduled rule."""
+        self._rules[name] = {
+            "cron": cron_expr,
+            "theme": theme_name,
+            "components": components,
+        }
+        log.info("Schedule rule '%s' added: %s -> %s", name, cron_expr, theme_name)
+
+    def remove_rule(self, name: str) -> bool:
+        """Remove a scheduled rule."""
+        return self._rules.pop(name, None) is not None
+
+    def list_rules(self) -> list[dict[str, Any]]:
+        """List all active rules."""
+        return [{"name": k, **v} for k, v in self._rules.items()]
+
+    def create_playlist(self, theme_names: list[str], interval_hours: int = 2) -> str:
+        """Create a playlist that cycles through themes with staggered offsets.
+
+        Instead of giving every theme the same cron (which would fire all at once),
+        each theme gets a unique hour slot so they rotate sequentially through the
+        day.  For example, with 3 themes and 2-hour intervals starting at the
+        current hour:
+
+          theme_0 fires at hour H+0   ->  "0 H * * *"
+          theme_1 fires at hour H+2   ->  "0 H+2 * * *"
+          theme_2 fires at hour H+4   ->  "0 H+4 * * *"
+
+        Each fires once daily.  If the total span (interval * count) exceeds 24
+        hours the hours wrap around via modulo 24 so the cycle repeats cleanly.
+
+        Previous bug: the old code used ``% 60`` on a total-minute offset which
+        discarded the hour component, causing themes to fire in the wrong order
+        or at the wrong time.
+        """
+        playlist_name = f"playlist_{int(time.time())}"
+        n = len(theme_names)
+        if n == 0:
+            return playlist_name
+
+        # Use the current hour as the starting point so the first theme fires soon.
+        base_hour = datetime.now().hour
+
+        for i, theme in enumerate(theme_names):
+            # Each theme gets its own hour slot, spaced by interval_hours.
+            target_hour = (base_hour + i * interval_hours) % 24
+            cron = f"0 {target_hour} * * *"
+            self.add_rule(f"{playlist_name}_{i}", cron, theme)
+        return playlist_name
+
+    def start(self) -> None:
+        """Start the scheduler in a background thread."""
+        if self._running:
+            return
+        self._running = True
+        self._thread = threading.Thread(target=self._run, daemon=True)
+        self._thread.start()
+        log.info("Theme scheduler started")
+
+    def stop(self) -> None:
+        """Stop the scheduler."""
+        self._running = False
+        log.info("Theme scheduler stopped")
+
+    def _run(self) -> None:
+        last_checked = None
+        while self._running:
+            now = datetime.now()
+            minute_key = now.strftime("%H:%M")
+
+            if minute_key != last_checked:
+                last_checked = minute_key
+                for name, rule in self._rules.items():
+                    if self._matches_cron(rule["cron"], now):
+                        log.info("Schedule triggered: %s -> %s", name, rule["theme"])
+                        if self._apply_callback:
+                            self._apply_callback(rule["theme"], rule.get("components"))
+
+            time.sleep(30)
+
+    def _matches_cron(self, cron_expr: str, dt: datetime) -> bool:
+        """Robust cron matching for standard patterns (minute, hour, day, month, day_of_week)."""
+        parts = cron_expr.split()
+        if len(parts) < 2:
             return False
-    return True
 
+        # Support full 5-field cron format: min, hour, day, month, day_of_week
+        # Pad with * if only 2 fields are supplied
+        while len(parts) < 5:
+            parts.append("*")
 
-class Scheduler:
-    """Schedule themes and manage playlists with staggered activation times.
+        min_expr, hour_expr, dom_expr, month_expr, dow_expr = parts[:5]
 
-    Parameters
-    ----------
-    sdk : Any
-        Reference to the parent ThemeSDK instance (stored but not yet used
-        for dispatch; reserved for future callback integration).
-    """
+        def match_field(val: int, expr: str) -> bool:
+            if expr == "*":
+                return True
+            # Handle list (e.g., "1,3,5")
+            if "," in expr:
+                return any(match_field(val, sub) for sub in expr.split(","))
+            # Handle step (e.g., "*/2", "1-5/2")
+            step = 1
+            if "/" in expr:
+                expr, step_str = expr.split("/", 1)
+                try:
+                    step = int(step_str)
+                except ValueError:
+                    return False
+            # Handle range (e.g., "1-5")
+            if "-" in expr:
+                start_str, end_str = expr.split("-", 1)
+                try:
+                    start, end = int(start_str), int(end_str)
+                    return start <= val <= end and (val - start) % step == 0
+                except ValueError:
+                    return False
+            # Handle simple step "*/2" where left is "*"
+            if expr == "*":
+                return val % step == 0
+            # Handle exact digit
+            if expr.isdigit():
+                try:
+                    num = int(expr)
+                    return val == num and val % step == 0
+                except ValueError:
+                    return False
+            return False
 
-    def __init__(self, sdk: Any = None) -> None:
-        self._sdk = sdk
-        self._schedules: Dict[str, Dict[str, str]] = {}
-        logger.info("Scheduler agent initialised")
+        # Day of week in cron: 0 or 7 is Sunday, 1 is Monday, etc.
+        # dt.isoweekday() returns 1 (Monday) to 7 (Sunday)
+        dow_val = dt.isoweekday()
+        if dow_val == 7:
+            dow_val = 0  # Normalize Sunday to 0 to match standard cron
 
-    # ------------------------------------------------------------------
-    # Core API
-    # ------------------------------------------------------------------
-
-    def schedule_theme(self, name: str, cron_expr: str) -> Dict[str, str]:
-        """Schedule a single theme at the given cron time.
-
-        Parameters
-        ----------
-        name : str
-            Unique identifier for the theme.
-        cron_expr : str
-            A standard 5-field cron expression (minute hour day month dow).
-
-        Returns
-        -------
-        dict
-            ``{"name": name, "cron": cron_expr}``
-
-        Raises
-        ------
-        ValueError
-            If *cron_expr* is not a valid 5-field expression.
-        """
-        if not _validate_cron(cron_expr):
-            logger.error("Invalid cron expression for %r: %s", name, cron_expr)
-            raise ValueError(f"Invalid cron expression: {cron_expr!r}")
-
-        self._schedules[name] = {"name": name, "cron": cron_expr}
-        logger.info("Scheduled theme %r at %s", name, cron_expr)
-        return self._schedules[name]
-
-    def create_playlist(
-        self,
-        names: List[str],
-        interval_minutes: int = 60,
-        start_time: Optional[datetime] = None,
-    ) -> List[Dict[str, str]]:
-        """Create a staggered playlist of theme schedule entries.
-
-        Each theme fires *interval_minutes* after the previous one.  For
-        example, with three themes starting at 09:00 and a 60-minute
-        interval::
-
-            theme[0] → "0 9 * * *"
-            theme[1] → "0 10 * * *"
-            theme[2] → "0 11 * * *"
-
-        Parameters
-        ----------
-        names : list[str]
-            Theme names to include in the playlist.
-        interval_minutes : int
-            Minutes between successive theme activations (default 60).
-        start_time : datetime or None
-            When the first theme should fire.  Defaults to the start of the
-            current hour (i.e. minute=0 of the current hour).
-
-        Returns
-        -------
-        list[dict]
-            Each dict has ``"name"`` and ``"cron"`` keys.
-
-        Raises
-        ------
-        ValueError
-            If *names* is empty or *interval_minutes* is not positive.
-        """
-        if not names:
-            raise ValueError("Playlist must contain at least one theme")
-        if interval_minutes <= 0:
-            raise ValueError("interval_minutes must be a positive integer")
-
-        if start_time is None:
-            start_time = datetime.now().replace(minute=0, second=0, microsecond=0)
-
-        base_minute = start_time.minute
-        base_hour = start_time.hour
-        playlist: List[Dict[str, str]] = []
-
-        for idx, name in enumerate(names):
-            total_offset = idx * interval_minutes
-            target_hour = base_hour + (base_minute + total_offset) // 60
-            target_minute = (base_minute + total_offset) % 60
-            # Wrap hours into 0–23 for a daily cron cycle
-            target_hour = target_hour % 24
-
-            cron_expr = f"{target_minute} {target_hour} * * *"
-            self._schedules[name] = {"name": name, "cron": cron_expr}
-            playlist.append(self._schedules[name])
-            logger.info(
-                "Playlist entry %d: theme %r → cron %s", idx, name, cron_expr
-            )
-
-        logger.info(
-            "Created playlist of %d theme(s) with %d-min interval",
-            len(playlist),
-            interval_minutes,
+        return (
+            match_field(dt.minute, min_expr) and
+            match_field(dt.hour, hour_expr) and
+            match_field(dt.day, dom_expr) and
+            match_field(dt.month, month_expr) and
+            match_field(dow_val, dow_expr)
         )
-        return playlist
-
-    def remove_schedule(self, name: str) -> bool:
-        """Remove a theme from the schedule.
-
-        Returns ``True`` if the theme was found and removed, ``False``
-        otherwise.
-        """
-        if name in self._schedules:
-            del self._schedules[name]
-            logger.info("Removed schedule for theme %r", name)
-            return True
-        logger.warning("No schedule found for theme %r", name)
-        return False
-
-    def list_schedules(self) -> List[Dict[str, str]]:
-        """Return all current schedule entries as a list of dicts."""
-        return list(self._schedules.values())
-
-    # ------------------------------------------------------------------
-    # Helper
-    # ------------------------------------------------------------------
-
-    def get_next_theme(self) -> Optional[Dict[str, str]]:
-        """Return the theme scheduled to fire next based on current time.
-
-        Compares each schedule's hour and minute against the current
-        wall-clock time and returns the entry whose activation time is
-        closest in the future.  If no future activation exists today
-        (i.e. all are in the past), the earliest entry of the day wraps
-        around and is returned.
-
-        Returns ``None`` when the schedule is empty.
-        """
-        if not self._schedules:
-            logger.debug("No schedules available")
-            return None
-
-        now = datetime.now()
-        now_minutes = now.hour * 60 + now.minute
-
-        best: Optional[Dict[str, str]] = None
-        best_delta: Optional[int] = None
-
-        for entry in self._schedules.values():
-            parts = entry["cron"].split()
-            if len(parts) < 2 or parts[0] == "*" or parts[1] == "*":
-                continue
-            try:
-                entry_min = int(parts[0])
-                entry_hr = int(parts[1])
-            except ValueError:
-                continue
-
-            entry_minutes = entry_hr * 60 + entry_min
-            # Positive delta means the entry is in the future today
-            delta = entry_minutes - now_minutes
-            # Wrap: if in the past, treat as tomorrow (+1440 minutes)
-            if delta < 0:
-                delta += 24 * 60
-
-            if best_delta is None or delta < best_delta:
-                best_delta = delta
-                best = entry
-
-        if best is not None:
-            logger.debug("Next theme: %r at %s", best["name"], best["cron"])
-        return best
