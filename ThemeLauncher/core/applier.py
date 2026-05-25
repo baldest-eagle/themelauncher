@@ -17,35 +17,6 @@ from typing import Any
 from core.logger import log
 from core.manifest_parser import GUIDE_COMPONENT_TYPES
 
-# Semantic cursor role mapping: registry key → filename substrings to search for
-CURSOR_ROLE_PATTERNS = {
-    "Arrow": ["arrow", "normal", "select"],
-    "Help": ["help", "question"],
-    "AppStarting": ["appstarting", "appstart", "working"],
-    "Wait": ["wait", "hourglass"],
-    "Crosshair": ["crosshair", "cross", "precision"],
-    "IBeam": ["ibeam", "text", "beam"],
-    "NWPen": ["nwpen", "pen"],
-    "No": ["no", "unavailable"],
-    "SizeNS": ["sizens", "ns"],
-    "SizeWE": ["sizewe", "we"],
-    "SizeNWSE": ["sizenwse", "nwse"],
-    "SizeNESW": ["sizenesw", "nesw"],
-    "SizeAll": ["sizeall", "move"],
-    "UpArrow": ["uparrow", "up"],
-    "Hand": ["hand", "link", "pointer"],
-}
-
-
-def _match_cursor_to_role(role_name: str, filenames: list[str]) -> str | None:
-    """Find the best-matching cursor file for a given Windows registry cursor role."""
-    patterns = CURSOR_ROLE_PATTERNS.get(role_name, [role_name.lower()])
-    for pattern in patterns:
-        for fname in filenames:
-            if pattern in fname.lower():
-                return fname
-    return None
-
 
 class Applier:
     """Central theme application engine."""
@@ -345,22 +316,7 @@ class Applier:
             if not full_path or not os.path.exists(full_path):
                 return {"success": False, "message": f"File not found: {full_path}"}
 
-            # Apply via registry broadcast (same pattern as _apply_msstyles)
-            try:
-                key = winreg.OpenKey(
-                    winreg.HKEY_CURRENT_USER,
-                    r"Software\Microsoft\Windows\CurrentVersion\Themes",
-                    0,
-                    winreg.KEY_WRITE,
-                )
-                winreg.SetValueEx(key, "CurrentTheme", 0, winreg.REG_SZ, full_path)
-                winreg.CloseKey(key)
-                ctypes.windll.user32.SendMessageW(0xFFFF, 0x001A, 0, "ImmersiveColorSet")
-                log.info("Applied theme via registry broadcast: %s", full_path)
-            except Exception as reg_exc:
-                log.warning("Registry broadcast failed, falling back to startfile: %s", reg_exc)
-                os.startfile(full_path)
-
+            os.startfile(full_path)
             return {"success": True, "message": f"Applied theme file: {variant['name']}"}
         except Exception as exc:
             return {"success": False, "message": str(exc)}
@@ -457,21 +413,11 @@ class Applier:
                     "UpArrow": "UpArrow",
                     "Hand": "Hand",
                 }
-                # Set individual cursor keys via semantic filename matching
-                cursor_filenames = sorted(cursor_files.keys())  # just filenames, not full paths
-                assigned: set[str] = set()
-                for role in role_map:
-                    matched = _match_cursor_to_role(role, cursor_filenames)
-                    if matched and matched not in assigned:
-                        winreg.SetValueEx(key, role, 0, winreg.REG_SZ, cursor_files[matched])
-                        assigned.add(matched)
-                    elif role == "Arrow":
-                        # Arrow is the default cursor — use first unassigned file as fallback
-                        for fname in cursor_filenames:
-                            if fname not in assigned:
-                                winreg.SetValueEx(key, role, 0, winreg.REG_SZ, cursor_files[fname])
-                                assigned.add(fname)
-                                break
+                # Map filenames to roles (best-effort)
+                file_list = sorted(cursor_files.values())
+                for i, (role, _) in enumerate(role_map.items()):
+                    if i < len(file_list):
+                        winreg.SetValueEx(key, role, 0, winreg.REG_SZ, file_list[i])
                 winreg.CloseKey(key)
             except Exception as exc:
                 log.warning("Could not set active cursor keys: %s", exc)

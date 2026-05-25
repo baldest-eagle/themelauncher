@@ -1,3 +1,5 @@
+# === ThemeLauncher .gitignore ===
+
 # Python
 __pycache__/
 *.py[cod]
@@ -7,7 +9,7 @@ dist/
 build/
 *.egg
 
-# Backup files
+# Backups / temp
 *.bak
 *.bak2
 *.bak3
@@ -17,21 +19,16 @@ build/
 logs/
 *.log
 
-# IDE / Editor
+# IDE / editor
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
-
-# Continue AI
 .continue/
+.kilo/
 
-# Chat logs / non-code files
-zedwork.txt
-## User
-
-# OS junk
+# OS files
 Thumbs.db
 Desktop.ini
 .DS_Store
@@ -41,5 +38,70 @@ venv/
 .env/
 .venv/
 
-# Config secrets (keep template, ignore local overrides)
+# Local config overrides
 config.local.json
+
+# === Sibling projects & junk in parent directory ===
+# These are NOT part of ThemeLauncher
+/BotProject/
+/BotProject.bck/
+/ProjectEraser/
+/ProjectEraser.bck/
+/SecureUxTheme_Source/
+/ThemeLauncher.bck/
+/ThemeLauncher_Condensed/
+/antigravity-ide/
+/antigravity/
+/conductor/
+/lineforge/
+/tacky-borders/
+/utility-startallback/
+/Workforce_Archive/
+/commands/
+/config/
+/extensions/
+/get/
+/history/
+/policies/
+/skills/
+/tmp/
+
+# Root-level junk files
+/.env
+/.gemini/
+/COD info.xlsx
+/COD_Portfolio.xlsx
+/Delta_App_Themes.md
+/Downloads.code-workspace
+/GEMINI.md
+/Japan_26_Environment_Archive.md
+/Japan_26_Master_Archive.txt
+/Japan_26_Theme_Archive.md
+/LIBRARY.md
+/WORKFORCE_SUMMARY.md
+/Themes/
+/check_previews.py
+/color_reference.html
+/gemini_bot.py
+/generate_portfolio.py
+/getfkd/
+/google_accounts.json
+/installation_id
+/keepitdown.py
+/keybindings.json
+/missed_icons.txt
+/oauth_creds.json
+/projects.json
+/query
+/recentclaide.txt
+/recover_assets.py
+/settings.json
+/state.json
+/trustedFolders.json
+/extension_integrity.json
+/config.yaml
+/dxdiag_output.txt
+/pits_n_puffs_chat.txt
+/zed.debug.json
+/zed.raw.b64
+/zed.tmp.bin
