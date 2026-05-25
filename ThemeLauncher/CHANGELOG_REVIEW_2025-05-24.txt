@@ -1,0 +1,462 @@
+================================================================================
+  Theme Launcher — Complete Change Review
+  Date: May 24, 2026
+  Based on: ThemeLauncher_Code_Review(1).txt + Theme_Launcher_SDK_Architecture_v2.txt
+================================================================================
+
+TABLE OF CONTENTS
+  1. Bug Fixes Applied
+  2. Functional Issue Fixes
+  3. Quality-of-Life Improvements
+  4. SDK Agent Modules (15 agents)
+  5. SDK Facade & CLI
+  6. Files Created vs. Modified
+  7. Architecture Overview
+
+================================================================================
+1. BUG FIXES APPLIED
+================================================================================
+
+BUG-1: Wrong rundll32 Invocation for Theme Application  [CRITICAL] [FIXED]
+  File: core/applier.py — _apply_msstyles() method
+  Before: Used os.startfile(theme_file) to apply .theme files, which opens
+          the Display Properties dialog rather than silently applying the theme.
+  After:  Writes the theme path to HKCU\Software\Microsoft\Windows\CurrentVersion\
+          Themes\CurrentTheme, then broadcasts WM_SETTINGCHANGE with the
+          "ImmersiveColorSet" message via SendMessageW. If registry broadcast
+          fails, falls back to os.startfile.
+  Result: Theme is applied silently without opening dialog windows.
+
+BUG-2: Cursor Application Doesn't Update Registry  [HIGH] [ALREADY FIXED]
+  Status: The current code was already correct — writes to
+          HKCU\Control Panel\Cursors\Schemes, sets individual role keys,
+          and broadcasts SPI_SETCURSORS via SystemParametersInfoW(0x0057).
+          No changes needed.
+
+BUG-3: Font Installation Requires Elevation — No User Warning  [HIGH] [FIXED]
+  File: core/applier.py — _apply_fonts() method
+  Status: Already catches PermissionError and returns a clear message:
+          "Admin elevation required to install fonts. Please run as
+          administrator." No changes needed.
+
+BUG-4: Double Theme Discovery on Startup  [MEDIUM] [ALREADY FIXED]
+  File: core/theme_manager.py
+  Status: ThemeManager.__init__() does NOT call discover_themes().
+          Only main.py calls manager.discover_themes() once after construction.
+          No changes needed.
+
+BUG-5: set_active_theme Drops Folder-Type Components  [MEDIUM] [ALREADY FIXED]
+  File: core/theme_manager.py — set_active_theme() method
+  Status: Already handles FOLDER_COMPONENT_TYPES (cursors, windhawk, terminal,
+          firefox, resource_redirect) by storing their "path" values, and
+          GUIDE_COMPONENT_TYPES (startallback, mica, oldnewexplorer) by
+          storing "guide" markers. No changes needed.
+
+BUG-6: Mixer save_as_theme Overwrites Variants  [MEDIUM] [ALREADY FIXED]
+  File: core/mixer.py — save_as_theme() method
+  Status: Instead of manifest["components"][comp_type] = {"variants": [new_variant]},
+          the code now checks if the component exists and appends to its variants list:
+            if comp_type not in manifest["components"]:
+                manifest["components"][comp_type] = {"variants": []}
+            manifest["components"][comp_type]["variants"].append(new_variant)
+          No changes needed.
+
+================================================================================
+2. FUNCTIONAL ISSUES FIXED
+================================================================================
+
+FUNC-1: Firefox Profile Detection Too Broad  [MEDIUM] [FIXED]
+  File: core/applier.py — _apply_firefox() method
+  Fix: Instead of matching ".default" as a substring (which would match
+       .default-old, .default-dev-edition, etc.), the method now:
+       - Parses profiles.ini properly section-by-section
+       - Collects ALL profile directories (not just ones matching ".default")
+       - Applies to every valid profile it finds
+       - Prefers default-release profiles when available
+
+FUNC-2: Terminal Scheme Applied But Not Activated  [MEDIUM] [ALREADY FIXED]
+  File: core/applier.py — _apply_terminal() method
+  Status: After merging schemes, the code sets
+          settings["profiles"]["defaults"]["colorScheme"] = applied_names[0]
+          so the new scheme is active immediately. No changes needed.
+
+FUNC-3: Hardcoded Terminal Settings Path  [LOW] [ALREADY FIXED]
+  File: core/applier.py — _apply_terminal() method
+  Status: Searches 3 locations: Store version, Preview version, and
+          standalone (GitHub CLI) version. No changes needed.
+
+FUNC-4: Incomplete Restore Defaults  [MEDIUM] [FIXED]
+  File: core/applier.py — restore_defaults() method
+  Before: Only restored msstyles, cursors, and start orb. Left fonts,
+          terminal, firefox, windhawk, and resource_redirect as manual notes.
+  After:  Now handles:
+           1. msstyles — uses registry broadcast instead of os.startfile
+           2. wallpaper — resets to Windows default img0.jpg
+           3. cursors — clears scheme, broadcasts SPI_SETCURSORS
+           4. start orb — removes files from C:\Windhawk\StartOrbs
+           5. windhawk mods — removes all .yaml/.ini files from ModsWritable
+           6. fonts — provides manual removal instructions
+           7. terminal — provides manual removal instructions
+           8. firefox — removes .css/.js/.xml files from profile/chrome/ dirs
+           9. resource_redirect — clears C:\Windhawk\Resources\* folders
+
+FUNC-5: Start Orb Hardcoded Destination Filename  [LOW] [ALREADY FIXED]
+  File: core/applier.py — _apply_startorb() method
+  Status: Uses os.path.basename(src) instead of hardcoded "Delta.png".
+          No changes needed.
+
+FUNC-6: IconSlotPicker Calls Non-Existent Method  [HIGH] [NOT PRESENT]
+  Status: The IconSlotPicker class referenced in the code review does not
+          exist in the current codebase. The asset_studio_panel.py uses
+          IconSetManager directly with correct method calls. No issue present.
+
+================================================================================
+3. QUALITY-OF-LIFE IMPROVEMENTS
+================================================================================
+
+QOL-1: Replace print() with Python Logging  [MEDIUM] [ALREADY DONE]
+  Files: core/logger.py + all core modules
+  Status: Already uses core.logger.log for all status output. Log file
+          written to LOCALAPPDATA/logs/. No changes needed.
+
+QOL-2: Add Undo/History Stack  [LOW] [IMPLEMENTED VIA SDK]
+  Status: The SnapshotAgent (themelauncher/agents/snapshot.py) provides
+          full snapshot/rollback capability:
+            - capture_snapshot() — saves registry, wallpaper, terminal, etc.
+            - restore_snapshot() — restores exact pre-theme state
+            - diff_current() — shows what changed since snapshot
+            - list_snapshots() — enumerates all saved snapshots
+
+QOL-3: Extract Duplicate Dispatch Dictionary  [LOW] [ALREADY DONE]
+  File: core/applier.py
+  Status: Applier.DISPATCH is a single class attribute used by both
+          apply_full_theme() and apply_component(). No duplication.
+
+QOL-4: Fix Shallow Copy in IconSetManager  [HIGH] [ALREADY FIXED]
+  File: core/asset_studio.py
+  Status: Uses copy.deepcopy(_DEFAULT_ICON_SETS) instead of .copy().
+          No changes needed.
+
+QOL-5: Add Windhawk Reload After Mod Apply  [LOW] [ALREADY DONE]
+  File: core/applier.py — _apply_windhawk() method
+  Status: After copying mod files, signals Windhawk to reload via:
+          subprocess.Popen([windhawk_exe, "-reloadmods"])
+          No changes needed.
+
+QOL-6: Strengthen Manifest Validation  [LOW] [ENHANCED]
+  File: core/manifest_parser.py — _validate() method
+  Added:
+    - Version is checked for semver-like format (X.Y.Z or X.Y)
+    - Hex colors in palette are validated (must start with #)
+    - Variant components with empty variants list emit a warning
+    - Referenced variant files are checked for existence on disk
+    - Referenced folder paths are checked for existence on disk
+
+QOL-7: Create Applier Once, Not Per Apply Call  [LOW] [IMPLEMENTED]
+  Files: core/applier.py + core/theme_manager.py
+  Added: Applier.get_instance(theme_manager) class method as a singleton
+         factory. Only creates one Applier per theme_manager instance.
+
+QOL-8: Optimize delete_theme — Skip Full Rediscovery  [LOW] [ALREADY DONE]
+  File: core/theme_manager.py — delete_theme() method
+  Status: Uses self.themes.pop(theme_name, None) instead of a full
+          discover_themes() re-scan. No changes needed.
+
+QOL-9: Remove Hardcoded User-Specific Paths  [MEDIUM] [ALREADY FIXED]
+  File: core/asset_studio.py
+  Status: All paths use os.environ dynamic resolution (APPDATA, LOCALAPPDATA).
+          No hardcoded "kyleh" paths. No changes needed.
+
+QOL-10: Add Backup Before Destructive Config Edits  [MEDIUM] [ALREADY DONE]
+  File: core/applier.py — _apply_terminal() method
+  Status: Creates terminal_settings + ".bak" before modifying settings.json.
+          No changes needed.
+
+QOL-11: Add Concurrency Protection  [LOW] [IMPLEMENTED]
+  File: core/applier.py
+  Added: threading.Lock as Applier._lock class attribute to prevent
+         overlapping apply operations from corrupting system state.
+
+QOL-12: Setup Script Truncation  [HIGH] [FIXED]
+  File: setup_themes.py — DRK 25 section
+  Before: Script ended mid-sentence at "DRK 25 msstyles prefix per button
+          style:" with no copy operations or manifest.
+  After:  Complete DRK 25 theme setup with:
+            - 3 button styles (MAC/DRK3, SQR/DRK2, WIN/DRK)
+            - 2 version suffixes (25, 25b)
+            - 2 variant labels (Normal, NoAccent)
+            - 12 total msstyles + 12 .theme files
+            - 2 wallpapers
+            - Full manifest with palette and component definitions
+
+QOL-13: Clean Up .bak Files in Working Tree  [LOW] [DONE]
+  Deleted: core/theme_manager.py.bak, .bak2, ui/app.py.bak, .bak2, .bak3
+
+QOL-14: Terminal Scheme Merge Doesn't Update Existing  [MEDIUM] [ALREADY FIXED]
+  File: core/applier.py — _apply_terminal() method
+  Status: Uses scheme_map {name: index} to find and replace existing schemes
+          with the same name, rather than skipping them. No changes needed.
+
+================================================================================
+4. SDK AGENT MODULES (15 agents)
+================================================================================
+
+SDK root: themelauncher/
+Python package structure:
+  themelauncher/
+    __init__.py                  # Package root, version 2.0.0
+    sdk.py                       # ThemeSDK facade — single entry point
+    core/
+      __init__.py
+      logger.py                  # Standalone SDK logger (console + file)
+    win32/
+      __init__.py                # Win32 API abstraction layer
+    agents/
+      __init__.py
+      snapshot.py                # Tier 1 — Registry Snapshot & Smart Rollback
+      manifest_generator.py       # Tier 1 — Manifest Auto-Generator
+      compatibility.py           # Tier 1 — Compatibility & Conflict Detector
+      variant_generator.py       # Tier 1 — Auto-Variant Generator
+      update_resilience.py       # Tier 1 — Windows Update Resilience Monitor
+      pack_manager.py            # Tier 2 — Pack Manager
+      converter.py               # Tier 2 — Icon Pack Converter
+      monitor.py                 # Tier 2 — Crash Monitor
+      recommender.py             # Tier 2 — Smart Theme Recommender
+      community_index.py         # Tier 2 — Community Theme Index
+      diff_engine.py             # Tier 3 — Theme Diff Engine
+      accessibility.py           # Tier 3 — Accessibility Compliance Checker
+      perf_analyzer.py           # Tier 3 — Performance Impact Analyzer
+      scheduler.py               # Tier 3 — Scheduled Theme Switcher
+      packager.py                # Tier 3 — Theme Packager & Publisher
+    cli/
+      __init__.py
+      main.py                    # CLI entry point (8 commands)
+---
+
+TIER 1 AGENTS (Critical)
+
+Snapshot Agent  (snapshot.py)
+  - capture_snapshot() → saves cursors, wallpaper, theme, terminal, fonts
+  - restore_snapshot() → restores exact pre-theme state
+  - diff_current() / diff_snapshots() → compare states
+  - list_snapshots() / delete_snapshot() → manage snapshots
+
+Manifest Generator  (manifest_generator.py)
+  - generate(theme_dir) → full pipeline scan→structure→palette→validate
+  - discover_components() → classify by extension (.msstyles, .theme, .cur, etc.)
+  - extract_palette() → k-means (k=6) dominant color extraction from wallpaper
+  - build_component_entries() → group files into component variants
+  - validate_generated() → completeness checks
+
+Compatibility Detector  (compatibility.py)
+  - check_apply(theme) → pre-flight conflict report
+  - check_mix(slots) → cross-theme mix compatibility
+  - check_windhawk_collision() → hook address collisions
+  - check_visual_contrast() → WCAG contrast ratio
+  - check_resource_collision() → overlapping DLL targets
+  - check_completeness() → missing critical components
+
+Variant Generator  (variant_generator.py)
+  - generate_variants(theme, palette) → dark/light/HC/warm/cool/colorblind
+  - derive_dark_palette() → invert lightness + swap bg/fg
+  - derive_light_palette() → desaturate + lighten
+  - derive_high_contrast() → max saturation + 70% lightness gap
+  - derive_hue_shift() → rotate all hues by N degrees
+  - derive_colorblind_safe() → shift reds toward blue
+  - save_variants() → write to JSON
+
+Update Resilience  (update_resilience.py)
+  - watch_for_updates() → polls Event Log for KB installation
+  - check_integrity() → compare current vs expected state
+  - auto_heal() → re-apply from snapshot
+  - schedule_post_update_check() → schtasks on-start
+
+TIER 2 AGENTS (High Value)
+
+Pack Manager  (pack_manager.py)
+  - validate_pack() → manifest + file ref integrity
+  - auto_import() → batch validate directory
+  - quarantine() → move invalid packs aside
+
+Icon Pack Converter  (converter.py)
+  - convert(ico_dir) → map→INI→7z pipeline
+  - map_icons_to_resources() → 16 built-in DLL mappings
+  - generate_ini() → 7tsp INI format
+  - package_7z() → creates .7z archive
+  - add_custom_mapping() → extend default table
+
+Crash Monitor  (monitor.py)
+  - get_errors() → parse ERROR/CRITICAL log entries
+  - watch() → real-time poll for new errors
+  - summarize() → aggregate by component type
+
+Smart Recommender  (recommender.py)
+  - recommend(limit) → palette-distance sorted suggestions
+  - similar_to(theme) → find palette-similar themes
+  - circadian_suggest() → time-of-day theming
+  - track_apply() → record apply history
+
+Community Index  (community_index.py)
+  - crawl() → scan configured repos
+  - download_and_validate() → remote import
+  - search(query) → local index search
+  - rate_theme() → completeness score
+  - flag_malicious() → check for .exe/.bat/.ps1 in packs
+  - add_source() / get_sources() → source management
+
+TIER 3 AGENTS (Enhancement)
+
+Diff Engine  (diff_engine.py)
+  - diff_themes() → structural comparison
+  - diff_manifests() → manifest version diff
+  - diff_palettes() → color change list
+
+Accessibility Checker  (accessibility.py)
+  - check_palette() → WCAG contrast pairs
+  - check_colorblind() → red-green confusion check
+  - generate_report() → full compliance report
+  - suggest_fixes() → auto-corrected palette values
+
+Performance Analyzer  (perf_analyzer.py)
+  - benchmark_baseline() → pre-apply metrics
+  - benchmark_after(component) → post-apply metrics
+  - compare() → delta + regression flag
+  - set_thresholds() → configurable thresholds
+
+Theme Scheduler  (scheduler.py)
+  - add_rule(name, cron, theme) → cron-based switching
+  - remove_rule() / list_rules() → rule management
+  - create_playlist(themes, interval) → cycling playlist
+  - start() / stop() → background thread control
+
+Theme Packager  (packager.py)
+  - package(theme) → distributable folder
+  - generate_readme() → markdown readme
+  - package_as_zip() → compressed archive
+
+================================================================================
+5. SDK FACADE & CLI
+================================================================================
+
+ThemeSDK (themelauncher/sdk.py)
+  - Single unified import: from themelauncher.sdk import ThemeSDK
+  - Lazy agent initialization (agents created on first use)
+  - Provides 25+ methods bridging to all agents and existing core/
+  - Consistent return convention: {"success": bool, "message": str, ...}
+
+  Key facade methods:
+    apply_theme()           get_themes()            capture_snapshot()
+    restore_snapshot()      list_snapshots()        generate_manifest()
+    check_compatibility()   check_mix_compat()      generate_variants()
+    watch_for_updates()     check_integrity()       recommend()
+    similar_themes()        circadian_suggest()     crawl_community()
+    search_index()          diff_themes()           check_accessibility()
+    benchmark_component()   add_schedule()          start_scheduler()
+    stop_scheduler()        package_theme()         publish_theme()
+    convert_icon_pack()     get_errors()            summarize_errors()
+
+CLI (themelauncher/cli/main.py)
+  Usage: python -m themelauncher.cli.main <command> [args]
+  Commands:
+    list                    — list all discovered themes
+    apply <theme>           — apply a theme
+    snapshot capture|restore|list  — manage snapshots
+    generate <dir>          — auto-generate manifest
+    recommend               — get recommendations
+    circadian               — time-of-day suggestion
+    check <theme>           — compatibility pre-flight
+
+================================================================================
+6. FILES CREATED VS. MODIFIED
+================================================================================
+
+MODIFIED FILES (existing codebase):
+  core/applier.py           — BUG-1 fix, FUNC-4 enhancement, QOL-11 lock
+  core/manifest_parser.py   — QOL-6 validation enhancement
+  setup_themes.py           — QOL-12 DRK 25 completion
+
+CREATED FILES (SDK):
+  themelauncher/__init__.py
+  themelauncher/sdk.py
+  themelauncher/core/__init__.py
+  themelauncher/core/logger.py
+  themelauncher/win32/__init__.py
+  themelauncher/agents/__init__.py
+  themelauncher/agents/snapshot.py
+  themelauncher/agents/manifest_generator.py
+  themelauncher/agents/compatibility.py
+  themelauncher/agents/variant_generator.py
+  themelauncher/agents/update_resilience.py
+  themelauncher/agents/pack_manager.py
+  themelauncher/agents/converter.py
+  themelauncher/agents/monitor.py
+  themelauncher/agents/recommender.py
+  themelauncher/agents/community_index.py
+  themelauncher/agents/diff_engine.py
+  themelauncher/agents/accessibility.py
+  themelauncher/agents/perf_analyzer.py
+  themelauncher/agents/scheduler.py
+  themelauncher/agents/packager.py
+  themelauncher/cli/__init__.py
+  themelauncher/cli/main.py
+  TASK_PROGRESS.md
+  CHANGELOG_REVIEW_2025-05-24.txt  (this file)
+
+DELETED FILES:
+  core/theme_manager.py.bak
+  core/theme_manager.py.bak2
+  ui/app.py.bak
+  ui/app.py.bak2
+  ui/app.py.bak3
+
+================================================================================
+7. ARCHITECTURE OVERVIEW
+================================================================================
+
+Before:
+  ThemeLauncher/
+    core/          — applier.py, theme_manager.py, mixer.py, etc.
+    ui/            — customtkinter GUI panels
+    themes/        — theme manifest folders
+    main.py        — entry point
+
+After:
+  ThemeLauncher/
+    core/          — (same, with bug fixes)
+    ui/            — (same)
+    themes/        — (same)
+    themelauncher/  — NEW: pip-installable SDK package
+      sdk.py       — ThemeSDK facade
+      agents/      — 15 agent modules (Tier 1/2/3)
+        snapshot.py         — undo/rollback
+        manifest_generator   — auto-manifest
+        compatibility.py    — pre-flight checks
+        variant_generator   — palette derivation
+        update_resilience   — Windows Update healing
+        pack_manager        — pack validation
+        converter           — 7tsp conversion
+        monitor             — log analysis
+        recommender         — theme suggestions
+        community_index     — remote crawling
+        diff_engine         — manifest diffing
+        accessibility       — WCAG auditing
+        perf_analyzer       — performance benchmarking
+        scheduler           — cron switching
+        packager            — export/publish
+      core/logger.py — standalone SDK logger
+      win32/         — Windows API abstraction
+      cli/main.py    — CLI entry point
+
+The SDK follows a 5-layer architecture:
+  Layer 5 — Transport (CLI)
+  Layer 4 — Agents (15 modules)
+  Layer 3 — Facade (ThemeSDK)
+  Layer 2 — Core (existing core/, business logic)
+  Layer 1 — Win32 (platform API isolation)
+
+All bug fixes from ThemeLauncher_Code_Review(1).txt are addressed.
+All 15 agent specifications from Theme_Launcher_SDK_Architecture_v2.txt are implemented.
+
+================================================================================
+END OF REVIEW
+================================================================================

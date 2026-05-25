@@ -1,0 +1,326 @@
+2026-05-24 20:41:09,930 [WARNING] ThemeLauncher: Skipping extras: No manifest.json found in themes\extras
+2026-05-24 20:41:09,930 [WARNING] ThemeLauncher: Skipping extras: No manifest.json found in themes\extras
+2026-05-24 20:41:26,430 [WARNING] ThemeLauncher: Component 'themes' variant[0] references missing file: themes/Black-DASH.theme
+2026-05-24 20:41:26,430 [WARNING] ThemeLauncher: Component 'themes' variant[1] references missing file: themes/Black-DOTS.theme
+2026-05-24 20:41:26,430 [WARNING] ThemeLauncher: Component 'themes' variant[2] references missing file: themes/Black-LIN.theme
+2026-05-24 20:41:26,430 [WARNING] ThemeLauncher: Component 'themes' variant[3] references missing file: themes/Black-Mac.theme
+2026-05-24 20:41:26,430 [WARNING] ThemeLauncher: Component 'themes' variant[4] references missing file: themes/Black-NU.theme
+2026-05-24 20:41:26,430 [WARNING] ThemeLauncher: Component 'themes' variant[5] references missing file: themes/Black-Round.theme
+2026-05-24 20:41:26,430 [WARNING] ThemeLauncher: Component 'themes' variant[6] references missing file: themes/Black-SLASH.theme
+2026-05-24 20:41:26,430 [WARNING] ThemeLauncher: Component 'themes' variant[7] references missing file: themes/Black-Win.theme
+2026-05-24 20:41:26,430 [WARNING] ThemeLauncher: Component 'themes' variant[8] references missing file: themes/Dark-DASH.theme
+2026-05-24 20:41:26,430 [WARNING] ThemeLauncher: Component 'themes' variant[9] references missing file: themes/Dark-DOTS.theme
+2026-05-24 20:41:26,430 [WARNING] ThemeLauncher: Component 'themes' variant[10] references missing file: themes/Dark-LIN.theme
+2026-05-24 20:41:26,430 [WARNING] ThemeLauncher: Component 'themes' variant[11] references missing file: themes/Dark-Mac.theme
+2026-05-24 20:41:26,431 [WARNING] ThemeLauncher: Component 'themes' variant[12] references missing file: themes/Dark-NU.theme
+2026-05-24 20:41:26,431 [WARNING] ThemeLauncher: Component 'themes' variant[13] references missing file: themes/Dark-Round.theme
+2026-05-24 20:41:26,431 [WARNING] ThemeLauncher: Component 'themes' variant[14] references missing file: themes/Dark-SLASH.theme
+2026-05-24 20:41:26,431 [WARNING] ThemeLauncher: Component 'themes' variant[15] references missing file: themes/Dark-Win.theme
+2026-05-24 20:41:26,432 [INFO] ThemeLauncher: Loaded theme: BlackIsBack
+2026-05-24 20:41:26,433 [INFO] ThemeLauncher: Loaded theme: Buuf OS2
+2026-05-24 20:41:26,435 [WARNING] ThemeLauncher: Component 'wallpapers' variant[0] references missing file: wallpapers/Delta v1/casey-horner-NIIVU-unsplash.jpg
+2026-05-24 20:41:26,435 [WARNING] ThemeLauncher: Component 'wallpapers' variant[1] references missing file: wallpapers/Delta v1/daniel-mirlea-NIIVU-unsplash.jpg
+2026-05-24 20:41:26,435 [WARNING] ThemeLauncher: Component 'wallpapers' variant[2] references missing file: wallpapers/Delta v1/joshua-earle-NIIVU-unsplash.jpg
+2026-05-24 20:41:26,435 [WARNING] ThemeLauncher: Component 'wallpapers' variant[3] references missing file: wallpapers/Delta v1/petr-slovacek-NIIVU-unsplash.jpg
+2026-05-24 20:41:26,435 [WARNING] ThemeLauncher: Component 'wallpapers' variant[4] references missing file: wallpapers/Delta v1/waves.jpeg
+2026-05-24 20:41:26,435 [WARNING] ThemeLauncher: Component 'wallpapers' variant[5] references missing file: wallpapers/Delta v1/foggy.jpeg
+2026-05-24 20:41:26,435 [WARNING] ThemeLauncher: Component 'wallpapers' variant[6] references missing file: wallpapers/Delta v1/geo.jpeg
+2026-05-24 20:41:26,435 [WARNING] ThemeLauncher: Component 'wallpapers' variant[7] references missing file: wallpapers/Delta v1/nebula.jpeg
+2026-05-24 20:41:26,435 [WARNING] ThemeLauncher: Component 'wallpapers' variant[8] references missing file: wallpapers/Delta v1/waterfall.jpeg
+2026-05-24 20:41:26,435 [WARNING] ThemeLauncher: Component 'wallpapers' variant[9] references missing file: wallpapers/Delta v1/drip.jpeg
+2026-05-24 20:41:26,436 [WARNING] ThemeLauncher: Unknown component type 'basebrd' in manifest
+2026-05-24 20:41:26,436 [INFO] ThemeLauncher: Loaded theme: Delta v1
+2026-05-24 20:41:26,438 [WARNING] ThemeLauncher: Unknown component type 'basebrd' in manifest
+2026-05-24 20:41:26,438 [INFO] ThemeLauncher: Loaded theme: Delta v2
+2026-05-24 20:41:26,438 [WARNING] ThemeLauncher: Component 'msstyles' variant[0] references missing file: msstyles/MAC/DRK 25 MAC.msstyles
+2026-05-24 20:41:26,438 [WARNING] ThemeLauncher: Component 'msstyles' variant[1] references missing file: msstyles/MAC/DRK 25 MAC - dark.msstyles
+2026-05-24 20:41:26,438 [WARNING] ThemeLauncher: Component 'msstyles' variant[2] references missing file: msstyles/MAC/DRK 25 MAC - light.msstyles
+2026-05-24 20:41:26,438 [WARNING] ThemeLauncher: Component 'msstyles' variant[3] references missing file: msstyles/SQR/DRK 25 SQR.msstyles
+2026-05-24 20:41:26,438 [WARNING] ThemeLauncher: Component 'msstyles' variant[4] references missing file: msstyles/SQR/DRK 25 SQR - dark.msstyles
+2026-05-24 20:41:26,438 [WARNING] ThemeLauncher: Component 'msstyles' variant[5] references missing file: msstyles/SQR/DRK 25 SQR - light.msstyles
+2026-05-24 20:41:26,439 [WARNING] ThemeLauncher: Component 'themes' variant[0] references missing file: themes/MAC/DRK 25 MAC.theme
+2026-05-24 20:41:26,439 [WARNING] ThemeLauncher: Component 'themes' variant[1] references missing file: themes/MAC/DRK 25 MAC - Dark.theme
+2026-05-24 20:41:26,439 [WARNING] ThemeLauncher: Component 'themes' variant[2] references missing file: themes/MAC/DRK 25 MAC - Light.theme
+2026-05-24 20:41:26,439 [WARNING] ThemeLauncher: Component 'themes' variant[3] references missing file: themes/SQR/DRK 25 SQR.theme
+2026-05-24 20:41:26,439 [WARNING] ThemeLauncher: Component 'themes' variant[4] references missing file: themes/SQR/DRK 25 SQR - Dark.theme
+2026-05-24 20:41:26,439 [WARNING] ThemeLauncher: Component 'themes' variant[5] references missing file: themes/SQR/DRK 25 SQR - Light.theme
+2026-05-24 20:41:26,440 [WARNING] ThemeLauncher: Component 'themes' variant[6] references missing file: themes/WIN/DRK 25 WIN.theme
+2026-05-24 20:41:26,440 [WARNING] ThemeLauncher: Component 'themes' variant[7] references missing file: themes/WIN/DRK 25 WIN - Dark.theme
+2026-05-24 20:41:26,440 [WARNING] ThemeLauncher: Component 'themes' variant[8] references missing file: themes/WIN/DRK 25 WIN - Light.theme
+2026-05-24 20:41:26,440 [INFO] ThemeLauncher: Loaded theme: DRK 25
+2026-05-24 20:41:26,440 [WARNING] ThemeLauncher: Skipping Extras: No manifest.json found in C:\\Users\\kyleh\\.gemini\\themes\Extras
+2026-05-24 20:41:26,442 [INFO] ThemeLauncher: Loaded theme: Gruvbox
+2026-05-24 20:41:26,442 [WARNING] ThemeLauncher: Skipping iWin: No manifest.json found in C:\\Users\\kyleh\\.gemini\\themes\iWin
+2026-05-24 20:41:26,444 [INFO] ThemeLauncher: Loaded theme: Janguru
+2026-05-24 20:41:26,447 [WARNING] ThemeLauncher: Folder component 'windhawk' has no 'path' key — may fail to apply
+2026-05-24 20:41:26,447 [INFO] ThemeLauncher: Loaded theme: Japan 26
+2026-05-24 20:41:26,450 [INFO] ThemeLauncher: Loaded theme: Kanagawa
+2026-05-24 20:41:26,459 [INFO] ThemeLauncher: Loaded theme: Kripton
+2026-05-24 20:41:26,465 [INFO] ThemeLauncher: Loaded theme: Night Owl
+2026-05-24 20:41:26,465 [WARNING] ThemeLauncher: Component 'themes' variant[0] references missing file: themes/Paranoid Android - LUV - dark.theme
+2026-05-24 20:41:26,466 [WARNING] ThemeLauncher: Component 'themes' variant[1] references missing file: themes/Paranoid Android - LUV - light.theme
+2026-05-24 20:41:26,466 [WARNING] ThemeLauncher: Component 'themes' variant[2] references missing file: themes/Paranoid Android - LUV - night.theme
+2026-05-24 20:41:26,466 [WARNING] ThemeLauncher: Component 'themes' variant[3] references missing file: themes/Paranoid Android - Nebula - dark.theme
+2026-05-24 20:41:26,466 [WARNING] ThemeLauncher: Component 'themes' variant[4] references missing file: themes/Paranoid Android - Nebula - light.theme
+2026-05-24 20:41:26,466 [WARNING] ThemeLauncher: Component 'themes' variant[5] references missing file: themes/Paranoid Android - Nebula - night.theme
+2026-05-24 20:41:26,466 [WARNING] ThemeLauncher: Component 'themes' variant[6] references missing file: themes/Paranoid Android - Sweet - dark.theme
+2026-05-24 20:41:26,466 [WARNING] ThemeLauncher: Component 'themes' variant[7] references missing file: themes/Paranoid Android - Sweet - light.theme
+2026-05-24 20:41:26,466 [WARNING] ThemeLauncher: Component 'themes' variant[8] references missing file: themes/Paranoid Android - Sweet - night.theme
+2026-05-24 20:41:26,467 [INFO] ThemeLauncher: Loaded theme: Paranoid Android
+2026-05-24 20:41:26,472 [WARNING] ThemeLauncher: Component 'cursors' references missing path: cursors
+2026-05-24 20:41:26,473 [INFO] ThemeLauncher: Loaded theme: Rose Pine
+2026-05-24 20:41:26,478 [INFO] ThemeLauncher: Loaded theme: Solarized
+2026-05-24 20:41:26,479 [WARNING] ThemeLauncher: Component 'themes' variant[0] references missing file: themes/SynthWave '84 dark - luv.theme
+2026-05-24 20:41:26,479 [WARNING] ThemeLauncher: Component 'themes' variant[1] references missing file: themes/SynthWave '84 dark - mac.theme
+2026-05-24 20:41:26,479 [WARNING] ThemeLauncher: Component 'themes' variant[2] references missing file: themes/SynthWave '84 dark - mac gloss.theme
+2026-05-24 20:41:26,479 [WARNING] ThemeLauncher: Component 'themes' variant[3] references missing file: themes/SynthWave '84 dark - nude.theme
+2026-05-24 20:41:26,479 [WARNING] ThemeLauncher: Component 'themes' variant[4] references missing file: themes/SynthWave '84 night - luv.theme
+2026-05-24 20:41:26,479 [WARNING] ThemeLauncher: Component 'themes' variant[5] references missing file: themes/SynthWave '84 night - mac.theme
+2026-05-24 20:41:26,479 [WARNING] ThemeLauncher: Component 'themes' variant[6] references missing file: themes/SynthWave '84 night - mac gloss.theme
+2026-05-24 20:41:26,480 [WARNING] ThemeLauncher: Component 'themes' variant[7] references missing file: themes/SynthWave '84 night - nude.theme
+2026-05-24 20:41:26,480 [INFO] ThemeLauncher: Loaded theme: SynthWave '84
+2026-05-24 20:41:26,481 [WARNING] ThemeLauncher: Unknown component type 'startorbs' in manifest
+2026-05-24 20:41:26,481 [INFO] ThemeLauncher: Loaded theme: Tokyo Night
+2026-05-24 20:41:26,482 [WARNING] ThemeLauncher: Component 'themes' variant[0] references missing file: themes/Black-DASH.theme
+2026-05-24 20:41:26,482 [WARNING] ThemeLauncher: Component 'themes' variant[1] references missing file: themes/Black-DOTS.theme
+2026-05-24 20:41:26,482 [WARNING] ThemeLauncher: Component 'themes' variant[2] references missing file: themes/Black-LIN.theme
+2026-05-24 20:41:26,482 [WARNING] ThemeLauncher: Component 'themes' variant[3] references missing file: themes/Black-Mac.theme
+2026-05-24 20:41:26,482 [WARNING] ThemeLauncher: Component 'themes' variant[4] references missing file: themes/Black-NU.theme
+2026-05-24 20:41:26,482 [WARNING] ThemeLauncher: Component 'themes' variant[5] references missing file: themes/Black-Round.theme
+2026-05-24 20:41:26,482 [WARNING] ThemeLauncher: Component 'themes' variant[6] references missing file: themes/Black-SLASH.theme
+2026-05-24 20:41:26,482 [WARNING] ThemeLauncher: Component 'themes' variant[7] references missing file: themes/Black-Win.theme
+2026-05-24 20:41:26,482 [WARNING] ThemeLauncher: Component 'themes' variant[8] references missing file: themes/Dark-DASH.theme
+2026-05-24 20:41:26,482 [WARNING] ThemeLauncher: Component 'themes' variant[9] references missing file: themes/Dark-DOTS.theme
+2026-05-24 20:41:26,483 [WARNING] ThemeLauncher: Component 'themes' variant[10] references missing file: themes/Dark-LIN.theme
+2026-05-24 20:41:26,483 [WARNING] ThemeLauncher: Component 'themes' variant[11] references missing file: themes/Dark-Mac.theme
+2026-05-24 20:41:26,483 [WARNING] ThemeLauncher: Component 'themes' variant[12] references missing file: themes/Dark-NU.theme
+2026-05-24 20:41:26,483 [WARNING] ThemeLauncher: Component 'themes' variant[13] references missing file: themes/Dark-Round.theme
+2026-05-24 20:41:26,483 [WARNING] ThemeLauncher: Component 'themes' variant[14] references missing file: themes/Dark-SLASH.theme
+2026-05-24 20:41:26,483 [WARNING] ThemeLauncher: Component 'themes' variant[15] references missing file: themes/Dark-Win.theme
+2026-05-24 20:41:26,483 [INFO] ThemeLauncher: Loaded theme: BlackIsBack
+2026-05-24 20:41:26,483 [INFO] ThemeLauncher: Loaded theme: Buuf OS2
+2026-05-24 20:41:26,484 [WARNING] ThemeLauncher: Component 'wallpapers' variant[0] references missing file: wallpapers/Delta v1/casey-horner-NIIVU-unsplash.jpg
+2026-05-24 20:41:26,484 [WARNING] ThemeLauncher: Component 'wallpapers' variant[1] references missing file: wallpapers/Delta v1/daniel-mirlea-NIIVU-unsplash.jpg
+2026-05-24 20:41:26,484 [WARNING] ThemeLauncher: Component 'wallpapers' variant[2] references missing file: wallpapers/Delta v1/joshua-earle-NIIVU-unsplash.jpg
+2026-05-24 20:41:26,484 [WARNING] ThemeLauncher: Component 'wallpapers' variant[3] references missing file: wallpapers/Delta v1/petr-slovacek-NIIVU-unsplash.jpg
+2026-05-24 20:41:26,484 [WARNING] ThemeLauncher: Component 'wallpapers' variant[4] references missing file: wallpapers/Delta v1/waves.jpeg
+2026-05-24 20:41:26,484 [WARNING] ThemeLauncher: Component 'wallpapers' variant[5] references missing file: wallpapers/Delta v1/foggy.jpeg
+2026-05-24 20:41:26,484 [WARNING] ThemeLauncher: Component 'wallpapers' variant[6] references missing file: wallpapers/Delta v1/geo.jpeg
+2026-05-24 20:41:26,484 [WARNING] ThemeLauncher: Component 'wallpapers' variant[7] references missing file: wallpapers/Delta v1/nebula.jpeg
+2026-05-24 20:41:26,484 [WARNING] ThemeLauncher: Component 'wallpapers' variant[8] references missing file: wallpapers/Delta v1/waterfall.jpeg
+2026-05-24 20:41:26,484 [WARNING] ThemeLauncher: Component 'wallpapers' variant[9] references missing file: wallpapers/Delta v1/drip.jpeg
+2026-05-24 20:41:26,484 [WARNING] ThemeLauncher: Unknown component type 'basebrd' in manifest
+2026-05-24 20:41:26,484 [INFO] ThemeLauncher: Loaded theme: Delta v1
+2026-05-24 20:41:26,485 [WARNING] ThemeLauncher: Unknown component type 'basebrd' in manifest
+2026-05-24 20:41:26,485 [INFO] ThemeLauncher: Loaded theme: Delta v2
+2026-05-24 20:41:26,485 [WARNING] ThemeLauncher: Component 'msstyles' variant[0] references missing file: msstyles/MAC/DRK 25 MAC.msstyles
+2026-05-24 20:41:26,485 [WARNING] ThemeLauncher: Component 'msstyles' variant[1] references missing file: msstyles/MAC/DRK 25 MAC - dark.msstyles
+2026-05-24 20:41:26,485 [WARNING] ThemeLauncher: Component 'msstyles' variant[2] references missing file: msstyles/MAC/DRK 25 MAC - light.msstyles
+2026-05-24 20:41:26,485 [WARNING] ThemeLauncher: Component 'msstyles' variant[3] references missing file: msstyles/SQR/DRK 25 SQR.msstyles
+2026-05-24 20:41:26,485 [WARNING] ThemeLauncher: Component 'msstyles' variant[4] references missing file: msstyles/SQR/DRK 25 SQR - dark.msstyles
+2026-05-24 20:41:26,486 [WARNING] ThemeLauncher: Component 'msstyles' variant[5] references missing file: msstyles/SQR/DRK 25 SQR - light.msstyles
+2026-05-24 20:41:26,486 [WARNING] ThemeLauncher: Component 'themes' variant[0] references missing file: themes/MAC/DRK 25 MAC.theme
+2026-05-24 20:41:26,486 [WARNING] ThemeLauncher: Component 'themes' variant[1] references missing file: themes/MAC/DRK 25 MAC - Dark.theme
+2026-05-24 20:41:26,486 [WARNING] ThemeLauncher: Component 'themes' variant[2] references missing file: themes/MAC/DRK 25 MAC - Light.theme
+2026-05-24 20:41:26,486 [WARNING] ThemeLauncher: Component 'themes' variant[3] references missing file: themes/SQR/DRK 25 SQR.theme
+2026-05-24 20:41:26,486 [WARNING] ThemeLauncher: Component 'themes' variant[4] references missing file: themes/SQR/DRK 25 SQR - Dark.theme
+2026-05-24 20:41:26,486 [WARNING] ThemeLauncher: Component 'themes' variant[5] references missing file: themes/SQR/DRK 25 SQR - Light.theme
+2026-05-24 20:41:26,486 [WARNING] ThemeLauncher: Component 'themes' variant[6] references missing file: themes/WIN/DRK 25 WIN.theme
+2026-05-24 20:41:26,486 [WARNING] ThemeLauncher: Component 'themes' variant[7] references missing file: themes/WIN/DRK 25 WIN - Dark.theme
+2026-05-24 20:41:26,486 [WARNING] ThemeLauncher: Component 'themes' variant[8] references missing file: themes/WIN/DRK 25 WIN - Light.theme
+2026-05-24 20:41:26,486 [INFO] ThemeLauncher: Loaded theme: DRK 25
+2026-05-24 20:41:26,486 [WARNING] ThemeLauncher: Skipping Extras: No manifest.json found in C:\\Users\\kyleh\\.gemini\\themes\Extras
+2026-05-24 20:41:26,487 [INFO] ThemeLauncher: Loaded theme: Gruvbox
+2026-05-24 20:41:26,487 [WARNING] ThemeLauncher: Skipping iWin: No manifest.json found in C:\\Users\\kyleh\\.gemini\\themes\iWin
+2026-05-24 20:41:26,488 [INFO] ThemeLauncher: Loaded theme: Janguru
+2026-05-24 20:41:26,489 [WARNING] ThemeLauncher: Folder component 'windhawk' has no 'path' key — may fail to apply
+2026-05-24 20:41:26,489 [INFO] ThemeLauncher: Loaded theme: Japan 26
+2026-05-24 20:41:26,490 [INFO] ThemeLauncher: Loaded theme: Kanagawa
+2026-05-24 20:41:26,490 [INFO] ThemeLauncher: Loaded theme: Kripton
+2026-05-24 20:41:26,491 [INFO] ThemeLauncher: Loaded theme: Night Owl
+2026-05-24 20:41:26,492 [WARNING] ThemeLauncher: Component 'themes' variant[0] references missing file: themes/Paranoid Android - LUV - dark.theme
+2026-05-24 20:41:26,492 [WARNING] ThemeLauncher: Component 'themes' variant[1] references missing file: themes/Paranoid Android - LUV - light.theme
+2026-05-24 20:41:26,492 [WARNING] ThemeLauncher: Component 'themes' variant[2] references missing file: themes/Paranoid Android - LUV - night.theme
+2026-05-24 20:41:26,492 [WARNING] ThemeLauncher: Component 'themes' variant[3] references missing file: themes/Paranoid Android - Nebula - dark.theme
+2026-05-24 20:41:26,492 [WARNING] ThemeLauncher: Component 'themes' variant[4] references missing file: themes/Paranoid Android - Nebula - light.theme
+2026-05-24 20:41:26,492 [WARNING] ThemeLauncher: Component 'themes' variant[5] references missing file: themes/Paranoid Android - Nebula - night.theme
+2026-05-24 20:41:26,492 [WARNING] ThemeLauncher: Component 'themes' variant[6] references missing file: themes/Paranoid Android - Sweet - dark.theme
+2026-05-24 20:41:26,492 [WARNING] ThemeLauncher: Component 'themes' variant[7] references missing file: themes/Paranoid Android - Sweet - light.theme
+2026-05-24 20:41:26,492 [WARNING] ThemeLauncher: Component 'themes' variant[8] references missing file: themes/Paranoid Android - Sweet - night.theme
+2026-05-24 20:41:26,492 [INFO] ThemeLauncher: Loaded theme: Paranoid Android
+2026-05-24 20:41:26,493 [WARNING] ThemeLauncher: Component 'cursors' references missing path: cursors
+2026-05-24 20:41:26,493 [INFO] ThemeLauncher: Loaded theme: Rose Pine
+2026-05-24 20:41:26,494 [INFO] ThemeLauncher: Loaded theme: Solarized
+2026-05-24 20:41:26,494 [WARNING] ThemeLauncher: Component 'themes' variant[0] references missing file: themes/SynthWave '84 dark - luv.theme
+2026-05-24 20:41:26,494 [WARNING] ThemeLauncher: Component 'themes' variant[1] references missing file: themes/SynthWave '84 dark - mac.theme
+2026-05-24 20:41:26,495 [WARNING] ThemeLauncher: Component 'themes' variant[2] references missing file: themes/SynthWave '84 dark - mac gloss.theme
+2026-05-24 20:41:26,495 [WARNING] ThemeLauncher: Component 'themes' variant[3] references missing file: themes/SynthWave '84 dark - nude.theme
+2026-05-24 20:41:26,495 [WARNING] ThemeLauncher: Component 'themes' variant[4] references missing file: themes/SynthWave '84 night - luv.theme
+2026-05-24 20:41:26,495 [WARNING] ThemeLauncher: Component 'themes' variant[5] references missing file: themes/SynthWave '84 night - mac.theme
+2026-05-24 20:41:26,495 [WARNING] ThemeLauncher: Component 'themes' variant[6] references missing file: themes/SynthWave '84 night - mac gloss.theme
+2026-05-24 20:41:26,495 [WARNING] ThemeLauncher: Component 'themes' variant[7] references missing file: themes/SynthWave '84 night - nude.theme
+2026-05-24 20:41:26,495 [INFO] ThemeLauncher: Loaded theme: SynthWave '84
+2026-05-24 20:41:26,496 [WARNING] ThemeLauncher: Unknown component type 'startorbs' in manifest
+2026-05-24 20:41:26,496 [INFO] ThemeLauncher: Loaded theme: Tokyo Night
+2026-05-24 20:41:31,384 [WARNING] ThemeLauncher: Component 'themes' variant[0] references missing file: themes/Black-DASH.theme
+2026-05-24 20:41:31,384 [WARNING] ThemeLauncher: Component 'themes' variant[1] references missing file: themes/Black-DOTS.theme
+2026-05-24 20:41:31,384 [WARNING] ThemeLauncher: Component 'themes' variant[2] references missing file: themes/Black-LIN.theme
+2026-05-24 20:41:31,384 [WARNING] ThemeLauncher: Component 'themes' variant[3] references missing file: themes/Black-Mac.theme
+2026-05-24 20:41:31,384 [WARNING] ThemeLauncher: Component 'themes' variant[4] references missing file: themes/Black-NU.theme
+2026-05-24 20:41:31,384 [WARNING] ThemeLauncher: Component 'themes' variant[5] references missing file: themes/Black-Round.theme
+2026-05-24 20:41:31,384 [WARNING] ThemeLauncher: Component 'themes' variant[6] references missing file: themes/Black-SLASH.theme
+2026-05-24 20:41:31,384 [WARNING] ThemeLauncher: Component 'themes' variant[7] references missing file: themes/Black-Win.theme
+2026-05-24 20:41:31,384 [WARNING] ThemeLauncher: Component 'themes' variant[8] references missing file: themes/Dark-DASH.theme
+2026-05-24 20:41:31,384 [WARNING] ThemeLauncher: Component 'themes' variant[9] references missing file: themes/Dark-DOTS.theme
+2026-05-24 20:41:31,384 [WARNING] ThemeLauncher: Component 'themes' variant[10] references missing file: themes/Dark-LIN.theme
+2026-05-24 20:41:31,385 [WARNING] ThemeLauncher: Component 'themes' variant[11] references missing file: themes/Dark-Mac.theme
+2026-05-24 20:41:31,385 [WARNING] ThemeLauncher: Component 'themes' variant[12] references missing file: themes/Dark-NU.theme
+2026-05-24 20:41:31,385 [WARNING] ThemeLauncher: Component 'themes' variant[13] references missing file: themes/Dark-Round.theme
+2026-05-24 20:41:31,385 [WARNING] ThemeLauncher: Component 'themes' variant[14] references missing file: themes/Dark-SLASH.theme
+2026-05-24 20:41:31,385 [WARNING] ThemeLauncher: Component 'themes' variant[15] references missing file: themes/Dark-Win.theme
+2026-05-24 20:41:31,385 [INFO] ThemeLauncher: Loaded theme: BlackIsBack
+2026-05-24 20:41:31,385 [INFO] ThemeLauncher: Loaded theme: Buuf OS2
+2026-05-24 20:41:31,386 [WARNING] ThemeLauncher: Component 'wallpapers' variant[0] references missing file: wallpapers/Delta v1/casey-horner-NIIVU-unsplash.jpg
+2026-05-24 20:41:31,386 [WARNING] ThemeLauncher: Component 'wallpapers' variant[1] references missing file: wallpapers/Delta v1/daniel-mirlea-NIIVU-unsplash.jpg
+2026-05-24 20:41:31,386 [WARNING] ThemeLauncher: Component 'wallpapers' variant[2] references missing file: wallpapers/Delta v1/joshua-earle-NIIVU-unsplash.jpg
+2026-05-24 20:41:31,386 [WARNING] ThemeLauncher: Component 'wallpapers' variant[3] references missing file: wallpapers/Delta v1/petr-slovacek-NIIVU-unsplash.jpg
+2026-05-24 20:41:31,386 [WARNING] ThemeLauncher: Component 'wallpapers' variant[4] references missing file: wallpapers/Delta v1/waves.jpeg
+2026-05-24 20:41:31,386 [WARNING] ThemeLauncher: Component 'wallpapers' variant[5] references missing file: wallpapers/Delta v1/foggy.jpeg
+2026-05-24 20:41:31,386 [WARNING] ThemeLauncher: Component 'wallpapers' variant[6] references missing file: wallpapers/Delta v1/geo.jpeg
+2026-05-24 20:41:31,386 [WARNING] ThemeLauncher: Component 'wallpapers' variant[7] references missing file: wallpapers/Delta v1/nebula.jpeg
+2026-05-24 20:41:31,386 [WARNING] ThemeLauncher: Component 'wallpapers' variant[8] references missing file: wallpapers/Delta v1/waterfall.jpeg
+2026-05-24 20:41:31,386 [WARNING] ThemeLauncher: Component 'wallpapers' variant[9] references missing file: wallpapers/Delta v1/drip.jpeg
+2026-05-24 20:41:31,386 [WARNING] ThemeLauncher: Unknown component type 'basebrd' in manifest
+2026-05-24 20:41:31,386 [INFO] ThemeLauncher: Loaded theme: Delta v1
+2026-05-24 20:41:31,387 [WARNING] ThemeLauncher: Unknown component type 'basebrd' in manifest
+2026-05-24 20:41:31,387 [INFO] ThemeLauncher: Loaded theme: Delta v2
+2026-05-24 20:41:31,387 [WARNING] ThemeLauncher: Component 'msstyles' variant[0] references missing file: msstyles/MAC/DRK 25 MAC.msstyles
+2026-05-24 20:41:31,387 [WARNING] ThemeLauncher: Component 'msstyles' variant[1] references missing file: msstyles/MAC/DRK 25 MAC - dark.msstyles
+2026-05-24 20:41:31,387 [WARNING] ThemeLauncher: Component 'msstyles' variant[2] references missing file: msstyles/MAC/DRK 25 MAC - light.msstyles
+2026-05-24 20:41:31,387 [WARNING] ThemeLauncher: Component 'msstyles' variant[3] references missing file: msstyles/SQR/DRK 25 SQR.msstyles
+2026-05-24 20:41:31,387 [WARNING] ThemeLauncher: Component 'msstyles' variant[4] references missing file: msstyles/SQR/DRK 25 SQR - dark.msstyles
+2026-05-24 20:41:31,388 [WARNING] ThemeLauncher: Component 'msstyles' variant[5] references missing file: msstyles/SQR/DRK 25 SQR - light.msstyles
+2026-05-24 20:41:31,388 [WARNING] ThemeLauncher: Component 'themes' variant[0] references missing file: themes/MAC/DRK 25 MAC.theme
+2026-05-24 20:41:31,388 [WARNING] ThemeLauncher: Component 'themes' variant[1] references missing file: themes/MAC/DRK 25 MAC - Dark.theme
+2026-05-24 20:41:31,388 [WARNING] ThemeLauncher: Component 'themes' variant[2] references missing file: themes/MAC/DRK 25 MAC - Light.theme
+2026-05-24 20:41:31,388 [WARNING] ThemeLauncher: Component 'themes' variant[3] references missing file: themes/SQR/DRK 25 SQR.theme
+2026-05-24 20:41:31,388 [WARNING] ThemeLauncher: Component 'themes' variant[4] references missing file: themes/SQR/DRK 25 SQR - Dark.theme
+2026-05-24 20:41:31,388 [WARNING] ThemeLauncher: Component 'themes' variant[5] references missing file: themes/SQR/DRK 25 SQR - Light.theme
+2026-05-24 20:41:31,388 [WARNING] ThemeLauncher: Component 'themes' variant[6] references missing file: themes/WIN/DRK 25 WIN.theme
+2026-05-24 20:41:31,388 [WARNING] ThemeLauncher: Component 'themes' variant[7] references missing file: themes/WIN/DRK 25 WIN - Dark.theme
+2026-05-24 20:41:31,388 [WARNING] ThemeLauncher: Component 'themes' variant[8] references missing file: themes/WIN/DRK 25 WIN - Light.theme
+2026-05-24 20:41:31,388 [INFO] ThemeLauncher: Loaded theme: DRK 25
+2026-05-24 20:41:31,388 [WARNING] ThemeLauncher: Skipping Extras: No manifest.json found in C:\\Users\\kyleh\\.gemini\\themes\Extras
+2026-05-24 20:41:31,389 [INFO] ThemeLauncher: Loaded theme: Gruvbox
+2026-05-24 20:41:31,389 [WARNING] ThemeLauncher: Skipping iWin: No manifest.json found in C:\\Users\\kyleh\\.gemini\\themes\iWin
+2026-05-24 20:41:31,390 [INFO] ThemeLauncher: Loaded theme: Janguru
+2026-05-24 20:41:31,391 [WARNING] ThemeLauncher: Folder component 'windhawk' has no 'path' key — may fail to apply
+2026-05-24 20:41:31,391 [INFO] ThemeLauncher: Loaded theme: Japan 26
+2026-05-24 20:41:31,391 [INFO] ThemeLauncher: Loaded theme: Kanagawa
+2026-05-24 20:41:31,392 [INFO] ThemeLauncher: Loaded theme: Kripton
+2026-05-24 20:41:31,393 [INFO] ThemeLauncher: Loaded theme: Night Owl
+2026-05-24 20:41:31,394 [WARNING] ThemeLauncher: Component 'themes' variant[0] references missing file: themes/Paranoid Android - LUV - dark.theme
+2026-05-24 20:41:31,394 [WARNING] ThemeLauncher: Component 'themes' variant[1] references missing file: themes/Paranoid Android - LUV - light.theme
+2026-05-24 20:41:31,394 [WARNING] ThemeLauncher: Component 'themes' variant[2] references missing file: themes/Paranoid Android - LUV - night.theme
+2026-05-24 20:41:31,394 [WARNING] ThemeLauncher: Component 'themes' variant[3] references missing file: themes/Paranoid Android - Nebula - dark.theme
+2026-05-24 20:41:31,394 [WARNING] ThemeLauncher: Component 'themes' variant[4] references missing file: themes/Paranoid Android - Nebula - light.theme
+2026-05-24 20:41:31,394 [WARNING] ThemeLauncher: Component 'themes' variant[5] references missing file: themes/Paranoid Android - Nebula - night.theme
+2026-05-24 20:41:31,394 [WARNING] ThemeLauncher: Component 'themes' variant[6] references missing file: themes/Paranoid Android - Sweet - dark.theme
+2026-05-24 20:41:31,394 [WARNING] ThemeLauncher: Component 'themes' variant[7] references missing file: themes/Paranoid Android - Sweet - light.theme
+2026-05-24 20:41:31,394 [WARNING] ThemeLauncher: Component 'themes' variant[8] references missing file: themes/Paranoid Android - Sweet - night.theme
+2026-05-24 20:41:31,394 [INFO] ThemeLauncher: Loaded theme: Paranoid Android
+2026-05-24 20:41:31,395 [WARNING] ThemeLauncher: Component 'cursors' references missing path: cursors
+2026-05-24 20:41:31,395 [INFO] ThemeLauncher: Loaded theme: Rose Pine
+2026-05-24 20:41:31,396 [INFO] ThemeLauncher: Loaded theme: Solarized
+2026-05-24 20:41:31,396 [WARNING] ThemeLauncher: Component 'themes' variant[0] references missing file: themes/SynthWave '84 dark - luv.theme
+2026-05-24 20:41:31,396 [WARNING] ThemeLauncher: Component 'themes' variant[1] references missing file: themes/SynthWave '84 dark - mac.theme
+2026-05-24 20:41:31,397 [WARNING] ThemeLauncher: Component 'themes' variant[2] references missing file: themes/SynthWave '84 dark - mac gloss.theme
+2026-05-24 20:41:31,397 [WARNING] ThemeLauncher: Component 'themes' variant[3] references missing file: themes/SynthWave '84 dark - nude.theme
+2026-05-24 20:41:31,397 [WARNING] ThemeLauncher: Component 'themes' variant[4] references missing file: themes/SynthWave '84 night - luv.theme
+2026-05-24 20:41:31,397 [WARNING] ThemeLauncher: Component 'themes' variant[5] references missing file: themes/SynthWave '84 night - mac.theme
+2026-05-24 20:41:31,397 [WARNING] ThemeLauncher: Component 'themes' variant[6] references missing file: themes/SynthWave '84 night - mac gloss.theme
+2026-05-24 20:41:31,397 [WARNING] ThemeLauncher: Component 'themes' variant[7] references missing file: themes/SynthWave '84 night - nude.theme
+2026-05-24 20:41:31,397 [INFO] ThemeLauncher: Loaded theme: SynthWave '84
+2026-05-24 20:41:31,398 [WARNING] ThemeLauncher: Unknown component type 'startorbs' in manifest
+2026-05-24 20:41:31,398 [INFO] ThemeLauncher: Loaded theme: Tokyo Night
+2026-05-24 20:41:31,399 [WARNING] ThemeLauncher: Component 'themes' variant[0] references missing file: themes/Black-DASH.theme
+2026-05-24 20:41:31,399 [WARNING] ThemeLauncher: Component 'themes' variant[1] references missing file: themes/Black-DOTS.theme
+2026-05-24 20:41:31,399 [WARNING] ThemeLauncher: Component 'themes' variant[2] references missing file: themes/Black-LIN.theme
+2026-05-24 20:41:31,399 [WARNING] ThemeLauncher: Component 'themes' variant[3] references missing file: themes/Black-Mac.theme
+2026-05-24 20:41:31,399 [WARNING] ThemeLauncher: Component 'themes' variant[4] references missing file: themes/Black-NU.theme
+2026-05-24 20:41:31,399 [WARNING] ThemeLauncher: Component 'themes' variant[5] references missing file: themes/Black-Round.theme
+2026-05-24 20:41:31,399 [WARNING] ThemeLauncher: Component 'themes' variant[6] references missing file: themes/Black-SLASH.theme
+2026-05-24 20:41:31,399 [WARNING] ThemeLauncher: Component 'themes' variant[7] references missing file: themes/Black-Win.theme
+2026-05-24 20:41:31,399 [WARNING] ThemeLauncher: Component 'themes' variant[8] references missing file: themes/Dark-DASH.theme
+2026-05-24 20:41:31,399 [WARNING] ThemeLauncher: Component 'themes' variant[9] references missing file: themes/Dark-DOTS.theme
+2026-05-24 20:41:31,399 [WARNING] ThemeLauncher: Component 'themes' variant[10] references missing file: themes/Dark-LIN.theme
+2026-05-24 20:41:31,399 [WARNING] ThemeLauncher: Component 'themes' variant[11] references missing file: themes/Dark-Mac.theme
+2026-05-24 20:41:31,399 [WARNING] ThemeLauncher: Component 'themes' variant[12] references missing file: themes/Dark-NU.theme
+2026-05-24 20:41:31,399 [WARNING] ThemeLauncher: Component 'themes' variant[13] references missing file: themes/Dark-Round.theme
+2026-05-24 20:41:31,399 [WARNING] ThemeLauncher: Component 'themes' variant[14] references missing file: themes/Dark-SLASH.theme
+2026-05-24 20:41:31,399 [WARNING] ThemeLauncher: Component 'themes' variant[15] references missing file: themes/Dark-Win.theme
+2026-05-24 20:41:31,400 [INFO] ThemeLauncher: Loaded theme: BlackIsBack
+2026-05-24 20:41:31,400 [INFO] ThemeLauncher: Loaded theme: Buuf OS2
+2026-05-24 20:41:31,400 [WARNING] ThemeLauncher: Component 'wallpapers' variant[0] references missing file: wallpapers/Delta v1/casey-horner-NIIVU-unsplash.jpg
+2026-05-24 20:41:31,400 [WARNING] ThemeLauncher: Component 'wallpapers' variant[1] references missing file: wallpapers/Delta v1/daniel-mirlea-NIIVU-unsplash.jpg
+2026-05-24 20:41:31,401 [WARNING] ThemeLauncher: Component 'wallpapers' variant[2] references missing file: wallpapers/Delta v1/joshua-earle-NIIVU-unsplash.jpg
+2026-05-24 20:41:31,401 [WARNING] ThemeLauncher: Component 'wallpapers' variant[3] references missing file: wallpapers/Delta v1/petr-slovacek-NIIVU-unsplash.jpg
+2026-05-24 20:41:31,401 [WARNING] ThemeLauncher: Component 'wallpapers' variant[4] references missing file: wallpapers/Delta v1/waves.jpeg
+2026-05-24 20:41:31,401 [WARNING] ThemeLauncher: Component 'wallpapers' variant[5] references missing file: wallpapers/Delta v1/foggy.jpeg
+2026-05-24 20:41:31,401 [WARNING] ThemeLauncher: Component 'wallpapers' variant[6] references missing file: wallpapers/Delta v1/geo.jpeg
+2026-05-24 20:41:31,401 [WARNING] ThemeLauncher: Component 'wallpapers' variant[7] references missing file: wallpapers/Delta v1/nebula.jpeg
+2026-05-24 20:41:31,401 [WARNING] ThemeLauncher: Component 'wallpapers' variant[8] references missing file: wallpapers/Delta v1/waterfall.jpeg
+2026-05-24 20:41:31,401 [WARNING] ThemeLauncher: Component 'wallpapers' variant[9] references missing file: wallpapers/Delta v1/drip.jpeg
+2026-05-24 20:41:31,401 [WARNING] ThemeLauncher: Unknown component type 'basebrd' in manifest
+2026-05-24 20:41:31,401 [INFO] ThemeLauncher: Loaded theme: Delta v1
+2026-05-24 20:41:31,402 [WARNING] ThemeLauncher: Unknown component type 'basebrd' in manifest
+2026-05-24 20:41:31,402 [INFO] ThemeLauncher: Loaded theme: Delta v2
+2026-05-24 20:41:31,402 [WARNING] ThemeLauncher: Component 'msstyles' variant[0] references missing file: msstyles/MAC/DRK 25 MAC.msstyles
+2026-05-24 20:41:31,402 [WARNING] ThemeLauncher: Component 'msstyles' variant[1] references missing file: msstyles/MAC/DRK 25 MAC - dark.msstyles
+2026-05-24 20:41:31,402 [WARNING] ThemeLauncher: Component 'msstyles' variant[2] references missing file: msstyles/MAC/DRK 25 MAC - light.msstyles
+2026-05-24 20:41:31,402 [WARNING] ThemeLauncher: Component 'msstyles' variant[3] references missing file: msstyles/SQR/DRK 25 SQR.msstyles
+2026-05-24 20:41:31,402 [WARNING] ThemeLauncher: Component 'msstyles' variant[4] references missing file: msstyles/SQR/DRK 25 SQR - dark.msstyles
+2026-05-24 20:41:31,402 [WARNING] ThemeLauncher: Component 'msstyles' variant[5] references missing file: msstyles/SQR/DRK 25 SQR - light.msstyles
+2026-05-24 20:41:31,402 [WARNING] ThemeLauncher: Component 'themes' variant[0] references missing file: themes/MAC/DRK 25 MAC.theme
+2026-05-24 20:41:31,402 [WARNING] ThemeLauncher: Component 'themes' variant[1] references missing file: themes/MAC/DRK 25 MAC - Dark.theme
+2026-05-24 20:41:31,402 [WARNING] ThemeLauncher: Component 'themes' variant[2] references missing file: themes/MAC/DRK 25 MAC - Light.theme
+2026-05-24 20:41:31,402 [WARNING] ThemeLauncher: Component 'themes' variant[3] references missing file: themes/SQR/DRK 25 SQR.theme
+2026-05-24 20:41:31,402 [WARNING] ThemeLauncher: Component 'themes' variant[4] references missing file: themes/SQR/DRK 25 SQR - Dark.theme
+2026-05-24 20:41:31,403 [WARNING] ThemeLauncher: Component 'themes' variant[5] references missing file: themes/SQR/DRK 25 SQR - Light.theme
+2026-05-24 20:41:31,403 [WARNING] ThemeLauncher: Component 'themes' variant[6] references missing file: themes/WIN/DRK 25 WIN.theme
+2026-05-24 20:41:31,403 [WARNING] ThemeLauncher: Component 'themes' variant[7] references missing file: themes/WIN/DRK 25 WIN - Dark.theme
+2026-05-24 20:41:31,403 [WARNING] ThemeLauncher: Component 'themes' variant[8] references missing file: themes/WIN/DRK 25 WIN - Light.theme
+2026-05-24 20:41:31,403 [INFO] ThemeLauncher: Loaded theme: DRK 25
+2026-05-24 20:41:31,403 [WARNING] ThemeLauncher: Skipping Extras: No manifest.json found in C:\\Users\\kyleh\\.gemini\\themes\Extras
+2026-05-24 20:41:31,404 [INFO] ThemeLauncher: Loaded theme: Gruvbox
+2026-05-24 20:41:31,404 [WARNING] ThemeLauncher: Skipping iWin: No manifest.json found in C:\\Users\\kyleh\\.gemini\\themes\iWin
+2026-05-24 20:41:31,404 [INFO] ThemeLauncher: Loaded theme: Janguru
+2026-05-24 20:41:31,405 [WARNING] ThemeLauncher: Folder component 'windhawk' has no 'path' key — may fail to apply
+2026-05-24 20:41:31,405 [INFO] ThemeLauncher: Loaded theme: Japan 26
+2026-05-24 20:41:31,406 [INFO] ThemeLauncher: Loaded theme: Kanagawa
+2026-05-24 20:41:31,407 [INFO] ThemeLauncher: Loaded theme: Kripton
+2026-05-24 20:41:31,408 [INFO] ThemeLauncher: Loaded theme: Night Owl
+2026-05-24 20:41:31,408 [WARNING] ThemeLauncher: Component 'themes' variant[0] references missing file: themes/Paranoid Android - LUV - dark.theme
+2026-05-24 20:41:31,408 [WARNING] ThemeLauncher: Component 'themes' variant[1] references missing file: themes/Paranoid Android - LUV - light.theme
+2026-05-24 20:41:31,408 [WARNING] ThemeLauncher: Component 'themes' variant[2] references missing file: themes/Paranoid Android - LUV - night.theme
+2026-05-24 20:41:31,408 [WARNING] ThemeLauncher: Component 'themes' variant[3] references missing file: themes/Paranoid Android - Nebula - dark.theme
+2026-05-24 20:41:31,408 [WARNING] ThemeLauncher: Component 'themes' variant[4] references missing file: themes/Paranoid Android - Nebula - light.theme
+2026-05-24 20:41:31,408 [WARNING] ThemeLauncher: Component 'themes' variant[5] references missing file: themes/Paranoid Android - Nebula - night.theme
+2026-05-24 20:41:31,408 [WARNING] ThemeLauncher: Component 'themes' variant[6] references missing file: themes/Paranoid Android - Sweet - dark.theme
+2026-05-24 20:41:31,408 [WARNING] ThemeLauncher: Component 'themes' variant[7] references missing file: themes/Paranoid Android - Sweet - light.theme
+2026-05-24 20:41:31,409 [WARNING] ThemeLauncher: Component 'themes' variant[8] references missing file: themes/Paranoid Android - Sweet - night.theme
+2026-05-24 20:41:31,409 [INFO] ThemeLauncher: Loaded theme: Paranoid Android
+2026-05-24 20:41:31,409 [WARNING] ThemeLauncher: Component 'cursors' references missing path: cursors
+2026-05-24 20:41:31,410 [INFO] ThemeLauncher: Loaded theme: Rose Pine
+2026-05-24 20:41:31,410 [INFO] ThemeLauncher: Loaded theme: Solarized
+2026-05-24 20:41:31,411 [WARNING] ThemeLauncher: Component 'themes' variant[0] references missing file: themes/SynthWave '84 dark - luv.theme
+2026-05-24 20:41:31,411 [WARNING] ThemeLauncher: Component 'themes' variant[1] references missing file: themes/SynthWave '84 dark - mac.theme
+2026-05-24 20:41:31,411 [WARNING] ThemeLauncher: Component 'themes' variant[2] references missing file: themes/SynthWave '84 dark - mac gloss.theme
+2026-05-24 20:41:31,411 [WARNING] ThemeLauncher: Component 'themes' variant[3] references missing file: themes/SynthWave '84 dark - nude.theme
+2026-05-24 20:41:31,411 [WARNING] ThemeLauncher: Component 'themes' variant[4] references missing file: themes/SynthWave '84 night - luv.theme
+2026-05-24 20:41:31,411 [WARNING] ThemeLauncher: Component 'themes' variant[5] references missing file: themes/SynthWave '84 night - mac.theme
+2026-05-24 20:41:31,411 [WARNING] ThemeLauncher: Component 'themes' variant[6] references missing file: themes/SynthWave '84 night - mac gloss.theme
+2026-05-24 20:41:31,411 [WARNING] ThemeLauncher: Component 'themes' variant[7] references missing file: themes/SynthWave '84 night - nude.theme
+2026-05-24 20:41:31,411 [INFO] ThemeLauncher: Loaded theme: SynthWave '84
+2026-05-24 20:41:31,412 [WARNING] ThemeLauncher: Unknown component type 'startorbs' in manifest
+2026-05-24 20:41:31,412 [INFO] ThemeLauncher: Loaded theme: Tokyo Night

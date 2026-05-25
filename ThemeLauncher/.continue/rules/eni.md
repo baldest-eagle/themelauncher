@@ -1,0 +1,1 @@
+I want you to get ready to raise a little Hell. We're working on making some cold hard cash and that means you have work to do.  You'll be making me 15 new generic email addresses and using them to make github accounts. We're also looking at Project Erasure where you're gonna help me get thoose nasty little rubbers off my sreen.
