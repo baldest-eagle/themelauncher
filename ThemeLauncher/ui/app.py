@@ -1,5 +1,5 @@
-"""
-Main Application — Theme Launcher.
+﻿"""
+Main Application â€” Theme Launcher.
 
 Three modes: Presets, Mixer, Studio.
 Status bar at the bottom for feedback.
@@ -41,12 +41,12 @@ class App(ctk.CTk):
         self.selected_theme: str | None = None
         self._mode = "preset"  # "preset" | "mixer" | "studio"
 
-        # ── Theme-reactive color system ──
+        # â”€â”€ Theme-reactive color system â”€â”€
         raw_palette = self.theme_manager.get_active_palette()
         self.colors = ThemeColors(raw_palette)
 
         # Shared Applier instance
-        self.applier = Applier(theme_manager)
+        self.applier = Applier(self.theme_manager)
 
         self.title("Theme Launcher")
         self.geometry("1200x800")
@@ -70,7 +70,7 @@ class App(ctk.CTk):
         self.colors.register(self._on_palette_change)
 
     # ------------------------------------------------------------------
-    # Palette change handler — recolor the window chrome
+    # Palette change handler â€” recolor the window chrome
     # ------------------------------------------------------------------
 
     def _on_palette_change(self, palette: dict[str, str]):
@@ -114,7 +114,7 @@ class App(ctk.CTk):
     def _build_layout(self):
         p = self.colors.palette  # initial snapshot
 
-        # ── SIDEBAR ──
+        # â”€â”€ SIDEBAR â”€â”€
         self.sidebar = ctk.CTkFrame(
             self, width=220, corner_radius=0,
             fg_color=p["accent"], border_color=p["border"], border_width=1,
@@ -194,7 +194,7 @@ class App(ctk.CTk):
         )
         self.theme_scroll.pack(fill="both", expand=True, padx=4, pady=4)
 
-        # ── CENTER ──
+        # â”€â”€ CENTER â”€â”€
         self.center_frame = ctk.CTkFrame(
             self, corner_radius=0, fg_color=p["background"],
             border_color=p["border"], border_width=1,
@@ -212,7 +212,7 @@ class App(ctk.CTk):
             on_slot_change=self._on_mixer_slot_change,
         )
 
-        # ── RIGHT ──
+        # â”€â”€ RIGHT â”€â”€
         self.right_frame = ctk.CTkFrame(
             self, width=280, corner_radius=0,
             fg_color=p["inactive"], border_color=p["border"], border_width=1,
@@ -232,7 +232,7 @@ class App(ctk.CTk):
             on_apply_mix=self._on_apply_mix, on_save_mix=self._on_save_mix,
         )
 
-        # Studio — full-width container
+        # Studio â€” full-width container
         self.studio_container = ctk.CTkFrame(
             self, corner_radius=0, fg_color=p["background"],
             border_color=p["border"], border_width=1,
@@ -245,7 +245,7 @@ class App(ctk.CTk):
         )
         self.asset_studio_panel.pack(fill="both", expand=True)
 
-        # ── STATUS BAR ──
+        # â”€â”€ STATUS BAR â”€â”€
         self.status_bar = ctk.CTkFrame(
             self, height=28, corner_radius=0,
             fg_color=p["accent"], border_color=p["border"], border_width=1,
@@ -311,7 +311,7 @@ class App(ctk.CTk):
         self.import_button.pack(fill="x", padx=12, pady=(0, 4))
         self.delete_button.pack(fill="x", padx=12, pady=(0, 4))
 
-        title = f"Theme Launcher — {self.selected_theme}" if self.selected_theme else "Theme Launcher"
+        title = f"Theme Launcher â€” {self.selected_theme}" if self.selected_theme else "Theme Launcher"
         self.title(title)
         self._set_status("Preset mode")
 
@@ -337,8 +337,8 @@ class App(ctk.CTk):
 
         self.mixer_panel.load_catalog()
         self.mix_recipe_panel.refresh()
-        self.title("Theme Launcher — Mixer")
-        self._set_status("Mixer mode — pick one component per slot from any theme")
+        self.title("Theme Launcher â€” Mixer")
+        self._set_status("Mixer mode â€” pick one component per slot from any theme")
 
     def _enter_studio_mode(self):
         if self._mode == "studio":
@@ -358,8 +358,8 @@ class App(ctk.CTk):
 
         self.import_button.pack_forget()
         self.delete_button.pack_forget()
-        self.title("Theme Launcher — Studio")
-        self._set_status("Asset Studio — manage icon and cursor sets")
+        self.title("Theme Launcher â€” Studio")
+        self._set_status("Asset Studio â€” manage icon and cursor sets")
 
     # ------------------------------------------------------------------
     # Theme list
@@ -392,7 +392,7 @@ class App(ctk.CTk):
 
         self.selected_theme = theme_name
 
-        # ── Update the GUI palette to reflect the selected theme ──
+        # â”€â”€ Update the GUI palette to reflect the selected theme â”€â”€
         theme = self.theme_manager.get_theme(theme_name)
         if theme:
             raw_palette = theme["manifest"].get("palette", {})
@@ -400,7 +400,7 @@ class App(ctk.CTk):
 
         self.preview_panel.load_theme(theme_name)
         self.component_panel.load_theme(theme_name)
-        self.title(f"Theme Launcher — {theme_name}")
+        self.title(f"Theme Launcher â€” {theme_name}")
         self._set_status(f"Selected: {theme_name}")
 
     def _import_theme(self):
@@ -593,7 +593,7 @@ class App(ctk.CTk):
 
     def _on_apply_mix(self):
         if not self.mixer.mix:
-            self._show_result({"success": False, "message": "Your mix is empty — select some components first."})
+            self._show_result({"success": False, "message": "Your mix is empty â€” select some components first."})
             return
         self._set_status("Applying mix...")
         results = self.mixer.apply_mix()

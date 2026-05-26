@@ -144,15 +144,20 @@ class Applier:
         except Exception as exc:
             results["cursors"] = {"success": False, "message": str(exc)}
 
-        # 4. Clear start orb
+        # 4. Clear start orbs (both SAB and Windhawk)
         try:
-            orb_dir = r"C:\Windhawk\StartOrbs"
-            if os.path.isdir(orb_dir):
-                for f in os.listdir(orb_dir):
-                    os.remove(os.path.join(orb_dir, f))
-                results["startorb"] = {"success": True, "message": "Custom start orbs removed"}
-            else:
-                results["startorb"] = {"success": True, "message": "No custom orb directory found"}
+            local = os.environ.get("LOCALAPPDATA", "")
+            orb_dirs = [
+                os.path.join(local, "StartAllBack", "Orbs"),
+                r"C:\Windhawk\StartOrbs",
+            ]
+            cleared = 0
+            for orb_dir in orb_dirs:
+                if os.path.isdir(orb_dir):
+                    for f in os.listdir(orb_dir):
+                        os.remove(os.path.join(orb_dir, f))
+                        cleared += 1
+            results["startorb"] = {"success": True, "message": f"Cleared {cleared} custom start orb(s)"}
         except Exception as exc:
             results["startorb"] = {"success": False, "message": str(exc)}
 
@@ -237,6 +242,53 @@ class Applier:
                 if v.get("name") == variant_name:
                     return v
         return variants[0]
+
+    def _find_sab_styles_dir(self) -> str:
+        """Locate StartAllBack Styles directory."""
+        local = os.environ.get("LOCALAPPDATA", "")
+        primary = os.path.join(local, "StartAllBack", "Styles")
+        if os.path.isdir(os.path.dirname(primary)):
+            return primary
+        candidates = [
+            primary,
+            os.path.join(os.environ.get("ProgramFiles", r"C:\Program Files"), "StartAllBack", "Styles"),
+            os.path.join(os.environ.get("APPDATA", ""), "StartIsBack"),
+        ]
+        for d in candidates:
+            if os.path.isdir(d):
+                return d
+        log.warning("StartAllBack Styles dir not found; using primary: %s", primary)
+        return primary
+
+    def _find_sab_orbs_dir(self) -> str:
+        """Locate StartAllBack Orbs directory."""
+        local = os.environ.get("LOCALAPPDATA", "")
+        primary = os.path.join(local, "StartAllBack", "Orbs")
+        if os.path.isdir(os.path.dirname(primary)):
+            return primary
+        log.warning("StartAllBack Orbs dir not found; using primary: %s", primary)
+        return primary
+
+    def _resolve_orb_dir(self, target: str) -> str:
+        """Resolve the correct orb destination based on target type.
+
+        Manifest variants can specify "target": "startallback" or "target": "windhawk".
+        If no target is specified, tries StartAllBack first, then Windhawk.
+        """
+        local = os.environ.get("LOCALAPPDATA", "")
+
+        if target == "startallback":
+            return os.path.join(local, "StartAllBack", "Orbs")
+
+        if target == "windhawk":
+            return r"C:\Windhawk\StartOrbs"
+
+        # Auto-detect: if SAB is installed, prefer it; otherwise Windhawk
+        sab_dir = os.path.join(local, "StartAllBack")
+        if os.path.isdir(sab_dir):
+            return os.path.join(sab_dir, "Orbs")
+
+        return r"C:\Windhawk\StartOrbs"
 
     # ------------------------------------------------------------------
     # MSSTYLES
@@ -747,14 +799,16 @@ class Applier:
             if not src or not os.path.exists(src):
                 return {"success": False, "message": f"Orb file not found: {src}"}
 
-            dest_dir = r"C:\Windhawk\StartOrbs"
-            os.makedirs(dest_dir, exist_ok=True)
+            # Route orb to the correct directory based on "target" field
+            target = variant.get("target", component.get("target", ""))
+            dest_dir = self._resolve_orb_dir(target)
 
-            # Use the variant's actual filename, not hardcoded "Delta.png"
+            os.makedirs(dest_dir, exist_ok=True)
             dest_path = os.path.join(dest_dir, os.path.basename(src))
             shutil.copy2(src, dest_path)
 
-            return {"success": True, "message": f"Installed Start Orb: {os.path.basename(src)}"}
+            location = "StartAllBack/Orbs" if target == "startallback" else "Windhawk/StartOrbs"
+            return {"success": True, "message": f"Installed Start Orb to {location}: {os.path.basename(src)}"}
         except Exception as exc:
             return {"success": False, "message": str(exc)}
 
@@ -766,16 +820,36 @@ class Applier:
         try:
             results = []
 
-            # Auto-apply the skin file if present
-            skin_rel = component.get("skin")
+            # Resolve the skin to install — supports both legacy "skin" key and variants
+            skin_rel = None
+            if component.get("variants"):
+                variant = self._get_variant(component, variant_name)
+                if variant:
+                    skin_rel = variant.get("file")
+            if not skin_rel:
+                skin_rel = component.get("skin")
+
             if skin_rel:
                 skin_src = self._resolve(theme_name, skin_rel)
                 if skin_src and os.path.exists(skin_src):
-                    sab_dir = os.path.join(os.environ.get("APPDATA", ""), "StartIsBack")
-                    os.makedirs(sab_dir, exist_ok=True)
-                    dest = os.path.join(sab_dir, os.path.basename(skin_src))
+                    styles_dir = self._find_sab_styles_dir()
+                    os.makedirs(styles_dir, exist_ok=True)
+                    dest = os.path.join(styles_dir, os.path.basename(skin_src))
                     shutil.copy2(skin_src, dest)
-                    results.append(f"Skin installed: {os.path.basename(skin_src)}")
+                    results.append(f"Skin installed to Styles: {os.path.basename(skin_src)}")
+                else:
+                    results.append(f"Skin file not found: {skin_rel}")
+
+            # Install orb image if referenced in the startallback component
+            orb_rel = component.get("orb")
+            if orb_rel:
+                orb_src = self._resolve(theme_name, orb_rel)
+                if orb_src and os.path.exists(orb_src):
+                    orbs_dir = self._find_sab_orbs_dir()
+                    os.makedirs(orbs_dir, exist_ok=True)
+                    dest = os.path.join(orbs_dir, os.path.basename(orb_src))
+                    shutil.copy2(orb_src, dest)
+                    results.append(f"Orb installed: {os.path.basename(orb_src)}")
 
             guide_rel = component.get("guide")
             guide_abs = self._resolve(theme_name, guide_rel) if guide_rel else None

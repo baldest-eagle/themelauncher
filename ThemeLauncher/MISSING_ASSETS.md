@@ -21,37 +21,37 @@ Update the status column here when done.
 | Asset | Status |
 |---|---|
 | `preview.png` | ✅ sourced from `__Theme Previews__` |
-| SAB skin (`.SAB.msstyles`) | ⬜ not found in source pack |
-| SAB guide screenshots | ⬜ not found in source pack |
-| Mica guide screenshots | ⬜ not found in source pack |
-| OldNewExplorer guide screenshots | ⬜ not found in source pack |
+| SAB skin (`.SAB.msstyles`) | ➖ N/A — not included in niivu's BlackIsBack pack |
+| SAB guide screenshots | ⬜ pending — drop PNGs into `guides/startallback/` |
+| Mica guide screenshots | ⬜ pending — drop PNGs into `guides/mica/` |
+| OldNewExplorer guide screenshots | ⬜ pending — drop PNGs into `guides/oldnewexplorer/` |
 
 ### Buuf OS2
 | Asset | Status |
 |---|---|
 | `preview.png` | ✅ sourced from `__Theme Previews__` |
-| SAB skin (`.SAB.msstyles`) | ⬜ not found in source pack |
-| SAB guide screenshots | ⬜ not found in source pack |
-| Mica guide screenshots | ⬜ not found in source pack |
-| OldNewExplorer guide screenshots | ⬜ not found in source pack |
+| SAB skin (`.SAB.msstyles`) | ➖ N/A — not included in niivu's Buuf OS2 pack |
+| SAB guide screenshots | ⬜ pending — drop PNGs into `guides/startallback/` |
+| Mica guide screenshots | ⬜ pending — drop PNGs into `guides/mica/` |
+| OldNewExplorer guide screenshots | ⬜ pending — drop PNGs into `guides/oldnewexplorer/` |
 
 ### Delta v1
 | Asset | Status |
 |---|---|
 | `preview.png` | ✅ copied from `msstyles/Previews/Dark.png` |
-| SAB skin (`.SAB.msstyles`) | ⬜ not found in source pack |
-| SAB guide screenshots | ⬜ not found in source pack |
-| Mica guide screenshots | ⬜ not found in source pack |
-| OldNewExplorer guide screenshots | ⬜ not found in source pack |
+| SAB skin (`.SAB.msstyles`) | ➖ N/A — not included in Delta v1 pack |
+| SAB guide screenshots | ⬜ pending — drop PNGs into `guides/startallback/` |
+| Mica guide screenshots | ⬜ pending — drop PNGs into `guides/mica/` |
+| OldNewExplorer guide screenshots | ⬜ pending — drop PNGs into `guides/oldnewexplorer/` |
 
 ### Delta v2
 | Asset | Status |
 |---|---|
 | `preview.png` | ✅ copied from `msstyles/Previews/Dark.png` |
-| SAB skin (`.SAB.msstyles`) | ⬜ not found in source pack |
-| SAB guide screenshots | ⬜ not found in source pack |
-| Mica guide screenshots | ⬜ not found in source pack |
-| OldNewExplorer guide screenshots | ⬜ not found in source pack |
+| SAB skin (`.SAB.msstyles`) | ➖ N/A — not included in Delta v2 pack |
+| SAB guide screenshots | ⬜ pending — drop PNGs into `guides/startallback/` |
+| Mica guide screenshots | ⬜ pending — drop PNGs into `guides/mica/` |
+| OldNewExplorer guide screenshots | ⬜ pending — drop PNGs into `guides/oldnewexplorer/` |
 
 ### DRK 25
 | Asset | Status |
@@ -60,34 +60,35 @@ Update the status column here when done.
 | SAB skin | ✅ `DRK 25 SAB.msstyles` |
 | SAB guide | ✅ 1 image |
 | Mica guide | ✅ 1 image |
-| OldNewExplorer guide | ⬜ no screenshot found in source pack |
+| OldNewExplorer guide | ⬜ pending — drop PNG into `guides/oldnewexplorer/` |
 
 ### gruvbox
 | Asset | Status |
 |---|---|
 | `preview.png` | ✅ |
-| SAB skin | ⬜ not found in source pack |
-| SAB guide | ⬜ no screenshots in source pack |
-| Mica guide | ⬜ no screenshots in source pack |
-| OldNewExplorer guide | ⬜ no screenshots in source pack |
+| SAB skin | ➖ N/A — not included in gruvbox pack |
+| SAB guide | ⬜ pending — drop PNGs into `guides/startallback/` |
+| Mica guide | ⬜ pending — drop PNGs into `guides/mica/` |
+| OldNewExplorer guide | ⬜ pending — drop PNGs into `guides/oldnewexplorer/` |
 
 ### iWin
 | Asset | Status |
 |---|---|
 | `preview.png` | ✅ |
-| SAB skin | ⬜ not found in source pack |
-| SAB guide | ⬜ not found in source pack |
-| Mica guide | ⬜ not found in source pack |
-| OldNewExplorer guide | ⬜ not found in source pack |
+| `manifest.json` | ✅ created 2026-05-25 — covers 6 variants, 32 wallpapers, cursors, guide refs |
+| SAB skin | ➖ N/A — not included in iWin pack |
+| SAB guide | ⬜ pending — drop PNGs into `guides/startallback/` |
+| Mica guide | ⬜ pending — drop PNGs into `guides/mica/` |
+| OldNewExplorer guide | ⬜ pending — drop PNGs into `guides/oldnewexplorer/` |
 
 ### Janguru
 | Asset | Status |
 |---|---|
 | `preview.png` | ✅ |
-| SAB skin | ⬜ not found in source pack |
-| SAB guide | ⬜ not found in source pack |
-| Mica guide | ⬜ not found in source pack |
-| OldNewExplorer guide | ⬜ not found in source pack |
+| SAB skin | ➖ N/A — not included in Janguru pack |
+| SAB guide | ⬜ pending — drop PNGs into `guides/startallback/` |
+| Mica guide | ⬜ pending — drop PNGs into `guides/mica/` |
+| OldNewExplorer guide | ⬜ pending — drop PNGs into `guides/oldnewexplorer/` |
 
 ### Japan 26
 | Asset | Status |
@@ -121,7 +122,7 @@ Update the status column here when done.
 | Asset | Status |
 |---|---|
 | `preview.png` | ✅ |
-| SAB skin | ⬜ not in source pack |
+| SAB skin | ➖ N/A — not included in Night Owl pack |
 | SAB guide | ✅ 3 images |
 | Mica guide | ✅ 2 images |
 | OldNewExplorer guide | ✅ 1 image |
@@ -130,16 +131,16 @@ Update the status column here when done.
 | Asset | Status |
 |---|---|
 | `preview.png` | ✅ |
-| SAB skin | ⬜ not found in source pack |
-| SAB guide | ⬜ not found in source pack |
-| Mica guide | ⬜ not found in source pack |
-| OldNewExplorer guide | ⬜ not found in source pack |
+| SAB skin | ➖ N/A — not included in Paranoid Android pack |
+| SAB guide | ⬜ pending — drop PNGs into `guides/startallback/` |
+| Mica guide | ⬜ pending — drop PNGs into `guides/mica/` |
+| OldNewExplorer guide | ⬜ pending — drop PNGs into `guides/oldnewexplorer/` |
 
 ### Rose Pine
 | Asset | Status |
 |---|---|
 | `preview.png` | ✅ |
-| SAB skin | ⬜ not found in source pack |
+| SAB skin | ➖ N/A — not included in Rose Pine pack |
 | SAB guide | ✅ 2 images |
 | Mica guide | ✅ 1 image |
 | OldNewExplorer guide | ✅ 1 image |
@@ -148,10 +149,10 @@ Update the status column here when done.
 | Asset | Status |
 |---|---|
 | `preview.png` | ✅ |
-| SAB skin | ⬜ not found in source pack |
-| SAB guide | ⬜ not found in source pack |
-| Mica guide | ⬜ not found in source pack |
-| OldNewExplorer guide | ⬜ not found in source pack |
+| SAB skin | ➖ N/A — not included in Solarized pack |
+| SAB guide | ⬜ pending — drop PNGs into `guides/startallback/` |
+| Mica guide | ⬜ pending — drop PNGs into `guides/mica/` |
+| OldNewExplorer guide | ⬜ pending — drop PNGs into `guides/oldnewexplorer/` |
 
 ### SynthWave 84
 | Asset | Status |
@@ -166,10 +167,10 @@ Update the status column here when done.
 | Asset | Status |
 |---|---|
 | `preview.png` | ✅ |
-| SAB skin | ⬜ not found in source pack |
-| SAB guide | ⬜ not found in source pack |
-| Mica guide | ⬜ not found in source pack |
-| OldNewExplorer guide | ⬜ not found in source pack |
+| SAB skin | ➖ N/A — not included in Tokyo Night pack |
+| SAB guide | ⬜ pending — drop PNGs into `guides/startallback/` |
+| Mica guide | ⬜ pending — drop PNGs into `guides/mica/` |
+| OldNewExplorer guide | ⬜ pending — drop PNGs into `guides/oldnewexplorer/` |
 
 ---
 
@@ -219,6 +220,33 @@ Update the status column here when done.
 > **Note:** SAB is automatable via registry import. Each theme needs a `startallback/settings.reg`
 > exported from a configured SAB state. The applier can import it with `reg import`.
 > This would eliminate the guide entirely for SAB.
+
+---
+
+## Manifest Status (2026-05-25)
+
+All 17 themes now have `manifest.json` files with `startallback`, `mica`, and `oldnewexplorer`
+component blocks pointing to their respective `guides/` subdirectories.
+
+| Theme | manifest | guide dirs | SAB skin | SAB guide | Mica guide | ONE guide |
+|---|---|---|---|---|---|---|
+| BlackIsBack | ✅ | ✅ | ➖ N/A | ⬜ | ⬜ | ⬜ |
+| Buuf OS2 | ✅ | ✅ | ➖ N/A | ⬜ | ⬜ | ⬜ |
+| Delta v1 | ✅ | ✅ | ➖ N/A | ⬜ | ⬜ | ⬜ |
+| Delta v2 | ✅ | ✅ | ➖ N/A | ⬜ | ⬜ | ⬜ |
+| DRK 25 | ✅ | ✅ | ✅ | ✅ | ✅ | ⬜ |
+| gruvbox | ✅ | ✅ | ➖ N/A | ⬜ | ⬜ | ⬜ |
+| iWin | ✅ NEW | ✅ | ➖ N/A | ⬜ | ⬜ | ⬜ |
+| Janguru | ✅ | ✅ | ➖ N/A | ⬜ | ⬜ | ⬜ |
+| Japan 26 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Kanagawa | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Kripton | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Night Owl | ✅ | ✅ | ➖ N/A | ✅ | ✅ | ✅ |
+| Paranoid Android | ✅ | ✅ | ➖ N/A | ⬜ | ⬜ | ⬜ |
+| Rose Pine | ✅ | ✅ | ➖ N/A | ✅ | ✅ | ✅ |
+| Solarized | ✅ | ✅ | ➖ N/A | ⬜ | ⬜ | ⬜ |
+| SynthWave 84 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Tokyo Night | ✅ | ✅ | ➖ N/A | ⬜ | ⬜ | ⬜ |
 
 ---
 

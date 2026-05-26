@@ -1,5 +1,13 @@
 {
   "themes_directory": "C:\\\\Users\\\\kyleh\\\\.gemini\\\\themes",
-  "active_theme": null,
-  "active_components": {}
+  "active_theme": "Kanagawa",
+  "active_components": {
+    "msstyles": "Kanagawa Lotus - SQR DT",
+    "themes": "Kanagawa Lotus - MAC DT NA",
+    "wallpapers": "Kanagawa WAVE",
+    "cursors": "cursors",
+    "startallback": "guide",
+    "mica": "guide",
+    "oldnewexplorer": "guide"
+  }
 }
