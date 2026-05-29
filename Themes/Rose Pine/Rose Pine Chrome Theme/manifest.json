@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "version": "1.0",
+  "name": "Rose Pine Chrome Theme",
+  "description": "A sophisticated dark Chrome theme matching the Rose Pine Windows 11 theme by niivu.",
+  "theme": {
+    "images": {
+      "theme_ntp_background": "images/theme_ntp_background.png"
+    },
+    "colors": {
+      "frame": [25, 23, 36],
+      "frame_inactive": [38, 35, 58],
+      "frame_incognito": [18, 17, 26],
+      "frame_incognito_inactive": [25, 23, 36],
+      "toolbar": [53, 51, 66],
+      "tab_text": [224, 222, 244],
+      "tab_background_text": [144, 140, 170],
+      "bookmark_text": [224, 222, 244],
+      "ntp_background": [53, 51, 66],
+      "ntp_text": [224, 222, 244],
+      "omnibox_text": [224, 222, 244],
+      "omnibox_background": [25, 23, 36]
+    },
+    "tints": {
+      "buttons": [0.7, 0.2, 0.6]
+    },
+    "properties": {
+      "ntp_background_alignment": "bottom",
+      "ntp_background_repeat": "no-repeat"
+    }
+  }
+}

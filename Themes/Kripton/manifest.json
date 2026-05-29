@@ -1,0 +1,427 @@
+{
+    "name":  "Kripton",
+    "version":  "1.0.0",
+    "description":  "A deep-space dark theme for Windows 11 with 4 style generations and 5 darkness levels (Night, Dark, Medium, Light, Lightest), each with NA variants, by niivu.",
+    "author":  "niivu",
+    "preview":  "preview.png",
+    "palette":  {
+                    "background":  "#0f1117",
+                    "accent":  "#1a1d2e",
+                    "text":  "#c0c8e0",
+                    "inactive":  "#0a0c12",
+                    "border":  "#2e3250",
+                    "active":  "#7b8cde"
+                },
+    "components":  {
+                       "msstyles":  {
+                                        "variants":  [
+                                                         {
+                                                             "name":  "Kripton Night",
+                                                             "file":  "msstyles/Kripton - Night.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton Night NA",
+                                                             "file":  "msstyles/Kripton - Night NA.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton Dark",
+                                                             "file":  "msstyles/Kripton - Dark.msstyles",
+                                                             "preview":  "previews/Dark.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton Dark NA",
+                                                             "file":  "msstyles/Kripton - Dark NA.msstyles",
+                                                             "preview":  "previews/Dark NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton Medium",
+                                                             "file":  "msstyles/Kripton - Medium.msstyles",
+                                                             "preview":  "previews/Medium.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton Medium NA",
+                                                             "file":  "msstyles/Kripton - Medium NA.msstyles",
+                                                             "preview":  "previews/Medium NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton Light",
+                                                             "file":  "msstyles/Kripton - Light.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton Light NA",
+                                                             "file":  "msstyles/Kripton - Light NA.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton Lightest",
+                                                             "file":  "msstyles/Kripton - Lightest.msstyles",
+                                                             "preview":  "previews/Lightest.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton Lightest NA",
+                                                             "file":  "msstyles/Kripton - Lightest NA.msstyles",
+                                                             "preview":  "previews/Lightest NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 2 Night",
+                                                             "file":  "msstyles/Kripton 2 - Night.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 2 Night NA",
+                                                             "file":  "msstyles/Kripton 2 - Night NA.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 2 Dark",
+                                                             "file":  "msstyles/Kripton 2 - Dark.msstyles",
+                                                             "preview":  "previews/Dark 2.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 2 Dark NA",
+                                                             "file":  "msstyles/Kripton 2 - Dark NA.msstyles",
+                                                             "preview":  "previews/Dark 2 NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 2 Medium",
+                                                             "file":  "msstyles/Kripton 2 - Medium.msstyles",
+                                                             "preview":  "previews/Medium 2.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 2 Medium NA",
+                                                             "file":  "msstyles/Kripton 2 - Medium NA.msstyles",
+                                                             "preview":  "previews/Medium 2 NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 2 Light",
+                                                             "file":  "msstyles/Kripton 2 - Light.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 2 Light NA",
+                                                             "file":  "msstyles/Kripton 2 - Light NA.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 2 Lightest",
+                                                             "file":  "msstyles/Kripton 2 - Lightest.msstyles",
+                                                             "preview":  "previews/Lightest 2.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 2 Lightest NA",
+                                                             "file":  "msstyles/Kripton 2 - Lightest NA.msstyles",
+                                                             "preview":  "previews/Lightest 2 NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 3 Night",
+                                                             "file":  "msstyles/Kripton 3 - Night.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 3 Night NA",
+                                                             "file":  "msstyles/Kripton 3 - Night NA.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 3 Dark",
+                                                             "file":  "msstyles/Kripton 3 - Dark.msstyles",
+                                                             "preview":  "previews/Dark 3.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 3 Dark NA",
+                                                             "file":  "msstyles/Kripton 3 - Dark NA.msstyles",
+                                                             "preview":  "previews/Dark 3 NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 3 Medium",
+                                                             "file":  "msstyles/Kripton 3 - Medium.msstyles",
+                                                             "preview":  "previews/Medium 3.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 3 Medium NA",
+                                                             "file":  "msstyles/Kripton 3 - Medium NA.msstyles",
+                                                             "preview":  "previews/Medium 3 NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 3 Light",
+                                                             "file":  "msstyles/Kripton 3 - Light.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 3 Light NA",
+                                                             "file":  "msstyles/Kripton 3 - Light NA.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 3 Lightest",
+                                                             "file":  "msstyles/Kripton 3 - Lightest.msstyles",
+                                                             "preview":  "previews/Lightest 3.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 3 Lightest NA",
+                                                             "file":  "msstyles/Kripton 3 - Lightest NA.msstyles",
+                                                             "preview":  "previews/Lightest 3 NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 4 Night",
+                                                             "file":  "msstyles/Kripton 4 - Night.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 4 Night NA",
+                                                             "file":  "msstyles/Kripton 4 - Night NA.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 4 Dark",
+                                                             "file":  "msstyles/Kripton 4 - Dark.msstyles",
+                                                             "preview":  "previews/Dark 4.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 4 Dark NA",
+                                                             "file":  "msstyles/Kripton 4 - Dark NA.msstyles",
+                                                             "preview":  "previews/Dark 4 NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 4 Medium",
+                                                             "file":  "msstyles/Kripton 4 - Medium.msstyles",
+                                                             "preview":  "previews/Medium 4.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 4 Medium NA",
+                                                             "file":  "msstyles/Kripton 4 - Medium NA.msstyles",
+                                                             "preview":  "previews/Medium 4 NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 4 Light",
+                                                             "file":  "msstyles/Kripton 4 - Light.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 4 Light NA",
+                                                             "file":  "msstyles/Kripton 4 - Light NA.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 4 Lightest",
+                                                             "file":  "msstyles/Kripton 4 - Lightest.msstyles",
+                                                             "preview":  "previews/Lightest 4.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kripton 4 Lightest NA",
+                                                             "file":  "msstyles/Kripton 4 - Lightest NA.msstyles",
+                                                             "preview":  "previews/Lightest 4 NA.png"
+                                                         }
+                                                     ]
+                                    },
+                       "themes":  {
+                                      "variants":  [
+                                                       {
+                                                           "name":  "Kripton Night",
+                                                           "file":  "themes/Kripton - Night.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton Night NA",
+                                                           "file":  "themes/Kripton - Night NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton Dark",
+                                                           "file":  "themes/Kripton - Dark.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton Dark NA",
+                                                           "file":  "themes/Kripton - Dark NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton Medium",
+                                                           "file":  "themes/Kripton - Medium.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton Medium NA",
+                                                           "file":  "themes/Kripton - Medium NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton Light",
+                                                           "file":  "themes/Kripton - Light.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton Light NA",
+                                                           "file":  "themes/Kripton - Light NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton Lightest",
+                                                           "file":  "themes/Kripton - Lightest.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton Lightest NA",
+                                                           "file":  "themes/Kripton - Lightest NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 2 Night",
+                                                           "file":  "themes/Kripton 2 - Night.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 2 Night NA",
+                                                           "file":  "themes/Kripton 2 - Night NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 2 Dark",
+                                                           "file":  "themes/Kripton 2 - Dark.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 2 Dark NA",
+                                                           "file":  "themes/Kripton 2 - Dark NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 2 Medium",
+                                                           "file":  "themes/Kripton 2 - Medium.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 2 Medium NA",
+                                                           "file":  "themes/Kripton 2 - Medium NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 2 Light",
+                                                           "file":  "themes/Kripton 2 - Light.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 2 Light NA",
+                                                           "file":  "themes/Kripton 2 - Light NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 2 Lightest",
+                                                           "file":  "themes/Kripton 2 - Lightest.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 2 Lightest NA",
+                                                           "file":  "themes/Kripton 2 - Lightest NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 3 Night",
+                                                           "file":  "themes/Kripton 3 - Night.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 3 Night NA",
+                                                           "file":  "themes/Kripton 3 - Night NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 3 Dark",
+                                                           "file":  "themes/Kripton 3 - Dark.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 3 Dark NA",
+                                                           "file":  "themes/Kripton 3 - Dark NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 3 Medium",
+                                                           "file":  "themes/Kripton 3 - Medium.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 3 Medium NA",
+                                                           "file":  "themes/Kripton 3 - Medium NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 3 Light",
+                                                           "file":  "themes/Kripton 3 - Light.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 3 Light NA",
+                                                           "file":  "themes/Kripton 3 - Light NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 3 Lightest",
+                                                           "file":  "themes/Kripton 3 - Lightest.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 3 Lightest NA",
+                                                           "file":  "themes/Kripton 3 - Lightest NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 4 Night",
+                                                           "file":  "themes/Kripton 4 - Night.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 4 Night NA",
+                                                           "file":  "themes/Kripton 4 - Night NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 4 Dark",
+                                                           "file":  "themes/Kripton 4 - Dark.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 4 Dark NA",
+                                                           "file":  "themes/Kripton 4 - Dark NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 4 Medium",
+                                                           "file":  "themes/Kripton 4 - Medium.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 4 Medium NA",
+                                                           "file":  "themes/Kripton 4 - Medium NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 4 Light",
+                                                           "file":  "themes/Kripton 4 - Light.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 4 Light NA",
+                                                           "file":  "themes/Kripton 4 - Light NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 4 Lightest",
+                                                           "file":  "themes/Kripton 4 - Lightest.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kripton 4 Lightest NA",
+                                                           "file":  "themes/Kripton 4 - Lightest NA.theme"
+                                                       }
+                                                   ]
+                                  },
+                       "wallpapers":  {
+                                          "variants":  [
+                                                           {
+                                                               "name":  "Kripton",
+                                                               "file":  "wallpapers/Kripton.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Kripton Minimal",
+                                                               "file":  "wallpapers/Kripton Minimal.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Milad Fakurian",
+                                                               "file":  "wallpapers/milad-fakurian-unsplash.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Pawel Czerwinski",
+                                                               "file":  "wallpapers/pawel-czerwinski-unsplash.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Sasha Pleshco",
+                                                               "file":  "wallpapers/sasha-pleshco-unsplash.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Shubham Dhage",
+                                                               "file":  "wallpapers/shubham-dhage-unsplash.png"
+                                                           }
+                                                       ]
+                                      },
+                       "cursors":  {
+                                       "path":  "cursors"
+                                   },
+                       "startallback":  {
+                                            "skin":  "startallback/Kripton SAB.msstyles",
+                                            "guide":  "guides/startallback",
+                                            "app":  "startallback",
+                                            "variants":  [
+                                                             {
+                                                                 "file":  "startallback/Kripton SAB.msstyles",
+                                                                 "name":  "Kripton"
+                                                             }
+                                                         ]
+                                        },
+                       "mica":  {
+                                    "guide":  "guides/mica",
+                                    "app":  "mica"
+                                },
+                       "oldnewexplorer":  {
+                                              "guide":  "guides/oldnewexplorer",
+                                              "app":  "oldnewexplorer"
+                                          },
+                       "startorb":  {
+                                        "variants":  [
+                                                         {
+                                                             "file":  "startallback\\Orbs/Kripton.svg",
+                                                             "name":  "Kripton"
+                                                         }
+                                                     ]
+                                    }
+                   }
+}

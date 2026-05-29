@@ -1,0 +1,399 @@
+{
+    "name":  "Kanagawa",
+    "version":  "1.0.0",
+    "description":  "A Windows 11 theme pack inspired by the Kanagawa color palette, featuring Lotus (light) and Wave (dark) variants with MAC, NUDE, and SQR taskbar styles.",
+    "author":  "niivu",
+    "preview":  "preview.png",
+    "palette":  {
+                    "background":  "#1f1f28",
+                    "accent":  "#2a2a37",
+                    "text":  "#dcd7ba",
+                    "inactive":  "#16161d",
+                    "border":  "#54546d",
+                    "active":  "#7e9cd8"
+                },
+    "components":  {
+                       "msstyles":  {
+                                        "variants":  [
+                                                         {
+                                                             "name":  "Kanagawa Lotus - MAC DT NA",
+                                                             "file":  "msstyles/Kanagawa Lotus - MAC DT NA.msstyles",
+                                                             "preview":  "previews/Kanagawa LOTUS MAC DT NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kanagawa Lotus - MAC DT",
+                                                             "file":  "msstyles/Kanagawa Lotus - MAC DT.msstyles",
+                                                             "preview":  "previews/Kanagawa LOTUS MAC DT.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kanagawa Lotus - MAC NA",
+                                                             "file":  "msstyles/Kanagawa Lotus - MAC NA.msstyles",
+                                                             "preview":  "previews/Kanagawa LOTUS MAC NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kanagawa Lotus - MAC",
+                                                             "file":  "msstyles/Kanagawa Lotus - MAC.msstyles",
+                                                             "preview":  "previews/Kanagawa LOTUS MAC.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kanagawa Lotus - NUDE DT NA",
+                                                             "file":  "msstyles/Kanagawa Lotus - NUDE DT NA.msstyles",
+                                                             "preview":  "previews/Kanagawa LOTUS NUDE DT NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kanagawa Lotus - NUDE DT",
+                                                             "file":  "msstyles/Kanagawa Lotus - NUDE DT.msstyles",
+                                                             "preview":  "previews/Kanagawa LOTUS NUDE DT.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kanagawa Lotus - NUDE NA",
+                                                             "file":  "msstyles/Kanagawa Lotus - NUDE NA.msstyles",
+                                                             "preview":  "previews/Kanagawa LOTUS NUDE NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kanagawa Lotus - NUDE",
+                                                             "file":  "msstyles/Kanagawa Lotus - NUDE.msstyles",
+                                                             "preview":  "previews/Kanagawa LOTUS NUDE.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kanagawa Lotus - SQR DT NA",
+                                                             "file":  "msstyles/Kanagawa Lotus - SQR DT NA.msstyles",
+                                                             "preview":  "previews/Kanagawa LOTUS SQR DT NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kanagawa Lotus - SQR DT",
+                                                             "file":  "msstyles/Kanagawa Lotus - SQR DT.msstyles",
+                                                             "preview":  "previews/Kanagawa LOTUS SQR DT.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kanagawa Lotus - SQR NA",
+                                                             "file":  "msstyles/Kanagawa Lotus - SQR NA.msstyles",
+                                                             "preview":  "previews/Kanagawa LOTUS SQR NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kanagawa Lotus - SQR",
+                                                             "file":  "msstyles/Kanagawa Lotus - SQR.msstyles",
+                                                             "preview":  "previews/Kanagawa LOTUS SQR.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kanagawa Wave - DARK MAC NA",
+                                                             "file":  "msstyles/Kanagawa Wave - DARK MAC NA.msstyles",
+                                                             "preview":  "previews/Kanagawa Wave MAC NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kanagawa Wave - DARK MAC",
+                                                             "file":  "msstyles/Kanagawa Wave - DARK MAC.msstyles",
+                                                             "preview":  "previews/Kanagawa Wave MAC.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kanagawa Wave - DARK NUDE NA",
+                                                             "file":  "msstyles/Kanagawa Wave - DARK NUDE NA.msstyles",
+                                                             "preview":  "previews/Kanagawa Wave NUDE NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kanagawa Wave - DARK NUDE",
+                                                             "file":  "msstyles/Kanagawa Wave - DARK NUDE.msstyles",
+                                                             "preview":  "previews/Kanagawa Wave NUDE.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kanagawa Wave - DARK SQR NA",
+                                                             "file":  "msstyles/Kanagawa Wave - DARK SQR NA.msstyles",
+                                                             "preview":  "previews/Kanagawa Wave SQR NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kanagawa Wave - DARK SQR",
+                                                             "file":  "msstyles/Kanagawa Wave - DARK SQR.msstyles",
+                                                             "preview":  "previews/Kanagawa Wave SQR.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kanagawa Wave - NIGHT MAC NA",
+                                                             "file":  "msstyles/Kanagawa Wave - NIGHT MAC NA.msstyles",
+                                                             "preview":  "previews/Kanagawa Wave MAC NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kanagawa Wave - NIGHT MAC",
+                                                             "file":  "msstyles/Kanagawa Wave - NIGHT MAC.msstyles",
+                                                             "preview":  "previews/Kanagawa Wave MAC.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kanagawa Wave - NIGHT NUDE NA",
+                                                             "file":  "msstyles/Kanagawa Wave - NIGHT NUDE NA.msstyles",
+                                                             "preview":  "previews/Kanagawa Wave NUDE NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kanagawa Wave - NIGHT NUDE",
+                                                             "file":  "msstyles/Kanagawa Wave - NIGHT NUDE.msstyles",
+                                                             "preview":  "previews/Kanagawa Wave NUDE.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kanagawa Wave - NIGHT SQR NA",
+                                                             "file":  "msstyles/Kanagawa Wave - NIGHT SQR NA.msstyles",
+                                                             "preview":  "previews/Kanagawa Wave SQR NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Kanagawa Wave - NIGHT SQR",
+                                                             "file":  "msstyles/Kanagawa Wave - NIGHT SQR.msstyles",
+                                                             "preview":  "previews/Kanagawa Wave SQR.png"
+                                                         }
+                                                     ]
+                                    },
+                       "themes":  {
+                                      "variants":  [
+                                                       {
+                                                           "name":  "Kanagawa Lotus - MAC DT NA",
+                                                           "file":  "themes/Kanagawa Lotus - MAC DT NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kanagawa Lotus - MAC DT",
+                                                           "file":  "themes/Kanagawa Lotus - MAC DT.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kanagawa Lotus - MAC NA",
+                                                           "file":  "themes/Kanagawa Lotus - MAC NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kanagawa Lotus - MAC",
+                                                           "file":  "themes/Kanagawa Lotus - MAC.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kanagawa Lotus - NUDE DT NA",
+                                                           "file":  "themes/Kanagawa Lotus - NUDE DT NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kanagawa Lotus - NUDE DT",
+                                                           "file":  "themes/Kanagawa Lotus - NUDE DT.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kanagawa Lotus - NUDE NA",
+                                                           "file":  "themes/Kanagawa Lotus - NUDE NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kanagawa Lotus - NUDE",
+                                                           "file":  "themes/Kanagawa Lotus - NUDE.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kanagawa Lotus - SQR DT NA",
+                                                           "file":  "themes/Kanagawa Lotus - SQR DT NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kanagawa Lotus - SQR DT",
+                                                           "file":  "themes/Kanagawa Lotus - SQR DT.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kanagawa Lotus - SQR NA",
+                                                           "file":  "themes/Kanagawa Lotus - SQR NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kanagawa Lotus - SQR",
+                                                           "file":  "themes/Kanagawa Lotus - SQR.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kanagawa Wave - DARK MAC NA",
+                                                           "file":  "themes/Kanagawa Wave - DARK MAC NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kanagawa Wave - DARK MAC",
+                                                           "file":  "themes/Kanagawa Wave - DARK MAC.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kanagawa Wave - DARK NUDE NA",
+                                                           "file":  "themes/Kanagawa Wave - DARK NUDE NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kanagawa Wave - DARK NUDE",
+                                                           "file":  "themes/Kanagawa Wave - DARK NUDE.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kanagawa Wave - DARK SQR NA",
+                                                           "file":  "themes/Kanagawa Wave - DARK SQR NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kanagawa Wave - DARK SQR",
+                                                           "file":  "themes/Kanagawa Wave - DARK SQR.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kanagawa Wave - NIGHT MAC NA",
+                                                           "file":  "themes/Kanagawa Wave - NIGHT MAC NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kanagawa Wave - NIGHT MAC",
+                                                           "file":  "themes/Kanagawa Wave - NIGHT MAC.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kanagawa Wave - NIGHT NUDE NA",
+                                                           "file":  "themes/Kanagawa Wave - NIGHT NUDE NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kanagawa Wave - NIGHT NUDE",
+                                                           "file":  "themes/Kanagawa Wave - NIGHT NUDE.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kanagawa Wave - NIGHT SQR NA",
+                                                           "file":  "themes/Kanagawa Wave - NIGHT SQR NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Kanagawa Wave - NIGHT SQR",
+                                                           "file":  "themes/Kanagawa Wave - NIGHT SQR.theme"
+                                                       }
+                                                   ]
+                                  },
+                       "wallpapers":  {
+                                          "variants":  [
+                                                           {
+                                                               "name":  "Block Lotus",
+                                                               "file":  "wallpapers/Kanagawa - Block Lotus.png"
+                                                           },
+                                                           {
+                                                               "name":  "Block Wave",
+                                                               "file":  "wallpapers/Kanagawa - Block Wave.png"
+                                                           },
+                                                           {
+                                                               "name":  "Circuits Lotus",
+                                                               "file":  "wallpapers/Kanagawa - Circuits Lotus.png"
+                                                           },
+                                                           {
+                                                               "name":  "Circuits Wave",
+                                                               "file":  "wallpapers/Kanagawa - Circuits Wave.png"
+                                                           },
+                                                           {
+                                                               "name":  "Diamonds Lotus",
+                                                               "file":  "wallpapers/Kanagawa - Diamonds Lotus.png"
+                                                           },
+                                                           {
+                                                               "name":  "Diamonds Wave",
+                                                               "file":  "wallpapers/Kanagawa - Diamonds Wave.png"
+                                                           },
+                                                           {
+                                                               "name":  "Dot Grid Lotus 1",
+                                                               "file":  "wallpapers/Kanagawa - Dot Grid Lotus-1.png"
+                                                           },
+                                                           {
+                                                               "name":  "Dot Grid Lotus 2",
+                                                               "file":  "wallpapers/Kanagawa - Dot Grid Lotus-2.png"
+                                                           },
+                                                           {
+                                                               "name":  "Dot Grid Wave 1",
+                                                               "file":  "wallpapers/Kanagawa - Dot Grid Wave-1.png"
+                                                           },
+                                                           {
+                                                               "name":  "Dot Grid Wave 2",
+                                                               "file":  "wallpapers/Kanagawa - Dot Grid Wave-2.png"
+                                                           },
+                                                           {
+                                                               "name":  "Octagon Lotus",
+                                                               "file":  "wallpapers/Kanagawa - Octagon Lotus.png"
+                                                           },
+                                                           {
+                                                               "name":  "Octagon Wave",
+                                                               "file":  "wallpapers/Kanagawa - Octagon Wave.png"
+                                                           },
+                                                           {
+                                                               "name":  "Triangles Lotus",
+                                                               "file":  "wallpapers/Kanagawa - Triangles Lotus.png"
+                                                           },
+                                                           {
+                                                               "name":  "Triangles Wave",
+                                                               "file":  "wallpapers/Kanagawa - Triangles Wave.png"
+                                                           },
+                                                           {
+                                                               "name":  "Kanagawa LOTUS",
+                                                               "file":  "wallpapers/Kanagawa LOTUS.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Kanagawa WAVE",
+                                                               "file":  "wallpapers/Kanagawa WAVE.jpeg"
+                                                           },
+                                                           {
+                                                               "name":  "Kanagawa 1",
+                                                               "file":  "wallpapers/Kanagawa-1.png"
+                                                           },
+                                                           {
+                                                               "name":  "Kanagawa 2",
+                                                               "file":  "wallpapers/Kanagawa-2.png"
+                                                           },
+                                                           {
+                                                               "name":  "Kanagawa Dark",
+                                                               "file":  "wallpapers/Kanagawa-dark.png"
+                                                           },
+                                                           {
+                                                               "name":  "Kanagawa Light",
+                                                               "file":  "wallpapers/Kanagawa-light.png"
+                                                           },
+                                                           {
+                                                               "name":  "Kanagawa Medium",
+                                                               "file":  "wallpapers/Kanagawa-medium.png"
+                                                           },
+                                                           {
+                                                               "name":  "Kanagawa",
+                                                               "file":  "wallpapers/Kanagawa.png"
+                                                           },
+                                                           {
+                                                               "name":  "Neogeo Dark",
+                                                               "file":  "wallpapers/neogeo-d.png"
+                                                           },
+                                                           {
+                                                               "name":  "Neogeo Light",
+                                                               "file":  "wallpapers/neogeo-l.png"
+                                                           }
+                                                       ]
+                                      },
+                       "cursors":  {
+                                       "path":  "cursors"
+                                   },
+                       "startallback":  {
+                                            "skin":  "startallback/Kanagawa DT SAB.msstyles",
+                                            "guide":  "guides/startallback",
+                                            "app":  "startallback",
+                                            "variants":  [
+                                                             {
+                                                                 "file":  "startallback/Kanagawa DT SAB.msstyles",
+                                                                 "name":  "Kanagawa DT"
+                                                             },
+                                                             {
+                                                                 "file":  "startallback/Kanagawa LOTUS SAB.msstyles",
+                                                                 "name":  "Kanagawa LOTUS"
+                                                             },
+                                                             {
+                                                                 "file":  "startallback/Kanagawa WAVE SAB.msstyles",
+                                                                 "name":  "Kanagawa WAVE"
+                                                             }
+                                                         ]
+                                        },
+                       "mica":  {
+                                    "guide":  "guides/mica",
+                                    "app":  "mica"
+                                },
+                       "oldnewexplorer":  {
+                                              "guide":  "guides/oldnewexplorer",
+                                              "app":  "oldnewexplorer"
+                                          },
+                       "startorb":  {
+                                        "variants":  [
+                                                         {
+                                                             "file":  "startallback\\Orbs/kanagawa (1).svg",
+                                                             "name":  "kanagawa (1)"
+                                                         },
+                                                         {
+                                                             "file":  "startallback\\Orbs/kanagawa (2).svg",
+                                                             "name":  "kanagawa (2)"
+                                                         },
+                                                         {
+                                                             "file":  "startallback\\Orbs/kanagawa (3).svg",
+                                                             "name":  "kanagawa (3)"
+                                                         },
+                                                         {
+                                                             "file":  "startallback\\Orbs/kanagawa (4).svg",
+                                                             "name":  "kanagawa (4)"
+                                                         },
+                                                         {
+                                                             "file":  "startallback\\Orbs/kanagawa (5).svg",
+                                                             "name":  "kanagawa (5)"
+                                                         },
+                                                         {
+                                                             "file":  "startallback/Orbs/StartAllBack - Start Menu.png",
+                                                             "name":  "StartAllBack - Start Menu"
+                                                         }
+                                                     ]
+                                    }
+                   }
+}

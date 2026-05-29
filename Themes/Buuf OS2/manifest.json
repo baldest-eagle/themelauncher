@@ -1,0 +1,126 @@
+{
+    "name":  "Buuf OS2",
+    "version":  "1.0.0",
+    "description":  "A dark, moody theme inspired by the classic Buuf icon set, reimagined for Windows 11 by niivu.",
+    "author":  "niivu",
+    "preview":  "preview.png",
+    "palette":  {
+                    "background":  "#1e1f28",
+                    "accent":  "#2a2b36",
+                    "text":  "#c8ccd4",
+                    "inactive":  "#17181f",
+                    "border":  "#414558",
+                    "active":  "#82aaff"
+                },
+    "components":  {
+                       "msstyles":  {
+                                        "variants":  [
+                                                         {
+                                                             "name":  "Buuf (Default)",
+                                                             "file":  "msstyles/buuf.msstyles",
+                                                             "preview":  "previews/Buuf.png"
+                                                         },
+                                                         {
+                                                             "name":  "Buuf NA",
+                                                             "file":  "msstyles/buuf NA.msstyles",
+                                                             "preview":  "previews/Buuf NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Buuf Dark",
+                                                             "file":  "msstyles/buuf Dark.msstyles",
+                                                             "preview":  "previews/Buuf Dark.png"
+                                                         },
+                                                         {
+                                                             "name":  "Buuf Dark NA",
+                                                             "file":  "msstyles/buuf Dark NA.msstyles",
+                                                             "preview":  "previews/Buuf Dark NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Buuf Night",
+                                                             "file":  "msstyles/buuf - Night.msstyles",
+                                                             "preview":  "previews/Buuf.png"
+                                                         },
+                                                         {
+                                                             "name":  "Buuf Night NA",
+                                                             "file":  "msstyles/buuf - Night NA.msstyles",
+                                                             "preview":  "previews/Buuf NA.png"
+                                                         }
+                                                     ]
+                                    },
+                       "themes":  {
+                                      "variants":  [
+                                                       {
+                                                           "name":  "Buuf (Default)",
+                                                           "file":  "themes/buuf.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Buuf NA",
+                                                           "file":  "themes/buuf NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Buuf Dark",
+                                                           "file":  "themes/buuf dark.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Buuf Dark NA",
+                                                           "file":  "themes/buuf dark NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Buuf Night",
+                                                           "file":  "themes/buuf - Night.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Buuf Night NA",
+                                                           "file":  "themes/buuf - Night NA.theme"
+                                                       }
+                                                   ]
+                                  },
+                       "wallpapers":  {
+                                          "variants":  [
+                                                           {
+                                                               "name":  "Bring the Pain",
+                                                               "file":  "wallpapers/bring_the_pain_by_mattahan_(remastered).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Buufish",
+                                                               "file":  "wallpapers/buufish.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Calvin",
+                                                               "file":  "wallpapers/calvin-rebenok-malchik-khobs-khobbs-2.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Some Clouds Sun",
+                                                               "file":  "wallpapers/some_clouds__sun_by_mattahan_(remastered).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "We Do Favors",
+                                                               "file":  "wallpapers/we+do+favors+for+friends+sometimes-2.jpg"
+                                                           }
+                                                       ]
+                                      },
+                       "cursors":  {
+                                       "path":  "cursors"
+                                   },
+                       "mica":  {
+                                    "guide":  "guides/mica",
+                                    "app":  "mica"
+                                },
+                       "oldnewexplorer":  {
+                                              "guide":  "guides/oldnewexplorer",
+                                              "app":  "oldnewexplorer"
+                                          },
+                       "startorb":  {
+                                        "variants":  [
+                                                         {
+                                                             "file":  "startallback\\Orbs/Buuf.svg",
+                                                             "name":  "Buuf"
+                                                         },
+                                                         {
+                                                             "file":  "startallback/Orbs/Buuf.png",
+                                                             "name":  "Buuf"
+                                                         }
+                                                     ]
+                                    }
+                   }
+}

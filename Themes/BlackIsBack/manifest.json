@@ -1,0 +1,197 @@
+{
+    "name":  "BlackIsBack",
+    "version":  "1.0.0",
+    "description":  "An ultra-dark monochromatic Windows 11 theme in Black and Dark variants by niivu.",
+    "author":  "niivu",
+    "preview":  "preview.png",
+    "palette":  {
+                    "background":  "#0d0d0d",
+                    "accent":  "#1a1a1a",
+                    "text":  "#e0e0e0",
+                    "inactive":  "#080808",
+                    "border":  "#333333",
+                    "active":  "#ffffff"
+                },
+    "components":  {
+                       "msstyles":  {
+                                        "variants":  [
+                                                         {
+                                                             "name":  "Black - DASH",
+                                                             "file":  "msstyles/Black/Black-DASH.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Black - DOTS",
+                                                             "file":  "msstyles/Black/Black-DOTS.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Black - LIN",
+                                                             "file":  "msstyles/Black/Black-LIN.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Black - Mac",
+                                                             "file":  "msstyles/Black/Black-Mac.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Black - NU",
+                                                             "file":  "msstyles/Black/Black-NU.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Black - Round",
+                                                             "file":  "msstyles/Black/Black-Round.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Black - SLASH",
+                                                             "file":  "msstyles/Black/Black-SLASH.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Black - Win",
+                                                             "file":  "msstyles/Black/Black-Win.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Dark - DASH",
+                                                             "file":  "msstyles/Dark/Dark-DASH.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Dark - DOTS",
+                                                             "file":  "msstyles/Dark/Dark-DOTS.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Dark - LIN",
+                                                             "file":  "msstyles/Dark/Dark-LIN.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Dark - Mac",
+                                                             "file":  "msstyles/Dark/Dark-Mac.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Dark - NU",
+                                                             "file":  "msstyles/Dark/Dark-NU.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Dark - Round",
+                                                             "file":  "msstyles/Dark/Dark-Round.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Dark - SLASH",
+                                                             "file":  "msstyles/Dark/Dark-SLASH.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Dark - Win",
+                                                             "file":  "msstyles/Dark/Dark-Win.msstyles"
+                                                         }
+                                                     ]
+                                    },
+                       "themes":  {
+                                      "variants":  [
+                                                       {
+                                                           "name":  "Black - DASH",
+                                                           "file":  "themes/Black-DASH.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Black - DOTS",
+                                                           "file":  "themes/Black-DOTS.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Black - LIN",
+                                                           "file":  "themes/Black-LIN.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Black - Mac",
+                                                           "file":  "themes/Black-Mac.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Black - NU",
+                                                           "file":  "themes/Black-NU.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Black - Round",
+                                                           "file":  "themes/Black-Round.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Black - SLASH",
+                                                           "file":  "themes/Black-SLASH.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Black - Win",
+                                                           "file":  "themes/Black-Win.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Dark - DASH",
+                                                           "file":  "themes/Dark-DASH.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Dark - DOTS",
+                                                           "file":  "themes/Dark-DOTS.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Dark - LIN",
+                                                           "file":  "themes/Dark-LIN.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Dark - Mac",
+                                                           "file":  "themes/Dark-Mac.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Dark - NU",
+                                                           "file":  "themes/Dark-NU.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Dark - Round",
+                                                           "file":  "themes/Dark-Round.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Dark - SLASH",
+                                                           "file":  "themes/Dark-SLASH.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Dark - Win",
+                                                           "file":  "themes/Dark-Win.theme"
+                                                       }
+                                                   ]
+                                  },
+                       "wallpapers":  {
+                                          "variants":  [
+                                                           {
+                                                               "name":  "DASH",
+                                                               "file":  "wallpapers/DASH.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "DOTS",
+                                                               "file":  "wallpapers/DOTS.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "LIN",
+                                                               "file":  "wallpapers/LIN.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "MAC",
+                                                               "file":  "wallpapers/MAC.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "NU",
+                                                               "file":  "wallpapers/NU.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Round",
+                                                               "file":  "wallpapers/Round.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Slash",
+                                                               "file":  "wallpapers/Slash.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "WIN",
+                                                               "file":  "wallpapers/WIN.jpg"
+                                                           }
+                                                       ]
+                                      },
+                       "mica":  {
+                                    "guide":  "guides/mica",
+                                    "app":  "mica"
+                                },
+                       "oldnewexplorer":  {
+                                              "guide":  "guides/oldnewexplorer",
+                                              "app":  "oldnewexplorer"
+                                          }
+                   }
+}

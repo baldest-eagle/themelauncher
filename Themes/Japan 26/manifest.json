@@ -1,0 +1,250 @@
+{
+    "name":  "Japan 26",
+    "version":  "1.1.0",
+    "description":  "A refined light theme for Windows 11 by niivu, inspired by Japanese aesthetic minimalism. Includes msstyles variants, Windhawk taskbar configs, StartAllBack styles, fonts, wallpapers, and Firefox theming.",
+    "author":  "niivu",
+    "preview":  "msstyles/JAPAN 26/Previews/JAPAN 26.png",
+    "palette":  {
+                    "background":  "#E7E7CF",
+                    "accent":  "#CFCAAC",
+                    "text":  "#3D3D31",
+                    "inactive":  "#F5F5E6",
+                    "border":  "#B4AFAF",
+                    "active":  "#FFFFFF"
+                },
+    "components":  {
+                       "msstyles":  {
+                                        "variants":  [
+                                                         {
+                                                             "name":  "Japan 26",
+                                                             "file":  "msstyles/JAPAN 26/JAPAN 26.msstyles",
+                                                             "preview":  "msstyles/JAPAN 26/Previews/JAPAN 26.png"
+                                                         },
+                                                         {
+                                                             "name":  "Japan 26 Alt",
+                                                             "file":  "msstyles/JAPAN 26/JAPAN 26 alt.msstyles",
+                                                             "preview":  "msstyles/JAPAN 26/Previews/JAPAN 26 alt.png"
+                                                         },
+                                                         {
+                                                             "name":  "Japan 26 Alt 2",
+                                                             "file":  "msstyles/JAPAN 26/JAPAN 26 alt 2.msstyles",
+                                                             "preview":  "msstyles/JAPAN 26/Previews/JAPAN 26 alt 2.png"
+                                                         },
+                                                         {
+                                                             "name":  "Japan 26 NA",
+                                                             "file":  "msstyles/JAPAN 26/JAPAN 26 NA.msstyles",
+                                                             "preview":  "msstyles/JAPAN 26/Previews/JAPAN 26 NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Japan 26 Alt NA",
+                                                             "file":  "msstyles/JAPAN 26/JAPAN 26 alt NA.msstyles",
+                                                             "preview":  "msstyles/JAPAN 26/Previews/JAPAN 26 alt NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Japan 26 Alt 2 NA",
+                                                             "file":  "msstyles/JAPAN 26/JAPAN 26 alt 2 NA.msstyles",
+                                                             "preview":  "msstyles/JAPAN 26/Previews/JAPAN 26 alt 2 NA.png"
+                                                         }
+                                                     ]
+                                    },
+                       "themes":  {
+                                      "variants":  [
+                                                       {
+                                                           "name":  "JAPAN 26",
+                                                           "file":  "msstyles/JAPAN 26.theme"
+                                                       }
+                                                   ]
+                                  },
+                       "wallpapers":  {
+                                          "variants":  [
+                                                           {
+                                                               "name":  "Plant",
+                                                               "file":  "wallpapers/plant1.png"
+                                                           },
+                                                           {
+                                                               "name":  "Flower 1",
+                                                               "file":  "wallpapers/xyFLOWER1.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Flower 2",
+                                                               "file":  "wallpapers/xyFLOWER2.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Flower 1 (Alt)",
+                                                               "file":  "msstyles/JAPAN 26/Wallpapers/xFLOWER1.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Flower 2 (Alt)",
+                                                               "file":  "msstyles/JAPAN 26/Wallpapers/xFLOWER2.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Flower 4",
+                                                               "file":  "msstyles/JAPAN 26/Wallpapers/xFLOWER4.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Flower 5",
+                                                               "file":  "msstyles/JAPAN 26/Wallpapers/xFLOWER5.png"
+                                                           },
+                                                           {
+                                                               "name":  "Horizontal",
+                                                               "file":  "msstyles/JAPAN 26/Wallpapers/Horizontal.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Vertical",
+                                                               "file":  "msstyles/JAPAN 26/Wallpapers/VERTICAL.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "JPN 26",
+                                                               "file":  "msstyles/JAPAN 26/Wallpapers/JPN 26.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "JPN 26 Tiled",
+                                                               "file":  "msstyles/JAPAN 26/Wallpapers/JPN 26 Tiled.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "JPN 26 Tiled 2",
+                                                               "file":  "msstyles/JAPAN 26/Wallpapers/JPN 26 Tiled 2.jpg"
+                                                           }
+                                                       ]
+                                      },
+                       "cursors":  {
+                                       "path":  "cursors"
+                                   },
+                       "startorb":  {
+                                        "variants":  [
+                                                         {
+                                                             "name":  "Japan 26",
+                                                             "file":  "startorbs/Japan 26.png"
+                                                         },
+                                                         {
+                                                             "name":  "Japan 26 Dark",
+                                                             "file":  "startorbs/Japan 26 Dark.png"
+                                                         },
+                                                         {
+                                                             "name":  "SAB Orb",
+                                                             "file":  "startallback/Orbs/JAPAN 26.png"
+                                                         },
+                                                         {
+                                                             "file":  "startallback/Orbs/StartAllBack - Taskbar.png",
+                                                             "name":  "StartAllBack - Taskbar"
+                                                         }
+                                                     ]
+                                    },
+                       "fonts":  {
+                                     "variants":  [
+                                                      {
+                                                          "name":  "Swis721 Cn BT D-Type",
+                                                          "file":  "fonts/SWISSCB-dtype.ttf"
+                                                      },
+                                                      {
+                                                          "name":  "Swis721 Cn BT",
+                                                          "file":  "fonts/SWISSCB.TTF"
+                                                      },
+                                                      {
+                                                          "name":  "Fantasque Sans Mono Nerd Font",
+                                                          "file":  "fonts/FantasqueSansMNerdFontMono-Regular.ttf"
+                                                      },
+                                                      {
+                                                          "name":  "ITC Avant Garde Gothic LT Med Caps",
+                                                          "file":  "fonts/ITC Avant Garde Gothic LT Medium Caps.ttf"
+                                                      }
+                                                  ]
+                                 },
+                       "icons":  {
+                                     "variants":  [
+                                                      {
+                                                          "name":  "Japan 26 Icons",
+                                                          "file":  "icons/7TSP Japan26-area04.7z"
+                                                      },
+                                                      {
+                                                          "name":  "Downloads",
+                                                          "file":  "icons/Downloads.ico"
+                                                      },
+                                                      {
+                                                          "name":  "Games",
+                                                          "file":  "icons/Games.ico"
+                                                      },
+                                                      {
+                                                          "name":  "Computer",
+                                                          "file":  "icons/JAPAN-area o4_Computer.ico"
+                                                      },
+                                                      {
+                                                          "name":  "Trash Empty",
+                                                          "file":  "icons/JAPAN-area o4_Trash Empty.ico"
+                                                      },
+                                                      {
+                                                          "name":  "Trash Full",
+                                                          "file":  "icons/JAPAN-area o4_Trash Full.ico"
+                                                      },
+                                                      {
+                                                          "name":  "Git Folder",
+                                                          "file":  "icons/folder-git.ico"
+                                                      }
+                                                  ]
+                                 },
+                       "firefox":  {
+                                       "userChrome":  "firefox/userChrome.css",
+                                       "userContent":  "firefox/userContent.css",
+                                       "colorExport":  "firefox/firefox-color-export.json",
+                                       "theme":  "firefox/theme.zip"
+                                   },
+                       "windhawk":  {
+                                        "mods":  [
+                                                     {
+                                                         "name":  "Taskbar Styler",
+                                                         "file":  "windhawk/taskbar-styler.yaml"
+                                                     },
+                                                     {
+                                                         "name":  "Taskbar Clock",
+                                                         "file":  "windhawk/taskbar-clock.yaml"
+                                                     },
+                                                     {
+                                                         "name":  "Taskbar Labels",
+                                                         "file":  "windhawk/taskbar-labels.yaml"
+                                                     },
+                                                     {
+                                                         "name":  "Taskbar Height and Icons",
+                                                         "file":  "windhawk/taskbar-height-icons.yaml"
+                                                     },
+                                                     {
+                                                         "name":  "Taskbar Tray Tweaks",
+                                                         "file":  "windhawk/taskbar-tray-tweaks.yaml"
+                                                     },
+                                                     {
+                                                         "name":  "Resource Redirect",
+                                                         "file":  "windhawk/resource-redirect.yaml"
+                                                     },
+                                                     {
+                                                         "name":  "Hide Home Gallery OneDrive",
+                                                         "file":  "windhawk/hide-home-gallery-onedrive.yaml"
+                                                     },
+                                                     {
+                                                         "name":  "Titlebar For Everyone",
+                                                         "file":  "windhawk/titlebar-for-everyone.yaml"
+                                                     }
+                                                 ]
+                                    },
+                       "terminal":  {
+                                        "schemes":  "terminal/schemes.json"
+                                    },
+                       "startallback":  {
+                                            "skin":  "startallback/JAPAN 26 SAB v2.msstyles",
+                                            "guide":  "guides/startallback",
+                                            "app":  "startallback",
+                                            "variants":  [
+                                                             {
+                                                                 "file":  "startallback/JAPAN 26 SAB v2.msstyles",
+                                                                 "name":  "JAPAN 26 SAB v2"
+                                                             }
+                                                         ]
+                                        },
+                       "mica":  {
+                                    "guide":  "guides/mica",
+                                    "app":  "mica"
+                                },
+                       "oldnewexplorer":  {
+                                              "guide":  "guides/oldnewexplorer",
+                                              "app":  "oldnewexplorer"
+                                          }
+                   }
+}

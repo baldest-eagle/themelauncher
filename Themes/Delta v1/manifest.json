@@ -1,0 +1,205 @@
+{
+    "name":  "Delta v1",
+    "version":  "1.0.0",
+    "description":  "A clean, minimal customization suite featuring multiple color variants and a consistent aesthetic.",
+    "author":  "niivu",
+    "preview":  "msstyles/Previews/Dark.png",
+    "palette":  {
+                    "background":  "#1A1B1E",
+                    "accent":  "#7AA2F7",
+                    "text":  "#A9B1D6",
+                    "inactive":  "#212226",
+                    "border":  "#565F89",
+                    "active":  "#7AA2F7"
+                },
+    "components":  {
+                       "msstyles":  {
+                                        "variants":  [
+                                                         {
+                                                             "name":  "Delta v1 Dark",
+                                                             "file":  "msstyles/Delta v1 - Dark.msstyles",
+                                                             "preview":  "msstyles/Previews/Dark.png"
+                                                         },
+                                                         {
+                                                             "name":  "Delta v1 Dark NA",
+                                                             "file":  "msstyles/Delta v1 - Dark NA.msstyles",
+                                                             "preview":  "msstyles/Previews/Dark NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Delta v1 Day",
+                                                             "file":  "msstyles/Delta v1 - Day.msstyles",
+                                                             "preview":  "msstyles/Previews/Day.png"
+                                                         },
+                                                         {
+                                                             "name":  "Delta v1 Day NA",
+                                                             "file":  "msstyles/Delta v1 - Day NA.msstyles",
+                                                             "preview":  "msstyles/Previews/Day NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Delta v1 Night",
+                                                             "file":  "msstyles/Delta v1 - Night.msstyles",
+                                                             "preview":  "msstyles/Previews/Dark.png"
+                                                         },
+                                                         {
+                                                             "name":  "Delta v1 Night NA",
+                                                             "file":  "msstyles/Delta v1 - Night NA.msstyles",
+                                                             "preview":  "msstyles/Previews/Dark NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Delta v1 Mac Dark",
+                                                             "file":  "msstyles/Delta v1 mac - Dark.msstyles",
+                                                             "preview":  "msstyles/Previews/Dark mac.png"
+                                                         },
+                                                         {
+                                                             "name":  "Delta v1 Mac Dark NA",
+                                                             "file":  "msstyles/Delta v1 mac - Dark NA.msstyles",
+                                                             "preview":  "msstyles/Previews/Dark mac NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Delta v1 Mac Day",
+                                                             "file":  "msstyles/Delta v1 mac - Day.msstyles",
+                                                             "preview":  "msstyles/Previews/Day mac.png"
+                                                         },
+                                                         {
+                                                             "name":  "Delta v1 Mac Day NA",
+                                                             "file":  "msstyles/Delta v1 mac - Day NA.msstyles",
+                                                             "preview":  "msstyles/Previews/Day mac NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Delta v1 Mac Night",
+                                                             "file":  "msstyles/Delta v1 mac - Night.msstyles",
+                                                             "preview":  "msstyles/Previews/Dark mac.png"
+                                                         },
+                                                         {
+                                                             "name":  "Delta v1 Mac Night NA",
+                                                             "file":  "msstyles/Delta v1 mac - Night NA.msstyles",
+                                                             "preview":  "msstyles/Previews/Dark mac NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Delta v1 Win Dark",
+                                                             "file":  "msstyles/Delta v1 Win - Dark.msstyles",
+                                                             "preview":  "msstyles/Previews/Dark Win.png"
+                                                         },
+                                                         {
+                                                             "name":  "Delta v1 Win Dark NA",
+                                                             "file":  "msstyles/Delta v1 Win - Dark NA.msstyles",
+                                                             "preview":  "msstyles/Previews/Dark Win NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Delta v1 Win Day",
+                                                             "file":  "msstyles/Delta v1 Win - Day.msstyles",
+                                                             "preview":  "msstyles/Previews/Day Win.png"
+                                                         },
+                                                         {
+                                                             "name":  "Delta v1 Win Day NA",
+                                                             "file":  "msstyles/Delta v1 Win - Day NA.msstyles",
+                                                             "preview":  "msstyles/Previews/Day Win NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "Delta v1 Win Night",
+                                                             "file":  "msstyles/Delta v1 Win - Night.msstyles",
+                                                             "preview":  "msstyles/Previews/Dark Win.png"
+                                                         },
+                                                         {
+                                                             "name":  "Delta v1 Win Night NA",
+                                                             "file":  "msstyles/Delta v1 Win - Night NA.msstyles",
+                                                             "preview":  "msstyles/Previews/Dark Win NA.png"
+                                                         }
+                                                     ]
+                                    },
+                       "themes":  {
+                                      "variants":  [
+                                                       {
+                                                           "name":  "Delta v1 Dark",
+                                                           "file":  "msstyles/Delta v1 - Dark.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Delta v1 Day",
+                                                           "file":  "msstyles/Delta v1 - Day.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Delta v1 Night",
+                                                           "file":  "msstyles/Delta v1 - Night.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Delta v1 Mac Dark",
+                                                           "file":  "msstyles/Delta v1 mac - Dark.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Delta v1 Win Dark",
+                                                           "file":  "msstyles/Delta v1 Win - Dark.theme"
+                                                       }
+                                                   ]
+                                  },
+                       "wallpapers":  {
+                                          "variants":  [
+                                                           {
+                                                               "name":  "Casey Horner",
+                                                               "file":  "wallpapers/Delta v1/casey-horner-NIIVU-unsplash.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Daniel Mirlea",
+                                                               "file":  "wallpapers/Delta v1/daniel-mirlea-NIIVU-unsplash.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Joshua Earle",
+                                                               "file":  "wallpapers/Delta v1/joshua-earle-NIIVU-unsplash.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Petr Slovacek",
+                                                               "file":  "wallpapers/Delta v1/petr-slovacek-NIIVU-unsplash.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Waves",
+                                                               "file":  "wallpapers/Delta v1/waves.jpeg"
+                                                           },
+                                                           {
+                                                               "name":  "Foggy",
+                                                               "file":  "wallpapers/Delta v1/foggy.jpeg"
+                                                           },
+                                                           {
+                                                               "name":  "Geo",
+                                                               "file":  "wallpapers/Delta v1/geo.jpeg"
+                                                           },
+                                                           {
+                                                               "name":  "Nebula",
+                                                               "file":  "wallpapers/Delta v1/nebula.jpeg"
+                                                           },
+                                                           {
+                                                               "name":  "Waterfall",
+                                                               "file":  "wallpapers/Delta v1/waterfall.jpeg"
+                                                           },
+                                                           {
+                                                               "name":  "Drip",
+                                                               "file":  "wallpapers/Delta v1/drip.jpeg"
+                                                           }
+                                                       ]
+                                      },
+                       "cursors":  {
+                                       "path":  "msstyles/Cursors"
+                                   },
+                       "startorb":  {
+                                        "variants":  [
+                                                         {
+                                                             "name":  "Delta Start Orb",
+                                                             "file":  "windhawk/Delta.png"
+                                                         }
+                                                     ]
+                                    },
+                       "windhawk":  {
+                                        "path":  "windhawk/Delta v1",
+                                        "mods":  "windhawk/Mods"
+                                    },
+                       "basebrd":  {
+                                       "path":  "basebrd"
+                                   },
+                       "mica":  {
+                                    "guide":  "guides/mica",
+                                    "app":  "mica"
+                                },
+                       "oldnewexplorer":  {
+                                              "guide":  "guides/oldnewexplorer",
+                                              "app":  "oldnewexplorer"
+                                          }
+                   }
+}

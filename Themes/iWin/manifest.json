@@ -1,0 +1,245 @@
+{
+    "name":  "iWin",
+    "version":  "1.0.0",
+    "description":  "A macOS-inspired Windows 11 theme by niivu, featuring Dark, Medium, and Night variants with MAC-style caption buttons and matching wallpapers.",
+    "author":  "niivu",
+    "preview":  "preview.png",
+    "palette":  {
+                    "background":  "#1c1c1e",
+                    "accent":  "#2c2c2e",
+                    "text":  "#f2f2f7",
+                    "inactive":  "#141416",
+                    "border":  "#48484a",
+                    "active":  "#0a84ff"
+                },
+    "components":  {
+                       "msstyles":  {
+                                        "variants":  [
+                                                         {
+                                                             "name":  "iWin MAC - Dark",
+                                                             "file":  "msstyles/iWin MAC - Dark.msstyles",
+                                                             "preview":  "previews/Dark.png"
+                                                         },
+                                                         {
+                                                             "name":  "iWin MAC - Dark NA",
+                                                             "file":  "msstyles/iWin MAC - Dark NA.msstyles",
+                                                             "preview":  "previews/Dark NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "iWin MAC - Medium",
+                                                             "file":  "msstyles/iWin MAC - Medium.msstyles",
+                                                             "preview":  "previews/Medium.png"
+                                                         },
+                                                         {
+                                                             "name":  "iWin MAC - Medium NA",
+                                                             "file":  "msstyles/iWin MAC - Medium NA.msstyles",
+                                                             "preview":  "previews/Medium NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "iWin MAC - Night",
+                                                             "file":  "msstyles/iWin MAC - Night NA.msstyles",
+                                                             "preview":  "previews/Dark NA.png"
+                                                         },
+                                                         {
+                                                             "name":  "iWin MAC - Night NA",
+                                                             "file":  "msstyles/iWin MAC - Night.msstyles",
+                                                             "preview":  "previews/Dark.png"
+                                                         }
+                                                     ]
+                                    },
+                       "themes":  {
+                                      "variants":  [
+                                                       {
+                                                           "name":  "iWin MAC - Dark",
+                                                           "file":  "themes/iWin MAC - Dark.theme"
+                                                       },
+                                                       {
+                                                           "name":  "iWin MAC - Dark NA",
+                                                           "file":  "themes/iWin MAC - Dark NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "iWin MAC - Medium",
+                                                           "file":  "themes/iWin MAC - Medium.theme"
+                                                       },
+                                                       {
+                                                           "name":  "iWin MAC - Medium NA",
+                                                           "file":  "themes/iWin MAC - Medium NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "iWin MAC - Night",
+                                                           "file":  "themes/iWin MAC - Night.theme"
+                                                       },
+                                                       {
+                                                           "name":  "iWin MAC - Night NA",
+                                                           "file":  "themes/iWin MAC - Night NA.theme"
+                                                       }
+                                                   ]
+                                  },
+                       "wallpapers":  {
+                                          "variants":  [
+                                                           {
+                                                               "name":  "iWin 11 - 1",
+                                                               "file":  "wallpapers/iWin 11 (1).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 2",
+                                                               "file":  "wallpapers/iWin 11 (2).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 3",
+                                                               "file":  "wallpapers/iWin 11 (3).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 4",
+                                                               "file":  "wallpapers/iWin 11 (4).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 5",
+                                                               "file":  "wallpapers/iWin 11 (5).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 6",
+                                                               "file":  "wallpapers/iWin 11 (6).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 7",
+                                                               "file":  "wallpapers/iWin 11 (7).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 8",
+                                                               "file":  "wallpapers/iWin 11 (8).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 9",
+                                                               "file":  "wallpapers/iWin 11 (9).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 10",
+                                                               "file":  "wallpapers/iWin 11 (10).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 11",
+                                                               "file":  "wallpapers/iWin 11 (11).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 12",
+                                                               "file":  "wallpapers/iWin 11 (12).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 13",
+                                                               "file":  "wallpapers/iWin 11 (13).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 14",
+                                                               "file":  "wallpapers/iWin 11 (14).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 15",
+                                                               "file":  "wallpapers/iWin 11 (15).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 16",
+                                                               "file":  "wallpapers/iWin 11 (16).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 17",
+                                                               "file":  "wallpapers/iWin 11 (17).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 18",
+                                                               "file":  "wallpapers/iWin 11 (18).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 19",
+                                                               "file":  "wallpapers/iWin 11 (19).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 20",
+                                                               "file":  "wallpapers/iWin 11 (20).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 21",
+                                                               "file":  "wallpapers/iWin 11 (21).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 22",
+                                                               "file":  "wallpapers/iWin 11 (22).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 23",
+                                                               "file":  "wallpapers/iWin 11 (23).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 24",
+                                                               "file":  "wallpapers/iWin 11 (24).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 25",
+                                                               "file":  "wallpapers/iWin 11 (25).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 26",
+                                                               "file":  "wallpapers/iWin 11 (26).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 27",
+                                                               "file":  "wallpapers/iWin 11 (27).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 28",
+                                                               "file":  "wallpapers/iWin 11 (28).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 29",
+                                                               "file":  "wallpapers/iWin 11 (29).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 30",
+                                                               "file":  "wallpapers/iWin 11 (30).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 31",
+                                                               "file":  "wallpapers/iWin 11 (31).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "iWin 11 - 32",
+                                                               "file":  "wallpapers/iWin 11 (32).jpg"
+                                                           }
+                                                       ]
+                                      },
+                       "cursors":  {
+                                       "path":  "cursors"
+                                   },
+                       "startallback":  {
+                                            "guide":  "guides/startallback",
+                                            "app":  "startallback",
+                                            "skin":  "startallback/iWin SABv2.msstyles",
+                                            "variants":  [
+                                                             {
+                                                                 "file":  "startallback/iWin SABv2.msstyles",
+                                                                 "name":  "iWin SABv2"
+                                                             }
+                                                         ]
+                                        },
+                       "mica":  {
+                                    "guide":  "guides/mica",
+                                    "app":  "mica"
+                                },
+                       "oldnewexplorer":  {
+                                              "guide":  "guides/oldnewexplorer",
+                                              "app":  "oldnewexplorer"
+                                          },
+                       "startorb":  {
+                                        "variants":  [
+                                                         {
+                                                             "file":  "startallback\\Orbs/iWin.png",
+                                                             "name":  "iWin"
+                                                         },
+                                                         {
+                                                             "file":  "startallback/Orbs/StartAllBack - Explorer.png",
+                                                             "name":  "StartAllBack - Explorer"
+                                                         }
+                                                     ]
+                                    }
+                   }
+}

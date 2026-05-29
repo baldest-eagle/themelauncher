@@ -1,0 +1,460 @@
+{
+    "name":  "Tokyo Night",
+    "version":  "1.0.0",
+    "description":  "A clean dark theme for Windows 11 inspired by the Tokyo Night color palette, featuring Night, Storm, Light, and Dark subvariants with Circle/Square and Fill/Line styles.",
+    "author":  "niivu",
+    "preview":  "preview.png",
+    "palette":  {
+                    "background":  "#1a1b26",
+                    "accent":  "#414868",
+                    "text":  "#c0caf5",
+                    "inactive":  "#16161e",
+                    "border":  "#565f89",
+                    "active":  "#7aa2f7"
+                },
+    "components":  {
+                       "msstyles":  {
+                                        "variants":  [
+                                                         {
+                                                             "name":  "Tokyo Dark Night Circle Fill NA",
+                                                             "file":  "msstyles/Tokyo Dark Night Circle Fill NA.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Dark Night Circle Fill",
+                                                             "file":  "msstyles/Tokyo Dark Night Circle Fill.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Dark Night Circle Line NA",
+                                                             "file":  "msstyles/Tokyo Dark Night Circle Line NA.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Dark Night Circle Line",
+                                                             "file":  "msstyles/Tokyo Dark Night Circle Line.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Dark Night Square Fill NA",
+                                                             "file":  "msstyles/Tokyo Dark Night Square Fill NA.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Dark Night Square Fill",
+                                                             "file":  "msstyles/Tokyo Dark Night Square Fill.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Dark Night Square Line NA",
+                                                             "file":  "msstyles/Tokyo Dark Night Square Line NA.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Dark Night Square Line",
+                                                             "file":  "msstyles/Tokyo Dark Night Square Line.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Dark Storm Circle Fill NA",
+                                                             "file":  "msstyles/Tokyo Dark Storm Circle Fill NA.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Dark Storm Circle Fill",
+                                                             "file":  "msstyles/Tokyo Dark Storm Circle Fill.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Dark Storm Circle Line NA",
+                                                             "file":  "msstyles/Tokyo Dark Storm Circle Line NA.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Dark Storm Circle Line",
+                                                             "file":  "msstyles/Tokyo Dark Storm Circle Line.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Dark Storm Square Fill NA",
+                                                             "file":  "msstyles/Tokyo Dark Storm Square Fill NA.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Dark Storm Square Fill",
+                                                             "file":  "msstyles/Tokyo Dark Storm Square Fill.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Dark Storm Square Line NA",
+                                                             "file":  "msstyles/Tokyo Dark Storm Square Line NA.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Dark Storm Square Line",
+                                                             "file":  "msstyles/Tokyo Dark Storm Square Line.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Light Circle Fill NA",
+                                                             "file":  "msstyles/Tokyo Light Circle Fill NA.msstyles",
+                                                             "preview":  "previews/Tokyo Light Circle Fill.png"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Light Circle Fill",
+                                                             "file":  "msstyles/Tokyo Light Circle Fill.msstyles",
+                                                             "preview":  "previews/Tokyo Light Circle Fill.png"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Light Circle Line NA",
+                                                             "file":  "msstyles/Tokyo Light Circle Line NA.msstyles",
+                                                             "preview":  "previews/Tokyo Light Circle Line.png"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Light Circle Line",
+                                                             "file":  "msstyles/Tokyo Light Circle Line.msstyles",
+                                                             "preview":  "previews/Tokyo Light Circle Line.png"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Light Square Fill NA",
+                                                             "file":  "msstyles/Tokyo Light Square Fill NA.msstyles",
+                                                             "preview":  "previews/Tokyo Light Square Fill.png"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Light Square Fill",
+                                                             "file":  "msstyles/Tokyo Light Square Fill.msstyles",
+                                                             "preview":  "previews/Tokyo Light Square Fill.png"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Light Square Line NA",
+                                                             "file":  "msstyles/Tokyo Light Square Line NA.msstyles",
+                                                             "preview":  "previews/Tokyo Light Square Line.png"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Light Square Line",
+                                                             "file":  "msstyles/Tokyo Light Square Line.msstyles",
+                                                             "preview":  "previews/Tokyo Light Square Line.png"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Night Circle Fill NA",
+                                                             "file":  "msstyles/Tokyo Night Circle Fill NA.msstyles",
+                                                             "preview":  "previews/Tokyo Night Circle Fill.png"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Night Circle Fill",
+                                                             "file":  "msstyles/Tokyo Night Circle Fill.msstyles",
+                                                             "preview":  "previews/Tokyo Night Circle Fill.png"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Night Circle Line NA",
+                                                             "file":  "msstyles/Tokyo Night Circle Line NA.msstyles",
+                                                             "preview":  "previews/Tokyo Night Circle Line.png"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Night Circle Line",
+                                                             "file":  "msstyles/Tokyo Night Circle Line.msstyles",
+                                                             "preview":  "previews/Tokyo Night Circle Line.png"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Night Square Fill NA",
+                                                             "file":  "msstyles/Tokyo Night Square Fill NA.msstyles",
+                                                             "preview":  "previews/Tokyo Night Square Fill.png"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Night Square Fill",
+                                                             "file":  "msstyles/Tokyo Night Square Fill.msstyles",
+                                                             "preview":  "previews/Tokyo Night Square Fill.png"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Night Square Line NA",
+                                                             "file":  "msstyles/Tokyo Night Square Line NA.msstyles",
+                                                             "preview":  "previews/Tokyo Night Square Line.png"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Night Square Line",
+                                                             "file":  "msstyles/Tokyo Night Square Line.msstyles",
+                                                             "preview":  "previews/Tokyo Night Square Line.png"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Night Storm Circle Fill NA",
+                                                             "file":  "msstyles/Tokyo Night Storm Circle Fill NA.msstyles",
+                                                             "preview":  "previews/Tokyo Night Storm Circle Fill.png"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Night Storm Circle Fill",
+                                                             "file":  "msstyles/Tokyo Night Storm Circle Fill.msstyles",
+                                                             "preview":  "previews/Tokyo Night Storm Circle Fill.png"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Night Storm Circle Line NA",
+                                                             "file":  "msstyles/Tokyo Night Storm Circle Line NA.msstyles",
+                                                             "preview":  "previews/Tokyo Night Storm Circle Line.png"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Night Storm Circle Line",
+                                                             "file":  "msstyles/Tokyo Night Storm Circle Line.msstyles",
+                                                             "preview":  "previews/Tokyo Night Storm Circle Line.png"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Night Storm Square Fill NA",
+                                                             "file":  "msstyles/Tokyo Night Storm Square Fill NA.msstyles",
+                                                             "preview":  "previews/Tokyo Night Storm Square Fill.png"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Night Storm Square Fill",
+                                                             "file":  "msstyles/Tokyo Night Storm Square Fill.msstyles",
+                                                             "preview":  "previews/Tokyo Night Storm Square Fill.png"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Night Storm Square Line NA",
+                                                             "file":  "msstyles/Tokyo Night Storm Square Line NA.msstyles",
+                                                             "preview":  "previews/Tokyo Night Storm Square Line.png"
+                                                         },
+                                                         {
+                                                             "name":  "Tokyo Night Storm Square Line",
+                                                             "file":  "msstyles/Tokyo Night Storm Square Line.msstyles",
+                                                             "preview":  "previews/Tokyo Night Storm Square Line.png"
+                                                         }
+                                                     ]
+                                    },
+                       "themes":  {
+                                      "variants":  [
+                                                       {
+                                                           "name":  "Tokyo Dark Night Circle Fill NA",
+                                                           "file":  "themes/Tokyo Dark Night Circle Fill NA..theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Dark Night Circle Fill",
+                                                           "file":  "themes/Tokyo Dark Night Circle Fill.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Dark Night Circle Line NA",
+                                                           "file":  "themes/Tokyo Dark Night Circle Line NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Dark Night Circle Line",
+                                                           "file":  "themes/Tokyo Dark Night Circle Line.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Dark Night Square Fill NA",
+                                                           "file":  "themes/Tokyo Dark Night Square Fill NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Dark Night Square Fill",
+                                                           "file":  "themes/Tokyo Dark Night Square Fill.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Dark Night Square Line NA",
+                                                           "file":  "themes/Tokyo Dark Night Square Line NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Dark Night Square Line",
+                                                           "file":  "themes/Tokyo Dark Night Square Line.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Dark Storm Circle Fill NA",
+                                                           "file":  "themes/Tokyo Dark Storm Circle Fill NA..theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Dark Storm Circle Fill",
+                                                           "file":  "themes/Tokyo Dark Storm Circle Fill.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Dark Storm Circle Line NA",
+                                                           "file":  "themes/Tokyo Dark Storm Circle Line NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Dark Storm Circle Line",
+                                                           "file":  "themes/Tokyo Dark Storm Circle Line.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Dark Storm Square Fill NA",
+                                                           "file":  "themes/Tokyo Dark Storm Square Fill NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Dark Storm Square Fill",
+                                                           "file":  "themes/Tokyo Dark Storm Square Fill.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Dark Storm Square Line NA",
+                                                           "file":  "themes/Tokyo Dark Storm Square Line NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Dark Storm Square Line",
+                                                           "file":  "themes/Tokyo Dark Storm Square Line.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Light Circle Fill NA",
+                                                           "file":  "themes/Tokyo Light Circle Fill NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Light Circle Fill",
+                                                           "file":  "themes/Tokyo Light Circle Fill.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Light Circle Line NA",
+                                                           "file":  "themes/Tokyo Light Circle Line NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Light Circle Line",
+                                                           "file":  "themes/Tokyo Light Circle Line.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Light Square Fill NA",
+                                                           "file":  "themes/Tokyo Light Square Fill NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Light Square Fill",
+                                                           "file":  "themes/Tokyo Light Square Fill.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Light Square Line NA",
+                                                           "file":  "themes/Tokyo Light Square Line NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Light Square Line",
+                                                           "file":  "themes/Tokyo Light Square Line.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Night Circle Fill NA",
+                                                           "file":  "themes/Tokyo Night Circle Fill NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Night Circle Fill",
+                                                           "file":  "themes/Tokyo Night Circle Fill.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Night Circle Line NA",
+                                                           "file":  "themes/Tokyo Night Circle Line NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Night Circle Line",
+                                                           "file":  "themes/Tokyo Night Circle Line.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Night Square Fill NA",
+                                                           "file":  "themes/Tokyo Night Square Fill NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Night Square Fill",
+                                                           "file":  "themes/Tokyo Night Square Fill.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Night Square Line NA",
+                                                           "file":  "themes/Tokyo Night Square Line NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Night Square Line",
+                                                           "file":  "themes/Tokyo Night Square Line.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Night Storm Circle Fill NA",
+                                                           "file":  "themes/Tokyo Night Storm Circle Fill NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Night Storm Circle Fill",
+                                                           "file":  "themes/Tokyo Night Storm Circle Fill.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Night Storm Circle Line NA",
+                                                           "file":  "themes/Tokyo Night Storm Circle Line NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Night Storm Circle Line",
+                                                           "file":  "themes/Tokyo Night Storm Circle Line.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Night Storm Square Fill NA",
+                                                           "file":  "themes/Tokyo Night Storm Square Fill NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Night Storm Square Fill",
+                                                           "file":  "themes/Tokyo Night Storm Square Fill.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Night Storm Square Line NA",
+                                                           "file":  "themes/Tokyo Night Storm Square Line NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tokyo Night Storm Square Line",
+                                                           "file":  "themes/Tokyo Night Storm Square Line.theme"
+                                                       }
+                                                   ]
+                                  },
+                       "wallpapers":  {
+                                          "variants":  [
+                                                           {
+                                                               "name":  "Alex Knight (niivu edit)",
+                                                               "file":  "wallpapers/alex-knight-unsplash(niivu edit).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Background Triangles 1",
+                                                               "file":  "wallpapers/bkg1 tri.png"
+                                                           },
+                                                           {
+                                                               "name":  "Background Triangles 2",
+                                                               "file":  "wallpapers/bkg2 tri.png"
+                                                           },
+                                                           {
+                                                               "name":  "Background Triangles 3",
+                                                               "file":  "wallpapers/bkg3 tri.png"
+                                                           },
+                                                           {
+                                                               "name":  "Dots 1",
+                                                               "file":  "wallpapers/dots 1.png"
+                                                           },
+                                                           {
+                                                               "name":  "Dots 2",
+                                                               "file":  "wallpapers/dots 2.png"
+                                                           },
+                                                           {
+                                                               "name":  "Dots 3",
+                                                               "file":  "wallpapers/dots 3.png"
+                                                           },
+                                                           {
+                                                               "name":  "Pexels Aleksandar Pasaric 2 (niivu edit)",
+                                                               "file":  "wallpapers/pexels-aleksandar-pasaric-2(niivu edit).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Pexels Aleksandar Pasaric (niivu edit)",
+                                                               "file":  "wallpapers/pexels-aleksandar-pasaric(niivu edit).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Pexels Janko Ferlic (niivu edit)",
+                                                               "file":  "wallpapers/pexels-janko-ferlic(niivu edit).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Pexels Mathew Liang (niivu edit)",
+                                                               "file":  "wallpapers/pexels-mathew-liang(niivu edit).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Pexels Nick Kwan (niivu edit)",
+                                                               "file":  "wallpapers/pexels-nick-kwan(niivu edit).jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Tokyo Night 2",
+                                                               "file":  "wallpapers/Tokyo Night 2.png"
+                                                           },
+                                                           {
+                                                               "name":  "Tokyo Night 3",
+                                                               "file":  "wallpapers/Tokyo Night 3.png"
+                                                           },
+                                                           {
+                                                               "name":  "Tokyo Night niivu",
+                                                               "file":  "wallpapers/Tokyo Night niivu.png"
+                                                           },
+                                                           {
+                                                               "name":  "Tokyo Night",
+                                                               "file":  "wallpapers/Tokyo Night.png"
+                                                           }
+                                                       ]
+                                      },
+                       "cursors":  {
+                                       "path":  "cursors"
+                                   },
+                       "startorbs":  {
+                                         "variants":  [
+                                                          {
+                                                              "name":  "Tokyo Night Color",
+                                                              "file":  "startorbs/Tokyo Night color.svg"
+                                                          },
+                                                          {
+                                                              "name":  "Tokyo Light Color",
+                                                              "file":  "startorbs/Tokyo Light color.svg"
+                                                          }
+                                                      ]
+                                     },
+                       "mica":  {
+                                    "guide":  "guides/mica",
+                                    "app":  "mica"
+                                },
+                       "oldnewexplorer":  {
+                                              "guide":  "guides/oldnewexplorer",
+                                              "app":  "oldnewexplorer"
+                                          }
+                   }
+}

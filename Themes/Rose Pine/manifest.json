@@ -1,0 +1,396 @@
+{
+    "name":  "Rose Pine",
+    "version":  "1.1.0",
+    "author":  "niivu",
+    "description":  "A sophisticated dark theme inspired by the RosÃƒÂ© Pine palette, featuring custom msstyles in base, Dawn, Moon, Night, and DOTS variants, wallpapers, start orbs, fonts, and extras.",
+    "preview":  "preview.png",
+    "palette":  {
+                    "background":  "#191724",
+                    "accent":  "#26233a",
+                    "text":  "#e0def4",
+                    "inactive":  "#12101e",
+                    "border":  "#403d52",
+                    "active":  "#ebbcba"
+                },
+    "components":  {
+                       "msstyles":  {
+                                        "label":  "Visual Styles",
+                                        "variants":  [
+                                                         {
+                                                             "name":  "Rose Pine",
+                                                             "file":  "msstyles/Rose Pine/Rose Pine.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Rose Pine NA",
+                                                             "file":  "msstyles/Rose Pine/Rose Pine NA.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Rose Pine Night",
+                                                             "file":  "msstyles/Rose Pine/Rose Pine Night.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Rose Pine Night NA",
+                                                             "file":  "msstyles/Rose Pine/Rose Pine Night NA.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Rose Pine Moon",
+                                                             "file":  "msstyles/Rose Pine/Rose Pine Moon.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Rose Pine Moon NA",
+                                                             "file":  "msstyles/Rose Pine/Rose Pine Moon NA.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Rose Pine Moon Night",
+                                                             "file":  "msstyles/Rose Pine/Rose Pine Moon Night.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Rose Pine Moon Night NA",
+                                                             "file":  "msstyles/Rose Pine/Rose Pine Moon Night NA.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Rose Pine Dawn",
+                                                             "file":  "msstyles/Rose Pine/Rose Pine Dawn.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Rose Pine Dawn NA",
+                                                             "file":  "msstyles/Rose Pine/Rose Pine Dawn NA.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Rose Pine DOTS",
+                                                             "file":  "msstyles/Rose Pine DOTS/Rose Pine - DOTS.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Rose Pine DOTS NA",
+                                                             "file":  "msstyles/Rose Pine DOTS/Rose Pine - DOTS - NA.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Rose Pine DOTS Night",
+                                                             "file":  "msstyles/Rose Pine DOTS/Rose Pine - DOTS - Night.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Rose Pine DOTS Night NA",
+                                                             "file":  "msstyles/Rose Pine DOTS/Rose Pine - DOTS - Night NA.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Rose Pine DOTS Moon",
+                                                             "file":  "msstyles/Rose Pine DOTS/Rose Pine - DOTS - Moon.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Rose Pine DOTS Moon NA",
+                                                             "file":  "msstyles/Rose Pine DOTS/Rose Pine - DOTS - Moon NA.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Rose Pine DOTS Moon Night",
+                                                             "file":  "msstyles/Rose Pine DOTS/Rose Pine - DOTS - Moon Night.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Rose Pine DOTS Moon Night NA",
+                                                             "file":  "msstyles/Rose Pine DOTS/Rose Pine - DOTS - Moon Night NA.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Rose Pine DOTS Dawn",
+                                                             "file":  "msstyles/Rose Pine DOTS/Rose Pine - DOTS - Dawn.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Rose Pine DOTS Dawn NA",
+                                                             "file":  "msstyles/Rose Pine DOTS/Rose Pine - DOTS - Dawn NA.msstyles"
+                                                         }
+                                                     ]
+                                    },
+                       "themes":  {
+                                      "label":  "Theme Files",
+                                      "variants":  [
+                                                       {
+                                                           "name":  "Rose Pine",
+                                                           "file":  "Resources_Themes_Folder/Rose Pine.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Rose Pine NA",
+                                                           "file":  "Resources_Themes_Folder/Rose Pine NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Rose Pine Night",
+                                                           "file":  "Resources_Themes_Folder/Rose Pine Night.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Rose Pine Night NA",
+                                                           "file":  "Resources_Themes_Folder/Rose Pine Night NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Rose Pine Moon",
+                                                           "file":  "Resources_Themes_Folder/Rose Pine Moon.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Rose Pine Moon NA",
+                                                           "file":  "Resources_Themes_Folder/Rose Pine Moon NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Rose Pine Moon Night",
+                                                           "file":  "Resources_Themes_Folder/Rose Pine Moon Night.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Rose Pine Moon Night NA",
+                                                           "file":  "Resources_Themes_Folder/Rose Pine Moon Night NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Rose Pine Dawn",
+                                                           "file":  "Resources_Themes_Folder/Rose Pine Dawn.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Rose Pine Dawn NA",
+                                                           "file":  "Resources_Themes_Folder/Rose Pine Dawn NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Rose Pine DOTS",
+                                                           "file":  "Resources_Themes_Folder/Rose Pine - DOTS.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Rose Pine DOTS NA",
+                                                           "file":  "Resources_Themes_Folder/Rose Pine - DOTS - NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Rose Pine DOTS Night",
+                                                           "file":  "Resources_Themes_Folder/Rose Pine - DOTS - Night.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Rose Pine DOTS Night NA",
+                                                           "file":  "Resources_Themes_Folder/Rose Pine - DOTS - Night NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Rose Pine DOTS Moon",
+                                                           "file":  "Resources_Themes_Folder/Rose Pine - DOTS - Moon.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Rose Pine DOTS Moon NA",
+                                                           "file":  "Resources_Themes_Folder/Rose Pine - DOTS - Moon NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Rose Pine DOTS Moon Night",
+                                                           "file":  "Resources_Themes_Folder/Rose Pine - DOTS - Moon Night.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Rose Pine DOTS Moon Night NA",
+                                                           "file":  "Resources_Themes_Folder/Rose Pine - DOTS - Moon Night NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Rose Pine DOTS Dawn",
+                                                           "file":  "Resources_Themes_Folder/Rose Pine - DOTS - Dawn.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Rose Pine DOTS Dawn NA",
+                                                           "file":  "Resources_Themes_Folder/Rose Pine - DOTS - Dawn NA.theme"
+                                                       }
+                                                   ]
+                                  },
+                       "wallpapers":  {
+                                          "label":  "Wallpapers",
+                                          "variants":  [
+                                                           {
+                                                               "name":  "Night - Leafy",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Night/leafy.png"
+                                                           },
+                                                           {
+                                                               "name":  "Night - Block Wave",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Night/Rose Pine - Block Wave.png"
+                                                           },
+                                                           {
+                                                               "name":  "Night - Burst",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Night/Rose Pine - Burst.png"
+                                                           },
+                                                           {
+                                                               "name":  "Night - Circuits",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Night/Rose Pine - Circuits.png"
+                                                           },
+                                                           {
+                                                               "name":  "Night - Diamonds",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Night/Rose Pine - Diamonds.png"
+                                                           },
+                                                           {
+                                                               "name":  "Night - Dot Grid 1",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Night/Rose Pine - Dot Grid 1.png"
+                                                           },
+                                                           {
+                                                               "name":  "Night - Dot Grid 2",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Night/Rose Pine - Dot Grid 2.png"
+                                                           },
+                                                           {
+                                                               "name":  "Night - Octagon",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Night/Rose Pine - Octagon.png"
+                                                           },
+                                                           {
+                                                               "name":  "Night - Triangles",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Night/Rose Pine - Triangles.png"
+                                                           },
+                                                           {
+                                                               "name":  "Night - Trianglify 1",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Night/Rose Pine - Trianglify 1.png"
+                                                           },
+                                                           {
+                                                               "name":  "Night - Trianglify 2",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Night/Rose Pine - Trianglify 2.png"
+                                                           },
+                                                           {
+                                                               "name":  "Moon - Leafy",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Moon/leafy-moon.png"
+                                                           },
+                                                           {
+                                                               "name":  "Moon - Block Wave",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Moon/Moon - Block Wave.png"
+                                                           },
+                                                           {
+                                                               "name":  "Moon - Burst",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Moon/Moon - Burst.png"
+                                                           },
+                                                           {
+                                                               "name":  "Moon - Circuits",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Moon/Moon - Circuits.png"
+                                                           },
+                                                           {
+                                                               "name":  "Moon - Diamonds",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Moon/Moon - Diamonds.png"
+                                                           },
+                                                           {
+                                                               "name":  "Moon - Dot Grid 1",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Moon/Moon - Dot Grid 1.png"
+                                                           },
+                                                           {
+                                                               "name":  "Moon - Dot Grid 2",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Moon/Moon - Dot Grid 2.png"
+                                                           },
+                                                           {
+                                                               "name":  "Moon - Octagon",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Moon/Moon - Octagon.png"
+                                                           },
+                                                           {
+                                                               "name":  "Moon - Triangles",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Moon/Moon - Triangles.png"
+                                                           },
+                                                           {
+                                                               "name":  "Moon - Trianglify 1",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Moon/Moon - Trianglify 1.png"
+                                                           },
+                                                           {
+                                                               "name":  "Moon - Trianglify 2",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Moon/Moon - Trianglify 2.png"
+                                                           },
+                                                           {
+                                                               "name":  "Dawn - Leafy",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Dawn/leafy-dawn.png"
+                                                           },
+                                                           {
+                                                               "name":  "Dawn - Block Wave",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Dawn/Dawn - Block Wave.png"
+                                                           },
+                                                           {
+                                                               "name":  "Dawn - Burst",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Dawn/Dawn - Burst.png"
+                                                           },
+                                                           {
+                                                               "name":  "Dawn - Circuits",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Dawn/Dawn - Circuits.png"
+                                                           },
+                                                           {
+                                                               "name":  "Dawn - Diamonds",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Dawn/Dawn - Diamonds.png"
+                                                           },
+                                                           {
+                                                               "name":  "Dawn - Dot Grid 1",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Dawn/Dawn - Dot Grid 1.png"
+                                                           },
+                                                           {
+                                                               "name":  "Dawn - Dot Grid 2",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Dawn/Dawn - Dot Grid 2.png"
+                                                           },
+                                                           {
+                                                               "name":  "Dawn - Octagon",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Dawn/Dawn - Octagon.png"
+                                                           },
+                                                           {
+                                                               "name":  "Dawn - Triangles",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Dawn/Dawn - Triangles.png"
+                                                           },
+                                                           {
+                                                               "name":  "Dawn - Trianglify 1",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Dawn/Dawn - Trianglify 1.png"
+                                                           },
+                                                           {
+                                                               "name":  "Dawn - Trianglify 2",
+                                                               "file":  "msstyles/Rose Pine/Wallpapers/Dawn/Dawn - Trianglify 2.png"
+                                                           }
+                                                       ]
+                                      },
+                       "cursors":  {
+                                       "label":  "Cursors",
+                                       "path":  "cursors"
+                                   },
+                       "startorb":  {
+                                        "label":  "Start Orbs",
+                                        "variants":  [
+                                                         {
+                                                             "name":  "Rose Pine",
+                                                             "file":  "Extras_and_Odds/Start Orbs/Rose Pine.svg"
+                                                         },
+                                                         {
+                                                             "name":  "Rose Pine Dark",
+                                                             "file":  "Extras_and_Odds/Start Orbs/Rose Pine Dark.svg"
+                                                         },
+                                                         {
+                                                             "name":  "Rose Pine Light",
+                                                             "file":  "Extras_and_Odds/Start Orbs/Rose Pine light.svg"
+                                                         },
+                                                         {
+                                                             "name":  "Rose Pine Dawn",
+                                                             "file":  "Extras_and_Odds/Start Orbs/Rose Pine Dawn.svg"
+                                                         },
+                                                         {
+                                                             "name":  "Rose Pine Moon",
+                                                             "file":  "Extras_and_Odds/Start Orbs/Rose Pine Moon.svg"
+                                                         }
+                                                     ]
+                                    },
+                       "fonts":  {
+                                     "label":  "Fonts",
+                                     "variants":  [
+                                                      {
+                                                          "name":  "FF DIN Round Pro",
+                                                          "file":  "fonts/FF DIN Round Pro.otf"
+                                                      }
+                                                  ]
+                                 },
+                       "icons":  {
+                                     "label":  "Icons",
+                                     "variants":  [
+                                                      {
+                                                          "name":  "7TSP Pack",
+                                                          "file":  "Extras_and_Odds/7TSP Icon Theme/7tsp Rose Pine.7z"
+                                                      }
+                                                  ]
+                                 },
+                       "firefox":  {
+                                       "label":  "Firefox",
+                                       "variants":  [
+                                                        {
+                                                            "name":  "Rose Pine",
+                                                            "file":  "firefox/Rose Pine.url"
+                                                        },
+                                                        {
+                                                            "name":  "Rose Pine Dawn",
+                                                            "file":  "firefox/Rose Pine Dawn.url"
+                                                        },
+                                                        {
+                                                            "name":  "Rose Pine Moon",
+                                                            "file":  "firefox/Rose Pine Moon.url"
+                                                        }
+                                                    ]
+                                   },
+                       "mica":  {
+                                    "guide":  "guides/mica",
+                                    "app":  "mica"
+                                },
+                       "oldnewexplorer":  {
+                                              "guide":  "guides/oldnewexplorer",
+                                              "app":  "oldnewexplorer"
+                                          }
+                   }
+}

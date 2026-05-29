@@ -1,0 +1,129 @@
+{
+    "name":  "Paranoid Android",
+    "version":  "1.0.0",
+    "description":  "A Catppuccin-inspired dark blue Windows 11 theme in LUV, Nebula, and Sweet variants by niivu.",
+    "author":  "niivu",
+    "preview":  "preview.png",
+    "palette":  {
+                    "background":  "#1c2333",
+                    "accent":  "#252f43",
+                    "text":  "#cdd6f4",
+                    "inactive":  "#161b27",
+                    "border":  "#45475a",
+                    "active":  "#89b4fa"
+                },
+    "components":  {
+                       "msstyles":  {
+                                        "variants":  [
+                                                         {
+                                                             "name":  "LUV",
+                                                             "file":  "msstyles/LUV.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "LUV Night",
+                                                             "file":  "msstyles/LUV - Night.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Nebula",
+                                                             "file":  "msstyles/Nebula.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Nebula Night",
+                                                             "file":  "msstyles/Nebula - Night.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Sweet",
+                                                             "file":  "msstyles/Sweet.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Sweet Night",
+                                                             "file":  "msstyles/Sweet - Night.msstyles"
+                                                         }
+                                                     ]
+                                    },
+                       "themes":  {
+                                      "variants":  [
+                                                       {
+                                                           "name":  "LUV - Dark",
+                                                           "file":  "themes/Paranoid Android - LUV - dark.theme"
+                                                       },
+                                                       {
+                                                           "name":  "LUV - Light",
+                                                           "file":  "themes/Paranoid Android - LUV - light.theme"
+                                                       },
+                                                       {
+                                                           "name":  "LUV - Night",
+                                                           "file":  "themes/Paranoid Android - LUV - night.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Nebula - Dark",
+                                                           "file":  "themes/Paranoid Android - Nebula - dark.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Nebula - Light",
+                                                           "file":  "themes/Paranoid Android - Nebula - light.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Nebula - Night",
+                                                           "file":  "themes/Paranoid Android - Nebula - night.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Sweet - Dark",
+                                                           "file":  "themes/Paranoid Android - Sweet - dark.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Sweet - Light",
+                                                           "file":  "themes/Paranoid Android - Sweet - light.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Sweet - Night",
+                                                           "file":  "themes/Paranoid Android - Sweet - night.theme"
+                                                       }
+                                                   ]
+                                  },
+                       "wallpapers":  {
+                                          "variants":  [
+                                                           {
+                                                               "name":  "LUV",
+                                                               "file":  "wallpapers/Paranoid Android - LUV.png"
+                                                           },
+                                                           {
+                                                               "name":  "Nebula",
+                                                               "file":  "wallpapers/Paranoid Android - Nebula.png"
+                                                           },
+                                                           {
+                                                               "name":  "Sweet",
+                                                               "file":  "wallpapers/Paranoid Android - Sweet.png"
+                                                           },
+                                                           {
+                                                               "name":  "Sweetspot",
+                                                               "file":  "wallpapers/Paranoid Android - Sweetspot.png"
+                                                           }
+                                                       ]
+                                      },
+                       "mica":  {
+                                    "guide":  "guides/mica",
+                                    "app":  "mica"
+                                },
+                       "oldnewexplorer":  {
+                                              "guide":  "guides/oldnewexplorer",
+                                              "app":  "oldnewexplorer"
+                                          },
+                       "startorb":  {
+                                        "variants":  [
+                                                         {
+                                                             "file":  "startallback/Orbs/Paranoid Start Orb.svg",
+                                                             "name":  "Paranoid Start Orb"
+                                                         },
+                                                         {
+                                                             "file":  "startallback/Orbs/StartAllBack explorer.png",
+                                                             "name":  "StartAllBack explorer"
+                                                         },
+                                                         {
+                                                             "file":  "startallback/Orbs/StartAllBack taskbar.png",
+                                                             "name":  "StartAllBack taskbar"
+                                                         }
+                                                     ]
+                                    }
+                   }
+}

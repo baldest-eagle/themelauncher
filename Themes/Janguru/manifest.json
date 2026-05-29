@@ -1,0 +1,273 @@
+{
+    "name":  "Janguru",
+    "version":  "1.0.0",
+    "description":  "A vibrant jungle-green Windows 11 theme with multiple color variants (Classic, Glyph, Imrik, Mangrove, Parrot, Tropical) in both day and night modes, by niivu.",
+    "author":  "niivu",
+    "preview":  "preview.png",
+    "palette":  {
+                    "background":  "#1b2d1b",
+                    "accent":  "#253525",
+                    "text":  "#c8d8b0",
+                    "inactive":  "#142014",
+                    "border":  "#4a6040",
+                    "active":  "#8bc34a"
+                },
+    "components":  {
+                       "msstyles":  {
+                                        "variants":  [
+                                                         {
+                                                             "name":  "Classic Day",
+                                                             "file":  "msstyles/Classic Day.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Classic Night",
+                                                             "file":  "msstyles/Classic Night.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Glyph Day",
+                                                             "file":  "msstyles/Glyph Day.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Glyph Night",
+                                                             "file":  "msstyles/Glyph Night.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Imrik Day",
+                                                             "file":  "msstyles/Imrik Day.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Imrik Night",
+                                                             "file":  "msstyles/Imrik Night.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "INV Classic Day",
+                                                             "file":  "msstyles/INV Classic Day.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "INV Classic Night",
+                                                             "file":  "msstyles/INV Classic Night.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "INV Mangrove Day",
+                                                             "file":  "msstyles/INV Mangrove Day.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "INV Mangrove Night",
+                                                             "file":  "msstyles/INV Mangrove Night.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "INV Parrot Day",
+                                                             "file":  "msstyles/INV Parrot Day.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "INV Parrot Night",
+                                                             "file":  "msstyles/INV Parrot Night.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "INV Tropical Day",
+                                                             "file":  "msstyles/INV Tropical Day.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "INV Tropical Night",
+                                                             "file":  "msstyles/INV Tropical Night.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Mangrove Day",
+                                                             "file":  "msstyles/Mangrove Day.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Mangrove Night",
+                                                             "file":  "msstyles/Mangrove Night.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Parrot Day",
+                                                             "file":  "msstyles/Parrot Day.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Parrot Night",
+                                                             "file":  "msstyles/Parrot Night.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Tropical Day",
+                                                             "file":  "msstyles/Tropical Day.msstyles"
+                                                         },
+                                                         {
+                                                             "name":  "Tropical Night",
+                                                             "file":  "msstyles/Tropical Night.msstyles"
+                                                         }
+                                                     ]
+                                    },
+                       "themes":  {
+                                      "variants":  [
+                                                       {
+                                                           "name":  "Classic Day",
+                                                           "file":  "themes/Janguru - Classic Day.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Classic Night",
+                                                           "file":  "themes/Janguru - Classic Night.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Glyph Day",
+                                                           "file":  "themes/Janguru - Glyph Day.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Glyph Night",
+                                                           "file":  "themes/Janguru - Glyph Night.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Imrik Night",
+                                                           "file":  "themes/Janguru - Imrik Night.theme"
+                                                       },
+                                                       {
+                                                           "name":  "INV Classic Day",
+                                                           "file":  "themes/Janguru - INV Classic Day.theme"
+                                                       },
+                                                       {
+                                                           "name":  "INV Classic Night",
+                                                           "file":  "themes/Janguru - INV Classic Night.theme"
+                                                       },
+                                                       {
+                                                           "name":  "INV Mangrove Day",
+                                                           "file":  "themes/Janguru - INV Mangrove Day.theme"
+                                                       },
+                                                       {
+                                                           "name":  "INV Mangrove Night",
+                                                           "file":  "themes/Janguru - INV Mangrove Night.theme"
+                                                       },
+                                                       {
+                                                           "name":  "INV Parrot Day",
+                                                           "file":  "themes/Janguru - INV Parrot Day.theme"
+                                                       },
+                                                       {
+                                                           "name":  "INV Parrot Night",
+                                                           "file":  "themes/Janguru - INV Parrot Night.theme"
+                                                       },
+                                                       {
+                                                           "name":  "INV Tropical Day",
+                                                           "file":  "themes/Janguru - INV Tropical Day.theme"
+                                                       },
+                                                       {
+                                                           "name":  "INV Tropical Night",
+                                                           "file":  "themes/Janguru - INV Tropical Night.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Mangrove Day",
+                                                           "file":  "themes/Janguru - Mangrove Day.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Mangrove Night",
+                                                           "file":  "themes/Janguru - Mangrove Night.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Parrot Day",
+                                                           "file":  "themes/Janguru - Parrot Day.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Parrot Night",
+                                                           "file":  "themes/Janguru - Parrot Night.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tropical Day",
+                                                           "file":  "themes/Janguru - Tropical Day.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Tropical Night",
+                                                           "file":  "themes/Janguru - Tropical Night.theme"
+                                                       }
+                                                   ]
+                                  },
+                       "wallpapers":  {
+                                          "variants":  [
+                                                           {
+                                                               "name":  "Classic Day",
+                                                               "file":  "wallpapers/Janguru Classic - day.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Classic Night",
+                                                               "file":  "wallpapers/Janguru Classic - night.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Glyph Day",
+                                                               "file":  "wallpapers/Janguru Glyph - day.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Glyph Night",
+                                                               "file":  "wallpapers/Janguru Glyph - night.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Imrik Day",
+                                                               "file":  "wallpapers/Janguru Imrik - day.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Imrik Night",
+                                                               "file":  "wallpapers/Janguru Imrik - night.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "INV Classic Day",
+                                                               "file":  "wallpapers/Janguru INV Classic - day.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "INV Classic Night",
+                                                               "file":  "wallpapers/Janguru INV Classic - night.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "INV Mangrove Day",
+                                                               "file":  "wallpapers/Janguru INV Mangrove - day.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "INV Mangrove Night",
+                                                               "file":  "wallpapers/Janguru INV Mangrove - night.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "INV Parrot Day",
+                                                               "file":  "wallpapers/Janguru INV Parrot - day.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "INV Parrot Night",
+                                                               "file":  "wallpapers/Janguru INV Parrot - night.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "INV Tropical Day",
+                                                               "file":  "wallpapers/Janguru INV Tropical - day.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "INV Tropical Night",
+                                                               "file":  "wallpapers/Janguru INV Tropical - night.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Mangrove Day",
+                                                               "file":  "wallpapers/Janguru Mangrove - day.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Mangrove Night",
+                                                               "file":  "wallpapers/Janguru Mangrove - night.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Parrot Day",
+                                                               "file":  "wallpapers/Janguru Parrot - day.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Parrot Night",
+                                                               "file":  "wallpapers/Janguru Parrot - night.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Tropical Day",
+                                                               "file":  "wallpapers/Janguru Tropical - day.jpg"
+                                                           },
+                                                           {
+                                                               "name":  "Tropical Night",
+                                                               "file":  "wallpapers/Janguru Tropical - night.jpg"
+                                                           }
+                                                       ]
+                                      },
+                       "mica":  {
+                                    "guide":  "guides/mica",
+                                    "app":  "mica"
+                                },
+                       "oldnewexplorer":  {
+                                              "guide":  "guides/oldnewexplorer",
+                                              "app":  "oldnewexplorer"
+                                          }
+                   }
+}

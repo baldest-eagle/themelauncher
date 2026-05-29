@@ -1,0 +1,350 @@
+{
+    "name":  "Gruvbox",
+    "version":  "1.0.0",
+    "description":  "Gruvbox retro groove color scheme for Windows 11, featuring dark, light, and night variants with ARROW, LACE, and ROUND border styles.",
+    "author":  "niivu",
+    "preview":  "preview.png",
+    "palette":  {
+                    "background":  "#282828",
+                    "accent":  "#3c3836",
+                    "text":  "#ebdbb2",
+                    "inactive":  "#1d2021",
+                    "border":  "#504945",
+                    "active":  "#d79921"
+                },
+    "components":  {
+                       "msstyles":  {
+                                        "variants":  [
+                                                         {
+                                                             "name":  "Dark - Arrow",
+                                                             "file":  "msstyles/gruvbox dark - ARROW.msstyles",
+                                                             "preview":  "previews/gruvbox dark - ARROW.png"
+                                                         },
+                                                         {
+                                                             "name":  "Dark - Arrow NA",
+                                                             "file":  "msstyles/gruvbox dark - ARROW NA.msstyles",
+                                                             "preview":  "previews/gruvbox dark - ARROW.png"
+                                                         },
+                                                         {
+                                                             "name":  "Dark - Lace",
+                                                             "file":  "msstyles/gruvbox dark - LACE.msstyles",
+                                                             "preview":  "previews/gruvbox dark - LACE.png"
+                                                         },
+                                                         {
+                                                             "name":  "Dark - Lace NA",
+                                                             "file":  "msstyles/gruvbox dark - LACE NA.msstyles",
+                                                             "preview":  "previews/gruvbox dark - LACE.png"
+                                                         },
+                                                         {
+                                                             "name":  "Dark - Round",
+                                                             "file":  "msstyles/gruvbox dark - ROUND.msstyles",
+                                                             "preview":  "previews/gruvbox dark - ROUND.png"
+                                                         },
+                                                         {
+                                                             "name":  "Dark - Round NA",
+                                                             "file":  "msstyles/gruvbox dark - ROUND NA.msstyles",
+                                                             "preview":  "previews/gruvbox dark - ROUND.png"
+                                                         },
+                                                         {
+                                                             "name":  "Light - Arrow",
+                                                             "file":  "msstyles/gruvbox light - ARROW.msstyles",
+                                                             "preview":  "previews/gruvbox light - ARROW.png"
+                                                         },
+                                                         {
+                                                             "name":  "Light - Arrow NA",
+                                                             "file":  "msstyles/gruvbox light - ARROW NA.msstyles",
+                                                             "preview":  "previews/gruvbox light - ARROW.png"
+                                                         },
+                                                         {
+                                                             "name":  "Light - Lace",
+                                                             "file":  "msstyles/gruvbox light - LACE.msstyles",
+                                                             "preview":  "previews/gruvbox light - LACE.png"
+                                                         },
+                                                         {
+                                                             "name":  "Light - Lace NA",
+                                                             "file":  "msstyles/gruvbox light - LACE NA.msstyles",
+                                                             "preview":  "previews/gruvbox light - LACE.png"
+                                                         },
+                                                         {
+                                                             "name":  "Light - Round",
+                                                             "file":  "msstyles/gruvbox light - ROUND.msstyles",
+                                                             "preview":  "previews/gruvbox light - ROUND.png"
+                                                         },
+                                                         {
+                                                             "name":  "Light - Round NA",
+                                                             "file":  "msstyles/gruvbox light - ROUND NA.msstyles",
+                                                             "preview":  "previews/gruvbox light - ROUND.png"
+                                                         },
+                                                         {
+                                                             "name":  "Night - Arrow",
+                                                             "file":  "msstyles/gruvbox night - ARROW.msstyles",
+                                                             "preview":  "previews/gruvbox dark - ARROW.png"
+                                                         },
+                                                         {
+                                                             "name":  "Night - Arrow NA",
+                                                             "file":  "msstyles/gruvbox night - ARROW NA.msstyles",
+                                                             "preview":  "previews/gruvbox dark - ARROW.png"
+                                                         },
+                                                         {
+                                                             "name":  "Night - Lace",
+                                                             "file":  "msstyles/gruvbox night - LACE.msstyles",
+                                                             "preview":  "previews/gruvbox dark - LACE.png"
+                                                         },
+                                                         {
+                                                             "name":  "Night - Lace NA",
+                                                             "file":  "msstyles/gruvbox night - LACE NA.msstyles",
+                                                             "preview":  "previews/gruvbox dark - LACE.png"
+                                                         },
+                                                         {
+                                                             "name":  "Night - Round",
+                                                             "file":  "msstyles/gruvbox night - ROUND.msstyles",
+                                                             "preview":  "previews/gruvbox dark - ROUND.png"
+                                                         },
+                                                         {
+                                                             "name":  "Night - Round NA",
+                                                             "file":  "msstyles/gruvbox night - ROUND NA.msstyles",
+                                                             "preview":  "previews/gruvbox dark - ROUND.png"
+                                                         }
+                                                     ]
+                                    },
+                       "themes":  {
+                                      "variants":  [
+                                                       {
+                                                           "name":  "Dark - Arrow",
+                                                           "file":  "themes/gruvbox dark - ARROW.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Dark - Arrow NA",
+                                                           "file":  "themes/gruvbox dark - ARROW NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Dark - Lace",
+                                                           "file":  "themes/gruvbox dark - LACE.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Dark - Lace NA",
+                                                           "file":  "themes/gruvbox dark - LACE NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Dark - Round",
+                                                           "file":  "themes/gruvbox dark - ROUND.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Dark - Round NA",
+                                                           "file":  "themes/gruvbox dark - ROUND NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Light - Arrow",
+                                                           "file":  "themes/gruvbox light - ARROW.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Light - Arrow NA",
+                                                           "file":  "themes/gruvbox light - ARROW NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Light - Lace",
+                                                           "file":  "themes/gruvbox light - LACE.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Light - Lace NA",
+                                                           "file":  "themes/gruvbox light - LACE NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Light - Round",
+                                                           "file":  "themes/gruvbox light - ROUND.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Light - Round NA",
+                                                           "file":  "themes/gruvbox light - ROUND NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Night - Arrow",
+                                                           "file":  "themes/gruvbox night - ARROW.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Night - Arrow NA",
+                                                           "file":  "themes/gruvbox night - ARROW NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Night - Lace",
+                                                           "file":  "themes/gruvbox night - LACE.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Night - Lace NA",
+                                                           "file":  "themes/gruvbox night - LACE NA.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Night - Round",
+                                                           "file":  "themes/gruvbox night - ROUND.theme"
+                                                       },
+                                                       {
+                                                           "name":  "Night - Round NA",
+                                                           "file":  "themes/gruvbox night - ROUND NA.theme"
+                                                       }
+                                                   ]
+                                  },
+                       "wallpapers":  {
+                                          "variants":  [
+                                                           {
+                                                               "name":  "Block Wave (Dark)",
+                                                               "file":  "wallpapers/block-wave.png"
+                                                           },
+                                                           {
+                                                               "name":  "Block Wave (Light)",
+                                                               "file":  "wallpapers/block-wave-.png"
+                                                           },
+                                                           {
+                                                               "name":  "Burst (Dark)",
+                                                               "file":  "wallpapers/burst.png"
+                                                           },
+                                                           {
+                                                               "name":  "Burst (Light)",
+                                                               "file":  "wallpapers/burst-.png"
+                                                           },
+                                                           {
+                                                               "name":  "Circuits (Dark)",
+                                                               "file":  "wallpapers/circuits.png"
+                                                           },
+                                                           {
+                                                               "name":  "Circuits (Light)",
+                                                               "file":  "wallpapers/circuits-.png"
+                                                           },
+                                                           {
+                                                               "name":  "Diamonds (Dark)",
+                                                               "file":  "wallpapers/diamonds.png"
+                                                           },
+                                                           {
+                                                               "name":  "Diamonds (Light)",
+                                                               "file":  "wallpapers/diamonds-.png"
+                                                           },
+                                                           {
+                                                               "name":  "Dot Grid Dark",
+                                                               "file":  "wallpapers/dot-grid-dark.png"
+                                                           },
+                                                           {
+                                                               "name":  "Dot Grid Dark (Alt)",
+                                                               "file":  "wallpapers/dot-grid-d.png"
+                                                           },
+                                                           {
+                                                               "name":  "Dot Grid Light",
+                                                               "file":  "wallpapers/dot-grid-light.png"
+                                                           },
+                                                           {
+                                                               "name":  "Dot Grid Light (Alt)",
+                                                               "file":  "wallpapers/dot-grid-li.png"
+                                                           },
+                                                           {
+                                                               "name":  "Gruvbox 1",
+                                                               "file":  "wallpapers/grubox (1).png"
+                                                           },
+                                                           {
+                                                               "name":  "Gruvbox 2",
+                                                               "file":  "wallpapers/grubox (2).png"
+                                                           },
+                                                           {
+                                                               "name":  "Gruvbox 3",
+                                                               "file":  "wallpapers/grubox (3).png"
+                                                           },
+                                                           {
+                                                               "name":  "Gruvbox 4",
+                                                               "file":  "wallpapers/grubox (4).png"
+                                                           },
+                                                           {
+                                                               "name":  "Gruvbox 5",
+                                                               "file":  "wallpapers/grubox (5).png"
+                                                           },
+                                                           {
+                                                               "name":  "Gruvbox 6",
+                                                               "file":  "wallpapers/grubox (6).png"
+                                                           },
+                                                           {
+                                                               "name":  "Gruvbox 7",
+                                                               "file":  "wallpapers/grubox (7).png"
+                                                           },
+                                                           {
+                                                               "name":  "Gruvbox 8",
+                                                               "file":  "wallpapers/grubox (8).png"
+                                                           },
+                                                           {
+                                                               "name":  "Gruvbox 9",
+                                                               "file":  "wallpapers/grubox (9).png"
+                                                           },
+                                                           {
+                                                               "name":  "Gruvbox Tri Dark",
+                                                               "file":  "wallpapers/gruvbox tri dark.png"
+                                                           },
+                                                           {
+                                                               "name":  "Gruvbox Tri Day",
+                                                               "file":  "wallpapers/gruvbox tri day.png"
+                                                           },
+                                                           {
+                                                               "name":  "Julius Drost",
+                                                               "file":  "wallpapers/julius-drost-niivu-unsplash.png"
+                                                           },
+                                                           {
+                                                               "name":  "Octagon (Dark)",
+                                                               "file":  "wallpapers/octagon.png"
+                                                           },
+                                                           {
+                                                               "name":  "Octagon (Light)",
+                                                               "file":  "wallpapers/octagon-.png"
+                                                           },
+                                                           {
+                                                               "name":  "Shirts (Dark)",
+                                                               "file":  "wallpapers/shirts.png"
+                                                           },
+                                                           {
+                                                               "name":  "Shirts (Light)",
+                                                               "file":  "wallpapers/shirts-.png"
+                                                           },
+                                                           {
+                                                               "name":  "Swirlbox",
+                                                               "file":  "wallpapers/swirlbox.png"
+                                                           },
+                                                           {
+                                                               "name":  "System76 Gruvbox",
+                                                               "file":  "wallpapers/System76 gruvbox.png"
+                                                           },
+                                                           {
+                                                               "name":  "System76 Chainlink (Light)",
+                                                               "file":  "wallpapers/System76-gruvbox-Chainlink-.png"
+                                                           },
+                                                           {
+                                                               "name":  "Triangles (Dark)",
+                                                               "file":  "wallpapers/triangles.png"
+                                                           },
+                                                           {
+                                                               "name":  "Triangles (Light)",
+                                                               "file":  "wallpapers/triangles-.png"
+                                                           },
+                                                           {
+                                                               "name":  "Trianglify Dark",
+                                                               "file":  "wallpapers/trianglify-dark.png"
+                                                           },
+                                                           {
+                                                               "name":  "Trianglify Dark 2",
+                                                               "file":  "wallpapers/trianglify-dark-2.png"
+                                                           },
+                                                           {
+                                                               "name":  "Trianglify Light",
+                                                               "file":  "wallpapers/trianglify-light.png"
+                                                           },
+                                                           {
+                                                               "name":  "Trianglify Light 2",
+                                                               "file":  "wallpapers/trianglify-light-2.png"
+                                                           }
+                                                       ]
+                                      },
+                       "cursors":  {
+                                       "path":  "cursors"
+                                   },
+                       "mica":  {
+                                    "guide":  "guides/mica",
+                                    "app":  "mica"
+                                },
+                       "oldnewexplorer":  {
+                                              "guide":  "guides/oldnewexplorer",
+                                              "app":  "oldnewexplorer"
+                                          }
+                   }
+}
