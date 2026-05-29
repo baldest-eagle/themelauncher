@@ -78,12 +78,13 @@ class MixerPanel(ctk.CTkFrame):
         p = self.colors.palette
 
         display_order = [
-            "msstyles", "wallpapers", "cursors", "startorb", "themes",
-            "terminal", "firefox", "windhawk", "fonts", "icons",
+            "msstyles", "wallpapers", "cursors", "startorb", "startallback",
+            "themes", "terminal", "firefox", "windhawk", "fonts", "icons",
         ]
         comp_labels = {
             "msstyles": "VISUAL STYLE", "wallpapers": "WALLPAPER",
             "cursors": "CURSORS", "startorb": "START ORB",
+            "startallback": "STARTALLBACK SKIN",
             "themes": "THEME FILE", "terminal": "TERMINAL",
             "firefox": "FIREFOX CSS", "windhawk": "WINDHAWK",
             "fonts": "FONTS", "icons": "ICONS",

@@ -148,6 +148,7 @@ class Applier:
         try:
             local = os.environ.get("LOCALAPPDATA", "")
             orb_dirs = [
+                r"C:\StartAllBack\Orbs",
                 os.path.join(local, "StartAllBack", "Orbs"),
                 r"C:\Windhawk\StartOrbs",
             ]
@@ -155,8 +156,11 @@ class Applier:
             for orb_dir in orb_dirs:
                 if os.path.isdir(orb_dir):
                     for f in os.listdir(orb_dir):
-                        os.remove(os.path.join(orb_dir, f))
-                        cleared += 1
+                        try:
+                            os.remove(os.path.join(orb_dir, f))
+                            cleared += 1
+                        except Exception:
+                            continue
             results["startorb"] = {"success": True, "message": f"Cleared {cleared} custom start orb(s)"}
         except Exception as exc:
             results["startorb"] = {"success": False, "message": str(exc)}
@@ -245,45 +249,45 @@ class Applier:
 
     def _find_sab_styles_dir(self) -> str:
         """Locate StartAllBack Styles directory."""
-        local = os.environ.get("LOCALAPPDATA", "")
-        primary = os.path.join(local, "StartAllBack", "Styles")
-        if os.path.isdir(os.path.dirname(primary)):
-            return primary
         candidates = [
-            primary,
+            r"C:\StartAllBack\Styles",
+            os.path.join(os.environ.get("LOCALAPPDATA", ""), "StartAllBack", "Styles"),
             os.path.join(os.environ.get("ProgramFiles", r"C:\Program Files"), "StartAllBack", "Styles"),
             os.path.join(os.environ.get("APPDATA", ""), "StartIsBack"),
         ]
         for d in candidates:
             if os.path.isdir(d):
                 return d
+        primary = r"C:\StartAllBack\Styles"
         log.warning("StartAllBack Styles dir not found; using primary: %s", primary)
         return primary
 
     def _find_sab_orbs_dir(self) -> str:
         """Locate StartAllBack Orbs directory."""
-        local = os.environ.get("LOCALAPPDATA", "")
-        primary = os.path.join(local, "StartAllBack", "Orbs")
-        if os.path.isdir(os.path.dirname(primary)):
-            return primary
+        candidates = [
+            r"C:\StartAllBack\Orbs",
+            os.path.join(os.environ.get("LOCALAPPDATA", ""), "StartAllBack", "Orbs"),
+        ]
+        for d in candidates:
+            if os.path.isdir(d):
+                return d
+        primary = r"C:\StartAllBack\Orbs"
         log.warning("StartAllBack Orbs dir not found; using primary: %s", primary)
         return primary
 
     def _resolve_orb_dir(self, target: str) -> str:
-        """Resolve the correct orb destination based on target type.
-
-        Manifest variants can specify "target": "startallback" or "target": "windhawk".
-        If no target is specified, tries StartAllBack first, then Windhawk.
-        """
-        local = os.environ.get("LOCALAPPDATA", "")
-
+        """Resolve the correct orb destination based on target type."""
         if target == "startallback":
-            return os.path.join(local, "StartAllBack", "Orbs")
+            return self._find_sab_orbs_dir()
 
         if target == "windhawk":
             return r"C:\Windhawk\StartOrbs"
 
-        # Auto-detect: if SAB is installed, prefer it; otherwise Windhawk
+        # Auto-detect: if SAB root exists, prefer it
+        if os.path.isdir(r"C:\StartAllBack"):
+            return r"C:\StartAllBack\Orbs"
+
+        local = os.environ.get("LOCALAPPDATA", "")
         sab_dir = os.path.join(local, "StartAllBack")
         if os.path.isdir(sab_dir):
             return os.path.join(sab_dir, "Orbs")
@@ -799,7 +803,7 @@ class Applier:
             if not src or not os.path.exists(src):
                 return {"success": False, "message": f"Orb file not found: {src}"}
 
-            # Route orb to the correct directory based on "target" field
+            # Route orb to the correct directory based on "target" field or auto-detection
             target = variant.get("target", component.get("target", ""))
             dest_dir = self._resolve_orb_dir(target)
 
@@ -807,7 +811,7 @@ class Applier:
             dest_path = os.path.join(dest_dir, os.path.basename(src))
             shutil.copy2(src, dest_path)
 
-            location = "StartAllBack/Orbs" if target == "startallback" else "Windhawk/StartOrbs"
+            location = "StartAllBack/Orbs" if "StartAllBack" in dest_dir else "Windhawk/StartOrbs"
             return {"success": True, "message": f"Installed Start Orb to {location}: {os.path.basename(src)}"}
         except Exception as exc:
             return {"success": False, "message": str(exc)}
@@ -820,12 +824,13 @@ class Applier:
         try:
             results = []
 
-            # Resolve the skin to install — supports both legacy "skin" key and variants
+            # Resolve the skin to install
             skin_rel = None
-            if component.get("variants"):
-                variant = self._get_variant(component, variant_name)
-                if variant:
-                    skin_rel = variant.get("file")
+            variant = self._get_variant(component, variant_name)
+            if variant:
+                skin_rel = variant.get("file")
+            
+            # Fallback to top-level "skin" key (legacy or simple manifest)
             if not skin_rel:
                 skin_rel = component.get("skin")
 
@@ -836,11 +841,12 @@ class Applier:
                     os.makedirs(styles_dir, exist_ok=True)
                     dest = os.path.join(styles_dir, os.path.basename(skin_src))
                     shutil.copy2(skin_src, dest)
-                    results.append(f"Skin installed to Styles: {os.path.basename(skin_src)}")
+                    results.append(f"Skin installed: {os.path.basename(skin_src)}")
                 else:
                     results.append(f"Skin file not found: {skin_rel}")
 
-            # Install orb image if referenced in the startallback component
+            # Install orb image if referenced directly in the startallback component (legacy)
+            # Modern manifests use a separate "startorb" component, but we keep this for compatibility.
             orb_rel = component.get("orb")
             if orb_rel:
                 orb_src = self._resolve(theme_name, orb_rel)

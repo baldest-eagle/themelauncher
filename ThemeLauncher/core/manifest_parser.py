@@ -24,6 +24,7 @@ KNOWN_COMPONENT_TYPES = {
 # Variant-based component types (have a "variants" list)
 VARIANT_COMPONENT_TYPES = {
     "msstyles", "wallpapers", "startorb", "themes", "fonts", "icons",
+    "startallback",
 }
 
 # Folder-based component types (referenced by "path")
@@ -33,7 +34,7 @@ FOLDER_COMPONENT_TYPES = {
 
 # Guide-based component types (require manual setup via screenshots)
 GUIDE_COMPONENT_TYPES = {
-    "startallback", "mica", "oldnewexplorer",
+    "mica", "oldnewexplorer",
 }
 
 
