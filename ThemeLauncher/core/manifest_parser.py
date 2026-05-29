@@ -100,7 +100,11 @@ class ManifestParser:
                 if not isinstance(variants, list):
                     raise ValueError(f"Component '{comp_type}'.variants must be a list")
                 if not variants:
-                    log.warning("Component '%s' has an empty variants list", comp_type)
+                    # startallback may use legacy "skin" key instead of variants
+                    if comp_type == "startallback" and comp_data.get("skin"):
+                        pass  # Valid legacy format — skin will be used at apply time
+                    else:
+                        log.warning("Component '%s' has an empty variants list", comp_type)
                 for i, v in enumerate(variants):
                     if "name" not in v:
                         raise ValueError(

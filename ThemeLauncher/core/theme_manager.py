@@ -213,8 +213,12 @@ class ThemeManager:
                 folder_path = comp_data.get("path", comp_type)
                 merged[comp_type] = saved.get(comp_type, folder_path)
 
-            elif comp_type in ("startallback", "mica", "oldnewexplorer"):
+            elif comp_type in ("mica", "oldnewexplorer"):
                 # Guide-type: store "guide" marker
+                merged[comp_type] = saved.get(comp_type, "guide")
+
+            elif comp_type == "startallback":
+                # Legacy startallback without variants: store "guide" marker as safety net
                 merged[comp_type] = saved.get(comp_type, "guide")
 
             else:

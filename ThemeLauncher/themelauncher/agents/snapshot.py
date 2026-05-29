@@ -153,10 +153,11 @@ class SnapshotAgent:
         return result
 
     def _capture_startallback(self) -> Optional[str]:
-        sab_dir = os.path.join(os.environ.get("APPDATA", ""), "StartIsBack")
-        if os.path.isdir(sab_dir):
-            files = os.listdir(sab_dir)
-            return json.dumps(files) if files else None
+        # Check both root install and APPDATA locations
+        for sab_dir in [r"C:\StartAllBack", os.path.join(os.environ.get("APPDATA", ""), "StartIsBack")]:
+            if os.path.isdir(sab_dir):
+                files = os.listdir(sab_dir)
+                return json.dumps(files) if files else None
         return None
 
     # ------------------------------------------------------------------

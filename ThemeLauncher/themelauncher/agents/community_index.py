@@ -87,7 +87,7 @@ class CommunityIndex:
             current = parent
 
         # Fallback
-        self.themes_dir = os.path.expanduser("~/.gemini/themes")
+        self.themes_dir = os.path.expanduser("~/.gemini/Themes")
         logger.info(
             "No config.json found; falling back to %s", self.themes_dir
         )

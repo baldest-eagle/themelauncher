@@ -247,33 +247,31 @@ class Applier:
                     return v
         return variants[0]
 
-    def _find_sab_styles_dir(self) -> str:
-        """Locate StartAllBack Styles directory."""
+    def _find_sab_styles_dir(self) -> str | None:
+        """Locate StartAllBack Styles directory. Returns None if not found."""
         candidates = [
             r"C:\StartAllBack\Styles",
             os.path.join(os.environ.get("LOCALAPPDATA", ""), "StartAllBack", "Styles"),
             os.path.join(os.environ.get("ProgramFiles", r"C:\Program Files"), "StartAllBack", "Styles"),
-            os.path.join(os.environ.get("APPDATA", ""), "StartIsBack"),
         ]
         for d in candidates:
             if os.path.isdir(d):
                 return d
-        primary = r"C:\StartAllBack\Styles"
-        log.warning("StartAllBack Styles dir not found; using primary: %s", primary)
-        return primary
+        log.warning("StartAllBack Styles dir not found")
+        return None
 
-    def _find_sab_orbs_dir(self) -> str:
-        """Locate StartAllBack Orbs directory."""
+    def _find_sab_orbs_dir(self) -> str | None:
+        """Locate StartAllBack Orbs directory. Returns None if not found."""
         candidates = [
             r"C:\StartAllBack\Orbs",
             os.path.join(os.environ.get("LOCALAPPDATA", ""), "StartAllBack", "Orbs"),
+            os.path.join(os.environ.get("ProgramFiles", r"C:\Program Files"), "StartAllBack", "Orbs"),
         ]
         for d in candidates:
             if os.path.isdir(d):
                 return d
-        primary = r"C:\StartAllBack\Orbs"
-        log.warning("StartAllBack Orbs dir not found; using primary: %s", primary)
-        return primary
+        log.warning("StartAllBack Orbs dir not found")
+        return None
 
     def _resolve_orb_dir(self, target: str) -> str:
         """Resolve the correct orb destination based on target type."""
@@ -838,10 +836,13 @@ class Applier:
                 skin_src = self._resolve(theme_name, skin_rel)
                 if skin_src and os.path.exists(skin_src):
                     styles_dir = self._find_sab_styles_dir()
-                    os.makedirs(styles_dir, exist_ok=True)
-                    dest = os.path.join(styles_dir, os.path.basename(skin_src))
-                    shutil.copy2(skin_src, dest)
-                    results.append(f"Skin installed: {os.path.basename(skin_src)}")
+                    if styles_dir:
+                        os.makedirs(styles_dir, exist_ok=True)
+                        dest = os.path.join(styles_dir, os.path.basename(skin_src))
+                        shutil.copy2(skin_src, dest)
+                        results.append(f"Skin installed: {os.path.basename(skin_src)}")
+                    else:
+                        return {"success": False, "message": "StartAllBack Styles directory not found. Is StartAllBack installed?"}
                 else:
                     results.append(f"Skin file not found: {skin_rel}")
 
@@ -852,10 +853,13 @@ class Applier:
                 orb_src = self._resolve(theme_name, orb_rel)
                 if orb_src and os.path.exists(orb_src):
                     orbs_dir = self._find_sab_orbs_dir()
-                    os.makedirs(orbs_dir, exist_ok=True)
-                    dest = os.path.join(orbs_dir, os.path.basename(orb_src))
-                    shutil.copy2(orb_src, dest)
-                    results.append(f"Orb installed: {os.path.basename(orb_src)}")
+                    if orbs_dir:
+                        os.makedirs(orbs_dir, exist_ok=True)
+                        dest = os.path.join(orbs_dir, os.path.basename(orb_src))
+                        shutil.copy2(orb_src, dest)
+                        results.append(f"Orb installed: {os.path.basename(orb_src)}")
+                    else:
+                        results.append("StartAllBack Orbs directory not found; orb skipped")
 
             guide_rel = component.get("guide")
             guide_abs = self._resolve(theme_name, guide_rel) if guide_rel else None

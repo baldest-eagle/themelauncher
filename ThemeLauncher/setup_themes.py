@@ -13,7 +13,7 @@ import os
 import shutil
 from pathlib import Path
 
-THEMES_DIR = Path(r"C:\Users\kyleh\.gemini\themes")
+THEMES_DIR = Path(r"C:\Users\kyleh\.gemini\Themes")
 
 
 def cp(src: Path, dst: Path):

@@ -9,6 +9,7 @@ from PIL import Image
 # Known install paths for common tools
 _APP_PATHS = {
     "startallback": [
+        r"C:\StartAllBack\StartAllBackCfg.exe",
         r"C:\Program Files\StartAllBack\StartAllBackCfg.exe",
         r"C:\Program Files (x86)\StartAllBack\StartAllBackCfg.exe",
     ],
