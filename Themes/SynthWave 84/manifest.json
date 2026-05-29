@@ -1,179 +1,178 @@
 {
-    "name":  "SynthWave \u002784",
-    "version":  "1.0.0",
-    "description":  "A retro synthwave-inspired dark theme for Windows 11 with neon accents by niivu.",
-    "author":  "niivu",
-    "preview":  "preview.png",
-    "palette":  {
-                    "background":  "#262335",
-                    "accent":  "#341c5c",
-                    "text":  "#ffffff",
-                    "inactive":  "#1a1a2e",
-                    "border":  "#495495",
-                    "active":  "#f92aad"
+    "name": "SynthWave '84",
+    "version": "1.0.0",
+    "description": "A retro synthwave-inspired dark theme for Windows 11 with neon accents by niivu.",
+    "author": "niivu",
+    "preview": "preview.png",
+    "palette": {
+        "background": "#262335",
+        "accent": "#341c5c",
+        "text": "#ffffff",
+        "inactive": "#1a1a2e",
+        "border": "#495495",
+        "active": "#f92aad"
+    },
+    "components": {
+        "msstyles": {
+            "variants": [
+                {
+                    "name": "Dark - Luv",
+                    "file": "msstyles/SynthWave '84 dark - luv.msstyles",
+                    "preview": "previews/SynthWave '84 dark - luv.png"
                 },
-    "components":  {
-                       "msstyles":  {
-                                        "variants":  [
-                                                         {
-                                                             "name":  "Dark - Luv",
-                                                             "file":  "msstyles/SynthWave \u002784 dark - luv.msstyles",
-                                                             "preview":  "previews/SynthWave \u002784 dark - luv.png"
-                                                         },
-                                                         {
-                                                             "name":  "Dark - Mac",
-                                                             "file":  "msstyles/SynthWave \u002784 dark - mac.msstyles",
-                                                             "preview":  "previews/SynthWave \u002784 dark - mac.png"
-                                                         },
-                                                         {
-                                                             "name":  "Dark - Mac Gloss",
-                                                             "file":  "msstyles/SynthWave \u002784 dark - mac GLOSS.msstyles",
-                                                             "preview":  "previews/SynthWave \u002784 dark - mac gloss.png"
-                                                         },
-                                                         {
-                                                             "name":  "Dark - Nude",
-                                                             "file":  "msstyles/SynthWave \u002784 dark - nude.msstyles",
-                                                             "preview":  "previews/SynthWave \u002784 dark - nude.png"
-                                                         },
-                                                         {
-                                                             "name":  "Night - Luv",
-                                                             "file":  "msstyles/SynthWave \u002784 night - luv.msstyles",
-                                                             "preview":  "previews/SynthWave \u002784 night - luv.png"
-                                                         },
-                                                         {
-                                                             "name":  "Night - Mac",
-                                                             "file":  "msstyles/SynthWave \u002784 night - mac.msstyles",
-                                                             "preview":  "previews/SynthWave \u002784 night - mac.png"
-                                                         },
-                                                         {
-                                                             "name":  "Night - Mac Gloss",
-                                                             "file":  "msstyles/SynthWave \u002784 night - mac GLOSS.msstyles",
-                                                             "preview":  "previews/SynthWave \u002784 night - mac gloss.png"
-                                                         },
-                                                         {
-                                                             "name":  "Night - Nude",
-                                                             "file":  "msstyles/SynthWave \u002784 night - nude.msstyles",
-                                                             "preview":  "previews/SynthWave \u002784 night - nude.png"
-                                                         }
-                                                     ]
-                                    },
-                       "themes":  {
-                                      "variants":  [
-                                                       {
-                                                           "name":  "Dark - Luv",
-                                                           "file":  "themes/SynthWave \u002784 dark - luv.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Dark - Mac",
-                                                           "file":  "themes/SynthWave \u002784 dark - mac.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Dark - Mac Gloss",
-                                                           "file":  "themes/SynthWave \u002784 dark - mac gloss.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Dark - Nude",
-                                                           "file":  "themes/SynthWave \u002784 dark - nude.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Night - Luv",
-                                                           "file":  "themes/SynthWave \u002784 night - luv.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Night - Mac",
-                                                           "file":  "themes/SynthWave \u002784 night - mac.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Night - Mac Gloss",
-                                                           "file":  "themes/SynthWave \u002784 night - mac gloss.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Night - Nude",
-                                                           "file":  "themes/SynthWave \u002784 night - nude.theme"
-                                                       }
-                                                   ]
-                                  },
-                       "wallpapers":  {
-                                          "variants":  [
-                                                           {
-                                                               "name":  "Wallpaper 1",
-                                                               "file":  "wallpapers/UNSPLASH-NIIVU (1).jpg"
-                                                           },
-                                                           {
-                                                               "name":  "Wallpaper 2",
-                                                               "file":  "wallpapers/UNSPLASH-NIIVU (2).jpg"
-                                                           },
-                                                           {
-                                                               "name":  "Wallpaper 3",
-                                                               "file":  "wallpapers/UNSPLASH-NIIVU (3).jpg"
-                                                           },
-                                                           {
-                                                               "name":  "Wallpaper 4",
-                                                               "file":  "wallpapers/UNSPLASH-NIIVU (4).jpg"
-                                                           },
-                                                           {
-                                                               "name":  "Wallpaper 5",
-                                                               "file":  "wallpapers/UNSPLASH-NIIVU (5).jpg"
-                                                           },
-                                                           {
-                                                               "name":  "Wallpaper 6",
-                                                               "file":  "wallpapers/UNSPLASH-NIIVU (6).jpg"
-                                                           },
-                                                           {
-                                                               "name":  "Wallpaper 7",
-                                                               "file":  "wallpapers/UNSPLASH-NIIVU (7).jpg"
-                                                           },
-                                                           {
-                                                               "name":  "Wallpaper 8",
-                                                               "file":  "wallpapers/UNSPLASH-NIIVU (8).png"
-                                                           },
-                                                           {
-                                                               "name":  "Wallpaper 9",
-                                                               "file":  "wallpapers/wallpaperflare.com.png"
-                                                           }
-                                                       ]
-                                      },
-                       "cursors":  {
-                                       "path":  "cursors"
-                                   },
-                       "startallback":  {
-                                            "skin":  "startallback/SynthWave \u002784 SAB.msstyles",
-                                            "guide":  "guides/startallback",
-                                            "app":  "startallback",
-                                            "variants":  [
-                                                             {
-                                                                 "file":  "startallback/SynthWave \u002784 SAB.msstyles",
-                                                                 "name":  "SynthWave \u002784"
-                                                             }
-                                                         ]
-                                        },
-                       "mica":  {
-                                    "guide":  "guides/mica",
-                                    "app":  "mica"
-                                },
-                       "oldnewexplorer":  {
-                                              "guide":  "guides/oldnewexplorer",
-                                              "app":  "oldnewexplorer"
-                                          },
-                       "startorb":  {
-                                        "variants":  [
-                                                         {
-                                                             "file":  "startallback\\Orbs/SynthWave \u002784 - Circle (color).svg",
-                                                             "name":  "SynthWave \u002784 - Circle (color)"
-                                                         },
-                                                         {
-                                                             "file":  "startallback\\Orbs/SynthWave \u002784 - Circle (neutral).svg",
-                                                             "name":  "SynthWave \u002784 - Circle (neutral)"
-                                                         },
-                                                         {
-                                                             "file":  "startallback\\Orbs/SynthWave \u002784 - Squared (color).svg",
-                                                             "name":  "SynthWave \u002784 - Squared (color)"
-                                                         },
-                                                         {
-                                                             "file":  "startallback\\Orbs/SynthWave \u002784 - Squared (neutral).svg",
-                                                             "name":  "SynthWave \u002784 - Squared (neutral)"
-                                                         }
-                                                     ]
-                                    }
-                   }
+                {
+                    "name": "Dark - Mac",
+                    "file": "msstyles/SynthWave '84 dark - mac.msstyles",
+                    "preview": "previews/SynthWave '84 dark - mac.png"
+                },
+                {
+                    "name": "Dark - Mac Gloss",
+                    "file": "msstyles/SynthWave '84 dark - mac GLOSS.msstyles",
+                    "preview": "previews/SynthWave '84 dark - mac gloss.png"
+                },
+                {
+                    "name": "Dark - Nude",
+                    "file": "msstyles/SynthWave '84 dark - nude.msstyles",
+                    "preview": "previews/SynthWave '84 dark - nude.png"
+                },
+                {
+                    "name": "Night - Luv",
+                    "file": "msstyles/SynthWave '84 night - luv.msstyles",
+                    "preview": "previews/SynthWave '84 night - luv.png"
+                },
+                {
+                    "name": "Night - Mac",
+                    "file": "msstyles/SynthWave '84 night - mac.msstyles",
+                    "preview": "previews/SynthWave '84 night - mac.png"
+                },
+                {
+                    "name": "Night - Mac Gloss",
+                    "file": "msstyles/SynthWave '84 night - mac GLOSS.msstyles",
+                    "preview": "previews/SynthWave '84 night - mac gloss.png"
+                },
+                {
+                    "name": "Night - Nude",
+                    "file": "msstyles/SynthWave '84 night - nude.msstyles",
+                    "preview": "previews/SynthWave '84 night - nude.png"
+                }
+            ]
+        },
+        "themes": {
+            "variants": [
+                {
+                    "name": "Dark - Luv",
+                    "file": "themes/SynthWave '84 dark - luv.theme"
+                },
+                {
+                    "name": "Dark - Mac",
+                    "file": "themes/SynthWave '84 dark - mac.theme"
+                },
+                {
+                    "name": "Dark - Mac Gloss",
+                    "file": "themes/SynthWave '84 dark - mac gloss.theme"
+                },
+                {
+                    "name": "Dark - Nude",
+                    "file": "themes/SynthWave '84 dark - nude.theme"
+                },
+                {
+                    "name": "Night - Luv",
+                    "file": "themes/SynthWave '84 night - luv.theme"
+                },
+                {
+                    "name": "Night - Mac",
+                    "file": "themes/SynthWave '84 night - mac.theme"
+                },
+                {
+                    "name": "Night - Mac Gloss",
+                    "file": "themes/SynthWave '84 night - mac gloss.theme"
+                },
+                {
+                    "name": "Night - Nude",
+                    "file": "themes/SynthWave '84 night - nude.theme"
+                }
+            ]
+        },
+        "wallpapers": {
+            "variants": [
+                {
+                    "name": "Wallpaper 1",
+                    "file": "wallpapers/UNSPLASH-NIIVU (1).jpg"
+                },
+                {
+                    "name": "Wallpaper 2",
+                    "file": "wallpapers/UNSPLASH-NIIVU (2).jpg"
+                },
+                {
+                    "name": "Wallpaper 3",
+                    "file": "wallpapers/UNSPLASH-NIIVU (3).jpg"
+                },
+                {
+                    "name": "Wallpaper 4",
+                    "file": "wallpapers/UNSPLASH-NIIVU (4).jpg"
+                },
+                {
+                    "name": "Wallpaper 5",
+                    "file": "wallpapers/UNSPLASH-NIIVU (5).jpg"
+                },
+                {
+                    "name": "Wallpaper 6",
+                    "file": "wallpapers/UNSPLASH-NIIVU (6).jpg"
+                },
+                {
+                    "name": "Wallpaper 7",
+                    "file": "wallpapers/UNSPLASH-NIIVU (7).jpg"
+                },
+                {
+                    "name": "Wallpaper 8",
+                    "file": "wallpapers/UNSPLASH-NIIVU (8).png"
+                },
+                {
+                    "name": "Wallpaper 9",
+                    "file": "wallpapers/wallpaperflare.com.png"
+                }
+            ]
+        },
+        "cursors": {
+            "path": "cursors"
+        },
+        "startallback": {
+            "skin": "startallback/SynthWave '84 SAB.msstyles",
+            "app": "startallback",
+            "variants": [
+                {
+                    "file": "startallback/SynthWave '84 SAB.msstyles",
+                    "name": "SynthWave '84"
+                }
+            ]
+        },
+        "mica": {
+            "guide": "guides/mica",
+            "app": "mica"
+        },
+        "oldnewexplorer": {
+            "guide": "guides/oldnewexplorer",
+            "app": "oldnewexplorer"
+        },
+        "startorb": {
+            "variants": [
+                {
+                    "file": "startallback/Orbs/SynthWave '84 - Circle (color).svg",
+                    "name": "SynthWave '84 - Circle (color)"
+                },
+                {
+                    "file": "startallback/Orbs/SynthWave '84 - Circle (neutral).svg",
+                    "name": "SynthWave '84 - Circle (neutral)"
+                },
+                {
+                    "file": "startallback/Orbs/SynthWave '84 - Squared (color).svg",
+                    "name": "SynthWave '84 - Squared (color)"
+                },
+                {
+                    "file": "startallback/Orbs/SynthWave '84 - Squared (neutral).svg",
+                    "name": "SynthWave '84 - Squared (neutral)"
+                }
+            ]
+        }
+    }
 }

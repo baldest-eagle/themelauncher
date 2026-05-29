@@ -1,41 +1,43 @@
 {
-    "components":  {
-                       "startallback":  {
-                                            "guide":  "guides/startallback",
-                                            "skin":  "startallback/Retro Dark.msstyles",
-                                            "app":  "startallback",
-                                            "variants":  [
-                                                             {
-                                                                 "file":  "startallback/Retro Dark.msstyles",
-                                                                 "name":  "Retro Dark"
-                                                             },
-                                                             {
-                                                                 "file":  "startallback/Retro.msstyles",
-                                                                 "name":  "Retro"
-                                                             }
-                                                         ]
-                                        },
-                       "startorb":  {
-                                        "variants":  [
-                                                         {
-                                                             "file":  "startallback\\Orbs/RETRO DARK.svg",
-                                                             "name":  "RETRO DARK"
-                                                         },
-                                                         {
-                                                             "file":  "startallback\\Orbs/RETRO.svg",
-                                                             "name":  "RETRO"
-                                                         }
-                                                     ]
-                                    }
-                   },
-    "name":  "Retro",
-    "version":  "1.0.0",
-    "palette":  {
-                    "inactive":  "#1a1a1a",
-                    "accent":  "#3d3d3d",
-                    "background":  "#2b2b2b",
-                    "border":  "#555555",
-                    "active":  "#ffffff",
-                    "text":  "#ffffff"
+    "components": {
+        "startallback": {
+            "skin": "startallback/Retro Dark.msstyles",
+            "app": "startallback",
+            "variants": [
+                {
+                    "file": "startallback/Retro Dark.msstyles",
+                    "name": "Retro Dark"
+                },
+                {
+                    "file": "startallback/Retro.msstyles",
+                    "name": "Retro"
                 }
+            ]
+        },
+        "startorb": {
+            "variants": [
+                {
+                    "file": "startallback/Orbs/RETRO DARK.svg",
+                    "name": "RETRO DARK"
+                },
+                {
+                    "file": "startallback/Orbs/RETRO.svg",
+                    "name": "RETRO"
+                }
+            ]
+        }
+    },
+    "name": "Retro",
+    "version": "1.0.0",
+    "palette": {
+        "inactive": "#1a1a1a",
+        "accent": "#3d3d3d",
+        "background": "#2b2b2b",
+        "border": "#555555",
+        "active": "#ffffff",
+        "text": "#ffffff"
+    },
+    "description": "A retro-inspired StartAllBack theme with classic Windows visual styles and nostalgic start orbs.",
+    "author": "niivu",
+    "preview": "preview.png"
 }

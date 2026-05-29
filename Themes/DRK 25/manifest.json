@@ -1,217 +1,216 @@
 {
-    "name":  "DRK 25",
-    "version":  "1.0.0",
-    "description":  "A clean, minimal dark Windows 11 theme in MAC, SQR, and WIN button styles by niivu.",
-    "author":  "niivu",
-    "preview":  "preview.png",
-    "palette":  {
-                    "background":  "#1e1e1e",
-                    "accent":  "#2d2d2d",
-                    "text":  "#d4d4d4",
-                    "inactive":  "#181818",
-                    "border":  "#3d3d3d",
-                    "active":  "#569cd6"
+    "name": "DRK 25",
+    "version": "1.0.0",
+    "description": "A clean, minimal dark Windows 11 theme in MAC, SQR, and WIN button styles by niivu.",
+    "author": "niivu",
+    "preview": "preview.png",
+    "palette": {
+        "background": "#1e1e1e",
+        "accent": "#2d2d2d",
+        "text": "#d4d4d4",
+        "inactive": "#181818",
+        "border": "#3d3d3d",
+        "active": "#569cd6"
+    },
+    "components": {
+        "msstyles": {
+            "variants": [
+                {
+                    "name": "MAC - Default",
+                    "file": "msstyles/MAC/DRK 25 MAC.msstyles",
+                    "preview": "previews/MAC/DRK 25.png"
                 },
-    "components":  {
-                       "msstyles":  {
-                                        "variants":  [
-                                                         {
-                                                             "name":  "MAC - Default",
-                                                             "file":  "msstyles/MAC/DRK 25 MAC.msstyles",
-                                                             "preview":  "previews/MAC/DRK 25.png"
-                                                         },
-                                                         {
-                                                             "name":  "MAC - Dark",
-                                                             "file":  "msstyles/MAC/DRK 25 MAC - dark.msstyles",
-                                                             "preview":  "previews/MAC/DRK 25.png"
-                                                         },
-                                                         {
-                                                             "name":  "MAC - Light",
-                                                             "file":  "msstyles/MAC/DRK 25 MAC - light.msstyles",
-                                                             "preview":  "previews/MAC/DRK 25 - Light.png"
-                                                         },
-                                                         {
-                                                             "name":  "SQR - Default",
-                                                             "file":  "msstyles/SQR/DRK 25 SQR.msstyles",
-                                                             "preview":  "previews/SQR/DRK 25.png"
-                                                         },
-                                                         {
-                                                             "name":  "SQR - Dark",
-                                                             "file":  "msstyles/SQR/DRK 25 SQR - dark.msstyles",
-                                                             "preview":  "previews/SQR/DRK 25.png"
-                                                         },
-                                                         {
-                                                             "name":  "SQR - Light",
-                                                             "file":  "msstyles/SQR/DRK 25 SQR - light.msstyles",
-                                                             "preview":  "previews/SQR/DRK 25 - Light.png"
-                                                         },
-                                                         {
-                                                             "name":  "WIN - Default",
-                                                             "file":  "msstyles/WIN/DRK 25 WIN.msstyles",
-                                                             "preview":  "previews/WIN/DRK 25.png"
-                                                         },
-                                                         {
-                                                             "name":  "WIN - Dark",
-                                                             "file":  "msstyles/WIN/DRK 25 WIN - dark.msstyles",
-                                                             "preview":  "previews/WIN/DRK 25.png"
-                                                         },
-                                                         {
-                                                             "name":  "WIN - Light",
-                                                             "file":  "msstyles/WIN/DRK 25 WIN - light.msstyles",
-                                                             "preview":  "previews/WIN/DRK 25 - Light.png"
-                                                         }
-                                                     ]
-                                    },
-                       "themes":  {
-                                      "variants":  [
-                                                       {
-                                                           "name":  "MAC - Default",
-                                                           "file":  "themes/MAC/DRK 25 MAC.theme"
-                                                       },
-                                                       {
-                                                           "name":  "MAC - Dark",
-                                                           "file":  "themes/MAC/DRK 25 MAC - Dark.theme"
-                                                       },
-                                                       {
-                                                           "name":  "MAC - Light",
-                                                           "file":  "themes/MAC/DRK 25 MAC - Light.theme"
-                                                       },
-                                                       {
-                                                           "name":  "SQR - Default",
-                                                           "file":  "themes/SQR/DRK 25 SQR.theme"
-                                                       },
-                                                       {
-                                                           "name":  "SQR - Dark",
-                                                           "file":  "themes/SQR/DRK 25 SQR - Dark.theme"
-                                                       },
-                                                       {
-                                                           "name":  "SQR - Light",
-                                                           "file":  "themes/SQR/DRK 25 SQR - Light.theme"
-                                                       },
-                                                       {
-                                                           "name":  "WIN - Default",
-                                                           "file":  "themes/WIN/DRK 25 WIN.theme"
-                                                       },
-                                                       {
-                                                           "name":  "WIN - Dark",
-                                                           "file":  "themes/WIN/DRK 25 WIN - Dark.theme"
-                                                       },
-                                                       {
-                                                           "name":  "WIN - Light",
-                                                           "file":  "themes/WIN/DRK 25 WIN - Light.theme"
-                                                       }
-                                                   ]
-                                  },
-                       "wallpapers":  {
-                                          "variants":  [
-                                                           {
-                                                               "name":  "cartographer",
-                                                               "file":  "wallpapers/cartographer.jpg"
-                                                           },
-                                                           {
-                                                               "name":  "chev",
-                                                               "file":  "wallpapers/chev.jpg"
-                                                           },
-                                                           {
-                                                               "name":  "DRK 25",
-                                                               "file":  "wallpapers/DRK 25.jpg"
-                                                           },
-                                                           {
-                                                               "name":  "Tile blue 1",
-                                                               "file":  "wallpapers/Tile blue 1.jpg"
-                                                           },
-                                                           {
-                                                               "name":  "Tile blue 2",
-                                                               "file":  "wallpapers/Tile blue 2.jpg"
-                                                           },
-                                                           {
-                                                               "name":  "Tile green",
-                                                               "file":  "wallpapers/Tile green.jpg"
-                                                           },
-                                                           {
-                                                               "name":  "Tile grey",
-                                                               "file":  "wallpapers/Tile grey.jpg"
-                                                           },
-                                                           {
-                                                               "name":  "Tile purple",
-                                                               "file":  "wallpapers/Tile purple.jpg"
-                                                           },
-                                                           {
-                                                               "name":  "Tile red",
-                                                               "file":  "wallpapers/Tile red.jpg"
-                                                           },
-                                                           {
-                                                               "name":  "Tile yellow",
-                                                               "file":  "wallpapers/Tile yellow.jpg"
-                                                           },
-                                                           {
-                                                               "name":  "tiled 2",
-                                                               "file":  "wallpapers/tiled 2.jpg"
-                                                           },
-                                                           {
-                                                               "name":  "tiled",
-                                                               "file":  "wallpapers/tiled.jpg"
-                                                           },
-                                                           {
-                                                               "name":  "Tiles circles",
-                                                               "file":  "wallpapers/Tiles circles.jpg"
-                                                           },
-                                                           {
-                                                               "name":  "Tiles squared",
-                                                               "file":  "wallpapers/Tiles squared.jpg"
-                                                           },
-                                                           {
-                                                               "name":  "valeriia-miller-GFpil1jEfBk-unsplash",
-                                                               "file":  "wallpapers/valeriia-miller-GFpil1jEfBk-unsplash.jpg"
-                                                           },
-                                                           {
-                                                               "name":  "valeriia-miller-unsplash",
-                                                               "file":  "wallpapers/valeriia-miller-unsplash.jpeg"
-                                                           },
-                                                           {
-                                                               "name":  "wavy",
-                                                               "file":  "wallpapers/wavy.jpg"
-                                                           }
-                                                       ]
-                                      },
-                       "startallback":  {
-                                            "skin":  "startallback/DRK 25 SAB.msstyles",
-                                            "guide":  "guides/startallback",
-                                            "app":  "startallback",
-                                            "variants":  [
-                                                             {
-                                                                 "file":  "startallback/DRK 25 SAB.msstyles",
-                                                                 "name":  "DRK 25"
-                                                             }
-                                                         ]
-                                        },
-                       "mica":  {
-                                    "guide":  "guides/mica",
-                                    "app":  "mica"
-                                },
-                       "oldnewexplorer":  {
-                                              "guide":  "guides/oldnewexplorer",
-                                              "app":  "oldnewexplorer"
-                                          },
-                       "startorb":  {
-                                        "variants":  [
-                                                         {
-                                                             "file":  "startallback\\Orbs/DRK 25 - Large.svg",
-                                                             "name":  "DRK 25 - Large"
-                                                         },
-                                                         {
-                                                             "file":  "startallback\\Orbs/DRK 25 - Medium.svg",
-                                                             "name":  "DRK 25 - Medium"
-                                                         },
-                                                         {
-                                                             "file":  "startallback\\Orbs/DRK 25 - Small.svg",
-                                                             "name":  "DRK 25 - Small"
-                                                         },
-                                                         {
-                                                             "file":  "startallback/Orbs/StartAllBack Explorer Style.png",
-                                                             "name":  "StartAllBack Explorer Style"
-                                                         }
-                                                     ]
-                                    }
-                   }
+                {
+                    "name": "MAC - Dark",
+                    "file": "msstyles/MAC/DRK 25 MAC - dark.msstyles",
+                    "preview": "previews/MAC/DRK 25.png"
+                },
+                {
+                    "name": "MAC - Light",
+                    "file": "msstyles/MAC/DRK 25 MAC - light.msstyles",
+                    "preview": "previews/MAC/DRK 25 - Light.png"
+                },
+                {
+                    "name": "SQR - Default",
+                    "file": "msstyles/SQR/DRK 25 SQR.msstyles",
+                    "preview": "previews/SQR/DRK 25.png"
+                },
+                {
+                    "name": "SQR - Dark",
+                    "file": "msstyles/SQR/DRK 25 SQR - dark.msstyles",
+                    "preview": "previews/SQR/DRK 25.png"
+                },
+                {
+                    "name": "SQR - Light",
+                    "file": "msstyles/SQR/DRK 25 SQR - light.msstyles",
+                    "preview": "previews/SQR/DRK 25 - Light.png"
+                },
+                {
+                    "name": "WIN - Default",
+                    "file": "msstyles/WIN/DRK 25 WIN.msstyles",
+                    "preview": "previews/WIN/DRK 25.png"
+                },
+                {
+                    "name": "WIN - Dark",
+                    "file": "msstyles/WIN/DRK 25 WIN - dark.msstyles",
+                    "preview": "previews/WIN/DRK 25.png"
+                },
+                {
+                    "name": "WIN - Light",
+                    "file": "msstyles/WIN/DRK 25 WIN - light.msstyles",
+                    "preview": "previews/WIN/DRK 25 - Light.png"
+                }
+            ]
+        },
+        "themes": {
+            "variants": [
+                {
+                    "name": "MAC - Default",
+                    "file": "themes/MAC/DRK 25 MAC.theme"
+                },
+                {
+                    "name": "MAC - Dark",
+                    "file": "themes/MAC/DRK 25 MAC - Dark.theme"
+                },
+                {
+                    "name": "MAC - Light",
+                    "file": "themes/MAC/DRK 25 MAC - Light.theme"
+                },
+                {
+                    "name": "SQR - Default",
+                    "file": "themes/SQR/DRK 25 SQR.theme"
+                },
+                {
+                    "name": "SQR - Dark",
+                    "file": "themes/SQR/DRK 25 SQR - Dark.theme"
+                },
+                {
+                    "name": "SQR - Light",
+                    "file": "themes/SQR/DRK 25 SQR - Light.theme"
+                },
+                {
+                    "name": "WIN - Default",
+                    "file": "themes/WIN/DRK 25 WIN.theme"
+                },
+                {
+                    "name": "WIN - Dark",
+                    "file": "themes/WIN/DRK 25 WIN - Dark.theme"
+                },
+                {
+                    "name": "WIN - Light",
+                    "file": "themes/WIN/DRK 25 WIN - Light.theme"
+                }
+            ]
+        },
+        "wallpapers": {
+            "variants": [
+                {
+                    "name": "cartographer",
+                    "file": "wallpapers/cartographer.jpg"
+                },
+                {
+                    "name": "chev",
+                    "file": "wallpapers/chev.jpg"
+                },
+                {
+                    "name": "DRK 25",
+                    "file": "wallpapers/DRK 25.jpg"
+                },
+                {
+                    "name": "Tile blue 1",
+                    "file": "wallpapers/Tile blue 1.jpg"
+                },
+                {
+                    "name": "Tile blue 2",
+                    "file": "wallpapers/Tile blue 2.jpg"
+                },
+                {
+                    "name": "Tile green",
+                    "file": "wallpapers/Tile green.jpg"
+                },
+                {
+                    "name": "Tile grey",
+                    "file": "wallpapers/Tile grey.jpg"
+                },
+                {
+                    "name": "Tile purple",
+                    "file": "wallpapers/Tile purple.jpg"
+                },
+                {
+                    "name": "Tile red",
+                    "file": "wallpapers/Tile red.jpg"
+                },
+                {
+                    "name": "Tile yellow",
+                    "file": "wallpapers/Tile yellow.jpg"
+                },
+                {
+                    "name": "tiled 2",
+                    "file": "wallpapers/tiled 2.jpg"
+                },
+                {
+                    "name": "tiled",
+                    "file": "wallpapers/tiled.jpg"
+                },
+                {
+                    "name": "Tiles circles",
+                    "file": "wallpapers/Tiles circles.jpg"
+                },
+                {
+                    "name": "Tiles squared",
+                    "file": "wallpapers/Tiles squared.jpg"
+                },
+                {
+                    "name": "valeriia-miller-GFpil1jEfBk-unsplash",
+                    "file": "wallpapers/valeriia-miller-GFpil1jEfBk-unsplash.jpg"
+                },
+                {
+                    "name": "valeriia-miller-unsplash",
+                    "file": "wallpapers/valeriia-miller-unsplash.jpeg"
+                },
+                {
+                    "name": "wavy",
+                    "file": "wallpapers/wavy.jpg"
+                }
+            ]
+        },
+        "startallback": {
+            "skin": "startallback/DRK 25 SAB.msstyles",
+            "app": "startallback",
+            "variants": [
+                {
+                    "file": "startallback/DRK 25 SAB.msstyles",
+                    "name": "DRK 25"
+                }
+            ]
+        },
+        "mica": {
+            "guide": "guides/mica",
+            "app": "mica"
+        },
+        "oldnewexplorer": {
+            "guide": "guides/oldnewexplorer",
+            "app": "oldnewexplorer"
+        },
+        "startorb": {
+            "variants": [
+                {
+                    "file": "startallback/Orbs/DRK 25 - Large.svg",
+                    "name": "DRK 25 - Large"
+                },
+                {
+                    "file": "startallback/Orbs/DRK 25 - Medium.svg",
+                    "name": "DRK 25 - Medium"
+                },
+                {
+                    "file": "startallback/Orbs/DRK 25 - Small.svg",
+                    "name": "DRK 25 - Small"
+                },
+                {
+                    "file": "startallback/Orbs/StartAllBack Explorer Style.png",
+                    "name": "StartAllBack Explorer Style"
+                }
+            ]
+        }
+    }
 }

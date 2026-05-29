@@ -1,415 +1,414 @@
 {
-    "name":  "Solarized",
-    "version":  "1.0.0",
-    "description":  "Solarized precision color scheme for Windows 11, featuring dark, day, and night base tones with taskbar style variants: base, mac, nude, and pac.",
-    "author":  "niivu",
-    "preview":  "preview.png",
-    "palette":  {
-                    "background":  "#002b36",
-                    "accent":  "#073642",
-                    "text":  "#839496",
-                    "inactive":  "#00212b",
-                    "border":  "#586e75",
-                    "active":  "#268bd2"
+    "name": "Solarized",
+    "version": "1.0.0",
+    "description": "Solarized precision color scheme for Windows 11, featuring dark, day, and night base tones with taskbar style variants: base, mac, nude, and pac.",
+    "author": "niivu",
+    "preview": "preview.png",
+    "palette": {
+        "background": "#002b36",
+        "accent": "#073642",
+        "text": "#839496",
+        "inactive": "#00212b",
+        "border": "#586e75",
+        "active": "#268bd2"
+    },
+    "components": {
+        "msstyles": {
+            "variants": [
+                {
+                    "name": "Solarized Dark",
+                    "file": "msstyles/solarized-dark.msstyles",
+                    "preview": "previews/solarized dark.png"
                 },
-    "components":  {
-                       "msstyles":  {
-                                        "variants":  [
-                                                         {
-                                                             "name":  "Solarized Dark",
-                                                             "file":  "msstyles/solarized-dark.msstyles",
-                                                             "preview":  "previews/solarized dark.png"
-                                                         },
-                                                         {
-                                                             "name":  "Solarized Dark NA",
-                                                             "file":  "msstyles/solarized-dark-NA.msstyles",
-                                                             "preview":  "previews/solarized dark.png"
-                                                         },
-                                                         {
-                                                             "name":  "Solarized Dark Mac",
-                                                             "file":  "msstyles/solarized-dark-mac.msstyles",
-                                                             "preview":  "previews/solarized dark mac.png"
-                                                         },
-                                                         {
-                                                             "name":  "Solarized Dark Mac NA",
-                                                             "file":  "msstyles/solarized-dark-mac-NA.msstyles",
-                                                             "preview":  "previews/solarized dark mac.png"
-                                                         },
-                                                         {
-                                                             "name":  "Solarized Dark Nude",
-                                                             "file":  "msstyles/solarized-dark-nude.msstyles",
-                                                             "preview":  "previews/solarized dark nude.png"
-                                                         },
-                                                         {
-                                                             "name":  "Solarized Dark Nude NA",
-                                                             "file":  "msstyles/solarized-dark-nude-NA.msstyles",
-                                                             "preview":  "previews/solarized dark nude.png"
-                                                         },
-                                                         {
-                                                             "name":  "Solarized Dark Pac",
-                                                             "file":  "msstyles/solarized-dark-pac.msstyles",
-                                                             "preview":  "previews/solarized dark pac.png"
-                                                         },
-                                                         {
-                                                             "name":  "Solarized Dark Pac NA",
-                                                             "file":  "msstyles/solarized-dark-pac-NA.msstyles",
-                                                             "preview":  "previews/solarized dark pac.png"
-                                                         },
-                                                         {
-                                                             "name":  "Solarized Day",
-                                                             "file":  "msstyles/solarized-day.msstyles",
-                                                             "preview":  "previews/solarized day.png"
-                                                         },
-                                                         {
-                                                             "name":  "Solarized Day NA",
-                                                             "file":  "msstyles/solarized-day-NA.msstyles",
-                                                             "preview":  "previews/solarized day.png"
-                                                         },
-                                                         {
-                                                             "name":  "Solarized Day Mac",
-                                                             "file":  "msstyles/solarized-day-mac.msstyles",
-                                                             "preview":  "previews/solarized day mac.png"
-                                                         },
-                                                         {
-                                                             "name":  "Solarized Day Mac NA",
-                                                             "file":  "msstyles/solarized-day-mac-NA.msstyles",
-                                                             "preview":  "previews/solarized day mac.png"
-                                                         },
-                                                         {
-                                                             "name":  "Solarized Day Nude",
-                                                             "file":  "msstyles/solarized-day-nude.msstyles",
-                                                             "preview":  "previews/solarized day nude.png"
-                                                         },
-                                                         {
-                                                             "name":  "Solarized Day Nude NA",
-                                                             "file":  "msstyles/solarized-day-nude-NA.msstyles",
-                                                             "preview":  "previews/solarized day nude.png"
-                                                         },
-                                                         {
-                                                             "name":  "Solarized Day Pac",
-                                                             "file":  "msstyles/solarized-day-pac.msstyles",
-                                                             "preview":  "previews/solarized day pac.png"
-                                                         },
-                                                         {
-                                                             "name":  "Solarized Day Pac NA",
-                                                             "file":  "msstyles/solarized-day-pac-NA.msstyles",
-                                                             "preview":  "previews/solarized day pac.png"
-                                                         },
-                                                         {
-                                                             "name":  "Solarized Night",
-                                                             "file":  "msstyles/solarized-night.msstyles",
-                                                             "preview":  "previews/solarized dark.png"
-                                                         },
-                                                         {
-                                                             "name":  "Solarized Night NA",
-                                                             "file":  "msstyles/solarized-night-NA.msstyles",
-                                                             "preview":  "previews/solarized dark.png"
-                                                         },
-                                                         {
-                                                             "name":  "Solarized Night Mac",
-                                                             "file":  "msstyles/solarized-night-mac.msstyles",
-                                                             "preview":  "previews/solarized dark mac.png"
-                                                         },
-                                                         {
-                                                             "name":  "Solarized Night Mac NA",
-                                                             "file":  "msstyles/solarized-night-mac-NA.msstyles",
-                                                             "preview":  "previews/solarized dark mac.png"
-                                                         },
-                                                         {
-                                                             "name":  "Solarized Night Nude",
-                                                             "file":  "msstyles/solarized-night-nude.msstyles",
-                                                             "preview":  "previews/solarized dark nude.png"
-                                                         },
-                                                         {
-                                                             "name":  "Solarized Night Nude NA",
-                                                             "file":  "msstyles/solarized-night-nude-NA.msstyles",
-                                                             "preview":  "previews/solarized dark nude.png"
-                                                         },
-                                                         {
-                                                             "name":  "Solarized Night Pac",
-                                                             "file":  "msstyles/solarized-night-pac.msstyles",
-                                                             "preview":  "previews/solarized dark pac.png"
-                                                         },
-                                                         {
-                                                             "name":  "Solarized Night Pac NA",
-                                                             "file":  "msstyles/solarized-night-pac-NA.msstyles",
-                                                             "preview":  "previews/solarized dark pac.png"
-                                                         }
-                                                     ]
-                                    },
-                       "themes":  {
-                                      "variants":  [
-                                                       {
-                                                           "name":  "Solarized Dark",
-                                                           "file":  "themes/solarized-dark.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Solarized Dark NA",
-                                                           "file":  "themes/solarized-dark-NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Solarized Dark Mac",
-                                                           "file":  "themes/solarized-dark-mac.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Solarized Dark Mac NA",
-                                                           "file":  "themes/solarized-dark-mac-NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Solarized Dark Nude",
-                                                           "file":  "themes/solarized-dark-nude.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Solarized Dark Nude NA",
-                                                           "file":  "themes/solarized-dark-nude-NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Solarized Dark Pac",
-                                                           "file":  "themes/solarized-dark-pac.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Solarized Dark Pac NA",
-                                                           "file":  "themes/solarized-dark-pac-NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Solarized Day",
-                                                           "file":  "themes/solarized-day.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Solarized Day NA",
-                                                           "file":  "themes/solarized-day-NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Solarized Day Mac",
-                                                           "file":  "themes/solarized-day-mac.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Solarized Day Mac NA",
-                                                           "file":  "themes/solarized-day-mac-NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Solarized Day Nude",
-                                                           "file":  "themes/solarized-day-nude.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Solarized Day Nude NA",
-                                                           "file":  "themes/solarized-day-nude-NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Solarized Day Pac",
-                                                           "file":  "themes/solarized-day-pac.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Solarized Day Pac NA",
-                                                           "file":  "themes/solarized-day-pac-NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Solarized Night",
-                                                           "file":  "themes/solarized-night.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Solarized Night NA",
-                                                           "file":  "themes/solarized-night-NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Solarized Night Mac",
-                                                           "file":  "themes/solarized-night-mac.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Solarized Night Mac NA",
-                                                           "file":  "themes/solarized-night-mac-NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Solarized Night Nude",
-                                                           "file":  "themes/solarized-night-nude.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Solarized Night Nude NA",
-                                                           "file":  "themes/solarized-night-nude-NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Solarized Night Pac",
-                                                           "file":  "themes/solarized-night-pac.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Solarized Night Pac NA",
-                                                           "file":  "themes/solarized-night-pac-NA.theme"
-                                                       }
-                                                   ]
-                                  },
-                       "wallpapers":  {
-                                          "variants":  [
-                                                           {
-                                                               "name":  "Block Wave Light",
-                                                               "file":  "wallpapers/Day/Block Wave light.png"
-                                                           },
-                                                           {
-                                                               "name":  "Burst Light",
-                                                               "file":  "wallpapers/Day/Burst light.png"
-                                                           },
-                                                           {
-                                                               "name":  "Circuits Light",
-                                                               "file":  "wallpapers/Day/Circuits light.png"
-                                                           },
-                                                           {
-                                                               "name":  "Diamonds Light",
-                                                               "file":  "wallpapers/Day/Diamonds light.png"
-                                                           },
-                                                           {
-                                                               "name":  "Dot Grid Light 1",
-                                                               "file":  "wallpapers/Day/Dot Grid light 1.png"
-                                                           },
-                                                           {
-                                                               "name":  "Dot Grid Light 2",
-                                                               "file":  "wallpapers/Day/Dot Grid light 2.png"
-                                                           },
-                                                           {
-                                                               "name":  "Octagon Light",
-                                                               "file":  "wallpapers/Day/Octagon light.png"
-                                                           },
-                                                           {
-                                                               "name":  "Pac Day",
-                                                               "file":  "wallpapers/Day/pac day.png"
-                                                           },
-                                                           {
-                                                               "name":  "Pac Dusk",
-                                                               "file":  "wallpapers/Day/pac dusk.png"
-                                                           },
-                                                           {
-                                                               "name":  "Solarized Day Clean",
-                                                               "file":  "wallpapers/Day/Solarized day clean.png"
-                                                           },
-                                                           {
-                                                               "name":  "Solarized Day 2 Clean",
-                                                               "file":  "wallpapers/Day/Solarized day 2 clean.png"
-                                                           },
-                                                           {
-                                                               "name":  "Solarized Day 3 Clean",
-                                                               "file":  "wallpapers/Day/Solarized day 3 clean.png"
-                                                           },
-                                                           {
-                                                               "name":  "Solarized Dusk Clean",
-                                                               "file":  "wallpapers/Day/Solarized dusk clean.png"
-                                                           },
-                                                           {
-                                                               "name":  "Solarized Dusk 2 Clean",
-                                                               "file":  "wallpapers/Day/Solarized dusk 2 clean.png"
-                                                           },
-                                                           {
-                                                               "name":  "Block Wave Dark",
-                                                               "file":  "wallpapers/Night/Block Wave dark.png"
-                                                           },
-                                                           {
-                                                               "name":  "Burst Dark",
-                                                               "file":  "wallpapers/Night/Burst dark.png"
-                                                           },
-                                                           {
-                                                               "name":  "Cheng Feng Modded",
-                                                               "file":  "wallpapers/Night/cheng-feng-unsplash (Modded).png"
-                                                           },
-                                                           {
-                                                               "name":  "Circuits Dark",
-                                                               "file":  "wallpapers/Night/Circuits dark.png"
-                                                           },
-                                                           {
-                                                               "name":  "Diamonds Dark",
-                                                               "file":  "wallpapers/Night/Diamonds dark.png"
-                                                           },
-                                                           {
-                                                               "name":  "Dot Grid Dark 1",
-                                                               "file":  "wallpapers/Night/Dot Grid dark 1.png"
-                                                           },
-                                                           {
-                                                               "name":  "Dot Grid Dark 2",
-                                                               "file":  "wallpapers/Night/Dot Grid dark 2.png"
-                                                           },
-                                                           {
-                                                               "name":  "Octagon Dark",
-                                                               "file":  "wallpapers/Night/Octagon dark.png"
-                                                           },
-                                                           {
-                                                               "name":  "Pac Dark",
-                                                               "file":  "wallpapers/Night/pac dark.png"
-                                                           },
-                                                           {
-                                                               "name":  "Pac Night",
-                                                               "file":  "wallpapers/Night/pac night.png"
-                                                           },
-                                                           {
-                                                               "name":  "Solarized 5K",
-                                                               "file":  "wallpapers/Night/solarized 5k.png"
-                                                           },
-                                                           {
-                                                               "name":  "Solarized Dark Clean",
-                                                               "file":  "wallpapers/Night/Solarized dark clean.png"
-                                                           },
-                                                           {
-                                                               "name":  "Solarized Dark 2 Clean",
-                                                               "file":  "wallpapers/Night/Solarized dark 2 clean.png"
-                                                           },
-                                                           {
-                                                               "name":  "Solarized Dark 3 Clean",
-                                                               "file":  "wallpapers/Night/Solarized dark 3 clean.png"
-                                                           },
-                                                           {
-                                                               "name":  "Solarized Night Clean",
-                                                               "file":  "wallpapers/Night/Solarized night clean.png"
-                                                           },
-                                                           {
-                                                               "name":  "Solarized Night 2 Clean",
-                                                               "file":  "wallpapers/Night/Solarized night 2 clean.png"
-                                                           },
-                                                           {
-                                                               "name":  "Solarized Night 3 Clean",
-                                                               "file":  "wallpapers/Night/Solarized night 3 clean.png"
-                                                           },
-                                                           {
-                                                               "name":  "Triangles Dark",
-                                                               "file":  "wallpapers/Night/Triangles dark.png"
-                                                           }
-                                                       ]
-                                      },
-                       "cursors":  {
-                                       "path":  "cursors"
-                                   },
-                       "startallback":  {
-                                            "guide":  "guides/startallback",
-                                            "app":  "startallback",
-                                            "skin":  "startallback/solarized Day SAB.msstyles",
-                                            "variants":  [
-                                                             {
-                                                                 "file":  "startallback/solarized Day SAB.msstyles",
-                                                                 "name":  "solarized Day"
-                                                             },
-                                                             {
-                                                                 "file":  "startallback/solarized Night SAB.msstyles",
-                                                                 "name":  "solarized Night"
-                                                             }
-                                                         ]
-                                        },
-                       "mica":  {
-                                    "guide":  "guides/mica",
-                                    "app":  "mica"
-                                },
-                       "oldnewexplorer":  {
-                                              "guide":  "guides/oldnewexplorer",
-                                              "app":  "oldnewexplorer"
-                                          },
-                       "startorb":  {
-                                        "variants":  [
-                                                         {
-                                                             "file":  "startallback\\Orbs/solarized - cyan.svg",
-                                                             "name":  "solarized - cyan"
-                                                         },
-                                                         {
-                                                             "file":  "startallback\\Orbs/solarized - dark.svg",
-                                                             "name":  "solarized - dark"
-                                                         },
-                                                         {
-                                                             "file":  "startallback\\Orbs/solarized - light.svg",
-                                                             "name":  "solarized - light"
-                                                         }
-                                                     ]
-                                    }
-                   }
+                {
+                    "name": "Solarized Dark NA",
+                    "file": "msstyles/solarized-dark-NA.msstyles",
+                    "preview": "previews/solarized dark.png"
+                },
+                {
+                    "name": "Solarized Dark Mac",
+                    "file": "msstyles/solarized-dark-mac.msstyles",
+                    "preview": "previews/solarized dark mac.png"
+                },
+                {
+                    "name": "Solarized Dark Mac NA",
+                    "file": "msstyles/solarized-dark-mac-NA.msstyles",
+                    "preview": "previews/solarized dark mac.png"
+                },
+                {
+                    "name": "Solarized Dark Nude",
+                    "file": "msstyles/solarized-dark-nude.msstyles",
+                    "preview": "previews/solarized dark nude.png"
+                },
+                {
+                    "name": "Solarized Dark Nude NA",
+                    "file": "msstyles/solarized-dark-nude-NA.msstyles",
+                    "preview": "previews/solarized dark nude.png"
+                },
+                {
+                    "name": "Solarized Dark Pac",
+                    "file": "msstyles/solarized-dark-pac.msstyles",
+                    "preview": "previews/solarized dark pac.png"
+                },
+                {
+                    "name": "Solarized Dark Pac NA",
+                    "file": "msstyles/solarized-dark-pac-NA.msstyles",
+                    "preview": "previews/solarized dark pac.png"
+                },
+                {
+                    "name": "Solarized Day",
+                    "file": "msstyles/solarized-day.msstyles",
+                    "preview": "previews/solarized day.png"
+                },
+                {
+                    "name": "Solarized Day NA",
+                    "file": "msstyles/solarized-day-NA.msstyles",
+                    "preview": "previews/solarized day.png"
+                },
+                {
+                    "name": "Solarized Day Mac",
+                    "file": "msstyles/solarized-day-mac.msstyles",
+                    "preview": "previews/solarized day mac.png"
+                },
+                {
+                    "name": "Solarized Day Mac NA",
+                    "file": "msstyles/solarized-day-mac-NA.msstyles",
+                    "preview": "previews/solarized day mac.png"
+                },
+                {
+                    "name": "Solarized Day Nude",
+                    "file": "msstyles/solarized-day-nude.msstyles",
+                    "preview": "previews/solarized day nude.png"
+                },
+                {
+                    "name": "Solarized Day Nude NA",
+                    "file": "msstyles/solarized-day-nude-NA.msstyles",
+                    "preview": "previews/solarized day nude.png"
+                },
+                {
+                    "name": "Solarized Day Pac",
+                    "file": "msstyles/solarized-day-pac.msstyles",
+                    "preview": "previews/solarized day pac.png"
+                },
+                {
+                    "name": "Solarized Day Pac NA",
+                    "file": "msstyles/solarized-day-pac-NA.msstyles",
+                    "preview": "previews/solarized day pac.png"
+                },
+                {
+                    "name": "Solarized Night",
+                    "file": "msstyles/solarized-night.msstyles",
+                    "preview": "previews/solarized dark.png"
+                },
+                {
+                    "name": "Solarized Night NA",
+                    "file": "msstyles/solarized-night-NA.msstyles",
+                    "preview": "previews/solarized dark.png"
+                },
+                {
+                    "name": "Solarized Night Mac",
+                    "file": "msstyles/solarized-night-mac.msstyles",
+                    "preview": "previews/solarized dark mac.png"
+                },
+                {
+                    "name": "Solarized Night Mac NA",
+                    "file": "msstyles/solarized-night-mac-NA.msstyles",
+                    "preview": "previews/solarized dark mac.png"
+                },
+                {
+                    "name": "Solarized Night Nude",
+                    "file": "msstyles/solarized-night-nude.msstyles",
+                    "preview": "previews/solarized dark nude.png"
+                },
+                {
+                    "name": "Solarized Night Nude NA",
+                    "file": "msstyles/solarized-night-nude-NA.msstyles",
+                    "preview": "previews/solarized dark nude.png"
+                },
+                {
+                    "name": "Solarized Night Pac",
+                    "file": "msstyles/solarized-night-pac.msstyles",
+                    "preview": "previews/solarized dark pac.png"
+                },
+                {
+                    "name": "Solarized Night Pac NA",
+                    "file": "msstyles/solarized-night-pac-NA.msstyles",
+                    "preview": "previews/solarized dark pac.png"
+                }
+            ]
+        },
+        "themes": {
+            "variants": [
+                {
+                    "name": "Solarized Dark",
+                    "file": "themes/solarized-dark.theme"
+                },
+                {
+                    "name": "Solarized Dark NA",
+                    "file": "themes/solarized-dark-NA.theme"
+                },
+                {
+                    "name": "Solarized Dark Mac",
+                    "file": "themes/solarized-dark-mac.theme"
+                },
+                {
+                    "name": "Solarized Dark Mac NA",
+                    "file": "themes/solarized-dark-mac-NA.theme"
+                },
+                {
+                    "name": "Solarized Dark Nude",
+                    "file": "themes/solarized-dark-nude.theme"
+                },
+                {
+                    "name": "Solarized Dark Nude NA",
+                    "file": "themes/solarized-dark-nude-NA.theme"
+                },
+                {
+                    "name": "Solarized Dark Pac",
+                    "file": "themes/solarized-dark-pac.theme"
+                },
+                {
+                    "name": "Solarized Dark Pac NA",
+                    "file": "themes/solarized-dark-pac-NA.theme"
+                },
+                {
+                    "name": "Solarized Day",
+                    "file": "themes/solarized-day.theme"
+                },
+                {
+                    "name": "Solarized Day NA",
+                    "file": "themes/solarized-day-NA.theme"
+                },
+                {
+                    "name": "Solarized Day Mac",
+                    "file": "themes/solarized-day-mac.theme"
+                },
+                {
+                    "name": "Solarized Day Mac NA",
+                    "file": "themes/solarized-day-mac-NA.theme"
+                },
+                {
+                    "name": "Solarized Day Nude",
+                    "file": "themes/solarized-day-nude.theme"
+                },
+                {
+                    "name": "Solarized Day Nude NA",
+                    "file": "themes/solarized-day-nude-NA.theme"
+                },
+                {
+                    "name": "Solarized Day Pac",
+                    "file": "themes/solarized-day-pac.theme"
+                },
+                {
+                    "name": "Solarized Day Pac NA",
+                    "file": "themes/solarized-day-pac-NA.theme"
+                },
+                {
+                    "name": "Solarized Night",
+                    "file": "themes/solarized-night.theme"
+                },
+                {
+                    "name": "Solarized Night NA",
+                    "file": "themes/solarized-night-NA.theme"
+                },
+                {
+                    "name": "Solarized Night Mac",
+                    "file": "themes/solarized-night-mac.theme"
+                },
+                {
+                    "name": "Solarized Night Mac NA",
+                    "file": "themes/solarized-night-mac-NA.theme"
+                },
+                {
+                    "name": "Solarized Night Nude",
+                    "file": "themes/solarized-night-nude.theme"
+                },
+                {
+                    "name": "Solarized Night Nude NA",
+                    "file": "themes/solarized-night-nude-NA.theme"
+                },
+                {
+                    "name": "Solarized Night Pac",
+                    "file": "themes/solarized-night-pac.theme"
+                },
+                {
+                    "name": "Solarized Night Pac NA",
+                    "file": "themes/solarized-night-pac-NA.theme"
+                }
+            ]
+        },
+        "wallpapers": {
+            "variants": [
+                {
+                    "name": "Block Wave Light",
+                    "file": "wallpapers/Day/Block Wave light.png"
+                },
+                {
+                    "name": "Burst Light",
+                    "file": "wallpapers/Day/Burst light.png"
+                },
+                {
+                    "name": "Circuits Light",
+                    "file": "wallpapers/Day/Circuits light.png"
+                },
+                {
+                    "name": "Diamonds Light",
+                    "file": "wallpapers/Day/Diamonds light.png"
+                },
+                {
+                    "name": "Dot Grid Light 1",
+                    "file": "wallpapers/Day/Dot Grid light 1.png"
+                },
+                {
+                    "name": "Dot Grid Light 2",
+                    "file": "wallpapers/Day/Dot Grid light 2.png"
+                },
+                {
+                    "name": "Octagon Light",
+                    "file": "wallpapers/Day/Octagon light.png"
+                },
+                {
+                    "name": "Pac Day",
+                    "file": "wallpapers/Day/pac day.png"
+                },
+                {
+                    "name": "Pac Dusk",
+                    "file": "wallpapers/Day/pac dusk.png"
+                },
+                {
+                    "name": "Solarized Day Clean",
+                    "file": "wallpapers/Day/Solarized day clean.png"
+                },
+                {
+                    "name": "Solarized Day 2 Clean",
+                    "file": "wallpapers/Day/Solarized day 2 clean.png"
+                },
+                {
+                    "name": "Solarized Day 3 Clean",
+                    "file": "wallpapers/Day/Solarized day 3 clean.png"
+                },
+                {
+                    "name": "Solarized Dusk Clean",
+                    "file": "wallpapers/Day/Solarized dusk clean.png"
+                },
+                {
+                    "name": "Solarized Dusk 2 Clean",
+                    "file": "wallpapers/Day/Solarized dusk 2 clean.png"
+                },
+                {
+                    "name": "Block Wave Dark",
+                    "file": "wallpapers/Night/Block Wave dark.png"
+                },
+                {
+                    "name": "Burst Dark",
+                    "file": "wallpapers/Night/Burst dark.png"
+                },
+                {
+                    "name": "Cheng Feng Modded",
+                    "file": "wallpapers/Night/cheng-feng-unsplash (Modded).png"
+                },
+                {
+                    "name": "Circuits Dark",
+                    "file": "wallpapers/Night/Circuits dark.png"
+                },
+                {
+                    "name": "Diamonds Dark",
+                    "file": "wallpapers/Night/Diamonds dark.png"
+                },
+                {
+                    "name": "Dot Grid Dark 1",
+                    "file": "wallpapers/Night/Dot Grid dark 1.png"
+                },
+                {
+                    "name": "Dot Grid Dark 2",
+                    "file": "wallpapers/Night/Dot Grid dark 2.png"
+                },
+                {
+                    "name": "Octagon Dark",
+                    "file": "wallpapers/Night/Octagon dark.png"
+                },
+                {
+                    "name": "Pac Dark",
+                    "file": "wallpapers/Night/pac dark.png"
+                },
+                {
+                    "name": "Pac Night",
+                    "file": "wallpapers/Night/pac night.png"
+                },
+                {
+                    "name": "Solarized 5K",
+                    "file": "wallpapers/Night/solarized 5k.png"
+                },
+                {
+                    "name": "Solarized Dark Clean",
+                    "file": "wallpapers/Night/Solarized dark clean.png"
+                },
+                {
+                    "name": "Solarized Dark 2 Clean",
+                    "file": "wallpapers/Night/Solarized dark 2 clean.png"
+                },
+                {
+                    "name": "Solarized Dark 3 Clean",
+                    "file": "wallpapers/Night/Solarized dark 3 clean.png"
+                },
+                {
+                    "name": "Solarized Night Clean",
+                    "file": "wallpapers/Night/Solarized night clean.png"
+                },
+                {
+                    "name": "Solarized Night 2 Clean",
+                    "file": "wallpapers/Night/Solarized night 2 clean.png"
+                },
+                {
+                    "name": "Solarized Night 3 Clean",
+                    "file": "wallpapers/Night/Solarized night 3 clean.png"
+                },
+                {
+                    "name": "Triangles Dark",
+                    "file": "wallpapers/Night/Triangles dark.png"
+                }
+            ]
+        },
+        "cursors": {
+            "path": "cursors"
+        },
+        "startallback": {
+            "app": "startallback",
+            "skin": "startallback/solarized Day SAB.msstyles",
+            "variants": [
+                {
+                    "file": "startallback/solarized Day SAB.msstyles",
+                    "name": "solarized Day"
+                },
+                {
+                    "file": "startallback/solarized Night SAB.msstyles",
+                    "name": "solarized Night"
+                }
+            ]
+        },
+        "mica": {
+            "guide": "guides/mica",
+            "app": "mica"
+        },
+        "oldnewexplorer": {
+            "guide": "guides/oldnewexplorer",
+            "app": "oldnewexplorer"
+        },
+        "startorb": {
+            "variants": [
+                {
+                    "file": "startallback/Orbs/solarized - cyan.svg",
+                    "name": "solarized - cyan"
+                },
+                {
+                    "file": "startallback/Orbs/solarized - dark.svg",
+                    "name": "solarized - dark"
+                },
+                {
+                    "file": "startallback/Orbs/solarized - light.svg",
+                    "name": "solarized - light"
+                }
+            ]
+        }
+    }
 }

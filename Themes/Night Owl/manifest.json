@@ -1,475 +1,474 @@
 {
-    "name":  "Night Owl",
-    "version":  "1.0.0",
-    "description":  "Night Owl color scheme for Windows 11 by niivu, inspired by Sarah Drasner\u0027s VS Code theme. Features Night Owl, Dark Owl, and Light Owl variants with multiple taskbar styles.",
-    "author":  "niivu",
-    "preview":  "preview.png",
-    "palette":  {
-                    "background":  "#011627",
-                    "accent":  "#1d3b53",
-                    "text":  "#d6deeb",
-                    "inactive":  "#010e1a",
-                    "border":  "#4b6479",
-                    "active":  "#82aaff"
+    "name": "Night Owl",
+    "version": "1.0.0",
+    "description": "Night Owl color scheme for Windows 11 by niivu, inspired by Sarah Drasner's VS Code theme. Features Night Owl, Dark Owl, and Light Owl variants with multiple taskbar styles.",
+    "author": "niivu",
+    "preview": "preview.png",
+    "palette": {
+        "background": "#011627",
+        "accent": "#1d3b53",
+        "text": "#d6deeb",
+        "inactive": "#010e1a",
+        "border": "#4b6479",
+        "active": "#82aaff"
+    },
+    "components": {
+        "msstyles": {
+            "variants": [
+                {
+                    "name": "Night Owl - Win",
+                    "file": "msstyles/Night Owl - Win.msstyles",
+                    "preview": "previews/Dark Win.png"
                 },
-    "components":  {
-                       "msstyles":  {
-                                        "variants":  [
-                                                         {
-                                                             "name":  "Night Owl - Win",
-                                                             "file":  "msstyles/Night Owl - Win.msstyles",
-                                                             "preview":  "previews/Dark Win.png"
-                                                         },
-                                                         {
-                                                             "name":  "Night Owl - Win NA",
-                                                             "file":  "msstyles/Night Owl - Win NA.msstyles",
-                                                             "preview":  "previews/Dark Win NA.png"
-                                                         },
-                                                         {
-                                                             "name":  "Night Owl - Mac",
-                                                             "file":  "msstyles/Night Owl - mac.msstyles",
-                                                             "preview":  "previews/Dark mac.png"
-                                                         },
-                                                         {
-                                                             "name":  "Night Owl - Mac NA",
-                                                             "file":  "msstyles/Night Owl - mac NA.msstyles",
-                                                             "preview":  "previews/Dark mac NA.png"
-                                                         },
-                                                         {
-                                                             "name":  "Night Owl - Mac 2",
-                                                             "file":  "msstyles/Night Owl - mac 2.msstyles",
-                                                             "preview":  "previews/Dark mac 2.png"
-                                                         },
-                                                         {
-                                                             "name":  "Night Owl - Mac 2 NA",
-                                                             "file":  "msstyles/Night Owl - mac 2 NA.msstyles",
-                                                             "preview":  "previews/Dark mac 2 NA.png"
-                                                         },
-                                                         {
-                                                             "name":  "Night Owl - Dots",
-                                                             "file":  "msstyles/Night Owl - dots.msstyles",
-                                                             "preview":  "previews/Dark dots.png"
-                                                         },
-                                                         {
-                                                             "name":  "Night Owl - Dots NA",
-                                                             "file":  "msstyles/Night Owl - dots NA.msstyles",
-                                                             "preview":  "previews/Dark dots NA.png"
-                                                         },
-                                                         {
-                                                             "name":  "Night Owl - Dots 2",
-                                                             "file":  "msstyles/Night Owl - dots 2.msstyles",
-                                                             "preview":  "previews/Dark dots 2.png"
-                                                         },
-                                                         {
-                                                             "name":  "Night Owl - Dots 2 NA",
-                                                             "file":  "msstyles/Night Owl - dots 2 NA.msstyles",
-                                                             "preview":  "previews/Dark dots 2 NA.png"
-                                                         },
-                                                         {
-                                                             "name":  "Night Owl - Nude",
-                                                             "file":  "msstyles/Night Owl - nude.msstyles",
-                                                             "preview":  "previews/Dark nude.png"
-                                                         },
-                                                         {
-                                                             "name":  "Night Owl - Nude NA",
-                                                             "file":  "msstyles/Night Owl - nude NA.msstyles",
-                                                             "preview":  "previews/Dark nude NA.png"
-                                                         },
-                                                         {
-                                                             "name":  "Dark Owl - Win",
-                                                             "file":  "msstyles/Dark Owl - Win.msstyles",
-                                                             "preview":  "previews/Dark Win.png"
-                                                         },
-                                                         {
-                                                             "name":  "Dark Owl - Win NA",
-                                                             "file":  "msstyles/Dark Owl - Win NA.msstyles",
-                                                             "preview":  "previews/Dark Win NA.png"
-                                                         },
-                                                         {
-                                                             "name":  "Dark Owl - Mac",
-                                                             "file":  "msstyles/Dark Owl - mac.msstyles",
-                                                             "preview":  "previews/Dark mac.png"
-                                                         },
-                                                         {
-                                                             "name":  "Dark Owl - Mac NA",
-                                                             "file":  "msstyles/Dark Owl - mac NA.msstyles",
-                                                             "preview":  "previews/Dark mac NA.png"
-                                                         },
-                                                         {
-                                                             "name":  "Dark Owl - Mac 2",
-                                                             "file":  "msstyles/Dark Owl - mac 2.msstyles",
-                                                             "preview":  "previews/Dark mac 2.png"
-                                                         },
-                                                         {
-                                                             "name":  "Dark Owl - Mac 2 NA",
-                                                             "file":  "msstyles/Dark Owl - mac 2 NA.msstyles",
-                                                             "preview":  "previews/Dark mac 2 NA.png"
-                                                         },
-                                                         {
-                                                             "name":  "Dark Owl - Dots",
-                                                             "file":  "msstyles/Dark Owl - dots.msstyles",
-                                                             "preview":  "previews/Dark dots.png"
-                                                         },
-                                                         {
-                                                             "name":  "Dark Owl - Dots NA",
-                                                             "file":  "msstyles/Dark Owl - dots NA.msstyles",
-                                                             "preview":  "previews/Dark dots NA.png"
-                                                         },
-                                                         {
-                                                             "name":  "Dark Owl - Dots 2",
-                                                             "file":  "msstyles/Dark Owl - dots 2.msstyles",
-                                                             "preview":  "previews/Dark dots 2.png"
-                                                         },
-                                                         {
-                                                             "name":  "Dark Owl - Dots 2 NA",
-                                                             "file":  "msstyles/Dark Owl - dots 2 NA.msstyles",
-                                                             "preview":  "previews/Dark dots 2 NA.png"
-                                                         },
-                                                         {
-                                                             "name":  "Dark Owl - Nude",
-                                                             "file":  "msstyles/Dark Owl - nude.msstyles",
-                                                             "preview":  "previews/Dark nude.png"
-                                                         },
-                                                         {
-                                                             "name":  "Dark Owl - Nude NA",
-                                                             "file":  "msstyles/Dark Owl - nude NA.msstyles",
-                                                             "preview":  "previews/Dark nude NA.png"
-                                                         },
-                                                         {
-                                                             "name":  "Light Owl - Win",
-                                                             "file":  "msstyles/Light Owl - Win.msstyles",
-                                                             "preview":  "previews/Light Win.png"
-                                                         },
-                                                         {
-                                                             "name":  "Light Owl - Win NA",
-                                                             "file":  "msstyles/Light Owl - Win NA.msstyles",
-                                                             "preview":  "previews/Light Win NA.png"
-                                                         },
-                                                         {
-                                                             "name":  "Light Owl - Mac",
-                                                             "file":  "msstyles/Light Owl - mac.msstyles",
-                                                             "preview":  "previews/Light mac.png"
-                                                         },
-                                                         {
-                                                             "name":  "Light Owl - Mac NA",
-                                                             "file":  "msstyles/Light Owl - mac NA.msstyles",
-                                                             "preview":  "previews/Light mac NA.png"
-                                                         },
-                                                         {
-                                                             "name":  "Light Owl - Mac 2",
-                                                             "file":  "msstyles/Light Owl - mac 2.msstyles",
-                                                             "preview":  "previews/Light mac 2.png"
-                                                         },
-                                                         {
-                                                             "name":  "Light Owl - Mac 2 NA",
-                                                             "file":  "msstyles/Light Owl - mac 2 NA.msstyles",
-                                                             "preview":  "previews/Light mac 2 NA.png"
-                                                         },
-                                                         {
-                                                             "name":  "Light Owl - Dots",
-                                                             "file":  "msstyles/Light Owl - dots.msstyles",
-                                                             "preview":  "previews/Light dots.png"
-                                                         },
-                                                         {
-                                                             "name":  "Light Owl - Dots NA",
-                                                             "file":  "msstyles/Light Owl - dots NA.msstyles",
-                                                             "preview":  "previews/Light dots NA.png"
-                                                         },
-                                                         {
-                                                             "name":  "Light Owl - Dots 2",
-                                                             "file":  "msstyles/Light Owl - dots 2.msstyles",
-                                                             "preview":  "previews/Light dots 2.png"
-                                                         },
-                                                         {
-                                                             "name":  "Light Owl - Dots 2 NA",
-                                                             "file":  "msstyles/Light Owl - dots 2 NA.msstyles",
-                                                             "preview":  "previews/Light dots 2 NA.png"
-                                                         },
-                                                         {
-                                                             "name":  "Light Owl - Nude",
-                                                             "file":  "msstyles/Light Owl - nude.msstyles",
-                                                             "preview":  "previews/Light nude.png"
-                                                         },
-                                                         {
-                                                             "name":  "Light Owl - Nude NA",
-                                                             "file":  "msstyles/Light Owl - nude NA.msstyles",
-                                                             "preview":  "previews/Light nude NA.png"
-                                                         }
-                                                     ]
-                                    },
-                       "themes":  {
-                                      "variants":  [
-                                                       {
-                                                           "name":  "Night Owl - Win",
-                                                           "file":  "themes/Night Owl - Win.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Night Owl - Win NA",
-                                                           "file":  "themes/Night Owl - Win NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Night Owl - Mac",
-                                                           "file":  "themes/Night Owl - mac.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Night Owl - Mac NA",
-                                                           "file":  "themes/Night Owl - mac NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Night Owl - Mac 2",
-                                                           "file":  "themes/Night Owl - mac 2.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Night Owl - Mac 2 NA",
-                                                           "file":  "themes/Night Owl - mac 2 NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Night Owl - Dots",
-                                                           "file":  "themes/Night Owl - dots.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Night Owl - Dots NA",
-                                                           "file":  "themes/Night Owl - dots NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Night Owl - Dots 2",
-                                                           "file":  "themes/Night Owl - dots 2.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Night Owl - Dots 2 NA",
-                                                           "file":  "themes/Night Owl - dots 2 NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Night Owl - Nude",
-                                                           "file":  "themes/Night Owl - nude.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Night Owl - Nude NA",
-                                                           "file":  "themes/Night Owl - nude NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Dark Owl - Win",
-                                                           "file":  "themes/Dark Owl - Win.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Dark Owl - Win NA",
-                                                           "file":  "themes/Dark Owl - Win NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Dark Owl - Mac",
-                                                           "file":  "themes/Dark Owl - mac.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Dark Owl - Mac NA",
-                                                           "file":  "themes/Dark Owl - mac NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Dark Owl - Mac 2",
-                                                           "file":  "themes/Dark Owl - mac 2.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Dark Owl - Mac 2 NA",
-                                                           "file":  "themes/Dark Owl - mac 2 NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Dark Owl - Dots",
-                                                           "file":  "themes/Dark Owl - dots.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Dark Owl - Dots NA",
-                                                           "file":  "themes/Dark Owl - dots NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Dark Owl - Dots 2",
-                                                           "file":  "themes/Dark Owl - dots 2.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Dark Owl - Dots 2 NA",
-                                                           "file":  "themes/Dark Owl - dots 2 NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Dark Owl - Nude",
-                                                           "file":  "themes/Dark Owl - nude.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Dark Owl - Nude NA",
-                                                           "file":  "themes/Dark Owl - nude NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Light Owl - Win",
-                                                           "file":  "themes/Light Owl - Win.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Light Owl - Win NA",
-                                                           "file":  "themes/Light Owl - Win NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Light Owl - Mac",
-                                                           "file":  "themes/Light Owl - mac.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Light Owl - Mac NA",
-                                                           "file":  "themes/Light Owl - mac NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Light Owl - Mac 2",
-                                                           "file":  "themes/Light Owl - mac 2.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Light Owl - Mac 2 NA",
-                                                           "file":  "themes/Light Owl - mac 2 NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Light Owl - Dots",
-                                                           "file":  "themes/Light Owl - dots.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Light Owl - Dots NA",
-                                                           "file":  "themes/Light Owl - dots NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Light Owl - Dots 2",
-                                                           "file":  "themes/Light Owl - dots 2.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Light Owl - Dots 2 NA",
-                                                           "file":  "themes/Light Owl - dots 2 NA.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Light Owl - Nude",
-                                                           "file":  "themes/Light Owl - nude.theme"
-                                                       },
-                                                       {
-                                                           "name":  "Light Owl - Nude NA",
-                                                           "file":  "themes/Light Owl - nude NA.theme"
-                                                       }
-                                                   ]
-                                  },
-                       "wallpapers":  {
-                                          "variants":  [
-                                                           {
-                                                               "name":  "Abstract (Night)",
-                                                               "file":  "wallpapers/Night/ABSTRACT.jpeg"
-                                                           },
-                                                           {
-                                                               "name":  "DJ Owl (Night)",
-                                                               "file":  "wallpapers/Night/DJ OWL.jpeg"
-                                                           },
-                                                           {
-                                                               "name":  "Night Owl (Night)",
-                                                               "file":  "wallpapers/Night/NIGHT OWL.jpeg"
-                                                           },
-                                                           {
-                                                               "name":  "Owl Time (Night)",
-                                                               "file":  "wallpapers/Night/OWL TIME.jpeg"
-                                                           },
-                                                           {
-                                                               "name":  "Owl (Night)",
-                                                               "file":  "wallpapers/Night/OWL.jpeg"
-                                                           },
-                                                           {
-                                                               "name":  "The Owl (Night)",
-                                                               "file":  "wallpapers/Night/THE OWL.jpeg"
-                                                           },
-                                                           {
-                                                               "name":  "Tree Owl (Night)",
-                                                               "file":  "wallpapers/Night/TREE OWL.jpeg"
-                                                           },
-                                                           {
-                                                               "name":  "Abstract (Light)",
-                                                               "file":  "wallpapers/Light/ABSTRACT.jpeg"
-                                                           },
-                                                           {
-                                                               "name":  "DJ Owl (Light)",
-                                                               "file":  "wallpapers/Light/DJ OWL.jpeg"
-                                                           },
-                                                           {
-                                                               "name":  "Night Owl (Light)",
-                                                               "file":  "wallpapers/Light/NIGHT OWL.jpeg"
-                                                           },
-                                                           {
-                                                               "name":  "Owl Time (Light)",
-                                                               "file":  "wallpapers/Light/OWL TIME.jpeg"
-                                                           },
-                                                           {
-                                                               "name":  "Owl (Light)",
-                                                               "file":  "wallpapers/Light/OWL.jpeg"
-                                                           },
-                                                           {
-                                                               "name":  "The Owl (Light)",
-                                                               "file":  "wallpapers/Light/THE OWL.jpeg"
-                                                           },
-                                                           {
-                                                               "name":  "Tree Owl (Light)",
-                                                               "file":  "wallpapers/Light/TREE OWL.jpeg"
-                                                           }
-                                                       ]
-                                      },
-                       "cursors":  {
-                                       "path":  "cursors"
-                                   },
-                       "startallback":  {
-                                            "guide":  "guides/startallback",
-                                            "app":  "startallback",
-                                            "skin":  "startallback/Light Owl.msstyles",
-                                            "variants":  [
-                                                             {
-                                                                 "file":  "startallback/Light Owl.msstyles",
-                                                                 "name":  "Light Owl"
-                                                             },
-                                                             {
-                                                                 "file":  "startallback/Night Owl.msstyles",
-                                                                 "name":  "Night Owl"
-                                                             }
-                                                         ]
-                                        },
-                       "mica":  {
-                                    "guide":  "guides/mica",
-                                    "app":  "mica"
-                                },
-                       "oldnewexplorer":  {
-                                              "guide":  "guides/oldnewexplorer",
-                                              "app":  "oldnewexplorer"
-                                          },
-                       "startorb":  {
-                                        "variants":  [
-                                                         {
-                                                             "file":  "startallback\\Orbs/Dots 1 - Light Owl.svg",
-                                                             "name":  "Dots 1 - Light Owl"
-                                                         },
-                                                         {
-                                                             "file":  "startallback\\Orbs/Dots 1 - Night Owl.svg",
-                                                             "name":  "Dots 1 - Night Owl"
-                                                         },
-                                                         {
-                                                             "file":  "startallback\\Orbs/Dots 2 - Light Owl.svg",
-                                                             "name":  "Dots 2 - Light Owl"
-                                                         },
-                                                         {
-                                                             "file":  "startallback\\Orbs/Dots 2 - Night Owl.svg",
-                                                             "name":  "Dots 2 - Night Owl"
-                                                         },
-                                                         {
-                                                             "file":  "startallback\\Orbs/Dots 3 - Light Owl.svg",
-                                                             "name":  "Dots 3 - Light Owl"
-                                                         },
-                                                         {
-                                                             "file":  "startallback\\Orbs/Dots 3 - Night Owl.svg",
-                                                             "name":  "Dots 3 - Night Owl"
-                                                         },
-                                                         {
-                                                             "file":  "startallback\\Orbs/Win - Light Owl.svg",
-                                                             "name":  "Win - Light Owl"
-                                                         },
-                                                         {
-                                                             "file":  "startallback\\Orbs/Win - Night Owl.svg",
-                                                             "name":  "Win - Night Owl"
-                                                         },
-                                                         {
-                                                             "file":  "startallback/Orbs/StartAllBack - Taskbar (Windhawk).png",
-                                                             "name":  "StartAllBack - Taskbar (Windhawk)"
-                                                         }
-                                                     ]
-                                    }
-                   }
+                {
+                    "name": "Night Owl - Win NA",
+                    "file": "msstyles/Night Owl - Win NA.msstyles",
+                    "preview": "previews/Dark Win NA.png"
+                },
+                {
+                    "name": "Night Owl - Mac",
+                    "file": "msstyles/Night Owl - mac.msstyles",
+                    "preview": "previews/Dark mac.png"
+                },
+                {
+                    "name": "Night Owl - Mac NA",
+                    "file": "msstyles/Night Owl - mac NA.msstyles",
+                    "preview": "previews/Dark mac NA.png"
+                },
+                {
+                    "name": "Night Owl - Mac 2",
+                    "file": "msstyles/Night Owl - mac 2.msstyles",
+                    "preview": "previews/Dark mac 2.png"
+                },
+                {
+                    "name": "Night Owl - Mac 2 NA",
+                    "file": "msstyles/Night Owl - mac 2 NA.msstyles",
+                    "preview": "previews/Dark mac 2 NA.png"
+                },
+                {
+                    "name": "Night Owl - Dots",
+                    "file": "msstyles/Night Owl - dots.msstyles",
+                    "preview": "previews/Dark dots.png"
+                },
+                {
+                    "name": "Night Owl - Dots NA",
+                    "file": "msstyles/Night Owl - dots NA.msstyles",
+                    "preview": "previews/Dark dots NA.png"
+                },
+                {
+                    "name": "Night Owl - Dots 2",
+                    "file": "msstyles/Night Owl - dots 2.msstyles",
+                    "preview": "previews/Dark dots 2.png"
+                },
+                {
+                    "name": "Night Owl - Dots 2 NA",
+                    "file": "msstyles/Night Owl - dots 2 NA.msstyles",
+                    "preview": "previews/Dark dots 2 NA.png"
+                },
+                {
+                    "name": "Night Owl - Nude",
+                    "file": "msstyles/Night Owl - nude.msstyles",
+                    "preview": "previews/Dark nude.png"
+                },
+                {
+                    "name": "Night Owl - Nude NA",
+                    "file": "msstyles/Night Owl - nude NA.msstyles",
+                    "preview": "previews/Dark nude NA.png"
+                },
+                {
+                    "name": "Dark Owl - Win",
+                    "file": "msstyles/Dark Owl - Win.msstyles",
+                    "preview": "previews/Dark Win.png"
+                },
+                {
+                    "name": "Dark Owl - Win NA",
+                    "file": "msstyles/Dark Owl - Win NA.msstyles",
+                    "preview": "previews/Dark Win NA.png"
+                },
+                {
+                    "name": "Dark Owl - Mac",
+                    "file": "msstyles/Dark Owl - mac.msstyles",
+                    "preview": "previews/Dark mac.png"
+                },
+                {
+                    "name": "Dark Owl - Mac NA",
+                    "file": "msstyles/Dark Owl - mac NA.msstyles",
+                    "preview": "previews/Dark mac NA.png"
+                },
+                {
+                    "name": "Dark Owl - Mac 2",
+                    "file": "msstyles/Dark Owl - mac 2.msstyles",
+                    "preview": "previews/Dark mac 2.png"
+                },
+                {
+                    "name": "Dark Owl - Mac 2 NA",
+                    "file": "msstyles/Dark Owl - mac 2 NA.msstyles",
+                    "preview": "previews/Dark mac 2 NA.png"
+                },
+                {
+                    "name": "Dark Owl - Dots",
+                    "file": "msstyles/Dark Owl - dots.msstyles",
+                    "preview": "previews/Dark dots.png"
+                },
+                {
+                    "name": "Dark Owl - Dots NA",
+                    "file": "msstyles/Dark Owl - dots NA.msstyles",
+                    "preview": "previews/Dark dots NA.png"
+                },
+                {
+                    "name": "Dark Owl - Dots 2",
+                    "file": "msstyles/Dark Owl - dots 2.msstyles",
+                    "preview": "previews/Dark dots 2.png"
+                },
+                {
+                    "name": "Dark Owl - Dots 2 NA",
+                    "file": "msstyles/Dark Owl - dots 2 NA.msstyles",
+                    "preview": "previews/Dark dots 2 NA.png"
+                },
+                {
+                    "name": "Dark Owl - Nude",
+                    "file": "msstyles/Dark Owl - nude.msstyles",
+                    "preview": "previews/Dark nude.png"
+                },
+                {
+                    "name": "Dark Owl - Nude NA",
+                    "file": "msstyles/Dark Owl - nude NA.msstyles",
+                    "preview": "previews/Dark nude NA.png"
+                },
+                {
+                    "name": "Light Owl - Win",
+                    "file": "msstyles/Light Owl - Win.msstyles",
+                    "preview": "previews/Light Win.png"
+                },
+                {
+                    "name": "Light Owl - Win NA",
+                    "file": "msstyles/Light Owl - Win NA.msstyles",
+                    "preview": "previews/Light Win NA.png"
+                },
+                {
+                    "name": "Light Owl - Mac",
+                    "file": "msstyles/Light Owl - mac.msstyles",
+                    "preview": "previews/Light mac.png"
+                },
+                {
+                    "name": "Light Owl - Mac NA",
+                    "file": "msstyles/Light Owl - mac NA.msstyles",
+                    "preview": "previews/Light mac NA.png"
+                },
+                {
+                    "name": "Light Owl - Mac 2",
+                    "file": "msstyles/Light Owl - mac 2.msstyles",
+                    "preview": "previews/Light mac 2.png"
+                },
+                {
+                    "name": "Light Owl - Mac 2 NA",
+                    "file": "msstyles/Light Owl - mac 2 NA.msstyles",
+                    "preview": "previews/Light mac 2 NA.png"
+                },
+                {
+                    "name": "Light Owl - Dots",
+                    "file": "msstyles/Light Owl - dots.msstyles",
+                    "preview": "previews/Light dots.png"
+                },
+                {
+                    "name": "Light Owl - Dots NA",
+                    "file": "msstyles/Light Owl - dots NA.msstyles",
+                    "preview": "previews/Light dots NA.png"
+                },
+                {
+                    "name": "Light Owl - Dots 2",
+                    "file": "msstyles/Light Owl - dots 2.msstyles",
+                    "preview": "previews/Light dots 2.png"
+                },
+                {
+                    "name": "Light Owl - Dots 2 NA",
+                    "file": "msstyles/Light Owl - dots 2 NA.msstyles",
+                    "preview": "previews/Light dots 2 NA.png"
+                },
+                {
+                    "name": "Light Owl - Nude",
+                    "file": "msstyles/Light Owl - nude.msstyles",
+                    "preview": "previews/Light nude.png"
+                },
+                {
+                    "name": "Light Owl - Nude NA",
+                    "file": "msstyles/Light Owl - nude NA.msstyles",
+                    "preview": "previews/Light nude NA.png"
+                }
+            ]
+        },
+        "themes": {
+            "variants": [
+                {
+                    "name": "Night Owl - Win",
+                    "file": "themes/Night Owl - Win.theme"
+                },
+                {
+                    "name": "Night Owl - Win NA",
+                    "file": "themes/Night Owl - Win NA.theme"
+                },
+                {
+                    "name": "Night Owl - Mac",
+                    "file": "themes/Night Owl - mac.theme"
+                },
+                {
+                    "name": "Night Owl - Mac NA",
+                    "file": "themes/Night Owl - mac NA.theme"
+                },
+                {
+                    "name": "Night Owl - Mac 2",
+                    "file": "themes/Night Owl - mac 2.theme"
+                },
+                {
+                    "name": "Night Owl - Mac 2 NA",
+                    "file": "themes/Night Owl - mac 2 NA.theme"
+                },
+                {
+                    "name": "Night Owl - Dots",
+                    "file": "themes/Night Owl - dots.theme"
+                },
+                {
+                    "name": "Night Owl - Dots NA",
+                    "file": "themes/Night Owl - dots NA.theme"
+                },
+                {
+                    "name": "Night Owl - Dots 2",
+                    "file": "themes/Night Owl - dots 2.theme"
+                },
+                {
+                    "name": "Night Owl - Dots 2 NA",
+                    "file": "themes/Night Owl - dots 2 NA.theme"
+                },
+                {
+                    "name": "Night Owl - Nude",
+                    "file": "themes/Night Owl - nude.theme"
+                },
+                {
+                    "name": "Night Owl - Nude NA",
+                    "file": "themes/Night Owl - nude NA.theme"
+                },
+                {
+                    "name": "Dark Owl - Win",
+                    "file": "themes/Dark Owl - Win.theme"
+                },
+                {
+                    "name": "Dark Owl - Win NA",
+                    "file": "themes/Dark Owl - Win NA.theme"
+                },
+                {
+                    "name": "Dark Owl - Mac",
+                    "file": "themes/Dark Owl - mac.theme"
+                },
+                {
+                    "name": "Dark Owl - Mac NA",
+                    "file": "themes/Dark Owl - mac NA.theme"
+                },
+                {
+                    "name": "Dark Owl - Mac 2",
+                    "file": "themes/Dark Owl - mac 2.theme"
+                },
+                {
+                    "name": "Dark Owl - Mac 2 NA",
+                    "file": "themes/Dark Owl - mac 2 NA.theme"
+                },
+                {
+                    "name": "Dark Owl - Dots",
+                    "file": "themes/Dark Owl - dots.theme"
+                },
+                {
+                    "name": "Dark Owl - Dots NA",
+                    "file": "themes/Dark Owl - dots NA.theme"
+                },
+                {
+                    "name": "Dark Owl - Dots 2",
+                    "file": "themes/Dark Owl - dots 2.theme"
+                },
+                {
+                    "name": "Dark Owl - Dots 2 NA",
+                    "file": "themes/Dark Owl - dots 2 NA.theme"
+                },
+                {
+                    "name": "Dark Owl - Nude",
+                    "file": "themes/Dark Owl - nude.theme"
+                },
+                {
+                    "name": "Dark Owl - Nude NA",
+                    "file": "themes/Dark Owl - nude NA.theme"
+                },
+                {
+                    "name": "Light Owl - Win",
+                    "file": "themes/Light Owl - Win.theme"
+                },
+                {
+                    "name": "Light Owl - Win NA",
+                    "file": "themes/Light Owl - Win NA.theme"
+                },
+                {
+                    "name": "Light Owl - Mac",
+                    "file": "themes/Light Owl - mac.theme"
+                },
+                {
+                    "name": "Light Owl - Mac NA",
+                    "file": "themes/Light Owl - mac NA.theme"
+                },
+                {
+                    "name": "Light Owl - Mac 2",
+                    "file": "themes/Light Owl - mac 2.theme"
+                },
+                {
+                    "name": "Light Owl - Mac 2 NA",
+                    "file": "themes/Light Owl - mac 2 NA.theme"
+                },
+                {
+                    "name": "Light Owl - Dots",
+                    "file": "themes/Light Owl - dots.theme"
+                },
+                {
+                    "name": "Light Owl - Dots NA",
+                    "file": "themes/Light Owl - dots NA.theme"
+                },
+                {
+                    "name": "Light Owl - Dots 2",
+                    "file": "themes/Light Owl - dots 2.theme"
+                },
+                {
+                    "name": "Light Owl - Dots 2 NA",
+                    "file": "themes/Light Owl - dots 2 NA.theme"
+                },
+                {
+                    "name": "Light Owl - Nude",
+                    "file": "themes/Light Owl - nude.theme"
+                },
+                {
+                    "name": "Light Owl - Nude NA",
+                    "file": "themes/Light Owl - nude NA.theme"
+                }
+            ]
+        },
+        "wallpapers": {
+            "variants": [
+                {
+                    "name": "Abstract (Night)",
+                    "file": "wallpapers/Night/ABSTRACT.jpeg"
+                },
+                {
+                    "name": "DJ Owl (Night)",
+                    "file": "wallpapers/Night/DJ OWL.jpeg"
+                },
+                {
+                    "name": "Night Owl (Night)",
+                    "file": "wallpapers/Night/NIGHT OWL.jpeg"
+                },
+                {
+                    "name": "Owl Time (Night)",
+                    "file": "wallpapers/Night/OWL TIME.jpeg"
+                },
+                {
+                    "name": "Owl (Night)",
+                    "file": "wallpapers/Night/OWL.jpeg"
+                },
+                {
+                    "name": "The Owl (Night)",
+                    "file": "wallpapers/Night/THE OWL.jpeg"
+                },
+                {
+                    "name": "Tree Owl (Night)",
+                    "file": "wallpapers/Night/TREE OWL.jpeg"
+                },
+                {
+                    "name": "Abstract (Light)",
+                    "file": "wallpapers/Light/ABSTRACT.jpeg"
+                },
+                {
+                    "name": "DJ Owl (Light)",
+                    "file": "wallpapers/Light/DJ OWL.jpeg"
+                },
+                {
+                    "name": "Night Owl (Light)",
+                    "file": "wallpapers/Light/NIGHT OWL.jpeg"
+                },
+                {
+                    "name": "Owl Time (Light)",
+                    "file": "wallpapers/Light/OWL TIME.jpeg"
+                },
+                {
+                    "name": "Owl (Light)",
+                    "file": "wallpapers/Light/OWL.jpeg"
+                },
+                {
+                    "name": "The Owl (Light)",
+                    "file": "wallpapers/Light/THE OWL.jpeg"
+                },
+                {
+                    "name": "Tree Owl (Light)",
+                    "file": "wallpapers/Light/TREE OWL.jpeg"
+                }
+            ]
+        },
+        "cursors": {
+            "path": "cursors"
+        },
+        "startallback": {
+            "app": "startallback",
+            "skin": "startallback/Light Owl.msstyles",
+            "variants": [
+                {
+                    "file": "startallback/Light Owl.msstyles",
+                    "name": "Light Owl"
+                },
+                {
+                    "file": "startallback/Night Owl.msstyles",
+                    "name": "Night Owl"
+                }
+            ]
+        },
+        "mica": {
+            "guide": "guides/mica",
+            "app": "mica"
+        },
+        "oldnewexplorer": {
+            "guide": "guides/oldnewexplorer",
+            "app": "oldnewexplorer"
+        },
+        "startorb": {
+            "variants": [
+                {
+                    "file": "startallback/Orbs/Dots 1 - Light Owl.svg",
+                    "name": "Dots 1 - Light Owl"
+                },
+                {
+                    "file": "startallback/Orbs/Dots 1 - Night Owl.svg",
+                    "name": "Dots 1 - Night Owl"
+                },
+                {
+                    "file": "startallback/Orbs/Dots 2 - Light Owl.svg",
+                    "name": "Dots 2 - Light Owl"
+                },
+                {
+                    "file": "startallback/Orbs/Dots 2 - Night Owl.svg",
+                    "name": "Dots 2 - Night Owl"
+                },
+                {
+                    "file": "startallback/Orbs/Dots 3 - Light Owl.svg",
+                    "name": "Dots 3 - Light Owl"
+                },
+                {
+                    "file": "startallback/Orbs/Dots 3 - Night Owl.svg",
+                    "name": "Dots 3 - Night Owl"
+                },
+                {
+                    "file": "startallback/Orbs/Win - Light Owl.svg",
+                    "name": "Win - Light Owl"
+                },
+                {
+                    "file": "startallback/Orbs/Win - Night Owl.svg",
+                    "name": "Win - Night Owl"
+                },
+                {
+                    "file": "startallback/Orbs/StartAllBack - Taskbar (Windhawk).png",
+                    "name": "StartAllBack - Taskbar (Windhawk)"
+                }
+            ]
+        }
+    }
 }
