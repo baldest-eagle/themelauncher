@@ -1,0 +1,17 @@
+﻿# Antigravity 2.0 Engine Cache & Session Logs
+.agents/.session_cache/
+.agents/plugins/
+
+# Python Virtual Environments & Runtime Cache
+__pycache__/
+*.pyc
+.venv/
+env/
+
+# Temporary Extraction Pipelines
+assets/temp_extracted/
+
+# Rogue nested repositories blocking commits
+C:\\users/kyleh/.gemini/ProjectEraser/
+C:\\users/kyleh/.gemini/ProjectEraser.bck/
+C:\\users/kyleh/.gemini/SecureUxTheme_Source/

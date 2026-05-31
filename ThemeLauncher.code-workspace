@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../BotProject"
+		},
+		{
+			"path": "../ProjectEraser"
+		},
+		{
+			"path": "../Themes"
+		}
+	],
+	"settings": {}
+}

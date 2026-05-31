@@ -1,0 +1,14 @@
+﻿{
+  "mcpServers": {
+    "theme-assets": {
+      "command": "node",
+      "args": ["@modelcontextprotocol/server-filesystem", "./themes", "./src", "./assets"],
+      "env": {}
+    },
+    "system-shell": {
+      "command": "powershell.exe",
+      "args": ["-NoProfile", "-NonInteractive", "-Command"],
+      "env": {}
+    }
+  }
+}

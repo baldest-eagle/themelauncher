@@ -1,0 +1,26 @@
+{
+  "folders": [
+    {
+      "path": ".",
+      "name": "ThemeLauncher"
+    },
+    {
+      "path": "../ProjectEraser"
+    },
+    {
+      "path": "../Themes"
+    },
+    {
+      "path": "../BotProject"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/.git": true,
+      "**/node_modules": true
+    },
+    "search.exclude": {
+      "**/node_modules": true
+    }
+  }
+}

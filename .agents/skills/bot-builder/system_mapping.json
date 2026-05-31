@@ -1,0 +1,30 @@
+﻿{
+  "windhawk_mappings": {
+    "target_dir": "icons/Windhawk Resource Redirect/",
+    "resource_subfolder": "Windhawk Resources",
+    "required_manifest": "theme.ini",
+    "critical_dlls": [
+      "ExplorerFrame.dll",
+      "imageres.dll",
+      "imagesp1.dll",
+      "shell32.dll",
+      "zipfldr.dll"
+    ]
+  },
+  "sub_app_targets": {
+    "startallback": {
+      "styles_path": "startallback/Styles/",
+      "orbs_path": "startallback/Orbs/"
+    },
+    "firefox": {
+      "profile_exports": "firefox/firefox-color-export.json",
+      "chrome_css": "firefox/userChrome.css"
+    },
+    "fonts": {
+      "extension": ".ttf"
+    },
+    "tweaks": {
+      "registry_backup": "winaero_tweaks_backup.reg"
+    }
+  }
+}
