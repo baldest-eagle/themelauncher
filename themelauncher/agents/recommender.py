@@ -80,7 +80,14 @@ class Recommender:
         return similar[:limit]
 
     def circadian_suggest(self) -> dict[str, Any]:
-        """Suggest based on time of day."""
+        """Suggest a theme by actual mean palette luminance (Rec. 709).
+
+        Daytime (06:00–17:59) → lightest palette (lowest eye strain in bright
+        ambient light). Nighttime (18:00–05:59) → darkest palette. Previously
+        this returned the first key in the dict (arbitrary hash order) for
+        daytime and the first substring match for nighttime — neither was a
+        real "lightest" or "darkest" pick.
+        """
         hour = datetime.now().hour
         if not self.theme_manager:
             return {"theme": None, "reason": "No themes available"}
@@ -89,26 +96,79 @@ class Recommender:
         if not all_themes:
             return {"theme": None, "reason": "No themes available"}
 
-        # Daytime: pick lightest theme; Night: pick darkest
-        if 6 <= hour < 18:
-            return {"theme": list(all_themes.keys())[0], "reason": f"It's {hour}:00 — daytime themes reduce eye strain"}
-        else:
-            dark_themes = [n for n in all_themes.keys() if "dark" in n.lower() or "night" in n.lower()]
-            if dark_themes:
-                return {"theme": dark_themes[0], "reason": f"It's {hour}:00 — dark theme suggested for nighttime"}
-            return {"theme": list(all_themes.keys())[0], "reason": f"It's {hour}:00"}
+        # Compute mean luminance per theme (lower = darker).
+        scored: list[tuple[float, str]] = []
+        for name, data in all_themes.items():
+            palette = data.get("manifest", {}).get("palette", {}) if isinstance(data, dict) else {}
+            lum = self._mean_palette_luminance(palette)
+            scored.append((lum, name))
+
+        if not scored:
+            return {"theme": None, "reason": "No themes available"}
+
+        is_daytime = 6 <= hour < 18
+        if is_daytime:
+            # Lightest = highest luminance.
+            scored.sort(key=lambda t: t[0], reverse=True)
+            pick = scored[0][1]
+            return {"theme": pick,
+                    "reason": f"It's {hour}:00 — lightest theme '{pick}' suggested for daytime"}
+        # Nighttime → darkest.
+        scored.sort(key=lambda t: t[0])
+        pick = scored[0][1]
+        return {"theme": pick,
+                "reason": f"It's {hour}:00 — darkest theme '{pick}' suggested for nighttime"}
+
+    @staticmethod
+    def _mean_palette_luminance(palette: dict[str, str]) -> float:
+        """Mean Rec. 709 luminance across all hex colors in ``palette``.
+
+        Channels are sRGB-linearized per WCAG 2.1 before applying the
+        coefficients so mid-tones aren't underestimated.
+        """
+        if not palette:
+            return 0.0
+        total = 0.0
+        count = 0
+        for v in palette.values():
+            if not isinstance(v, str) or not v.startswith("#") or len(v) < 7:
+                continue
+            try:
+                h = v.lstrip("#")
+                r, g, b = int(h[0:2], 16) / 255.0, int(h[2:4], 16) / 255.0, int(h[4:6], 16) / 255.0
+            except (ValueError, IndexError):
+                continue
+            rl = r / 12.92 if r <= 0.03928 else ((r + 0.055) / 1.055) ** 2.4
+            gl = g / 12.92 if g <= 0.03928 else ((g + 0.055) / 1.055) ** 2.4
+            bl = b / 12.92 if b <= 0.03928 else ((b + 0.055) / 1.055) ** 2.4
+            total += 0.2126 * rl + 0.7152 * gl + 0.0722 * bl
+            count += 1
+        return total / count if count else 0.0
 
     def track_apply(self, theme_name: str, components: Optional[list[str]] = None) -> None:
-        """Record an apply event for learning."""
+        """Record an apply event for learning.
+
+        History is bounded to the most recent 200 entries so a long-running
+        process doesn't accumulate unbounded memory.
+        """
         self._history.append({
             "action": "apply",
             "theme": theme_name,
             "components": components,
             "timestamp": time.time(),
         })
+        if len(self._history) > 200:
+            # Trim to the most recent 200 entries.
+            del self._history[: len(self._history) - 200]
 
     def _color_distance(self, hex_a: str, hex_b: str) -> float:
-        """CIEDE2000-like distance between two hex colors."""
+        """Euclidean sRGB distance between two hex colors.
+
+        Note: this is a simple ``sqrt(Δr² + Δg² + Δb²)`` over raw sRGB values,
+        NOT a perceptually-uniform CIEDE2000 distance (despite the previous
+        docstring's claim). It's good enough for ranking palette similarity
+        but should not be presented as perceptually accurate.
+        """
         def _to_rgb(h):
             h = h.lstrip("#")
             return int(h[0:2], 16), int(h[2:4], 16), int(h[4:6], 16)

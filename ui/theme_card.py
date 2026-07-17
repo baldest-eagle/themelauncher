@@ -1,6 +1,7 @@
 """Theme card for the sidebar — theme-reactive."""
 
 import os
+import tkinter as tk
 
 import customtkinter as ctk
 from PIL import Image
@@ -16,12 +17,18 @@ class ThemeCard(ctk.CTkFrame):
 
         self.theme_name = theme_name
         self.theme_data = theme_data
+        self.theme_path = theme_data.get("path")
         self.colors = colors
         self.on_select = on_select
         self.selected = False
 
+        # takefocus is rejected by CTkFrame's kwarg filter, so set it on
+        # the underlying tk.Frame directly via the unbound method.
+        tk.Frame.configure(self, takefocus=True)
+
         self._build()
-        self._bind_clicks()
+        self._bind_descendants()
+        self._bind_keyboard()
 
     def _build(self):
         p = self.colors.palette
@@ -71,15 +78,66 @@ class ThemeCard(ctk.CTkFrame):
             text_color=self.colors.p("text"),
         )
 
-    def _bind_clicks(self):
-        self.bind("<Button-1>", self._on_click)
-        for widget in self.winfo_children():
-            widget.bind("<Button-1>", self._on_click)
-            for child in widget.winfo_children():
-                child.bind("<Button-1>", self._on_click)
+    def _bind_descendants(self):
+        """Recursively bind click + right-click on this card and every
+        descendant widget, so clicks anywhere inside the card trigger
+        selection and right-click opens the context menu."""
+        widgets = [self]
+        stack = list(self.winfo_children())
+        while stack:
+            w = stack.pop()
+            widgets.append(w)
+            stack.extend(w.winfo_children())
+        for w in widgets:
+            w.bind("<Button-1>", self._on_click, add="+")
+            w.bind("<Button-3>", self._on_right_click, add="+")
+
+    def _bind_keyboard(self):
+        """Make the card keyboard-navigable (WCAG 2.1 SC 2.1.1)."""
+        self.bind("<Return>", self._on_click)
+        self.bind("<space>", self._on_click)
+        self.bind("<FocusIn>", self._on_focus_in)
+        self.bind("<FocusOut>", self._on_focus_out)
+
+    def _on_focus_in(self, event=None):
+        # Only draw the focus ring if the card isn't already selected —
+        # otherwise we'd overwrite the selection accent.
+        if not self.selected:
+            p = self.colors.palette
+            self.configure(border_color=p["active"])
+
+    def _on_focus_out(self, event=None):
+        if not self.selected:
+            p = self.colors.palette
+            self.configure(border_color=p["border"])
 
     def _on_click(self, event=None):
         self.on_select(self.theme_name)
+
+    def _on_right_click(self, event=None):
+        p = self.colors.palette
+        menu = tk.Menu(self, tearoff=0,
+                       bg=p["accent"], fg=p["text"],
+                       activebackground=p["border"], activeforeground=p["text"],
+                       borderwidth=0)
+        menu.add_command(label="Apply", command=self._on_click)
+        menu.add_separator()
+        if self.theme_path and hasattr(os, "startfile"):
+            menu.add_command(
+                label="Open in File Explorer",
+                command=lambda: self._open_in_explorer(),
+            )
+        try:
+            menu.tk_popup(event.x_root, event.y_root)
+        finally:
+            menu.grab_release()
+
+    def _open_in_explorer(self):
+        if self.theme_path and hasattr(os, "startfile"):
+            try:
+                os.startfile(self.theme_path)  # type: ignore[attr-defined]
+            except Exception:
+                pass
 
     def set_selected(self, selected: bool):
         self.selected = selected
@@ -91,6 +149,8 @@ class ThemeCard(ctk.CTkFrame):
 
     def update_palette(self, palette: dict[str, str]):
         """Called by App when the global palette changes."""
+        if not self.winfo_exists():
+            return
         if self.selected:
             self.configure(fg_color=palette["active"], border_color=palette["accent"])
         else:

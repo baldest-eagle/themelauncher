@@ -18,11 +18,21 @@ class MixerPanel(ctk.CTkFrame):
         self._build()
         self.colors.register(self._on_palette_change)
 
+    def destroy(self):
+        """Unregister the palette callback before tearing down."""
+        try:
+            self.colors.unregister(self._on_palette_change)
+        except Exception:
+            pass
+        super().destroy()
+
     # ------------------------------------------------------------------
     # Palette change
     # ------------------------------------------------------------------
 
     def _on_palette_change(self, palette: dict[str, str]):
+        if not self.winfo_exists():
+            return
         self.configure(fg_color=palette["background"])
         self._header.configure(fg_color=palette["accent"], border_color=palette["border"])
         self._header_title.configure(text_color=palette["text"])
@@ -106,7 +116,8 @@ class MixerPanel(ctk.CTkFrame):
     def _build_section(self, comp_type, label, entries):
         p = self.colors.palette
 
-        hdr = ctk.CTkFrame(self.scroll, fg_color=p["accent"], corner_radius=0)
+        hdr = ctk.CTkFrame(self.scroll, fg_color=p["accent"], corner_radius=0,
+                           border_color=p["border"], border_width=1)
         hdr.pack(fill="x", pady=(16, 4))
         ctk.CTkLabel(
             hdr, text=label,
@@ -165,7 +176,7 @@ class MixerPanel(ctk.CTkFrame):
 
         ctk.CTkLabel(
             card, text=theme_name,
-            font=ctk.CTkFont(family="Segoe UI", size=8),
+            font=ctk.CTkFont(family="Segoe UI", size=10),
             text_color=p["border"], wraplength=115, justify="center",
         ).pack(padx=3, pady=(2, 0))
 

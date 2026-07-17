@@ -5,5 +5,9 @@ customtkinter>=5.2.0
 Pillow>=10.0.0
 numpy>=1.24.0
 
+# Optional — required for .7z / 7TSP SFX extraction and icon-pack packaging.
+# Without it, the 7TSP extractor still handles .zip/.tar archives gracefully.
+py7zr>=0.20.0
+
 # Windows-specific (only needed on Windows)
 # pywin32>=305  # for win32com (shortcut icon application)

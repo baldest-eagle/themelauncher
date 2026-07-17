@@ -9,9 +9,43 @@ import colorsys
 import copy
 import json
 import os
+import re
 from typing import Any, Optional
 
 from ..core.logger import log
+
+
+def _resolve_themes_dir() -> str:
+    """Resolve the themes directory from the project config.
+
+    Walks up from this module's ``__file__`` looking for a ``config.json`` at
+    the project root (the same level as the ``themelauncher`` package). Reads
+    ``themes_directory`` from it, falling back to ``<root>/themes``.
+
+    Previously this read ``config.json`` from the process CWD, which broke
+    whenever the app was launched from a different working directory (e.g.
+    a Start Menu shortcut sets CWD to System32).
+    """
+    here = os.path.abspath(os.path.dirname(__file__))
+    # here = .../themelauncher/themelauncher/agents/variant_generator.py
+    # walk up: agents/ → themelauncher/ → themelauncher/ → project root
+    for up in ("..", "..", ".."):
+        here = os.path.abspath(os.path.join(here, up))
+        cfg = os.path.join(here, "config.json")
+        if os.path.exists(cfg):
+            try:
+                with open(cfg, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                td = data.get("themes_directory", "")
+                if td:
+                    if os.path.isabs(td):
+                        return td
+                    return os.path.join(here, td)
+            except Exception:
+                pass
+    # Fallback: <project_root>/themes
+    root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+    return os.path.join(root, "themes")
 
 
 class VariantGenerator:
@@ -22,6 +56,9 @@ class VariantGenerator:
             return False
 
         v_lower = variant_type.lower()
+        # Word-boundary match so "dark" does NOT match "darkforest" (was a
+        # false positive with substring ``in``).
+        word_re = re.compile(r"\b" + re.escape(v_lower) + r"\b", re.IGNORECASE)
 
         # 1. Check manifest.json first for existing variants in components
         manifest_path = os.path.join(theme_dir, "manifest.json")
@@ -35,21 +72,24 @@ class VariantGenerator:
                         variants = comp_data.get("variants", [])
                         for var in variants:
                             if isinstance(var, dict):
-                                name = var.get("name", "").lower()
-                                file_path = var.get("file", "").lower()
-                                if v_lower in name or v_lower in file_path:
+                                name = var.get("name", "") or ""
+                                file_path = var.get("file", "") or ""
+                                if word_re.search(name) or word_re.search(file_path):
                                     log.info(
-                                        "Variant '%s' found in manifest for theme at %s (Name: '%s', File: '%s')",
+                                        "Variant '%s' found in manifest for theme at %s "
+                                        "(Name: '%s', File: '%s')",
                                         variant_type, theme_dir, var.get("name"), var.get("file")
                                     )
                                     return True
             except Exception as e:
                 log.warning("Could not parse manifest at %s to check variants: %s", manifest_path, e)
 
-        # 2. Check files on disk recursively
+        # 2. Check filename STEMS (not full filenames) on disk recursively.
+        # E.g. ``dark.ttf`` matches "dark" but ``darkforest.ttf`` does not.
         for root, _, files in os.walk(theme_dir):
             for file in files:
-                if v_lower in file.lower():
+                stem = os.path.splitext(file)[0]
+                if word_re.search(stem):
                     log.info(
                         "Variant '%s' file match found on disk: %s",
                         variant_type, os.path.join(root, file)
@@ -66,43 +106,45 @@ class VariantGenerator:
     ) -> dict[str, Any]:
         """Generate specified variant types for a theme palette.
 
-        Only creates 'light', 'dark', and 'slate' variants, and skips any that
-        are already provided by the theme files or manifest.
+        Accepts ``dark``, ``light``, ``slate``, ``high_contrast``,
+        ``colorblind_safe``, and ``hue_shift``. Any variant that is already
+        provided by the theme files or manifest is skipped.
         """
         if types is None:
             types = ["dark", "light", "slate"]
 
-        # Resolve theme directory to check provided files
-        import json
-        config_path = "config.json"
-        themes_dir = "themes"
-        if os.path.exists(config_path):
-            try:
-                with open(config_path, "r", encoding="utf-8") as f:
-                    config = json.load(f)
-                    themes_dir = config.get("themes_directory", "themes")
-            except Exception:
-                pass
+        # Resolve theme directory via the project config (NOT the process CWD).
+        themes_dir = _resolve_themes_dir()
         theme_dir = os.path.join(themes_dir, theme_name)
+
+        supported = {
+            "dark": self.derive_dark_palette,
+            "light": self.derive_light_palette,
+            "slate": self.derive_slate_palette,
+            "high_contrast": self.derive_high_contrast,
+            "colorblind_safe": self.derive_colorblind_safe,
+            # hue_shift takes an extra ``degrees`` arg; special-case below.
+            "hue_shift": None,
+        }
 
         variants = {}
         skipped = []
         for vt in types:
-            # Ensure we only generate light/dark/slate
-            if vt not in ["dark", "light", "slate"]:
+            key = vt.lower()
+            if key not in supported:
+                log.warning("Unsupported variant type '%s'; skipping", vt)
                 continue
 
-            if self._is_variant_provided(theme_dir, vt):
+            if self._is_variant_provided(theme_dir, key):
                 log.info("Skipping variant '%s' for '%s': already provided by theme files", vt, theme_name)
                 skipped.append(vt)
                 continue
 
-            if vt == "dark":
-                variants["dark"] = self.derive_dark_palette(palette)
-            elif vt == "light":
-                variants["light"] = self.derive_light_palette(palette)
-            elif vt == "slate":
-                variants["slate"] = self.derive_slate_palette(palette)
+            if key == "hue_shift":
+                variants["hue_shift"] = self.derive_hue_shift(palette, degrees=30)
+            else:
+                fn = supported[key]
+                variants[key] = fn(palette)
 
         return {
             "generated": len(variants),
@@ -127,15 +169,41 @@ class VariantGenerator:
         return result
 
     def derive_dark_palette(self, palette: dict[str, str]) -> dict[str, str]:
-        """Invert lightness, swap bg/fg."""
-        def _dark(h, s, v):
-            return self._hsv_to_hex(h, s, 1.0 - v * 0.7)
-        result = self._transform_palette(palette, _dark)
-        # Swap bg and fg-like roles
-        if "background" in result and "text" in result:
-            bg, txt = result["background"], result["text"]
-            result["background"] = txt
-            result["text"] = bg
+        """Derive a dark variant using explicit lightness targets.
+
+        Previously this used ``v' = 1.0 - v * 0.7`` which is self-cancelling
+        for already-dark colors (a dark color stays dark, a light color flips
+        dark — but then the bg/text swap re-inverts it, so the result was
+        essentially the input palette for any sensible input).
+
+        Now we use explicit lightness targets keyed on the palette key name:
+          * ``background``/``bg``/``surface`` → very dark value (0.12)
+          * ``text``/``fg``/``foreground``   → very light value (0.95)
+          * ``accent``/``primary``           → moderate value (0.55), full sat
+          * everything else                  → lightness only modestly changed
+        """
+        dark_keys = ("background", "bg", "surface", "base", "panel")
+        light_keys = ("text", "fg", "foreground", "label", "title")
+        accent_keys = ("accent", "primary", "active", "selection")
+
+        result: dict[str, str] = {}
+        for key, hex_color in palette.items():
+            h, s, v = self._hex_to_hsv(hex_color)
+            k_lower = key.lower()
+            if any(k in k_lower for k in dark_keys):
+                new_v = 0.12
+                new_s = min(s, 0.35)  # mute so we don't get neon backgrounds
+            elif any(k in k_lower for k in light_keys):
+                new_v = 0.95
+                new_s = min(s, 0.20)
+            elif any(k in k_lower for k in accent_keys):
+                new_v = 0.55
+                new_s = max(s, 0.65)  # keep accents punchy
+            else:
+                # Generic key: shift toward dark without going pure black.
+                new_v = max(0.18, min(0.40, v * 0.5))
+                new_s = s
+            result[key] = self._hsv_to_hex(h, new_s, new_v)
         return result
 
     def derive_light_palette(self, palette: dict[str, str]) -> dict[str, str]:

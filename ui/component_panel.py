@@ -3,6 +3,7 @@
 import customtkinter as ctk
 
 from core.manifest_parser import GUIDE_COMPONENT_TYPES
+from ui.tooltip import Hovertip
 
 
 class ComponentPanel(ctk.CTkFrame):
@@ -23,11 +24,21 @@ class ComponentPanel(ctk.CTkFrame):
         self._build()
         self.colors.register(self._on_palette_change)
 
+    def destroy(self):
+        """Unregister the palette callback before tearing down."""
+        try:
+            self.colors.unregister(self._on_palette_change)
+        except Exception:
+            pass
+        super().destroy()
+
     # ------------------------------------------------------------------
     # Palette change
     # ------------------------------------------------------------------
 
     def _on_palette_change(self, palette: dict[str, str]):
+        if not self.winfo_exists():
+            return
         self.configure(fg_color=palette["inactive"])
         # Rebuild the list if a theme is loaded (simpler than per-widget update)
         if self.current_theme:
@@ -163,19 +174,24 @@ class ComponentPanel(ctk.CTkFrame):
             else (lambda cn=comp_name: self.on_apply(cn))
         )
 
-        ctk.CTkButton(
+        action_btn = ctk.CTkButton(
             row, text=btn_text, width=24, height=24,
             fg_color=p["border"] if is_guide else p["accent"],
             text_color=p["text"], hover_color=p["border"],
             corner_radius=0,
             font=ctk.CTkFont(size=14, weight="bold"),
             command=btn_cmd,
-        ).pack(side="right", padx=(4, 8), pady=8)
+        )
+        action_btn.pack(side="right", padx=(4, 8), pady=8)
+        Hovertip(
+            action_btn,
+            "Open manual setup guide" if is_guide else "Apply this component now",
+        )
 
         if is_guide:
             ctk.CTkLabel(
                 row, text="manual setup",
-                font=ctk.CTkFont(family="Segoe UI", size=8),
+                font=ctk.CTkFont(family="Segoe UI", size=10),
                 text_color=p["border"], anchor="e",
             ).pack(side="right", padx=(0, 4))
 

@@ -100,11 +100,20 @@ class CompatibilityDetector:
             else:
                 wall_bg = "#000000"
 
-            # Simple WCAG contrast check
+            # WCAG 2.1 contrast check — channels must be sRGB-linearized
+            # before applying the Rec. 709 luminance coefficients.
+            def _channel_to_linear(c: float) -> float:
+                if c <= 0.03928:
+                    return c / 12.92
+                return ((c + 0.055) / 1.055) ** 2.4
+
             def _luminance(hex_color: str) -> float:
                 hex_color = hex_color.lstrip("#")
                 r, g, b = [int(hex_color[i:i+2], 16) / 255.0 for i in (0, 2, 4)]
-                return 0.2126 * r + 0.7152 * g + 0.0722 * b
+                rl = _channel_to_linear(r)
+                gl = _channel_to_linear(g)
+                bl = _channel_to_linear(b)
+                return 0.2126 * rl + 0.7152 * gl + 0.0722 * bl
 
             l1 = _luminance(terminal_bg)
             l2 = _luminance(wall_bg)

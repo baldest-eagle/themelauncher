@@ -2,6 +2,8 @@
 
 import customtkinter as ctk
 
+from ui.tooltip import Hovertip
+
 
 class MixRecipePanel(ctk.CTkFrame):
     def __init__(self, parent, mixer, colors, on_apply_mix, on_save_mix):
@@ -14,11 +16,21 @@ class MixRecipePanel(ctk.CTkFrame):
         self._build()
         self.colors.register(self._on_palette_change)
 
+    def destroy(self):
+        """Unregister the palette callback before tearing down."""
+        try:
+            self.colors.unregister(self._on_palette_change)
+        except Exception:
+            pass
+        super().destroy()
+
     # ------------------------------------------------------------------
     # Palette change
     # ------------------------------------------------------------------
 
     def _on_palette_change(self, palette: dict[str, str]):
+        if not self.winfo_exists():
+            return
         self.configure(fg_color=palette["inactive"])
         self._header.configure(fg_color=palette["accent"], border_color=palette["border"])
         self._header_label.configure(text_color=palette["text"])
@@ -52,13 +64,15 @@ class MixRecipePanel(ctk.CTkFrame):
         )
         self._header_label.pack(side="left", padx=16, pady=12)
 
-        ctk.CTkButton(
+        clear_btn = ctk.CTkButton(
             self._header, text="X Clear", width=60, height=24,
             fg_color="transparent", text_color=p["border"],
             hover_color=p["background"], corner_radius=0,
             font=ctk.CTkFont(family="Segoe UI", size=9),
             command=self._clear_all,
-        ).pack(side="right", padx=8)
+        )
+        clear_btn.pack(side="right", padx=8)
+        Hovertip(clear_btn, "Clear all slots")
 
         # Scrollable recipe list
         self.scroll = ctk.CTkScrollableFrame(
@@ -134,13 +148,15 @@ class MixRecipePanel(ctk.CTkFrame):
                     self.refresh()
                 return remove
 
-            ctk.CTkButton(
+            remove_btn = ctk.CTkButton(
                 row, text="X", width=20, height=20,
                 fg_color="transparent", text_color=p["border"],
                 hover_color=p["accent"], corner_radius=0,
                 font=ctk.CTkFont(size=10),
                 command=make_remove(comp_type),
-            ).pack(side="right", padx=(4, 6), pady=6)
+            )
+            remove_btn.pack(side="right", padx=(4, 6), pady=6)
+            Hovertip(remove_btn, "Remove this slot")
 
             left = ctk.CTkFrame(row, fg_color="transparent")
             left.pack(side="left", fill="x", expand=True, padx=(8, 0), pady=6)
@@ -168,6 +184,14 @@ class MixRecipePanel(ctk.CTkFrame):
     def _on_apply(self):
         self.on_apply_mix()
 
+    def do_save(self):
+        """Public entry point for the Ctrl+S keyboard shortcut.
+
+        Opens the Save-Mix dialog (same as clicking the "Save as New Theme"
+        button).  Safe to call from App-level keybindings.
+        """
+        self._on_save()
+
     def _on_save(self):
         p = self.colors.palette
 
@@ -175,6 +199,7 @@ class MixRecipePanel(ctk.CTkFrame):
         dialog.title("Save Mix as Theme")
         dialog.geometry("380x260")
         dialog.configure(fg_color=p["background"])
+        dialog.transient(self)
         dialog.grab_set()
         dialog.resizable(False, False)
 

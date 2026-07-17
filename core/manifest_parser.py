@@ -7,6 +7,7 @@ referenced files actually exist on disk.
 
 import json
 import os
+import re
 from typing import Any
 
 from core.logger import log
@@ -62,13 +63,13 @@ class ManifestParser:
             if field not in data:
                 raise ValueError(f"Manifest missing required field: {field}")
 
-        # Validate version is semver-like
+        # Validate version is semver-like. Accepts pre-release suffixes
+        # like "1.0.0-beta" (the previous all-digits check rejected them).
         version = data.get("version", "")
         if not version or not isinstance(version, str):
             raise ValueError("Manifest 'version' must be a non-empty string")
-        parts = version.split(".")
-        if len(parts) not in (2, 3) or not all(p.isdigit() for p in parts):
-            log.warning("Manifest version '%s' does not follow semver (e.g. 1.0.0)", version)
+        if not re.match(r"^\d+(\.\d+){1,2}(-[A-Za-z0-9.]+)?$", version):
+            log.warning("Manifest version '%s' does not follow semver (e.g. 1.0.0 or 1.0.0-beta)", version)
 
         # Palette must be a dict with the expected keys
         palette = data.get("palette", {})
@@ -144,12 +145,12 @@ class ManifestParser:
     # Convenience methods
     # ------------------------------------------------------------------
 
-    def resolve_path(self, manifest: dict, relative_path: str) -> str:
+    def resolve_path(self, relative_path: str) -> str:
         return os.path.join(self.theme_dir, relative_path)
 
     def get_preview_path(self, manifest: dict) -> str | None:
         if "preview" in manifest:
-            return self.resolve_path(manifest, manifest["preview"])
+            return self.resolve_path(manifest["preview"])
         return None
 
     def get_palette(self, manifest: dict) -> dict:

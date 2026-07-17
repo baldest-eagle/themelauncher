@@ -36,8 +36,21 @@ class DiffEngine:
         # Find changed variants
         common = set(comps_a.keys()) & set(comps_b.keys())
         for comp in common:
-            variants_a = {v["name"] for v in comps_a[comp].get("variants", [])}
-            variants_b = {v["name"] for v in comps_b[comp].get("variants", [])}
+            # Guard against malformed variant entries (missing "name", or
+            # variant not a dict). Previously ``v["name"]`` raised KeyError.
+            def _variant_names(comp_data: Any) -> set[str]:
+                names: set[str] = set()
+                variants = comp_data.get("variants", []) if isinstance(comp_data, dict) else []
+                if not isinstance(variants, list):
+                    return names
+                for v in variants:
+                    if isinstance(v, dict):
+                        n = v.get("name")
+                        if isinstance(n, str):
+                            names.add(n)
+                return names
+            variants_a = _variant_names(comps_a[comp])
+            variants_b = _variant_names(comps_b[comp])
             if variants_a != variants_b:
                 changes["changed_variants"].append({
                     "component": comp,

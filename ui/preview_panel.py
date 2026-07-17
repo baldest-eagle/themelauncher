@@ -19,11 +19,21 @@ class PreviewPanel(ctk.CTkFrame):
         self._build()
         self.colors.register(self._on_palette_change)
 
+    def destroy(self):
+        """Unregister the palette callback before tearing down."""
+        try:
+            self.colors.unregister(self._on_palette_change)
+        except Exception:
+            pass
+        super().destroy()
+
     # ------------------------------------------------------------------
     # Palette change
     # ------------------------------------------------------------------
 
     def _on_palette_change(self, palette: dict[str, str]):
+        if not self.winfo_exists():
+            return
         self.configure(fg_color=palette["background"])
         self._header.configure(fg_color=palette["accent"], border_color=palette["border"])
         self.title_label.configure(text_color=palette["text"])

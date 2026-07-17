@@ -39,7 +39,14 @@ class IconPackConverter:
 
     def convert(self, icon_pack_path: str, output_path: str,
                 pack_name: Optional[str] = None, author: Optional[str] = None) -> dict[str, Any]:
-        """Full conversion pipeline: map icons, generate INI, package as 7z."""
+        """Full conversion pipeline: map icons, generate INI, package as 7z.
+
+        ``output_path`` may be either a directory (the INI is written inside
+        it) or a bare filename / archive path (the INI is written alongside
+        it). Previously the bare-filename branch crashed with
+        ``os.makedirs('')`` because ``os.path.dirname('config.7z')`` returns
+        ``''``.
+        """
         if not os.path.isdir(icon_pack_path):
             return {"success": False, "message": f"Directory not found: {icon_pack_path}"}
 
@@ -48,16 +55,20 @@ class IconPackConverter:
         if not mapping_result["mapped"]:
             return {"success": False, "message": "No icons could be mapped to known resources"}
 
-        # Generate INI
-        ini_path = os.path.join(output_path, "config.ini") if os.path.isdir(output_path) else \
-            os.path.join(os.path.dirname(output_path), "config.ini")
-        os.makedirs(os.path.dirname(ini_path), exist_ok=True)
+        # Resolve the INI directory robustly.
+        if os.path.isdir(output_path):
+            ini_dir = output_path
+        else:
+            # output_path is a file (e.g. "pack.7z") — write alongside it.
+            ini_dir = os.path.dirname(output_path) or "."
+        os.makedirs(ini_dir, exist_ok=True)
+        ini_path = os.path.join(ini_dir, "config.ini")
         ini_content = self.generate_ini(mapping_result["mapping"], pack_name or "Icon Pack")
         with open(ini_path, "w", encoding="utf-8") as f:
             f.write(ini_content)
 
-        # Try to package as 7z
-        package_result = self.package_7z(ini_path, output_path)
+        # Try to package as 7z — include the icon files, not just the INI.
+        package_result = self.package_7z(ini_path, output_path, icon_pack_path=icon_pack_path)
         if package_result["success"]:
             return {
                 "success": True,
@@ -96,17 +107,38 @@ class IconPackConverter:
             lines.append(f"{entry['dll']},{entry['index']}={entry['file']}")
         return "\n".join(lines)
 
-    def package_7z(self, ini_path: str, output_path: str) -> dict[str, Any]:
-        """Create the 7z archive using py7zr if available."""
+    def package_7z(self, ini_path: str, output_path: str,
+                    icon_pack_path: Optional[str] = None) -> dict[str, Any]:
+        """Create the 7z archive using py7zr if available.
+
+        Includes BOTH the generated INI and every ``.ico`` file under
+        ``icon_pack_path`` (walked recursively). Previously this archived only
+        the INI, producing an icon-less package that 7TSP could not install.
+        """
         try:
             import py7zr
-            archive_path = output_path if output_path.endswith(".7z") else output_path + ".7z"
-            with py7zr.SevenZipFile(archive_path, 'w') as archive:
-                archive.write(ini_path, os.path.basename(ini_path))
-            return {"success": True, "output": archive_path}
         except ImportError:
             log.warning("py7zr not available; cannot create 7z package")
             return {"success": False, "message": "py7zr not installed"}
+
+        archive_path = output_path if output_path.endswith(".7z") else output_path + ".7z"
+        # If output_path was a directory, the archive lands inside it.
+        if os.path.isdir(output_path):
+            archive_path = os.path.join(output_path, os.path.basename(output_path) + ".7z")
+        with py7zr.SevenZipFile(archive_path, 'w') as archive:
+            archive.write(ini_path, os.path.basename(ini_path))
+            if icon_pack_path and os.path.isdir(icon_pack_path):
+                for root, _dirs, files in os.walk(icon_pack_path):
+                    for fname in files:
+                        if not fname.lower().endswith(".ico"):
+                            continue
+                        src = os.path.join(root, fname)
+                        arcname = os.path.relpath(src, icon_pack_path)
+                        try:
+                            archive.write(src, arcname)
+                        except Exception as exc:
+                            log.warning("Failed to add %s to archive: %s", src, exc)
+        return {"success": True, "output": archive_path}
 
     def add_custom_mapping(self, filename: str, dll: str, index: int) -> None:
         """Extend the built-in mapping table."""

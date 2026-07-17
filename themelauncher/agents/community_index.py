@@ -42,7 +42,7 @@ class CommunityIndex:
 
     On init the agent resolves the themes directory by walking upward from
     its own file location looking for ``config.json``.  If none is found it
-    falls back to ``~/.gemini/themes``.
+    falls back to ``~/.themelauncher/themes``.
 
     The public surface matches the ThemeSDK facade expectations:
     :meth:`crawl`, :meth:`search`, :meth:`scan`, :meth:`get_theme`, and
@@ -58,9 +58,12 @@ class CommunityIndex:
     def _resolve_themes_dir(self) -> None:
         """Walk upward from *this file* to locate ``config.json``.
 
-        Reads the ``themes_dir`` key from the first ``config.json`` found.
-        If the walk reaches the filesystem root without finding one the
-        method falls back to ``~/.gemini/themes``.
+        Reads the ``themes_dir`` (or ``themes_directory``) key from the first
+        ``config.json`` found.  If the walk reaches the filesystem root
+        without finding one, the method falls back to
+        ``~/.themelauncher/themes`` (this project's own data dir — the
+        previous fallback ``~/.gemini/Themes`` was a copy-paste from another
+        project and had nothing to do with ThemeLauncher).
         """
         current = os.path.dirname(os.path.abspath(__file__))
 
@@ -86,8 +89,8 @@ class CommunityIndex:
                 break
             current = parent
 
-        # Fallback
-        self.themes_dir = os.path.expanduser("~/.gemini/Themes")
+        # Fallback — this project's own per-user data dir.
+        self.themes_dir = os.path.expanduser("~/.themelauncher/themes")
         logger.info(
             "No config.json found; falling back to %s", self.themes_dir
         )

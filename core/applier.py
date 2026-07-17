@@ -11,11 +11,17 @@ import os
 import shutil
 import subprocess
 import threading
-import winreg
 from typing import Any
 
+# Guarded winreg import so the module loads cleanly on non-Windows.
+try:
+    import winreg  # type: ignore[import-not-found]
+except ImportError:  # pragma: no cover - non-Windows
+    winreg = None  # type: ignore[assignment]
+
+from core._io import atomic_write_json, safe_remove
 from core.logger import log
-from core.manifest_parser import GUIDE_COMPONENT_TYPES
+from core.win32 import reg_open_key, reg_set_value, set_system_parameter
 
 
 class Applier:
@@ -101,16 +107,15 @@ class Applier:
         # 1. Restore default msstyles / theme
         try:
             default_theme = os.path.join(
-                os.environ["WINDIR"], "Resources", "Themes", "aero.theme"
+                os.environ.get("WINDIR", r"C:\Windows"), "Resources", "Themes", "aero.theme"
             )
             if os.path.exists(default_theme):
-                key = winreg.OpenKey(
+                with reg_open_key(
                     winreg.HKEY_CURRENT_USER,
                     r"Software\Microsoft\Windows\CurrentVersion\Themes",
-                    0, winreg.KEY_WRITE,
-                )
-                winreg.SetValueEx(key, "CurrentTheme", 0, winreg.REG_SZ, default_theme)
-                winreg.CloseKey(key)
+                    writable=True,
+                ) as key:
+                    reg_set_value(key, "CurrentTheme", default_theme)
                 ctypes.windll.user32.SendMessageW(0xFFFF, 0x001A, 0, "ImmersiveColorSet")
                 results["msstyles"] = {"success": True, "message": "Reverted to Aero theme"}
             else:
@@ -121,11 +126,14 @@ class Applier:
         # 2. Restore default wallpaper
         try:
             default_wallpaper = os.path.join(
-                os.environ["WINDIR"], "Web", "Wallpaper", "Windows", "img0.jpg"
+                os.environ.get("WINDIR", r"C:\Windows"), "Web", "Wallpaper", "Windows", "img0.jpg"
             )
             if os.path.exists(default_wallpaper):
-                ctypes.windll.user32.SystemParametersInfoW(20, 0, default_wallpaper, 3)
-                results["wallpapers"] = {"success": True, "message": "Wallpaper reset to default"}
+                ok, msg = set_system_parameter(20, 0, default_wallpaper, 3)
+                if ok:
+                    results["wallpapers"] = {"success": True, "message": "Wallpaper reset to default"}
+                else:
+                    results["wallpapers"] = {"success": False, "message": f"Wallpaper reset failed: {msg}"}
             else:
                 results["wallpapers"] = {"success": True, "message": "Default wallpaper not found, skipped"}
         except Exception as exc:
@@ -133,13 +141,15 @@ class Applier:
 
         # 3. Reset cursors
         try:
-            key = winreg.OpenKey(
-                winreg.HKEY_CURRENT_USER, r"Control Panel\Cursors", 0, winreg.KEY_WRITE
-            )
-            winreg.SetValueEx(key, "", 0, winreg.REG_SZ, "")
-            winreg.SetValueEx(key, "Scheme Source", 0, winreg.REG_DWORD, 0)
-            winreg.CloseKey(key)
-            ctypes.windll.user32.SystemParametersInfoW(0x0057, 0, None, 2)
+            with reg_open_key(
+                winreg.HKEY_CURRENT_USER, r"Control Panel\Cursors", writable=True
+            ) as key:
+                reg_set_value(key, "", "")
+                reg_set_value(key, "Scheme Source", 0)
+            # Broadcast SPI_SETCURSORS so the change takes effect immediately.
+            ok, msg = set_system_parameter(0x0057, 0, None, 2)
+            if not ok:
+                log.warning("restore_defaults: cursor broadcast failed: %s", msg)
             results["cursors"] = {"success": True, "message": "Cursors reset to system default"}
         except Exception as exc:
             results["cursors"] = {"success": False, "message": str(exc)}
@@ -156,11 +166,8 @@ class Applier:
             for orb_dir in orb_dirs:
                 if os.path.isdir(orb_dir):
                     for f in os.listdir(orb_dir):
-                        try:
-                            os.remove(os.path.join(orb_dir, f))
+                        if safe_remove(os.path.join(orb_dir, f)):
                             cleared += 1
-                        except Exception:
-                            continue
             results["startorb"] = {"success": True, "message": f"Cleared {cleared} custom start orb(s)"}
         except Exception as exc:
             results["startorb"] = {"success": False, "message": str(exc)}
@@ -174,8 +181,7 @@ class Applier:
                 count = 0
                 for f in os.listdir(windhawk_path):
                     fpath = os.path.join(windhawk_path, f)
-                    if os.path.isfile(fpath):
-                        os.remove(fpath)
+                    if os.path.isfile(fpath) and safe_remove(fpath):
                         count += 1
                 results["windhawk"] = {"success": True, "message": f"Cleared {count} Windhawk mod files"}
             else:
@@ -197,7 +203,7 @@ class Applier:
 
         # 9. Firefox cleanup
         try:
-            firefox_path = os.path.join(os.environ["APPDATA"], "Mozilla", "Firefox")
+            firefox_path = os.path.join(os.environ.get("APPDATA", ""), "Mozilla", "Firefox")
             if os.path.isdir(firefox_path):
                 cleared = 0
                 for entry in os.listdir(firefox_path):
@@ -206,8 +212,8 @@ class Applier:
                         for f in os.listdir(profile_chrome):
                             fpath = os.path.join(profile_chrome, f)
                             if os.path.isfile(fpath) and f.endswith((".css", ".js", ".xml")):
-                                os.remove(fpath)
-                                cleared += 1
+                                if safe_remove(fpath):
+                                    cleared += 1
                 results["firefox"] = {"success": True, "message": f"Cleaned {cleared} Firefox chrome files"}
             else:
                 results["firefox"] = {"success": True, "message": "Firefox directory not found"}
@@ -316,33 +322,34 @@ class Applier:
             if theme_file and os.path.exists(theme_file):
                 # First, set the registry key so the system knows the current theme
                 try:
-                    key = winreg.OpenKey(
+                    with reg_open_key(
                         winreg.HKEY_CURRENT_USER,
                         r"Software\Microsoft\Windows\CurrentVersion\Themes",
-                        0,
-                        winreg.KEY_WRITE,
-                    )
-                    winreg.SetValueEx(key, "CurrentTheme", 0, winreg.REG_SZ, theme_file)
-                    winreg.CloseKey(key)
+                        writable=True,
+                    ) as key:
+                        reg_set_value(key, "CurrentTheme", theme_file)
                     # Broadcast WM_SETTINGCHANGE so Explorer picks up the change
                     ctypes.windll.user32.SendMessageW(0xFFFF, 0x001A, 0, "ImmersiveColorSet")
                     log.info("Applied theme via registry broadcast: %s", theme_file)
                 except Exception as reg_exc:
                     log.warning("Registry theme broadcast failed, falling back to startfile: %s", reg_exc)
+                    if not hasattr(os, "startfile"):
+                        return {
+                            "success": False,
+                            "message": f"Theme file launch requires Windows: {theme_file}",
+                        }
                     os.startfile(theme_file)
                     log.info("Applied theme file: %s", theme_file)
             else:
                 # Fallback: set registry key directly (requires sign-out to take effect)
                 full_path = self._resolve(theme_name, variant["file"])
                 if full_path and os.path.exists(full_path):
-                    key = winreg.OpenKey(
+                    with reg_open_key(
                         winreg.HKEY_CURRENT_USER,
                         r"Software\Microsoft\Windows\CurrentVersion\Themes",
-                        0,
-                        winreg.KEY_WRITE,
-                    )
-                    winreg.SetValueEx(key, "CurrentTheme", 0, winreg.REG_SZ, full_path)
-                    winreg.CloseKey(key)
+                        writable=True,
+                    ) as key:
+                        reg_set_value(key, "CurrentTheme", full_path)
                     log.info("Set CurrentTheme registry key to: %s", full_path)
                     return {
                         "success": True,
@@ -370,6 +377,8 @@ class Applier:
             if not full_path or not os.path.exists(full_path):
                 return {"success": False, "message": f"File not found: {full_path}"}
 
+            if not hasattr(os, "startfile"):
+                return {"success": False, "message": "Theme file launch requires Windows"}
             os.startfile(full_path)
             return {"success": True, "message": f"Applied theme file: {variant['name']}"}
         except Exception as exc:
@@ -389,7 +398,9 @@ class Applier:
             if not full_path or not os.path.exists(full_path):
                 return {"success": False, "message": f"File not found: {full_path}"}
 
-            ctypes.windll.user32.SystemParametersInfoW(20, 0, full_path, 3)
+            ok, msg = set_system_parameter(20, 0, full_path, 3)
+            if not ok:
+                return {"success": False, "message": f"Wallpaper apply failed: {msg}"}
             log.info("Wallpaper set to: %s", full_path)
             return {"success": True, "message": f"Applied wallpaper: {variant['name']}"}
         except Exception as exc:
@@ -398,6 +409,82 @@ class Applier:
     # ------------------------------------------------------------------
     # CURSORS
     # ------------------------------------------------------------------
+
+    # Per-role keyword hints used by _match_cursor_roles when canonical
+    # filename matching fails. Lower-cased; matched against the filename
+    # stem (extension stripped) and the full filename.
+    _CURSOR_ROLE_KEYWORDS: dict[str, tuple[str, ...]] = {
+        "Arrow":       ("arrow", "default", "normal", "select"),
+        "Help":        ("help", "helpsel"),
+        "AppStarting": ("appstarting", "working", "busy"),
+        "Wait":        ("wait", "loading", "hourglass"),
+        "Crosshair":   ("cross", "crosshair", "precision"),
+        "IBeam":       ("ibeam", "text", "beam"),
+        "NWPen":       ("nwpen", "pen"),
+        "No":          ("unavail", "nodrop", "deny", "blocked", "no"),
+        "SizeNS":      ("sizens", "ns"),
+        "SizeWE":      ("sizewe", "ew"),
+        "SizeNWSE":    ("sizenwse", "nwse"),
+        "SizeNESW":    ("sizenesw", "nesw"),
+        "SizeAll":     ("sizeall", "move"),
+        "UpArrow":     ("uparrow", "up"),
+        "Hand":        ("hand", "link", "pointer"),
+    }
+
+    def _match_cursor_roles(self, cursor_files: dict[str, str]) -> dict[str, str]:
+        """Map ``{filename: abs_path}`` to ``{role: abs_path}``.
+
+        Two-pass matcher:
+          1. Canonical-name match — for each role, look up the canonical
+             filename (from asset_studio.CURSOR_ROLES) by stem.
+          2. Per-role keyword match — fall back to substring keywords from
+             ``_CURSOR_ROLE_KEYWORDS``.
+
+        Each file is assigned to at most one role (no reuse). Returns the
+        15-entry role→path dict; roles with no match are simply absent.
+
+        This replaces the previous alphabetical-assignment loop that
+        produced an essentially random cursor scheme.
+        """
+        from core.asset_studio import CURSOR_ROLES
+
+        # Build stem→path lookup for canonical matching (first-seen wins
+        # on duplicate stems).
+        name_to_path: dict[str, str] = {}
+        for fname, fpath in cursor_files.items():
+            stem = os.path.splitext(fname)[0].lower()
+            if stem not in name_to_path:
+                name_to_path[stem] = fpath
+
+        assigned: dict[str, str] = {}
+        used_paths: set[str] = set()
+
+        # Pass 1: canonical filename match.
+        for role, canonical in CURSOR_ROLES.items():
+            canonical_stem = os.path.splitext(canonical)[0].lower()
+            path = name_to_path.get(canonical_stem)
+            if path and path not in used_paths:
+                assigned[role] = path
+                used_paths.add(path)
+
+        # Pass 2: per-role keyword match.
+        for role, keywords in self._CURSOR_ROLE_KEYWORDS.items():
+            if role in assigned:
+                continue
+            for fname, fpath in cursor_files.items():
+                if fpath in used_paths:
+                    continue
+                stem = os.path.splitext(fname)[0].lower()
+                fname_lower = fname.lower()
+                for kw in keywords:
+                    if kw in stem or kw in fname_lower:
+                        assigned[role] = fpath
+                        used_paths.add(fpath)
+                        break
+                if role in assigned:
+                    break
+
+        return assigned
 
     def _apply_cursors(self, theme_name, component, variant_name=None):
         try:
@@ -413,12 +500,21 @@ class Applier:
                     break
 
             if inf_file:
-                # Install via setupapi
-                subprocess.run(
+                # Install via setupapi — capture output and check return code
+                # so silent INF failures are surfaced in the log.
+                inf_result = subprocess.run(
                     ["rundll32.exe", "setupapi,InstallHinfSection", "DefaultInstall", "132", inf_file],
+                    capture_output=True,
+                    text=True,
                     check=False,
                 )
-                log.info("Cursors installed via INF: %s", inf_file)
+                if inf_result.returncode != 0:
+                    log.warning(
+                        "Cursor INF install returned %d: %s",
+                        inf_result.returncode, inf_result.stderr.strip(),
+                    )
+                else:
+                    log.info("Cursors installed via INF: %s", inf_file)
 
             # Regardless of INF, also set registry keys directly for the cursor scheme.
             # This ensures the cursor scheme name is registered and persists.
@@ -433,51 +529,30 @@ class Applier:
 
             # Set the scheme in registry
             try:
-                key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, cursor_reg, 0, winreg.KEY_WRITE)
-                scheme_value = ",".join(
-                    cursor_files.get(f, "") for f in sorted(cursor_files)
-                )
-                winreg.SetValueEx(key, scheme_name, 0, winreg.REG_SZ, scheme_value)
-                winreg.CloseKey(key)
+                with reg_open_key(winreg.HKEY_CURRENT_USER, cursor_reg, writable=True) as key:
+                    scheme_value = ",".join(sorted(cursor_files.values()))
+                    reg_set_value(key, scheme_name, scheme_value)
             except Exception as exc:
                 log.warning("Could not set cursor scheme registry key: %s", exc)
 
-            # Set the active cursor scheme
+            # Set the active cursor scheme. Use the _match_cursor_roles matcher
+            # (canonical-filename then keyword) instead of the old alphabetical
+            # assignment that produced an essentially random cursor scheme.
             try:
-                key = winreg.OpenKey(
-                    winreg.HKEY_CURRENT_USER, r"Control Panel\Cursors", 0, winreg.KEY_WRITE
-                )
-                winreg.SetValueEx(key, "", 0, winreg.REG_SZ, scheme_name)
-                winreg.SetValueEx(key, "Scheme Source", 0, winreg.REG_DWORD, 1)
-                # Set individual cursor keys
-                role_map = {
-                    "Arrow": "Arrow",
-                    "Help": "Help",
-                    "AppStarting": "AppStarting",
-                    "Wait": "Wait",
-                    "Crosshair": "Crosshair",
-                    "IBeam": "IBeam",
-                    "NWPen": "NWPen",
-                    "No": "No",
-                    "SizeNS": "SizeNS",
-                    "SizeWE": "SizeWE",
-                    "SizeNWSE": "SizeNWSE",
-                    "SizeNESW": "SizeNESW",
-                    "SizeAll": "SizeAll",
-                    "UpArrow": "UpArrow",
-                    "Hand": "Hand",
-                }
-                # Map filenames to roles (best-effort)
-                file_list = sorted(cursor_files.values())
-                for i, (role, _) in enumerate(role_map.items()):
-                    if i < len(file_list):
-                        winreg.SetValueEx(key, role, 0, winreg.REG_SZ, file_list[i])
-                winreg.CloseKey(key)
+                with reg_open_key(
+                    winreg.HKEY_CURRENT_USER, r"Control Panel\Cursors", writable=True
+                ) as key:
+                    reg_set_value(key, "", scheme_name)
+                    reg_set_value(key, "Scheme Source", 1)
+                    for role, path in self._match_cursor_roles(cursor_files).items():
+                        reg_set_value(key, role, path)
             except Exception as exc:
                 log.warning("Could not set active cursor keys: %s", exc)
 
             # Broadcast change
-            ctypes.windll.user32.SystemParametersInfoW(0x0057, 0, None, 2)
+            ok, msg = set_system_parameter(0x0057, 0, None, 2)
+            if not ok:
+                log.warning("Cursor broadcast failed: %s", msg)
 
             return {"success": True, "message": f"Cursors applied: {scheme_name}"}
         except Exception as exc:
@@ -494,7 +569,19 @@ class Applier:
             if not variants:
                 return {"success": False, "message": "No font variants found"}
 
-            fonts_dest = os.path.join(os.environ["WINDIR"], "Fonts")
+            # Honor the user's variant selection: if a variant_name was
+            # provided, only install that font (was previously installing
+            # ALL variants regardless of selection).
+            if variant_name:
+                selected = [v for v in variants if v.get("name") == variant_name]
+                if selected:
+                    variants = selected
+                else:
+                    log.warning(
+                        "Requested font variant '%s' not in manifest; installing all", variant_name
+                    )
+
+            fonts_dest = os.path.join(os.environ.get("WINDIR", r"C:\Windows"), "Fonts")
             installed = []
             failed = []
 
@@ -513,16 +600,22 @@ class Applier:
 
             try:
                 for variant in variants:
-                    src = self._resolve(theme_name, variant["file"])
-                    if not src or not os.path.exists(src):
+                    # Per-variant try/except so one failure (e.g., file in
+                    # use) doesn't abort installation of the remaining fonts.
+                    try:
+                        src = self._resolve(theme_name, variant["file"])
+                        if not src or not os.path.exists(src):
+                            failed.append(variant.get("name", variant.get("file", "?")))
+                            continue
+                        filename = os.path.basename(src)
+                        dest = os.path.join(fonts_dest, filename)
+                        shutil.copy2(src, dest)
+                        winreg.SetValueEx(reg_key, variant["name"], 0, winreg.REG_SZ, filename)
+                        installed.append(variant["name"])
+                        log.info("Installed font: %s", variant["name"])
+                    except Exception as vexc:
+                        log.warning("Failed to install font %s: %s", variant.get("name", "?"), vexc)
                         failed.append(variant.get("name", variant.get("file", "?")))
-                        continue
-                    filename = os.path.basename(src)
-                    dest = os.path.join(fonts_dest, filename)
-                    shutil.copy2(src, dest)
-                    winreg.SetValueEx(reg_key, variant["name"], 0, winreg.REG_SZ, filename)
-                    installed.append(variant["name"])
-                    log.info("Installed font: %s", variant["name"])
             finally:
                 winreg.CloseKey(reg_key)
 
@@ -531,8 +624,8 @@ class Applier:
                 HWND_BROADCAST = 0xFFFF
                 WM_FONTCHANGE = 0x001D
                 ctypes.windll.user32.SendMessageW(HWND_BROADCAST, WM_FONTCHANGE, 0, 0)
-            except Exception:
-                pass
+            except Exception as exc:
+                log.debug("Font change broadcast failed: %s", exc)
 
             msg_parts = []
             if installed:
@@ -600,7 +693,12 @@ class Applier:
 
             # Merge schemes (update existing by name, add new ones)
             existing_schemes = settings.get("schemes", [])
-            scheme_map = {s["name"]: i for i, s in enumerate(existing_schemes)}
+            # Guard against malformed settings.json where schemes isn't a list.
+            if not isinstance(existing_schemes, list):
+                existing_schemes = []
+                settings["schemes"] = existing_schemes
+            # Use .get("name") so a scheme dict without a name doesn't KeyError.
+            scheme_map = {s.get("name", ""): i for i, s in enumerate(existing_schemes)}
 
             applied_names = []
             for scheme in new_schemes:
@@ -613,14 +711,14 @@ class Applier:
 
             settings["schemes"] = existing_schemes
 
-            # Switch the default profile's color scheme to the first new scheme
-            if applied_names and "profiles" in settings:
+            # Switch the default profile's color scheme to the first new scheme.
+            # profiles may be a list (Terminal schema permits that) — guard.
+            if applied_names and isinstance(settings.get("profiles"), dict):
                 default_profile = settings["profiles"].get("defaults", {})
                 default_profile["colorScheme"] = applied_names[0]
                 settings["profiles"]["defaults"] = default_profile
 
-            with open(terminal_settings, "w", encoding="utf-8") as f:
-                json.dump(settings, f, indent=4)
+            atomic_write_json(terminal_settings, settings, indent=4)
 
             log.info("Terminal schemes applied: %s", ", ".join(applied_names))
             return {
@@ -638,7 +736,7 @@ class Applier:
     def _apply_firefox(self, theme_name, component, variant_name=None):
         try:
             # Use profiles.ini to find the correct profile directory
-            firefox_path = os.path.join(os.environ["APPDATA"], "Mozilla", "Firefox")
+            firefox_path = os.path.join(os.environ.get("APPDATA", ""), "Mozilla", "Firefox")
             profiles_ini = os.path.join(firefox_path, "profiles.ini")
 
             if not os.path.exists(profiles_ini):
@@ -766,7 +864,11 @@ class Applier:
                     shutil.copy2(src, dest)
                     applied.append(mod.get("name", filename))
 
-            # Attempt to signal Windhawk to reload mods
+            # Attempt to signal Windhawk to reload mods. Capture stdout/stderr
+            # and wait (with a short timeout) so we can report whether the
+            # reload actually happened — the previous fire-and-forget Popen
+            # always reported success even if Windhawk wasn't running.
+            reload_msg = ""
             try:
                 windhawk_exe = os.path.join(
                     os.environ.get("PROGRAMFILES", r"C:\Program Files"),
@@ -774,14 +876,26 @@ class Applier:
                     "Windhawk.exe",
                 )
                 if os.path.exists(windhawk_exe):
-                    subprocess.Popen([windhawk_exe, "-reloadmods"], creationflags=0x00000008)
-                    log.info("Signaled Windhawk to reload mods")
+                    proc = subprocess.Popen(
+                        [windhawk_exe, "-reloadmods"],
+                        stdout=subprocess.PIPE,
+                        stderr=subprocess.PIPE,
+                        creationflags=0x00000008,
+                    )
+                    try:
+                        proc.wait(timeout=5)
+                        reload_msg = f"; Windhawk reload signaled (pid {proc.pid}, rc={proc.returncode})"
+                        log.info("Signaled Windhawk to reload mods (rc=%s)", proc.returncode)
+                    except subprocess.TimeoutExpired:
+                        reload_msg = f"; Windhawk reload timed out (pid {proc.pid})"
+                        log.warning("Windhawk reload timed out; process may still be starting")
             except Exception as exc:
                 log.debug("Could not signal Windhawk reload: %s", exc)
+                reload_msg = f"; Windhawk reload skipped: {exc}"
 
             return {
                 "success": True,
-                "message": f"Windhawk mods applied: {', '.join(applied)}",
+                "message": f"Windhawk mods applied: {', '.join(applied)}{reload_msg}",
             }
         except Exception as exc:
             log.exception("Error applying windhawk")
@@ -804,6 +918,15 @@ class Applier:
             # Route orb to the correct directory based on "target" field or auto-detection
             target = variant.get("target", component.get("target", ""))
             dest_dir = self._resolve_orb_dir(target)
+
+            # Guard: _resolve_orb_dir may return None when neither StartAllBack
+            # nor Windhawk is installed. os.makedirs(None) raises a confusing
+            # TypeError — surface a clear message instead.
+            if dest_dir is None:
+                return {
+                    "success": False,
+                    "message": "Start-orb target directory not found — is StartAllBack or Windhawk installed?",
+                }
 
             os.makedirs(dest_dir, exist_ok=True)
             dest_path = os.path.join(dest_dir, os.path.basename(src))
@@ -918,7 +1041,7 @@ class Applier:
                 return pattern_path
         return None
 
-    def _apply_mica_auto(self, theme_name: str, component: dict, mica_json: str, settings_path: str) -> dict:
+    def _apply_mica_auto(self, theme_name: str, mica_json: str, settings_path: str) -> dict:
         """Apply MicaForEveryone settings from JSON file."""
         try:
             src_path = self._resolve(theme_name, mica_json)
@@ -932,8 +1055,7 @@ class Applier:
             backup = settings_path + ".bak"
             shutil.copy2(settings_path, backup)
 
-            with open(settings_path, "w", encoding="utf-8") as f:
-                json.dump(settings, f, indent=2)
+            atomic_write_json(settings_path, settings, indent=2)
 
             return {
                 "success": True,
@@ -1048,7 +1170,7 @@ class Applier:
         Intelligently processes icon files and maps them to Windhawk-compatible
         naming convention: {dll_name}_{resource_index}.ico
         """
-        from .agents.converter import IconPackConverter
+        from themelauncher.agents.converter import IconPackConverter
 
         src_dir = self._resolve(theme_name, wh_path)
         if not src_dir or not os.path.exists(src_dir):
@@ -1072,7 +1194,6 @@ class Applier:
                 dest_name = f"{entry['dll'].replace('.dll', '')}_{entry['index']}.ico"
                 dest = os.path.join(dest_dir, dest_name)
                 try:
-                    import shutil
                     shutil.copy2(src, dest)
                     deployed.append(dest_name)
                 except PermissionError:
@@ -1106,8 +1227,13 @@ class Applier:
         """Run Windows SFC scan in background thread with progress callback.
 
         Provides graceful error handling for admin privilege denial.
+
+        Returns ``{"success": ..., "message": ..., "thread_started": bool,
+        "thread": Thread, "result_container": dict}``. The caller can poll
+        or join ``thread`` and then read ``result_container["result"]`` to
+        retrieve the actual SFC outcome (previously the result was lost in
+        a local dict that the caller had no handle to).
         """
-        import ctypes
 
         def sfc_worker():
             try:
@@ -1158,7 +1284,7 @@ class Applier:
                 return {"success": False, "message": f"SFC failed: {exc}"}
 
         # Run in background thread
-        result_container = {"done": False, "result": None}
+        result_container: dict[str, Any] = {"done": False, "result": None}
 
         def thread_wrapper():
             result_container["result"] = sfc_worker()
@@ -1167,28 +1293,51 @@ class Applier:
         t = threading.Thread(target=thread_wrapper, daemon=True)
         t.start()
 
-        # Return immediately with thread info
+        # Return immediately with thread info + result_container handle so
+        # the caller can retrieve the actual SFC outcome.
         return {
             "success": True,
             "message": "SFC scan started in background thread",
             "thread_started": True,
             "thread": t,
+            "result_container": result_container,
         }
 
     def apply_theme_with_sfc_guard(self, theme_name: str, run_sfc_first: bool = False) -> dict[str, Any]:
         """Apply theme with optional SFC integrity check in elevated thread.
 
-        If run_sfc_first is True, runs SFC scan before theme application.
-        All operations run in background threads with graceful error handling.
+        If ``run_sfc_first`` is True, runs SFC scan in a background thread and
+        **waits for it to finish** before applying the theme (no race on shared
+        system state — SFC modifies system files; apply_full_theme modifies the
+        registry, fonts dir, etc.). If SFC fails, the theme is NOT applied and
+        the SFC failure is returned to the caller.
         """
-        results = {}
+        results: dict[str, Any] = {}
 
         if run_sfc_first:
             sfc_result = self.run_sfc_scan()
             results["sfc_check"] = sfc_result
-            if not sfc_result["thread_started"]:
-                return results
+            thread = sfc_result.get("thread")
+            result_container = sfc_result.get("result_container")
+            if thread is not None and result_container is not None:
+                # Join the SFC thread before applying the theme so the two
+                # don't race on shared system state.
+                thread.join()
+                sfc_outcome = result_container.get("result")
+                results["sfc_result"] = sfc_outcome
+                if sfc_outcome and not sfc_outcome.get("success", False):
+                    # SFC failed or reported integrity issues — abort the
+                    # theme application so we don't layer a fresh theme on
+                    # top of corrupted system files.
+                    results["theme"] = {
+                        "success": False,
+                        "message": (
+                            f"Theme application skipped: SFC reported issues — "
+                            f"{sfc_outcome.get('message', 'unknown error')}"
+                        ),
+                    }
+                    return results
 
-        # Apply theme in elevated context if needed
+        # Apply theme
         results["theme"] = self.apply_full_theme(theme_name)
         return results

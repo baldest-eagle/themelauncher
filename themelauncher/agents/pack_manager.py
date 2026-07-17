@@ -63,8 +63,66 @@ class PackManager:
                     callback({"path": entry, "success": result["success"], "message": result["message"]})
 
     def sort_themes(self, themes_dir: str, by: str = "name") -> dict[str, Any]:
-        """Reorganize theme directories (placeholder)."""
-        return {"success": True, "message": f"Themes would be sorted by '{by}'"}
+        """Return a sorted list of manifest entries from ``themes_dir``.
+
+        Reads every ``manifest.json`` under ``themes_dir`` (one per theme) and
+        sorts the resulting list by ``by`` — either ``"name"`` (default) or
+        ``"author"``. Themes with missing/invalid manifests are sorted to the
+        end. Previously this was a placeholder that just returned a message
+        string instead of actually sorting anything.
+
+        The directory on disk is NOT renamed or moved — only the returned
+        list is sorted. Callers can use the returned order to refresh a UI
+        list or rename directories if they wish.
+        """
+        valid_by = {"name", "author"}
+        if by not in valid_by:
+            return {"success": False,
+                    "message": f"Invalid sort key '{by}'; must be one of {sorted(valid_by)}"}
+
+        if not themes_dir or not os.path.isdir(themes_dir):
+            return {"success": False, "message": f"Themes directory not found: {themes_dir}"}
+
+        entries: list[dict[str, Any]] = []
+        unsortable: list[str] = []
+        for entry in os.listdir(themes_dir):
+            entry_path = os.path.join(themes_dir, entry)
+            if not os.path.isdir(entry_path):
+                continue
+            manifest_path = os.path.join(entry_path, "manifest.json")
+            if not os.path.exists(manifest_path):
+                unsortable.append(entry)
+                continue
+            try:
+                with open(manifest_path, "r", encoding="utf-8") as f:
+                    manifest = json.load(f)
+            except (json.JSONDecodeError, OSError) as exc:
+                log.warning("Could not read manifest for %s: %s", entry, exc)
+                unsortable.append(entry)
+                continue
+            entries.append({
+                "name": manifest.get("name", entry),
+                "author": manifest.get("author", ""),
+                "version": manifest.get("version", ""),
+                "dir": entry,
+                "path": entry_path,
+                "manifest": manifest,
+            })
+
+        # Sort by the requested key. Missing values sort to the bottom.
+        entries.sort(key=lambda e: (e.get(by) or "", e.get("name", "")))
+
+        # Append unsortable entries at the end so the caller sees them.
+        for u in sorted(unsortable):
+            entries.append({"name": u, "dir": u, "path": os.path.join(themes_dir, u),
+                            "unsortable": True})
+
+        return {
+            "success": True,
+            "by": by,
+            "count": len(entries),
+            "themes": entries,
+        }
 
     def quarantine(self, pack_path: str, reason: str) -> str:
         """Move invalid pack to quarantine folder."""

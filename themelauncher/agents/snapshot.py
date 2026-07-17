@@ -12,11 +12,28 @@ import json
 import os
 import shutil
 import time
-import winreg
 from datetime import datetime
 from typing import Any, Optional
 
+try:
+    import winreg  # Windows-only; module must import cleanly off-Windows.
+except ImportError:  # pragma: no cover - non-Windows
+    winreg = None
+
 from ..core.logger import log
+
+# Best-effort import of the shared atomic I/O helper. core/_io.py is being
+# added by the parallel core-reconstruction agent; if it isn't available yet
+# (e.g. during this layer's standalone tests) we fall back to a local
+# implementation so this module remains importable on its own.
+try:
+    from core._io import atomic_write_json  # type: ignore
+except Exception:  # pragma: no cover - fallback when core/_io not yet present
+    def atomic_write_json(path: str, data: Any, *, indent: int = 2) -> None:
+        tmp = path + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=indent, default=str)
+        os.replace(tmp, path)
 
 SNAPSHOTS_DIR = os.path.join(
     os.environ.get("LOCALAPPDATA", ".themelauncher"),
@@ -36,9 +53,16 @@ class SnapshotAgent:
     # ------------------------------------------------------------------
 
     def capture_snapshot(self) -> str:
-        """Save current system state to a timestamped JSON file. Returns snapshot ID."""
+        """Save current system state to a timestamped JSON file. Returns snapshot ID.
+
+        The snapshot ID includes microseconds so two captures in the same
+        second don't collide (was same-second collision overwriting the prior
+        snapshot). The file is written atomically (temp + os.replace) so a
+        crash mid-write can't corrupt the snapshot.
+        """
+        now = datetime.now()
         snapshot = {
-            "id": datetime.now().strftime("%Y-%m-%dT%H-%M-%S"),
+            "id": now.strftime("%Y-%m-%dT%H-%M-%S") + f"-{now.microsecond:06d}",
             "timestamp": time.time(),
             "cursors": self._capture_cursors(),
             "current_theme": self._capture_current_theme(),
@@ -50,8 +74,7 @@ class SnapshotAgent:
         }
 
         filepath = os.path.join(self.snapshots_dir, f"{snapshot['id']}.json")
-        with open(filepath, "w", encoding="utf-8") as f:
-            json.dump(snapshot, f, indent=2, default=str)
+        atomic_write_json(filepath, snapshot)
 
         log.info("Snapshot captured: %s", snapshot["id"])
         return snapshot["id"]
@@ -153,10 +176,28 @@ class SnapshotAgent:
         return result
 
     def _capture_startallback(self) -> Optional[str]:
-        # Check both root install and APPDATA locations
-        for sab_dir in [r"C:\StartAllBack", os.path.join(os.environ.get("APPDATA", ""), "StartIsBack")]:
+        """List StartAllBack / StartIsBack files if installed.
+
+        Checks the standard install locations: PROGRAMFILES (64-bit SAB),
+        ``PROGRAMFILES(X86)`` (32-bit SAB), LOCALAPPDATA (per-user SAB), and
+        ``APPDATA\\StartIsBack`` (legacy). Previously only the hardcoded
+        ``C:\\StartAllBack`` + ``APPDATA\\StartIsBack`` were checked.
+        """
+        candidates = [
+            os.path.join(os.environ.get("PROGRAMFILES", r"C:\Program Files"), "StartAllBack"),
+            os.path.join(os.environ.get("PROGRAMFILES(X86)", r"C:\Program Files (x86)"), "StartAllBack"),
+            os.path.join(os.environ.get("LOCALAPPDATA", ""), "StartAllBack"),
+            os.path.join(os.environ.get("APPDATA", ""), "StartIsBack"),
+            r"C:\StartAllBack",  # legacy hardcoded path, kept for backwards compat
+        ]
+        for sab_dir in candidates:
+            if not sab_dir:
+                continue
             if os.path.isdir(sab_dir):
-                files = os.listdir(sab_dir)
+                try:
+                    files = os.listdir(sab_dir)
+                except OSError:
+                    continue
                 return json.dumps(files) if files else None
         return None
 

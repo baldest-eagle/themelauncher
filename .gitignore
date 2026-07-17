@@ -1,4 +1,4 @@
-﻿# Antigravity 2.0 Engine Cache & Session Logs
+# Antigravity 2.0 Engine Cache & Session Logs
 .agents/.session_cache/
 .agents/plugins/
 
@@ -15,3 +15,10 @@ assets/temp_extracted/
 C:\\users/kyleh/.gemini/ProjectEraser/
 C:\\users/kyleh/.gemini/ProjectEraser.bck/
 C:\\users/kyleh/.gemini/SecureUxTheme_Source/
+
+# Runtime logs
+logs/
+.themelauncher/
+
+# Local themes
+Themes/

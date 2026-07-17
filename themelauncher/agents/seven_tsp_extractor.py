@@ -18,6 +18,45 @@ from typing import Any, Optional
 from ..core.logger import log
 
 
+def _is_pe_dll(path: str) -> bool:
+    """Return True if ``path`` starts with the PE ``MZ`` magic.
+
+    7TSP packs sometimes ship non-PE ``.res`` files (HTML/XML/resource
+    scripts, asset lists, even text files) that just happen to have a ``.res``
+    extension. Renaming those to ``.dll`` produces broken files that Windows
+    refuses to load — so we validate the magic before renaming.
+    """
+    try:
+        with open(path, "rb") as f:
+            return f.read(2) == b"MZ"
+    except OSError:
+        return False
+
+
+def _unpack_archive(archive_path: str, extract_to: str) -> None:
+    """Unpack ``archive_path`` into ``extract_to``.
+
+    Dispatches on extension:
+      * ``.7z``  → py7zr (raises a clear error if not installed)
+      * ``.exe`` → try py7zr (SFX archives), fall back to shutil
+      * anything else (``.zip``, ``.tar.*``) → shutil.unpack_archive
+    """
+    ext = os.path.splitext(archive_path)[1].lower()
+    if ext == ".7z" or ext == ".exe":
+        try:
+            import py7zr
+        except ImportError as exc:
+            raise RuntimeError(
+                f"Extracting {ext} archives requires the optional 'py7zr' package. "
+                f"Install it with: pip install py7zr"
+            ) from exc
+        with py7zr.SevenZipFile(archive_path, mode="r") as z:
+            z.extractall(path=extract_to)
+        return
+    # Standard formats (zip / tar / gztar / bztar / xztar)
+    shutil.unpack_archive(archive_path, extract_to)
+
+
 class SevenTSPExtractor:
     """Extract and convert 7TSP icon packs for Windhawk."""
 
@@ -42,7 +81,7 @@ class SevenTSPExtractor:
         os.makedirs(extract_to, exist_ok=True)
 
         try:
-            shutil.unpack_archive(archive_path, extract_to)
+            _unpack_archive(archive_path, extract_to)
             log.info("Extracted 7TSP archive to: %s", extract_to)
             return {
                 "success": True,
@@ -53,7 +92,12 @@ class SevenTSPExtractor:
             return {"success": False, "message": f"Extraction failed: {exc}"}
 
     def remap_resources(self, source_dir: str) -> dict[str, Any]:
-        """Phase 2: Convert .res files to .dll format for Windhawk."""
+        """Phase 2: Convert .res files to .dll format for Windhawk.
+
+        Only renames files that actually start with the PE ``MZ`` magic — a
+        non-PE ``.res`` (asset list, manifest XML, text) is left in place and
+        logged, so we don't produce broken ``.dll`` files Windows can't load.
+        """
         remapped = []
         skipped = []
 
@@ -61,6 +105,10 @@ class SevenTSPExtractor:
             for filename in files:
                 if filename.lower().endswith(".res"):
                     old_path = os.path.join(root, filename)
+                    if not _is_pe_dll(old_path):
+                        skipped.append(f"{filename}: not a PE image (no MZ magic)")
+                        log.info("Skipping non-PE .res file: %s", old_path)
+                        continue
                     new_name = filename.lower()[:-4] + ".dll"
                     new_path = os.path.join(root, new_name)
                     try:
@@ -136,11 +184,18 @@ class SevenTSPExtractor:
         }
 
     def generate_theme_ini(self, source_dir: str, output_path: str) -> dict[str, Any]:
-        """Phase 3: Generate theme.ini with system binary mappings."""
+        """Phase 3: Generate theme.ini with system binary mappings.
+
+        Emits valid ``key=value`` INI lines under ``[Icons]`` (was previously
+        writing bare DLL filenames, which is not valid INI and confused
+        parsers). Walks ``source_dir`` recursively so nested DLL folders work.
+        """
         dll_files = []
-        for filename in os.listdir(source_dir):
-            if filename.lower().endswith(".dll"):
-                dll_files.append(filename)
+        for root, dirs, files in os.walk(source_dir):
+            for filename in files:
+                if filename.lower().endswith(".dll"):
+                    rel = os.path.relpath(os.path.join(root, filename), source_dir)
+                    dll_files.append(rel)
 
         lines = [
             "[General]",
@@ -151,21 +206,25 @@ class SevenTSPExtractor:
             "[Icons]",
         ]
 
-        # Map standard Windows system DLLs
-        system_mappings = [
-            "%SystemRoot%\\System32\\imageres.dll=imageres.dll",
-            "%SystemRoot%\\System32\\shell32.dll=shell32.dll",
-            "%SystemRoot%\\System32\\explorer.exe=explorer.exe",
-        ]
-
+        # Emit a ``key=value`` line per DLL: the DLL filename (relative path)
+        # becomes the key, and the value is the path inside the theme folder.
         for dll in dll_files:
-            lines.append(dll)
+            # Sanitize to an INI-safe key (no spaces, no backslashes).
+            key = os.path.basename(dll).replace(".dll", "")
+            lines.append(f"{key}={dll}")
 
+        # Map standard Windows system DLLs (kept for backwards compat).
         lines.append("")
+        lines.append("[SystemMappings]")
+        system_mappings = [
+            "imageres=%SystemRoot%\\\\System32\\\\imageres.dll",
+            "shell32=%SystemRoot%\\\\System32\\\\shell32.dll",
+            "explorer=%SystemRoot%\\\\explorer.exe",
+        ]
         for mapping in system_mappings:
             lines.append(mapping)
 
-        ini_content = "\n".join(lines)
+        ini_content = "\n".join(lines) + "\n"
 
         try:
             with open(output_path, "w", encoding="utf-8") as f:
@@ -179,18 +238,35 @@ class SevenTSPExtractor:
             return {"success": False, "message": f"Failed to write ini: {exc}"}
 
     def stage_icons(self, source_dir: str, theme_name: str, themes_dir: str) -> dict[str, Any]:
-        """Phase 4: Move assets to /themes/[ThemeName]/Icons/ and clean temp."""
+        """Phase 4: Move assets to /themes/[ThemeName]/Icons/ and clean temp.
+
+        Walks ``source_dir`` recursively (7TSP packs commonly nest DLLs in
+        subfolders). Collisions (two files with the same basename in different
+        subfolders) are disambiguated with a numeric suffix.
+        """
         theme_icon_dir = os.path.join(themes_dir, theme_name, "Icons")
         os.makedirs(theme_icon_dir, exist_ok=True)
 
         staged = []
-        for filename in os.listdir(source_dir):
-            if filename.lower().endswith(".dll"):
-                src = os.path.join(source_dir, filename)
-                dst = os.path.join(theme_icon_dir, filename)
+        seen_basenames: dict[str, int] = {}
+        for root, dirs, files in os.walk(source_dir):
+            for filename in files:
+                if not filename.lower().endswith(".dll"):
+                    continue
+                src = os.path.join(root, filename)
+                # Handle same-name collisions with a numeric suffix.
+                base = filename
+                if base in seen_basenames:
+                    seen_basenames[base] += 1
+                    stem, ext = os.path.splitext(base)
+                    dst_name = f"{stem}_{seen_basenames[base]}{ext}"
+                else:
+                    seen_basenames[base] = 0
+                    dst_name = base
+                dst = os.path.join(theme_icon_dir, dst_name)
                 try:
                     shutil.copy2(src, dst)
-                    staged.append(filename)
+                    staged.append(dst_name)
                 except Exception as exc:
                     log.warning("Failed to stage %s: %s", filename, exc)
 

@@ -186,9 +186,13 @@ class ManifestGenerator:
             img = img.resize((64, 64), Image.LANCZOS)
             pixels = np.array(img).reshape(-1, 3)
 
-            # Simple k-means with k=6
+            # Simple k-means with k=6. Seed the RNG (and the initial centroid
+            # choice) so palette extraction is reproducible run-to-run —
+            # previously np.random.choice produced a different palette every
+            # call from the same wallpaper.
             k = 6
-            centroids = pixels[np.random.choice(pixels.shape[0], k, replace=False)].astype(float)
+            rng = np.random.default_rng(42)
+            centroids = pixels[rng.choice(pixels.shape[0], k, replace=False)].astype(float)
 
             for _ in range(20):
                 distances = np.linalg.norm(pixels[:, None] - centroids[None], axis=2)

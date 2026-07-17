@@ -5,11 +5,11 @@ Bug fix: save_as_theme no longer overwrites component variants — it appends.
 """
 
 import copy
-import json
 import os
 import shutil
 from typing import Any
 
+from core._io import atomic_write_json
 from core.logger import log
 from core.manifest_parser import FOLDER_COMPONENT_TYPES, VARIANT_COMPONENT_TYPES
 
@@ -136,7 +136,7 @@ class Mixer:
         try:
             os.makedirs(dest_folder)
             manifest: dict[str, Any] = {
-                "name": new_name,
+                "name": safe_name,
                 "version": "1.0.0",
                 "description": description or "Custom mix created from multiple themes.",
                 "author": author or "Custom",
@@ -161,40 +161,60 @@ class Mixer:
                         (v for v in comp_data["variants"] if v["name"] == variant_name),
                         None,
                     )
-                    if variant:
-                        src_file = os.path.join(source_theme_path, variant["file"])
-                        if os.path.exists(src_file):
-                            dest_file = os.path.join(comp_dest, os.path.basename(src_file))
-                            shutil.copy2(src_file, dest_file)
-                            rel_file = os.path.join(comp_type, os.path.basename(src_file))
-                            new_variant = {"name": variant["name"], "file": rel_file}
+                    if not variant:
+                        # CRITICAL: don't fall through to the else branch —
+                        # it would deep-copy the original component dict (with
+                        # variants pointing at the SOURCE theme's files) into
+                        # the new theme, producing a manifest referencing
+                        # files that were never copied. Skip with a warning.
+                        log.warning(
+                            "Mixer: variant '%s' not found in %s:%s — skipping %s",
+                            variant_name, theme_name, comp_type, comp_type,
+                        )
+                        continue
+                    src_file = os.path.join(source_theme_path, variant["file"])
+                    if not os.path.exists(src_file):
+                        log.warning(
+                            "Mixer: source file missing for %s variant '%s' — skipping",
+                            comp_type, variant_name,
+                        )
+                        continue
+                    dest_file = os.path.join(comp_dest, os.path.basename(src_file))
+                    shutil.copy2(src_file, dest_file)
+                    rel_file = os.path.join(comp_type, os.path.basename(src_file))
+                    new_variant = {"name": variant["name"], "file": rel_file}
 
-                            if variant.get("preview"):
-                                src_preview = os.path.join(source_theme_path, variant["preview"])
-                                if os.path.exists(src_preview):
-                                    preview_dest = os.path.join(comp_dest, os.path.basename(src_preview))
-                                    shutil.copy2(src_preview, preview_dest)
-                                    new_variant["preview"] = os.path.join(comp_type, os.path.basename(src_preview))
+                    if variant.get("preview"):
+                        src_preview = os.path.join(source_theme_path, variant["preview"])
+                        if os.path.exists(src_preview):
+                            preview_dest = os.path.join(comp_dest, os.path.basename(src_preview))
+                            shutil.copy2(src_preview, preview_dest)
+                            new_variant["preview"] = os.path.join(comp_type, os.path.basename(src_preview))
 
-                            # FIX: append to existing variants list instead of overwriting
-                            if comp_type not in manifest["components"]:
-                                manifest["components"][comp_type] = {"variants": []}
-                            manifest["components"][comp_type]["variants"].append(new_variant)
+                    # Each comp_type appears exactly once in self.mix, so
+                    # direct assignment is correct (the previous "append to
+                    # existing variants list" branch was structurally inert).
+                    manifest["components"][comp_type] = {"variants": [new_variant]}
 
                 elif "path" in comp_data:
                     src_dir = os.path.join(source_theme_path, comp_data["path"])
                     if os.path.exists(src_dir):
                         shutil.copytree(src_dir, comp_dest, dirs_exist_ok=True)
                         manifest["components"][comp_type] = {"path": comp_type}
+                    else:
+                        log.warning(
+                            "Mixer: source path missing for %s — skipping", comp_type
+                        )
+                        continue
 
                 else:
                     # Guide-type or other — copy the reference
                     manifest["components"][comp_type] = copy.deepcopy(comp_data)
 
-            # Write manifest
+            # Write manifest atomically (temp + os.replace) so a crash mid-write
+            # doesn't leave a half-written manifest.json behind.
             manifest_path = os.path.join(dest_folder, "manifest.json")
-            with open(manifest_path, "w", encoding="utf-8") as f:
-                json.dump(manifest, f, indent=2)
+            atomic_write_json(manifest_path, manifest, indent=2)
 
             # Incremental add to theme manager
             try:
@@ -211,7 +231,7 @@ class Mixer:
 
             return {
                 "success": True,
-                "message": f'Theme "{new_name}" saved successfully.',
+                "message": f'Theme "{safe_name}" saved successfully.',
                 "theme_name": safe_name,
             }
 

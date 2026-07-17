@@ -13,12 +13,18 @@ import json
 import os
 import shutil
 import subprocess
-import winreg
 from typing import Any
+
+# Guarded winreg import so the module loads cleanly on non-Windows.
+try:
+    import winreg  # type: ignore[import-not-found]
+except ImportError:  # pragma: no cover - non-Windows
+    winreg = None  # type: ignore[assignment]
 
 import numpy as np
 from PIL import Image
 
+from core._io import atomic_write_json
 from core.logger import log
 
 # ---------------------------------------------------------------------------
@@ -29,10 +35,18 @@ _EXTRAS_DIR = os.path.join(os.path.dirname(__file__), "..", "themes", "extras")
 ICON_SETS_JSON = os.path.join(_EXTRAS_DIR, "icon_sets.json")
 CURSORS_OUT_DIR = os.path.join(_EXTRAS_DIR, "cursors")
 ICONS_OUT_DIR = _EXTRAS_DIR
-TASKBAR_DIR = os.path.join(
-    os.environ.get("APPDATA", ""),
-    r"Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar",
-)
+
+
+def _taskbar_dir() -> str:
+    """Compute the TaskBar pinned-shortcuts directory on each call.
+
+    Late-binding so a process that changes APPDATA mid-lifetime (rare, but
+    happens in tests) sees the right path.
+    """
+    return os.path.join(
+        os.environ.get("APPDATA", ""),
+        r"Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar",
+    )
 
 # Cursor role -> canonical filename
 CURSOR_ROLES = {
@@ -176,20 +190,21 @@ def recolour_image(img: Image.Image, new_hex: str) -> Image.Image:
 
 
 def recolour_ico(src_path: str, dest_path: str, new_hex: str) -> None:
-    img = Image.open(src_path)
-    frames = []
-    n = getattr(img, "n_frames", 1)
-    for i in range(n):
-        img.seek(i)
-        frames.append(recolour_image(img.convert("RGBA"), new_hex))
-    sizes = [(f.width, f.height) for f in frames]
-    frames[0].save(dest_path, format="ICO", append_images=frames[1:], sizes=sizes)
+    with Image.open(src_path) as img:
+        frames = []
+        n = getattr(img, "n_frames", 1)
+        for i in range(n):
+            img.seek(i)
+            frames.append(recolour_image(img.convert("RGBA"), new_hex))
+        sizes = [(f.width, f.height) for f in frames]
+        frames[0].save(dest_path, format="ICO", append_images=frames[1:], sizes=sizes)
 
 
 def recolour_cur(src_path: str, dest_path: str, new_hex: str) -> None:
     try:
         recolour_ico(src_path, dest_path, new_hex)
-    except Exception:
+    except Exception as exc:
+        log.warning("recolour_cur failed for %s: %s — copying original", src_path, exc)
         shutil.copy2(src_path, dest_path)
 
 
@@ -200,8 +215,8 @@ def recolour_cur(src_path: str, dest_path: str, new_hex: str) -> None:
 _ICO_SIZES = [(256, 256), (128, 128), (64, 64), (48, 48), (32, 32), (16, 16)]
 
 
-def generate_icon(app_key: str, fg_color: str, bg_color: str = None,
-                  style: str = "circle", output_path: str = None) -> str:
+def generate_icon(app_key: str, fg_color: str, bg_color: str | None = None,
+                  style: str = "circle", output_path: str | None = None) -> str:
     draw_fn = DRAW_FUNCTIONS.get(app_key.lower(), _draw_gemini)
     size = 256
     img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
@@ -324,8 +339,7 @@ class IconSetManager:
 
     def _save(self) -> None:
         os.makedirs(os.path.dirname(ICON_SETS_JSON), exist_ok=True)
-        with open(ICON_SETS_JSON, "w", encoding="utf-8") as f:
-            json.dump(self.data, f, indent=2)
+        atomic_write_json(ICON_SETS_JSON, self.data, indent=2)
 
     # -- Queries ------------------------------------------------------------
 
@@ -406,7 +420,7 @@ class IconSetManager:
         self.data["sets"][set_name] = dict(mix)
         self._save()
 
-    def generate_icon(self, set_name: str, app_key: str, hex_val: str, draw_fn=None) -> None:
+    def generate_icon(self, set_name: str, app_key: str, hex_val: str) -> None:
         """Generate an icon and add it to the set."""
         output = generate_icon(app_key, hex_val, style="bold")
         self.data["sets"][set_name][app_key] = os.path.basename(output)
@@ -463,7 +477,7 @@ class IconSetManager:
             app = apps.get(app_key)
             if not app:
                 continue
-            lnk_path = os.path.join(TASKBAR_DIR, app["lnk"])
+            lnk_path = os.path.join(_taskbar_dir(), app["lnk"])
             ico_path = os.path.join(_EXTRAS_DIR, ico_file)
 
             if not os.path.exists(ico_path):
@@ -471,11 +485,22 @@ class IconSetManager:
                 continue
 
             try:
+                exe = app.get("exe", "")
                 if not os.path.exists(lnk_path):
+                    # Don't create an unlaunchable .lnk when exe is empty.
+                    # Only create shortcuts when we have a target; existing
+                    # shortcuts can be recoloured in place.
+                    if not exe:
+                        results[app_key] = {
+                            "success": False,
+                            "message": (
+                                f"Skipped {app_key}: no executable configured and no "
+                                f"existing shortcut to recolour"
+                            ),
+                        }
+                        continue
                     shortcut = shell.CreateShortcut(lnk_path)
-                    exe = app.get("exe", "")
-                    if exe:
-                        shortcut.TargetPath = exe
+                    shortcut.TargetPath = exe
                 else:
                     shortcut = shell.CreateShortcut(lnk_path)
                 shortcut.IconLocation = f"{ico_path},0"
@@ -497,7 +522,7 @@ class IconSetManager:
             app = apps.get(app_key)
             if not app:
                 continue
-            lnk_path = os.path.join(TASKBAR_DIR, app["lnk"])
+            lnk_path = os.path.join(_taskbar_dir(), app["lnk"])
             ico_path = os.path.join(_EXTRAS_DIR, ico_file)
 
             if not os.path.exists(ico_path):
@@ -519,8 +544,8 @@ class IconSetManager:
         try:
             import ctypes
             ctypes.windll.shell32.SHChangeNotify(0x8000000, 0x1000, None, None)
-        except Exception:
-            pass
+        except Exception as exc:
+            log.debug("SHChangeNotify failed: %s", exc)
 
 
 # ---------------------------------------------------------------------------

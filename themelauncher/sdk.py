@@ -6,6 +6,7 @@ All 17 agents are lazily initialized on first access. Methods follow the
 """
 
 import os
+import threading
 from typing import Any, Callable, Optional
 
 from .agents.accessibility import AccessibilityChecker
@@ -33,6 +34,8 @@ class ThemeSDK:
 
     def __init__(self, config_path: Optional[str] = None):
         self._config_path = config_path
+        self._state_lock = threading.RLock()
+        self._update_thread = None
         self._theme_manager = None
         self._snapshot: Optional[SnapshotAgent] = None
         self._manifest_gen: Optional[ManifestGenerator] = None
@@ -91,14 +94,35 @@ class ThemeSDK:
         return tm.get_all_themes()
 
     def apply_theme(self, theme_name: str) -> dict:
-        """Apply a full theme."""
+        """Apply a full theme.
+
+        Returns ``{success, message, components}`` where ``components`` is the
+        per-component result map produced by the Applier. ``success`` is True
+        only when every component reports success.
+        """
         tm = self._load_theme_manager()
         if not tm:
             return {"success": False, "message": "Theme manager not available"}
 
         from core.applier import Applier
         applier = Applier(tm)
-        return applier.apply_full_theme(theme_name)
+        with self._state_lock:
+            results = applier.apply_full_theme(theme_name)
+
+        # ``results`` is a per-component dict[str, dict]. Aggregate it into the
+        # flat success/message/components contract callers expect.
+        if isinstance(results, dict) and all(isinstance(v, dict) for v in results.values()):
+            all_ok = all(v.get("success", False) for v in results.values()) if results else False
+            if all_ok:
+                message = f"Applied theme '{theme_name}' successfully."
+            else:
+                failed = [k for k, v in results.items() if not v.get("success", False)]
+                message = f"Applied theme '{theme_name}' with failures: {', '.join(failed)}"
+            return {"success": all_ok, "message": message, "components": results}
+        # Defensive: if the applier already returned the flat shape, pass it through.
+        if isinstance(results, dict) and "success" in results:
+            return results
+        return {"success": False, "message": f"Unexpected applier response: {results!r}", "components": results}
 
     # ------------------------------------------------------------------
     # Agent methods: Snapshot
@@ -106,11 +130,13 @@ class ThemeSDK:
 
     def capture_snapshot(self) -> str:
         snap = self._get_or_create("_snapshot", SnapshotAgent)
-        return snap.capture_snapshot()
+        with self._state_lock:
+            return snap.capture_snapshot()
 
     def restore_snapshot(self, snapshot_id: Optional[str] = None) -> dict:
         snap = self._get_or_create("_snapshot", SnapshotAgent)
-        return snap.restore_snapshot(snapshot_id)
+        with self._state_lock:
+            return snap.restore_snapshot(snapshot_id)
 
     def list_snapshots(self) -> list:
         snap = self._get_or_create("_snapshot", SnapshotAgent)
@@ -135,7 +161,8 @@ class ThemeSDK:
         return detector.check_apply(theme_name)
 
     def check_mix_compatibility(self, slots: dict) -> dict:
-        detector = self._get_or_create("_compatibility", CompatibilityDetector)
+        tm = self._load_theme_manager()
+        detector = self._get_or_create("_compatibility", CompatibilityDetector, tm)
         return detector.check_mix(slots)
 
     # ------------------------------------------------------------------
@@ -152,16 +179,45 @@ class ThemeSDK:
     # ------------------------------------------------------------------
 
     def watch_for_updates(self, callback: Optional[Callable] = None) -> None:
+        """Start the update-resilience watcher.
+
+        The callback (if provided) is invoked for *notification* only. The
+        UpdateResilience agent itself always calls ``_handle_update`` to heal
+        the system regardless of whether a callback is supplied — otherwise the
+        auto-heal path would be unreachable whenever a callback is set.
+        """
         tm = self._load_theme_manager()
         snap = self._get_or_create("_snapshot", SnapshotAgent)
         agent = self._get_or_create("_update_resilience", UpdateResilience, tm, snap)
-        callback = callback or (lambda e: log.info("Update detected: %s", e))
-        import threading
-        t = threading.Thread(target=agent.watch_for_updates, args=(callback,), daemon=True)
+        notify_callback = callback or (lambda e: log.info("Update detected: %s", e))
+        # Stop any prior watcher before starting a new one.
+        self.stop_update_watcher()
+        t = threading.Thread(
+            target=agent.watch_for_updates,
+            args=(notify_callback,),
+            daemon=True,
+            name="themelauncher-update-watcher",
+        )
+        self._update_thread = t
         t.start()
 
+    def stop_update_watcher(self) -> None:
+        """Stop the update-resilience watcher if it is running."""
+        agent = self._update_resilience
+        if agent is not None:
+            try:
+                agent.stop()
+            except Exception as exc:  # pragma: no cover - defensive
+                log.warning("Failed to stop update watcher: %s", exc)
+        t = self._update_thread
+        self._update_thread = None
+        if t is not None and t.is_alive() and t is not threading.current_thread():
+            t.join(timeout=5)
+
     def check_integrity(self) -> dict:
-        agent = self._get_or_create("_update_resilience", UpdateResilience)
+        tm = self._load_theme_manager()
+        snap = self._get_or_create("_snapshot", SnapshotAgent)
+        agent = self._get_or_create("_update_resilience", UpdateResilience, tm, snap)
         return agent.check_integrity()
 
     # ------------------------------------------------------------------
@@ -215,9 +271,21 @@ class ThemeSDK:
     # Agent methods: Performance
     # ------------------------------------------------------------------
 
-    def benchmark_component(self, component: str) -> dict:
+    def benchmark_component(self, component: str,
+                            apply_fn: Optional[Callable[[], Any]] = None) -> dict:
+        """Benchmark a single component.
+
+        ``apply_fn`` (if provided) is invoked between the baseline and after
+        measurements; without it the two measurements reflect the same state
+        and the comparison is meaningless.
+        """
         perf = self._get_or_create("_perf", PerfAnalyzer)
         baseline = perf.benchmark_baseline()
+        if apply_fn is not None:
+            try:
+                apply_fn()
+            except Exception as exc:
+                log.exception("apply_fn raised during benchmark: %s", exc)
         after = perf.benchmark_after(component)
         return perf.compare(baseline, after)
 
@@ -235,8 +303,10 @@ class ThemeSDK:
         sched.start()
 
     def stop_scheduler(self) -> None:
-        sched = self._get_or_create("_scheduler", ThemeScheduler, self.apply_theme)
-        sched.stop()
+        if self._scheduler is not None:
+            self._scheduler.stop()
+        # Also stop the update watcher — they are commonly started together.
+        self.stop_update_watcher()
 
     # ------------------------------------------------------------------
     # Agent methods: Packager
@@ -249,8 +319,13 @@ class ThemeSDK:
         return pkg.package(theme_name, output_dir, manifest, theme_path)
 
     def publish_theme(self, theme_name: str, repo: Optional[str] = None) -> dict:
-        log.info("Publishing %s to %s", theme_name, repo or "default")
-        return {"success": True, "message": f"Published {theme_name}"}
+        log.warning("publish_theme('%s', repo=%r) is not implemented; use package_theme "
+                    "to produce a shareable archive.", theme_name, repo)
+        return {
+            "success": False,
+            "message": ("Publishing is not yet implemented. Use package_theme to "
+                        "produce a shareable archive."),
+        }
 
     # ------------------------------------------------------------------
     # Agent methods: Converter
@@ -282,7 +357,9 @@ class ThemeSDK:
         if not tm:
             return {"success": False, "message": "Theme manager not available"}
         themes_dir = tm.config.get("themes_directory", "")
-        audit = self._get_or_create("_auditor", DirectoryAuditor, themes_dir)
+        # Always construct a fresh auditor — config (themes_directory) may
+        # change between calls and a cached instance would point at a stale dir.
+        audit = DirectoryAuditor(themes_dir)
         return audit.audit_all()
 
     def standardize_theme(self, theme_name: str) -> dict:
@@ -290,7 +367,7 @@ class ThemeSDK:
         if not tm:
             return {"success": False, "message": "Theme manager not available"}
         themes_dir = tm.config.get("themes_directory", "")
-        audit = self._get_or_create("_auditor", DirectoryAuditor, themes_dir)
+        audit = DirectoryAuditor(themes_dir)
         return audit.standardize_extensions(theme_name)
 
     # ------------------------------------------------------------------

@@ -37,6 +37,8 @@ _EXTENDED_DEFAULTS = {
     "success":      (),
     "error":        (),
     "status_fg":    ("border",),
+    "primary":      ("accent",),
+    "primary_fg":   (),
 }
 
 # Hardcoded fallbacks for extended keys (when no manifest key chains to them)
@@ -53,14 +55,16 @@ _DEFAULT_PALETTE: dict[str, str] = {
     "text":         "#ffffff",
     "inactive":     "#1a1a1a",
     "border":       "#555555",
-    "active":       "#ffffff",
+    "active":       "#3d3d3d",
     "card_fg":      "#1a1a1a",
     "card_hover":   "#555555",
     "danger":       "#8B2E2E",
     "danger_hover": "#A33A3A",
     "success":      "#4CAF50",
     "error":        "#C42B1C",
-    "status_fg":    "#555555",
+    "status_fg":    "#cccccc",
+    "primary":      "#3d3d3d",
+    "primary_fg":   "#ffffff",
 }
 
 
@@ -106,9 +110,66 @@ def _resolve_palette(raw: dict[str, str]) -> dict[str, str]:
         dh_r, dh_g, dh_b = colorsys.hsv_to_rgb(danger_h, danger_s, min(1.0, danger_v + 0.08))
         out["danger_hover"] = f"#{int(dh_r*255):02x}{int(dh_g*255):02x}{int(dh_b*255):02x}"
     except Exception:
-        pass  # Keep defaults if color math fails
+        log.warning("ThemeColors: danger derivation failed; using fallback")
+
+    # 4. Contrast guard: if the active/background color is too close to text,
+    #    nudge active to the accent (which usually contrasts with text). If
+    #    accent is ALSO too close, force a safe black/white active based on
+    #    text luminance. Without this, a palette where active==text produces
+    #    invisible buttons (white text on white bg = 1.0:1 contrast).
+    try:
+        if _contrast(out["text"], out["active"]) < 3.0:
+            if _contrast(out["text"], out["accent"]) >= 3.0:
+                out["active"] = out["accent"]
+            else:
+                # Accent too close too — force a guaranteed-contrasting active
+                if _luminance(out["text"]) < 0.5:
+                    out["active"] = "#f0f0f0"  # text is dark -> light active
+                else:
+                    out["active"] = "#101010"  # text is light -> dark active
+    except Exception as exc:
+        log.warning("ThemeColors: contrast guard failed: %s", exc)
+
+    # 5. Guaranteed-safe primary / primary_fg pair derived from accent so UI
+    #    elements that use ``primary`` never end up invisible.
+    try:
+        out["primary"] = out["accent"]
+        out["primary_fg"] = "#ffffff" if _luminance(out["accent"]) < 0.5 else "#101010"
+    except Exception as exc:
+        log.warning("ThemeColors: primary derivation failed: %s", exc)
 
     return out
+
+
+# ---------------------------------------------------------------------------
+# WCAG 2.1 contrast helpers (sRGB-linearized)
+# ---------------------------------------------------------------------------
+
+def _channel_to_linear(c: float) -> float:
+    """Convert a single sRGB channel [0,1] to linear-light [0,1]."""
+    if c <= 0.03928:
+        return c / 12.92
+    return ((c + 0.055) / 1.055) ** 2.4
+
+
+def _luminance(hex_color: str) -> float:
+    """Relative luminance of a hex color (WCAG 2.1, sRGB-linearized)."""
+    h = hex_color.lstrip("#")
+    if len(h) == 3:
+        h = "".join(ch * 2 for ch in h)
+    r = _channel_to_linear(int(h[0:2], 16) / 255.0)
+    g = _channel_to_linear(int(h[2:4], 16) / 255.0)
+    b = _channel_to_linear(int(h[4:6], 16) / 255.0)
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b
+
+
+def _contrast(fg: str, bg: str) -> float:
+    """WCAG 2.1 contrast ratio between two hex colors (1.0 .. 21.0)."""
+    l1 = _luminance(fg)
+    l2 = _luminance(bg)
+    lighter = max(l1, l2)
+    darker = min(l1, l2)
+    return (lighter + 0.05) / (darker + 0.05)
 
 
 class ThemeColors:

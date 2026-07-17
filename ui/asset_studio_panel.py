@@ -22,6 +22,13 @@ except ImportError:
     CursorSetManager = None
     DRAW_FUNCTIONS: Dict[str, Any] = {}
 
+try:
+    from core.logger import log
+except ImportError:
+    # Fallback if core.logger is unavailable at import time.
+    import logging
+    log = logging.getLogger("asset_studio")
+
 # Palette key shortcuts
 _BG = "background"
 _ACCENT = "accent"
@@ -80,10 +87,43 @@ def _section_header(parent, text, p):
     return hdr
 
 
+def _bind_keyboard_card(widget, handler, colors):
+    """Make a card-like CTkFrame keyboard-navigable.
+
+    - Sets ``takefocus=True`` via the unbound ``tk.Frame.configure`` (CTkFrame's
+      kwarg filter rejects ``takefocus=`` directly).
+    - Binds ``<Return>`` and ``<space>`` to ``handler``.
+    - Adds a FocusIn/FocusOut ring using ``colors.p('active')`` / ``colors.p('border')``.
+    """
+    tk.Frame.configure(widget, takefocus=True)
+    widget.bind("<Return>", handler)
+    widget.bind("<space>", handler)
+
+    def _focus_in(_event=None):
+        if not widget.winfo_exists():
+            return
+        try:
+            widget.configure(border_color=colors.p(_ACTIVE))
+        except Exception:
+            pass
+
+    def _focus_out(_event=None):
+        if not widget.winfo_exists():
+            return
+        try:
+            widget.configure(border_color=colors.p(_BORDER))
+        except Exception:
+            pass
+
+    widget.bind("<FocusIn>", _focus_in, add="+")
+    widget.bind("<FocusOut>", _focus_out, add="+")
+
+
 class AssetStudioPanel(ctk.CTkFrame):
     """Outer container with tab bar for Icons and Cursors. Theme-reactive."""
 
-    def __init__(self, parent, icon_manager, cursor_manager, colors, theme_manager):
+    def __init__(self, parent, icon_manager, cursor_manager, colors, theme_manager,
+                 on_error=None):
         p = colors.palette
         super().__init__(parent, corner_radius=0, fg_color=p[_BG])
         self._icon_manager = icon_manager
@@ -91,11 +131,30 @@ class AssetStudioPanel(ctk.CTkFrame):
         self._colors = colors
         self._theme_manager = theme_manager
         self._active_tab = "icons"
+        self._on_error = on_error
 
         self._build()
         self._colors.register(self._on_palette_change)
 
+    def destroy(self):
+        """Unregister the palette callback before tearing down."""
+        try:
+            self._colors.unregister(self._on_palette_change)
+        except Exception:
+            pass
+        super().destroy()
+
+    def _notify_error(self, message: str) -> None:
+        """Route an error to the App's status bar (if wired)."""
+        if callable(self._on_error):
+            try:
+                self._on_error(message)
+            except Exception:
+                pass
+
     def _on_palette_change(self, palette: dict[str, str]):
+        if not self.winfo_exists():
+            return
         self.configure(fg_color=palette[_BG])
         self._tab_bar.configure(fg_color=palette[_ACCENT], border_color=palette[_BORDER])
         self._content_frame.configure(fg_color="transparent")
@@ -141,13 +200,15 @@ class AssetStudioPanel(ctk.CTkFrame):
 
         # Icon studio
         self._icon_studio = _IconStudioFrame(
-            self._content_frame, self._icon_manager, self._colors, self._theme_manager
+            self._content_frame, self._icon_manager, self._colors, self._theme_manager,
+            on_error=self._notify_error,
         )
         self._icon_studio.pack(fill="both", expand=True)
 
         # Cursor studio (hidden initially)
         self._cursor_studio = _CursorStudioFrame(
-            self._content_frame, self._cursor_manager, self._colors, self._theme_manager
+            self._content_frame, self._cursor_manager, self._colors, self._theme_manager,
+            on_error=self._notify_error,
         )
 
     def _switch_tab(self, tab):
@@ -177,8 +238,12 @@ class _SaveSetDialog(ctk.CTkToplevel):
         self.geometry("320x150")
         self.configure(fg_color=p[_BG])
         self.resizable(False, False)
+        self.transient(parent)
         self.grab_set()
         self._cb = callback
+        # Stash the palette so validation can use the theme's error colour
+        # rather than a hardcoded literal.
+        self._palette = p
 
         ctk.CTkLabel(self, text="New Set Name",
                       font=ctk.CTkFont(family="Segoe UI", size=11, weight="bold"),
@@ -201,7 +266,8 @@ class _SaveSetDialog(ctk.CTkToplevel):
     def _save(self):
         name = self._entry.get().strip()
         if not name:
-            self._entry.configure(border_color="#C42B1C")
+            # Use the theme's error colour rather than a hardcoded literal.
+            self._entry.configure(border_color=self._palette["error"])
             return
         self.destroy()
         self._cb(name)
@@ -210,24 +276,44 @@ class _SaveSetDialog(ctk.CTkToplevel):
 class _IconStudioFrame(ctk.CTkFrame):
     """Three-column icon set editor. Theme-reactive."""
 
-    def __init__(self, parent, icon_manager, colors, theme_manager):
+    def __init__(self, parent, icon_manager, colors, theme_manager, on_error=None):
         p = colors.palette
         super().__init__(parent, corner_radius=0, fg_color=p[_BG])
         self._icon_manager = icon_manager
         self._colors = colors
         self._theme_manager = theme_manager
+        self._on_error = on_error
         self._selected_set: Optional[str] = None
         self._current_mix: Dict[str, str] = {}
         self._selected_app: Optional[str] = None
         self._image_refs: List[ctk.CTkImage] = []
         self._set_row_widgets: Dict[str, ctk.CTkFrame] = {}
-        self._hex_var = tk.StringVar(value="#D58C40")
+        # Initialise the recolour hex field from the active palette so it
+        # reflects the current theme instead of a hardcoded orange.
+        self._hex_var = tk.StringVar(value=colors.p(_ACCENT))
 
         self._build_columns()
         self._load_set_list()
         self._colors.register(self._on_palette_change)
 
+    def destroy(self):
+        """Unregister the palette callback before tearing down."""
+        try:
+            self._colors.unregister(self._on_palette_change)
+        except Exception:
+            pass
+        super().destroy()
+
+    def _notify_error(self, message: str) -> None:
+        if callable(self._on_error):
+            try:
+                self._on_error(message)
+            except Exception:
+                pass
+
     def _on_palette_change(self, palette: dict[str, str]):
+        if not self.winfo_exists():
+            return
         self.configure(fg_color=palette[_BG])
         # Rebuild columns with new palette
         self._left.configure(fg_color=palette[_INACT], border_color=palette[_BORDER])
@@ -359,8 +445,9 @@ class _IconStudioFrame(ctk.CTkFrame):
         if self._icon_manager is not None:
             try:
                 sets = self._icon_manager.get_sets()
-            except Exception:
-                pass
+            except Exception as exc:
+                log.warning("[AssetStudio] icon get_sets failed: %s", exc)
+                self._notify_error(f"Icon sets could not be loaded: {exc}")
         p = self._colors.palette
         for set_name in sets:
             row = ctk.CTkFrame(self._set_scroll, corner_radius=0,
@@ -379,6 +466,9 @@ class _IconStudioFrame(ctk.CTkFrame):
             h = _make_handler(set_name)
             row.bind("<Button-1>", h)
             lbl.bind("<Button-1>", h)
+            # Keyboard navigation for the row.
+            _bind_keyboard_card(row, h, self._colors)
+            _bind_keyboard_card(lbl, h, self._colors)
 
         if not sets:
             ctk.CTkLabel(self._set_scroll, text="No icon sets found.",
@@ -458,7 +548,7 @@ class _IconStudioFrame(ctk.CTkFrame):
                           text_color=p[_TEXT], wraplength=80, justify="center").pack()
 
             ctk.CTkLabel(card, text=f"from: {self._selected_set}",
-                          font=ctk.CTkFont(family="Segoe UI", size=8),
+                          font=ctk.CTkFont(family="Segoe UI", size=10),
                           text_color=p[_BORDER], wraplength=80, justify="center").pack(pady=(0, 4))
 
             def _make_click(ak, al):
@@ -479,7 +569,8 @@ class _IconStudioFrame(ctk.CTkFrame):
             self._icon_manager.recolour_slot(self._selected_set, self._selected_app, hex_val)
             self._rebuild_slot_grid()
         except Exception as exc:
-            print(f"[AssetStudio] recolour_slot error: {exc}")
+            log.warning("[AssetStudio] recolour_slot error: %s", exc)
+            self._notify_error(f"Recolour slot failed: {exc}")
 
     def _recolour_set(self):
         if not self._selected_set:
@@ -491,7 +582,8 @@ class _IconStudioFrame(ctk.CTkFrame):
             self._icon_manager.recolour_set(self._selected_set, hex_val)
             self._rebuild_slot_grid()
         except Exception as exc:
-            print(f"[AssetStudio] recolour_set error: {exc}")
+            log.warning("[AssetStudio] recolour_set error: %s", exc)
+            self._notify_error(f"Recolour set failed: {exc}")
 
     def _save_as_new_set(self):
         def _do_save(name):
@@ -501,7 +593,8 @@ class _IconStudioFrame(ctk.CTkFrame):
                     self._load_set_list()
                     self._select_set(name)
                 except Exception as exc:
-                    print(f"[AssetStudio] save error: {exc}")
+                    log.warning("[AssetStudio] save error: %s", exc)
+                    self._notify_error(f"Save icon set failed: {exc}")
         _SaveSetDialog(self, self._colors.palette, _do_save)
 
     def _apply_set(self):
@@ -510,7 +603,8 @@ class _IconStudioFrame(ctk.CTkFrame):
         try:
             self._icon_manager.apply_mixed(self._current_mix)
         except Exception as exc:
-            print(f"[AssetStudio] apply error: {exc}")
+            log.warning("[AssetStudio] apply error: %s", exc)
+            self._notify_error(f"Apply icon set failed: {exc}")
 
     def _new_set(self):
         def _do_create(name):
@@ -520,31 +614,51 @@ class _IconStudioFrame(ctk.CTkFrame):
                     self._load_set_list()
                     self._select_set(name)
                 except Exception as exc:
-                    print(f"[AssetStudio] new_set error: {exc}")
+                    log.warning("[AssetStudio] new_set error: %s", exc)
+                    self._notify_error(f"Create icon set failed: {exc}")
         _SaveSetDialog(self, self._colors.palette, _do_create)
 
 
 class _CursorStudioFrame(ctk.CTkFrame):
     """Three-column cursor set editor. Theme-reactive."""
 
-    def __init__(self, parent, cursor_manager, colors, theme_manager):
+    def __init__(self, parent, cursor_manager, colors, theme_manager, on_error=None):
         p = colors.palette
         super().__init__(parent, corner_radius=0, fg_color=p[_BG])
         self._cursor_manager = cursor_manager
         self._colors = colors
         self._theme_manager = theme_manager
+        self._on_error = on_error
         self._selected_set: Optional[str] = None
         self._current_cursor_mix: Dict[str, str] = {}
         self._selected_role: Optional[str] = None
         self._image_refs: List[ctk.CTkImage] = []
         self._set_row_widgets: Dict[str, ctk.CTkFrame] = {}
-        self._hex_var = tk.StringVar(value="#D58C40")
+        # Initialise from the active palette (was hardcoded "#D58C40").
+        self._hex_var = tk.StringVar(value=colors.p(_ACCENT))
 
         self._build_columns()
         self._load_set_list()
         self._colors.register(self._on_palette_change)
 
+    def destroy(self):
+        """Unregister the palette callback before tearing down."""
+        try:
+            self._colors.unregister(self._on_palette_change)
+        except Exception:
+            pass
+        super().destroy()
+
+    def _notify_error(self, message: str) -> None:
+        if callable(self._on_error):
+            try:
+                self._on_error(message)
+            except Exception:
+                pass
+
     def _on_palette_change(self, palette: dict[str, str]):
+        if not self.winfo_exists():
+            return
         self.configure(fg_color=palette[_BG])
         self._left.configure(fg_color=palette[_INACT], border_color=palette[_BORDER])
         self._center.configure(fg_color=palette[_BG], border_color=palette[_BORDER])
@@ -668,8 +782,9 @@ class _CursorStudioFrame(ctk.CTkFrame):
         if self._cursor_manager is not None:
             try:
                 sets = self._cursor_manager.get_all_sets()
-            except Exception:
-                pass
+            except Exception as exc:
+                log.warning("[CursorStudio] get_all_sets failed: %s", exc)
+                self._notify_error(f"Cursor sets could not be loaded: {exc}")
         p = self._colors.palette
         for set_name in sets:
             row = ctk.CTkFrame(self._set_scroll, corner_radius=0,
@@ -688,6 +803,9 @@ class _CursorStudioFrame(ctk.CTkFrame):
             h = _make_handler(set_name)
             row.bind("<Button-1>", h)
             lbl.bind("<Button-1>", h)
+            # Keyboard navigation for the row.
+            _bind_keyboard_card(row, h, self._colors)
+            _bind_keyboard_card(lbl, h, self._colors)
 
         if not sets:
             ctk.CTkLabel(self._set_scroll, text="No cursor sets found.",
@@ -752,7 +870,7 @@ class _CursorStudioFrame(ctk.CTkFrame):
                           font=ctk.CTkFont(family="Segoe UI", size=9, weight="bold"),
                           text_color=p[_TEXT], wraplength=72, justify="center").pack()
             ctk.CTkLabel(card, text=os.path.splitext(os.path.basename(path))[0],
-                          font=ctk.CTkFont(family="Segoe UI", size=8),
+                          font=ctk.CTkFont(family="Segoe UI", size=10),
                           text_color=p[_BORDER], wraplength=72, justify="center").pack(pady=(0, 4))
 
             def _make_click(r, p):
@@ -774,7 +892,8 @@ class _CursorStudioFrame(ctk.CTkFrame):
             self._load_set_list()
             self._select_set(new_name)
         except Exception as exc:
-            print(f"[CursorStudio] recolour error: {exc}")
+            log.warning("[CursorStudio] recolour error: %s", exc)
+            self._notify_error(f"Recolour cursor set failed: {exc}")
 
     def _save_as_new_set(self):
         def _do_save(name):
@@ -784,7 +903,8 @@ class _CursorStudioFrame(ctk.CTkFrame):
                     self._load_set_list()
                     self._select_set(f"Custom: {name}")
                 except Exception as exc:
-                    print(f"[CursorStudio] save error: {exc}")
+                    log.warning("[CursorStudio] save error: %s", exc)
+                    self._notify_error(f"Save cursor set failed: {exc}")
         _SaveSetDialog(self, self._colors.palette, _do_save)
 
     def _apply_set(self):
@@ -793,4 +913,5 @@ class _CursorStudioFrame(ctk.CTkFrame):
         try:
             self._cursor_manager.apply_set(self._current_cursor_mix)
         except Exception as exc:
-            print(f"[CursorStudio] apply error: {exc}")
+            log.warning("[CursorStudio] apply error: %s", exc)
+            self._notify_error(f"Apply cursor set failed: {exc}")

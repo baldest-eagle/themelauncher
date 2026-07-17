@@ -79,8 +79,18 @@ class ThemeScheduler:
         log.info("Theme scheduler started")
 
     def stop(self) -> None:
-        """Stop the scheduler."""
+        """Stop the scheduler.
+
+        Signals the run loop to exit (``_running = False``), then joins the
+        background thread so callers can be sure no callback is in flight when
+        ``stop()`` returns. Captures ``self._thread`` before clearing it so a
+        re-entrant call (e.g. from ``stop_scheduler``) is safe.
+        """
         self._running = False
+        thread = self._thread
+        self._thread = None
+        if thread is not None and thread.is_alive() and thread is not threading.current_thread():
+            thread.join(timeout=35)
         log.info("Theme scheduler stopped")
 
     def _run(self) -> None:
@@ -91,11 +101,17 @@ class ThemeScheduler:
 
             if minute_key != last_checked:
                 last_checked = minute_key
-                for name, rule in self._rules.items():
+                for name, rule in list(self._rules.items()):
                     if self._matches_cron(rule["cron"], now):
                         log.info("Schedule triggered: %s -> %s", name, rule["theme"])
                         if self._apply_callback:
-                            self._apply_callback(rule["theme"], rule.get("components"))
+                            # ``apply_theme`` takes a single ``theme_name`` arg.
+                            # (Previously this passed 2 args, raising TypeError.)
+                            try:
+                                self._apply_callback(rule["theme"])
+                            except Exception:
+                                log.exception("Scheduled apply failed for rule '%s' "
+                                              "(theme=%s)", name, rule.get("theme"))
 
             time.sleep(30)
 
@@ -152,10 +168,22 @@ class ThemeScheduler:
         if dow_val == 7:
             dow_val = 0  # Normalize Sunday to 0 to match standard cron
 
-        return (
-            match_field(dt.minute, min_expr) and
-            match_field(dt.hour, hour_expr) and
-            match_field(dt.day, dom_expr) and
-            match_field(dt.month, month_expr) and
-            match_field(dow_val, dow_expr)
-        )
+        min_ok = match_field(dt.minute, min_expr)
+        hour_ok = match_field(dt.hour, hour_expr)
+        dom_ok = match_field(dt.day, dom_expr)
+        month_ok = match_field(dt.month, month_expr)
+        dow_ok = match_field(dow_val, dow_expr)
+
+        # POSIX cron semantics: when BOTH day-of-month and day-of-week are
+        # restricted (i.e. neither is ``*``), the rule fires on EITHER match
+        # (OR). Otherwise both must match (AND). This matches the behaviour of
+        # Vixie cron and is what users expect for expressions like
+        # ``0 0 13 * 5`` (the 13th of the month OR a Friday).
+        dom_restricted = dom_expr != "*"
+        dow_restricted = dow_expr != "*"
+        if dom_restricted and dow_restricted:
+            day_ok = dom_ok or dow_ok
+        else:
+            day_ok = dom_ok and dow_ok
+
+        return min_ok and hour_ok and month_ok and day_ok

@@ -13,6 +13,7 @@ import os
 import shutil
 from typing import Any
 
+from core._io import atomic_write_json
 from core.logger import log
 from core.manifest_parser import (
     FOLDER_COMPONENT_TYPES,
@@ -28,7 +29,21 @@ class ThemeManager:
         self.config = self._load_config()
         self.themes: dict[str, dict[str, Any]] = {}
         self.active_theme: str | None = self.config.get("active_theme")
-        self.active_components: dict[str, str] = self.config.get("active_components", {})
+        # Validate active_components schema. A malformed config (e.g., a list
+        # instead of a dict, or non-string values) would crash set_active_theme
+        # later with a confusing AttributeError. Coerce to dict[str, str].
+        raw_ac = self.config.get("active_components", {})
+        if isinstance(raw_ac, dict):
+            self.active_components = {
+                str(k): str(v) for k, v in raw_ac.items()
+                if v is not None
+            }
+        else:
+            log.warning(
+                "config.json 'active_components' is malformed (%s); resetting to empty",
+                type(raw_ac).__name__,
+            )
+            self.active_components = {}
 
     # ------------------------------------------------------------------
     # Config
@@ -43,8 +58,7 @@ class ThemeManager:
     def _save_config(self) -> None:
         self.config["active_theme"] = self.active_theme
         self.config["active_components"] = self.active_components
-        with open(self.config_path, "w", encoding="utf-8") as f:
-            json.dump(self.config, f, indent=2)
+        atomic_write_json(self.config_path, self.config, indent=2)
 
     # ------------------------------------------------------------------
     # Discovery
@@ -153,8 +167,18 @@ class ThemeManager:
             self.themes.pop(theme_name, None)
             return {"success": True, "message": f'Theme "{theme_name}" already removed from disk.'}
 
+        # Safety: refuse to delete if themes_directory is missing/empty —
+        # otherwise os.path.abspath("") resolves to CWD and the commonpath
+        # guard can wrongly allow or block the delete based on CWD.
+        themes_dir_raw = self.config.get("themes_directory", "")
+        if not themes_dir_raw:
+            return {
+                "success": False,
+                "message": "Themes directory not configured; refusing to delete.",
+            }
+
         # Safety: only delete inside managed directory
-        themes_dir = os.path.abspath(self.config.get("themes_directory", ""))
+        themes_dir = os.path.abspath(themes_dir_raw)
         target_path = os.path.abspath(theme_path)
         try:
             common = os.path.commonpath([themes_dir, target_path])
@@ -244,7 +268,8 @@ class ThemeManager:
         return self.themes.get(theme_name)
 
     def get_all_themes(self) -> dict[str, dict[str, Any]]:
-        return self.themes
+        # Shallow copy so callers can't mutate our internal state.
+        return dict(self.themes)
 
     def get_active_palette(self) -> dict[str, str]:
         if not self.active_theme:

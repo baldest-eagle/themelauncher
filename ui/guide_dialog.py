@@ -190,6 +190,7 @@ class GuideDialog(ctk.CTkToplevel):
             dialog.title("App Not Found")
             dialog.geometry("360x140")
             dialog.configure(fg_color=p["background"])
+            dialog.transient(self)
             dialog.grab_set()
             ctk.CTkLabel(
                 dialog,
@@ -197,8 +198,21 @@ class GuideDialog(ctk.CTkToplevel):
                 font=ctk.CTkFont(family="Segoe UI", size=11),
                 text_color=p["text"], wraplength=320, justify="center",
             ).pack(expand=True, padx=20, pady=20)
+
+            def _on_ok():
+                dialog.destroy()
+                # Restore the parent GuideDialog's modal grab — Tk does
+                # not auto-re-grab after a sub-dialog closes, so without
+                # this the user could interact with the main window
+                # behind the still-open guide.
+                if self.winfo_exists():
+                    try:
+                        self.grab_set()
+                    except Exception:
+                        pass
+
             ctk.CTkButton(
                 dialog, text="OK", corner_radius=0,
                 fg_color=p["accent"], text_color=p["text"],
-                hover_color=p["border"], command=dialog.destroy,
+                hover_color=p["border"], command=_on_ok,
             ).pack(pady=(0, 16))
