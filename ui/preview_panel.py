@@ -16,6 +16,8 @@ class PreviewPanel(ctk.CTkFrame):
         self.current_theme = None
         self.variant_buttons = {}
         self._image_refs = {}
+        self._selected_wallpapers = []
+        self._wp_style_var = ctk.StringVar(value="fill")
         self._build()
         self.colors.register(self._on_palette_change)
 
@@ -30,7 +32,6 @@ class PreviewPanel(ctk.CTkFrame):
     # ------------------------------------------------------------------
     # Palette change
     # ------------------------------------------------------------------
-
     def _on_palette_change(self, palette: dict[str, str]):
         if not self.winfo_exists():
             return
@@ -44,18 +45,12 @@ class PreviewPanel(ctk.CTkFrame):
             scrollbar_button_color=palette["border"],
             scrollbar_button_hover_color=palette["text"],
         )
-        # Rebuild content to pick up new palette colors
         if self.current_theme:
             self.load_theme(self.current_theme)
-
-    # ------------------------------------------------------------------
-    # Build
-    # ------------------------------------------------------------------
 
     def _build(self):
         p = self.colors.palette
 
-        # Header
         self._header = ctk.CTkFrame(self, fg_color=p["accent"], corner_radius=0,
                                      border_color=p["border"], border_width=1)
         self._header.pack(fill="x")
@@ -74,7 +69,6 @@ class PreviewPanel(ctk.CTkFrame):
         )
         self.author_label.pack(side="left", padx=4, pady=12)
 
-        # Main preview image
         self.preview_frame = ctk.CTkFrame(
             self, fg_color=p["inactive"], corner_radius=0,
             border_color=p["border"], border_width=1,
@@ -88,7 +82,6 @@ class PreviewPanel(ctk.CTkFrame):
         )
         self.preview_label.pack(fill="x", padx=8, pady=8)
 
-        # Scrollable content
         self.scroll = ctk.CTkScrollableFrame(
             self, fg_color=p["background"],
             scrollbar_button_color=p["border"],
@@ -160,6 +153,16 @@ class PreviewPanel(ctk.CTkFrame):
             font=ctk.CTkFont(family="Segoe UI", size=10, weight="bold"),
             text_color=p["text"],
         ).pack(side="left", padx=10, pady=6)
+
+        if comp_name == "wallpapers":
+            select_all_btn = ctk.CTkButton(
+                header, text="Select Multiple", width=100,
+                font=ctk.CTkFont(family="Segoe UI", size=9),
+                fg_color=p["border"], text_color=p["text"],
+                hover_color=p["active"], corner_radius=0,
+                command=lambda: self._open_wallpaper_selector(theme),
+            )
+            select_all_btn.pack(side="right", padx=8, pady=4)
 
         grid_frame = ctk.CTkFrame(self.scroll, fg_color="transparent")
         grid_frame.pack(fill="x", pady=(0, 4))
@@ -239,7 +242,12 @@ class PreviewPanel(ctk.CTkFrame):
         try:
             preview_path = variant.get("preview")
             if not preview_path:
-                return
+                file_path = variant.get("file", "")
+                img_exts = {".png", ".jpg", ".jpeg", ".bmp"}
+                if any(file_path.lower().endswith(ext) for ext in img_exts):
+                    preview_path = file_path
+                else:
+                    return
             full_path = os.path.join(theme["path"], preview_path)
             if not os.path.exists(full_path):
                 return
@@ -378,3 +386,71 @@ class PreviewPanel(ctk.CTkFrame):
             return ctk.CTkImage(light_image=img, size=(160, 107))
         except Exception:
             return None
+
+    def _open_wallpaper_selector(self, theme):
+        p = self.colors.palette
+
+        all_images = []
+        wallpaper_comp = theme["manifest"].get("components", {}).get("wallpapers", {})
+        for variant in wallpaper_comp.get("variants", []):
+            file_path = variant.get("file", "")
+            full = os.path.join(theme["path"], file_path)
+            if os.path.exists(full):
+                all_images.append(full)
+
+        dialog = ctk.CTkToplevel(self)
+        dialog.title("Select Wallpapers")
+        dialog.geometry("400x500")
+        dialog.configure(fg_color=p["background"])
+        dialog.transient(self.winfo_toplevel())
+        dialog.grab_set()
+
+        ctk.CTkLabel(
+            dialog, text="Select images for slideshow:",
+            font=ctk.CTkFont(family="Segoe UI", size=12),
+            text_color=p["text"],
+        ).pack(pady=(12, 8), padx=16, anchor="w")
+
+        scroll = ctk.CTkScrollableFrame(dialog, fg_color="transparent")
+        scroll.pack(fill="both", expand=True, padx=16)
+
+        var_map = {}
+        for img_path in all_images:
+            var = ctk.BooleanVar()
+            var_map[img_path] = var
+            row = ctk.CTkFrame(scroll, fg_color=p["card_fg"])
+            row.pack(fill="x", pady=2)
+            ctk.CTkCheckBox(
+                row, text=os.path.basename(img_path),
+                variable=var, text_color=p["text"],
+            ).pack(anchor="w", padx=8, pady=4)
+
+        style_frame = ctk.CTkFrame(dialog, fg_color="transparent")
+        style_frame.pack(fill="x", padx=16, pady=8)
+
+        ctk.CTkLabel(
+            style_frame, text="Style:",
+            font=ctk.CTkFont(family="Segoe UI", size=11),
+            text_color=p["text"],
+        ).pack(anchor="w")
+
+        style_combo = ctk.CTkComboBox(
+            style_frame, values=["fill", "fit", "stretch", "tile", "span"],
+            font=ctk.CTkFont(family="Segoe UI", size=11),
+        )
+        style_combo.pack(fill="x", pady=(4, 0))
+        style_combo.set("fill")
+
+        def apply_selection():
+            selected = [p for p, v in var_map.items() if v.get()]
+            if selected:
+                self._selected_wallpapers = selected
+                self._wp_style_var = ctk.StringVar(value=style_combo.get())
+                dialog.destroy()
+
+        ctk.CTkButton(
+            dialog, text="Apply Selection",
+            fg_color=p["accent"], text_color=p["text"],
+            hover_color=p["border"], corner_radius=0,
+            command=apply_selection,
+        ).pack(pady=12)

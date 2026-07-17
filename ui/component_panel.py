@@ -21,6 +21,7 @@ class ComponentPanel(ctk.CTkFrame):
         self.current_theme = None
         self.component_vars = {}
         self.component_rows = {}
+        self.detail_labels = {}
         self._build()
         self.colors.register(self._on_palette_change)
 
@@ -91,7 +92,16 @@ class ComponentPanel(ctk.CTkFrame):
             border_color=p["border"], border_width=1,
             command=self._on_apply_selected,
         )
-        self._apply_selected_btn.pack(fill="x", padx=8, pady=(8, 4))
+        self._apply_selected_btn.pack(fill="x", padx=8, pady=(8, 2))
+
+        self._uncheck_all_btn = ctk.CTkButton(
+            self._footer, text="Uncheck All",
+            font=ctk.CTkFont(family="Segoe UI", size=9),
+            fg_color="transparent", text_color=p["border"],
+            hover_color=p["inactive"], corner_radius=0,
+            command=self._on_uncheck_all,
+        )
+        self._uncheck_all_btn.pack(fill="x", padx=8, pady=2)
 
         self._apply_all_btn = ctk.CTkButton(
             self._footer, text="Apply Full Theme",
@@ -100,7 +110,11 @@ class ComponentPanel(ctk.CTkFrame):
             hover_color=p["border"], corner_radius=0,
             command=self._on_apply_all,
         )
-        self._apply_all_btn.pack(fill="x", padx=8, pady=(4, 8))
+        self._apply_all_btn.pack(fill="x", padx=8, pady=(2, 8))
+
+    def _on_uncheck_all(self):
+        for var in self.component_vars.values():
+            var.set(False)
 
     def load_theme(self, theme_name: str):
         self.current_theme = theme_name
@@ -112,6 +126,7 @@ class ComponentPanel(ctk.CTkFrame):
             widget.destroy()
         self.component_vars = {}
         self.component_rows = {}
+        self.detail_labels = {}
 
         manifest = theme["manifest"]
         components = manifest.get("components", {})
@@ -159,11 +174,13 @@ class ComponentPanel(ctk.CTkFrame):
         # Detail info
         detail = self._get_detail(comp_name, comp_data)
         if detail:
-            ctk.CTkLabel(
+            lbl = ctk.CTkLabel(
                 row, text=detail,
                 font=ctk.CTkFont(family="Segoe UI", size=9),
                 text_color=p["border"], anchor="e",
-            ).pack(side="right", padx=8, pady=8)
+            )
+            lbl.pack(side="right", padx=8, pady=8)
+            self.detail_labels[comp_name] = lbl
 
         # Action button
         is_guide = comp_name in self.GUIDE_COMPONENTS
@@ -218,6 +235,11 @@ class ComponentPanel(ctk.CTkFrame):
         row = self.component_rows.get(component_type)
         if row:
             row.configure(fg_color=p["inactive"], border_color=p["accent"])
+        
+        lbl = self.detail_labels.get(component_type)
+        if lbl:
+            text = variant_name[:20] + "..." if len(variant_name) > 20 else variant_name
+            lbl.configure(text=text)
 
     def _on_apply_selected(self):
         if not self.current_theme:

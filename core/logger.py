@@ -17,7 +17,7 @@ from logging.handlers import RotatingFileHandler
 
 _LOG_DIR = os.path.join(os.path.dirname(__file__), "..", "logs")
 _LOG_FILE = os.path.join(_LOG_DIR, "theme_launcher.log")
-_MAX_BYTES = 2 * 1024 * 1024  # 2 MB
+_MAX_BYTES = 2 * 1024 * 1024
 _BACKUP_COUNT = 3
 
 _logger: logging.Logger | None = None

@@ -125,6 +125,14 @@ class App(ctk.CTk):
         self.restore_button.configure(
             fg_color=p["accent"], text_color=p["text"], hover_color=p["border"],
         )
+        self.sfc_button.configure(
+            fg_color=p["accent"], text_color=p["text"], hover_color=p["border"],
+        )
+        self.settings_button.configure(
+            fg_color=p["accent"], text_color=p["text"], hover_color=p["border"],
+        )
+        if hasattr(self, "admin_label") and self.admin_label.winfo_exists():
+            self.admin_label.configure(text_color=palette["status_fg"])
 
         # Refresh theme cards (they hold their own palette ref)
         for card in self._card_widgets:
@@ -216,7 +224,23 @@ class App(ctk.CTk):
             hover_color=p["border"], corner_radius=0,
             command=self._restore_system_defaults,
         )
-        self.restore_button.pack(fill="x", padx=12, pady=(0, 8))
+        self.restore_button.pack(fill="x", padx=12, pady=(0, 4))
+
+        self.sfc_button = ctk.CTkButton(
+            self.sidebar, text="Integrity Scan (SFC)",
+            fg_color=p["accent"], text_color=p["text"],
+            hover_color=p["border"], corner_radius=0,
+            command=self._run_integrity_scan,
+        )
+        self.sfc_button.pack(fill="x", padx=12, pady=(0, 4))
+
+        self.settings_button = ctk.CTkButton(
+            self.sidebar, text="Windows Preferences",
+            fg_color=p["accent"], text_color=p["text"],
+            hover_color=p["border"], corner_radius=0,
+            command=self._open_preferences,
+        )
+        self.settings_button.pack(fill="x", padx=12, pady=(0, 8))
 
         # Scrollable theme list
         self.theme_scroll = ctk.CTkScrollableFrame(
@@ -292,6 +316,15 @@ class App(ctk.CTk):
             text_color=p["status_fg"], anchor="w",
         )
         self.status_label.pack(side="left", padx=12, pady=4)
+
+        # Admin indicator
+        self.admin_label = ctk.CTkLabel(
+            self.status_bar, text="USER",
+            font=ctk.CTkFont(family="Segoe UI", size=9, weight="bold"),
+            text_color=p["status_fg"],
+        )
+        self.admin_label.pack(side="right", padx=16, pady=4)
+        self._update_admin_status()
 
         self._card_widgets: list[ThemeCard] = []
 
@@ -842,7 +875,7 @@ class App(ctk.CTk):
     def _set_busy(self, busy: bool):
         """Disable the sidebar's destructive buttons while a background
         operation is running."""
-        for btn in (self.import_button, self.delete_button, self.restore_button):
+        for btn in (self.import_button, self.delete_button, self.restore_button, self.sfc_button, self.settings_button):
             try:
                 btn.configure(state="disabled" if busy else "normal")
             except Exception:
@@ -1009,3 +1042,42 @@ class App(ctk.CTk):
         except Exception:
             pass
         log.info("Status: %s", message)
+
+    def _update_admin_status(self):
+        try:
+            import ctypes
+            is_admin = ctypes.windll.shell32.IsUserAnAdmin() != 0
+        except Exception:
+            is_admin = False
+
+        p = self.colors.palette
+        if is_admin:
+            self.admin_label.configure(text="ADMIN", text_color=p["status_fg"])
+        else:
+            self.admin_label.configure(text="LIMITED (NO ADMIN)", text_color="#e81123")
+            log.warning("App running without administrative privileges")
+
+    def _open_preferences(self):
+        from ui.preferences_panel import PreferencesPanel
+        dialog = PreferencesPanel(self, self.colors)
+        dialog.grab_set()
+
+    def _run_integrity_scan(self):
+        import threading
+        
+        def _scan_and_wait():
+            res = self.applier.run_sfc_scan(on_progress=lambda msg: self.after(0, lambda: self._set_status(msg)))
+            if res.get("thread_started"):
+                res["thread"].join()
+                return res["result_container"]["result"]
+            return res
+
+        def _done(result):
+            if isinstance(result, Exception):
+                self._show_result({"success": False, "message": f"SFC Scan failed: {result}"})
+                self._set_status("SFC scan failed", severity="error")
+            else:
+                self._show_result(result)
+                self._set_status("Integrity Scan complete", severity="success" if result.get("success") else "error")
+
+        self._run_async("Starting Integrity Scan (SFC)...", _scan_and_wait, _done)

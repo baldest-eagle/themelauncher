@@ -13,10 +13,14 @@ import os
 from typing import Any, Optional
 
 from ..core.logger import log
+from .preview_generator import PreviewGenerator
 
 
 class ManifestGenerator:
     """Auto-generate manifest.json from a folder of theme assets."""
+
+    def __init__(self):
+        self.preview_gen = PreviewGenerator()
 
     def generate(
         self,
@@ -30,11 +34,14 @@ class ManifestGenerator:
 
         manifest_name = name or os.path.basename(os.path.normpath(theme_dir))
 
+        # Phase 0: Organize folder into standard structure
+        self.organize_folder(theme_dir)
+
         # Phase 1: Discover & classify files
         file_map = self.discover_components(theme_dir)
 
         # Phase 2: Build component entries
-        components = self.build_component_entries(file_map)
+        components = self.build_component_entries(file_map, theme_dir)
 
         # Phase 3: Extract palette from wallpaper
         palette = {"background": "#2b2b2b", "accent": "#3d3d3d", "text": "#ffffff",
@@ -47,6 +54,9 @@ class ManifestGenerator:
                     palette = self.extract_palette(wall_path)
                 except Exception as exc:
                     log.warning("Palette extraction failed: %s", exc)
+
+        # Phase 3.5: Generate previews for components
+        self.generate_component_previews(components, theme_dir)
 
         manifest = {
             "name": manifest_name,
@@ -85,9 +95,12 @@ class ManifestGenerator:
                 ext = os.path.splitext(filename)[1].lower()
                 rel_path = os.path.relpath(os.path.join(root, filename), theme_dir)
 
+                # Skip files in the guides folders - they should be detected by guide component
+                if "guide" in root.lower() or root.endswith("guides"):
+                    continue
+
                 if ext == ".msstyles":
                     file_map.setdefault("msstyles", []).append(rel_path)
-                    # Also look for paired .theme file
                     theme_candidate = rel_path.replace(".msstyles", ".theme")
                     if os.path.exists(os.path.join(theme_dir, theme_candidate)):
                         file_map.setdefault("themes", []).append(theme_candidate)
@@ -98,15 +111,12 @@ class ManifestGenerator:
                 elif ext in (".ttf", ".otf", ".woff", ".woff2"):
                     file_map.setdefault("fonts", []).append(rel_path)
                 elif ext in (".jpg", ".jpeg", ".png", ".bmp"):
-                    # Heuristic: large images are wallpapers
                     try:
                         size = os.path.getsize(os.path.join(root, filename))
-                        if size > 100 * 1024:  # > 100KB
+                        if size > 100 * 1024:
                             file_map.setdefault("wallpapers", []).append(rel_path)
-                        else:
-                            file_map.setdefault("previews", []).append(rel_path)
                     except OSError:
-                        file_map.setdefault("wallpapers", []).append(rel_path)
+                        pass
                 elif ext == ".ico":
                     file_map.setdefault("icons", []).append(rel_path)
                 elif ext in (".yaml", ".yml", ".ini"):
@@ -118,25 +128,27 @@ class ManifestGenerator:
 
         return file_map
 
-    def build_component_entries(self, file_map: dict[str, list[str]]) -> dict[str, Any]:
+    def organize_folder(self, theme_dir: str) -> None:
+        """Organize theme folder into standard structure. Create missing folders."""
+        for folder in ["wallpapers", "cursors", "fonts", "icons", "themes", "windhawk", "firefox"]:
+            os.makedirs(os.path.join(theme_dir, folder), exist_ok=True)
+
+    def build_component_entries(self, file_map: dict[str, list[str]], theme_dir: str) -> dict[str, Any]:
         """Phase 2: Group files into component entries with variant lists."""
         components: dict[str, Any] = {}
 
-        # Msstyles -> variants
         if file_map.get("msstyles"):
             variants = []
             for path in file_map["msstyles"]:
+                # If it's in a StartAllBack folder, skip it here (handled later)
+                if "startallback" in path.lower() or "sab" in path.lower():
+                    continue
                 name = os.path.splitext(os.path.basename(path))[0]
                 variant = {"name": name, "file": path}
-                # Check for preview
-                preview_base = os.path.splitext(path)[0] + ".png"
-                if file_map.get("previews") and any(preview_base in p for p in file_map["previews"]):
-                    variant["preview"] = preview_base
                 variants.append(variant)
             if variants:
                 components["msstyles"] = {"variants": variants}
 
-        # Themes -> variants
         if file_map.get("themes"):
             variants = [
                 {"name": os.path.splitext(os.path.basename(p))[0], "file": p}
@@ -145,7 +157,6 @@ class ManifestGenerator:
             if variants:
                 components["themes"] = {"variants": variants}
 
-        # Wallpapers -> variants
         if file_map.get("wallpapers"):
             variants = [
                 {"name": f"Wallpaper {i+1}", "file": p}
@@ -154,13 +165,11 @@ class ManifestGenerator:
             if variants:
                 components["wallpapers"] = {"variants": variants}
 
-        # Cursors -> folder path
         if file_map.get("cursors"):
-            # Find common parent
+            # Find the most likely path containing cursors
             parent = os.path.commonpath(file_map["cursors"])
             components["cursors"] = {"path": parent} if parent else {"path": "cursors"}
 
-        # Fonts -> variants
         if file_map.get("fonts"):
             variants = []
             for path in file_map["fonts"]:
@@ -169,15 +178,112 @@ class ManifestGenerator:
             if variants:
                 components["fonts"] = {"variants": variants}
 
-        # Firefox
         if file_map.get("firefox"):
             parent = os.path.commonpath(file_map["firefox"])
             components["firefox"] = {"path": parent} if parent else {"path": "chrome"}
 
+        # --- Enhanced Detection ---
+
+        # 1. Icons
+        if file_map.get("icons"):
+            variants = []
+            for path in file_map["icons"]:
+                name = os.path.splitext(os.path.basename(path))[0]
+                variants.append({"name": name, "file": path})
+            if variants:
+                components["icons"] = {"variants": variants}
+
+        # 2. Windhawk Mods
+        if file_map.get("windhawk_mods"):
+            variants = []
+            for path in file_map["windhawk_mods"]:
+                name = os.path.splitext(os.path.basename(path))[0]
+                variants.append({"name": name, "file": path})
+            if variants:
+                components["windhawk"] = {"variants": variants}
+
+        # 3. Resource Redirect (theme.ini)
+        theme_ini = None
+        for root, dirs, files in os.walk(theme_dir):
+            if "theme.ini" in files:
+                theme_ini = os.path.relpath(os.path.join(root, "theme.ini"), theme_dir)
+                break
+        if theme_ini:
+            components["resource_redirect"] = {"path": os.path.dirname(theme_ini)}
+
+        # 4. StartOrb
+        orb_files = []
+        for root, dirs, files in os.walk(theme_dir):
+            if "orb" in root.lower() or "start" in root.lower():
+                for f in files:
+                    if f.lower().endswith((".png", ".bmp", ".svg")):
+                        orb_files.append(os.path.relpath(os.path.join(root, f), theme_dir))
+        if orb_files:
+            variants = [{"name": os.path.splitext(os.path.basename(p))[0], "file": p} for p in orb_files]
+            components["startorb"] = {"variants": variants}
+
+        # 5. StartAllBack
+        sab_styles = []
+        for path in file_map.get("msstyles", []):
+            if "startallback" in path.lower() or "sab" in path.lower():
+                sab_styles.append(path)
+        if sab_styles:
+            variants = [{"name": os.path.splitext(os.path.basename(p))[0], "file": p} for p in sab_styles]
+            components["startallback"] = {"variants": variants}
+
+        # 6. MicaForEveryone
+        mica_json = None
+        for root, dirs, files in os.walk(theme_dir):
+            if "mica" in root.lower():
+                for f in files:
+                    if f.lower().endswith(".json"):
+                        mica_json = os.path.relpath(os.path.join(root, f), theme_dir)
+                        break
+        if mica_json:
+            components["mica"] = {"settings_json": mica_json}
+
+        # 7. OldNewExplorer
+        one_reg = None
+        for root, dirs, files in os.walk(theme_dir):
+            for f in files:
+                if "oldnewexplorer" in f.lower() and f.lower().endswith(".reg"):
+                    one_reg = os.path.relpath(os.path.join(root, f), theme_dir)
+                    break
+        if one_reg:
+            components["oldnewexplorer"] = {"reg_file": one_reg}
+
         return components
 
+    def generate_component_previews(self, components: dict, theme_dir: str):
+        """Automate preview generation for variants using the Preview Bot engine."""
+        preview_dir = os.path.join(theme_dir, "previews")
+        os.makedirs(preview_dir, exist_ok=True)
+
+        # MSSTYLES
+        if "msstyles" in components:
+            for variant in components["msstyles"].get("variants", []):
+                file_rel = variant.get("file")
+                file_abs = os.path.join(theme_dir, file_rel)
+                out_filename = f"preview_msstyles_{variant['name']}.png"
+                out_path = os.path.join(preview_dir, out_filename)
+                
+                if self.preview_gen.generate_from_msstyles(file_abs, out_path):
+                    variant["preview"] = os.path.relpath(out_path, theme_dir)
+
+        # THEMES
+        if "themes" in components:
+            for variant in components["themes"].get("variants", []):
+                file_rel = variant.get("file")
+                file_abs = os.path.join(theme_dir, file_rel)
+                out_filename = f"preview_themes_{variant['name']}.png"
+                out_path = os.path.join(preview_dir, out_filename)
+                
+                # Use theme generator if it's a .theme file
+                if file_rel.endswith(".theme"):
+                    if self.preview_gen.generate_from_theme(file_abs, out_path):
+                        variant["preview"] = os.path.relpath(out_path, theme_dir)
+
     def extract_palette(self, image_path: str) -> dict[str, str]:
-        """Phase 3: Extract dominant colors from wallpaper using k-means on pixel data."""
         try:
             from PIL import Image
             import numpy as np
@@ -205,7 +311,6 @@ class ManifestGenerator:
                     break
                 centroids = new_centroids
 
-            # Sort by luminance
             luminance = 0.299 * centroids[:, 0] + 0.587 * centroids[:, 1] + 0.114 * centroids[:, 2]
             sorted_idx = np.argsort(luminance)
 
@@ -228,7 +333,6 @@ class ManifestGenerator:
                     "inactive": "#1a1a1a", "border": "#555555", "active": "#ffffff"}
 
     def validate_generated(self, manifest: dict) -> list[str]:
-        """Phase 4: Verify completeness, emit warnings."""
         warnings = []
         components = manifest.get("components", {})
 

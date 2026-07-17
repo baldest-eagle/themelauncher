@@ -26,6 +26,7 @@ from .agents.seven_tsp_extractor import SevenTSPExtractor
 from .agents.snapshot import SnapshotAgent
 from .agents.update_resilience import UpdateResilience
 from .agents.variant_generator import VariantGenerator
+from .agents.preview_bot import PreviewBot
 from .core.logger import log
 
 
@@ -54,6 +55,7 @@ class ThemeSDK:
         self._packager: Optional[ThemePackager] = None
         self._auditor: Optional[DirectoryAuditor] = None
         self._tsp_extractor: Optional[SevenTSPExtractor] = None
+        self._preview_bot: Optional[PreviewBot] = None
 
         log.info("ThemeSDK initialized")
 
@@ -381,3 +383,15 @@ class ThemeSDK:
         themes_dir = tm.config.get("themes_directory", "")
         extractor = self._get_or_create("_tsp_extractor", SevenTSPExtractor)
         return extractor.full_pipeline(archive_path, theme_name, themes_dir)
+
+    # ------------------------------------------------------------------
+    # Agent methods: Preview Bot
+    # ------------------------------------------------------------------
+
+    def ingest_preview(self, file_path: str, theme_name: Optional[str] = None) -> dict:
+        tm = self._load_theme_manager()
+        if not tm:
+            return {"success": False, "message": "Theme manager not available"}
+        themes_dir = tm.config.get("themes_directory", "")
+        bot = self._get_or_create("_preview_bot", PreviewBot, themes_dir)
+        return bot.ingest_file(file_path, theme_name)

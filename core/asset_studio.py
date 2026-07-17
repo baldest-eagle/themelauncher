@@ -464,6 +464,23 @@ class IconSetManager:
         self._save()
         return new_filename
 
+    def recolour_msstyles_buttons(self, msstyles_path: str, new_hex: str, output_dir: str) -> dict[str, str]:
+        """Extract and recolour caption buttons from an msstyles file."""
+        from themelauncher.agents.preview_generator import PreviewGenerator
+        gen = PreviewGenerator()
+        buttons = gen.extract_caption_buttons(msstyles_path)
+        
+        results = {}
+        os.makedirs(output_dir, exist_ok=True)
+        
+        for role, img in buttons.items():
+            recoloured = recolour_image(img, new_hex)
+            out_path = os.path.join(output_dir, f"caption_{role}_{new_hex.lstrip('#')}.png")
+            recoloured.save(out_path)
+            results[role] = out_path
+            
+        return results
+
     # -- Apply shortcuts -----------------------------------------------------
 
     def apply_set(self, set_name: str) -> dict:

@@ -437,6 +437,42 @@ class _IconStudioFrame(ctk.CTkFrame):
                            font=ctk.CTkFont(family="Segoe UI", size=10),
                            command=cmd).pack(fill="x", padx=10, pady=2)
 
+        _section_header(scroll, "CAPTION BUTTONS", p)
+        ctk.CTkLabel(scroll, text="Extract & tint from .msstyles",
+                      font=ctk.CTkFont(family="Segoe UI", size=9),
+                      text_color=p[_BORDER]).pack(anchor="w", padx=10, pady=(4, 4))
+        
+        ctk.CTkButton(scroll, text="Extract & Recolour", corner_radius=0,
+                       fg_color=p[_INACT], text_color=p[_TEXT],
+                       hover_color=p[_BORDER], border_color=p[_BORDER], border_width=1,
+                       font=ctk.CTkFont(family="Segoe UI", size=10),
+                       command=self._extract_msstyles_buttons).pack(fill="x", padx=10, pady=2)
+
+    def _extract_msstyles_buttons(self):
+        file_path = filedialog.askopenfilename(
+            title="Select .msstyles",
+            filetypes=[("MSStyles", "*.msstyles")]
+        )
+        if not file_path:
+            return
+        
+        hex_val = self._hex_var.get().strip()
+        if not hex_val or self._icon_manager is None:
+            return
+            
+        try:
+            out_dir = filedialog.askdirectory(title="Select Output Directory for Images")
+            if not out_dir:
+                return
+            
+            results = self._icon_manager.recolour_msstyles_buttons(file_path, hex_val, out_dir)
+            if results:
+                print(f"[AssetStudio] Extracted {len(results)} buttons to {out_dir}")
+            else:
+                print(f"[AssetStudio] No buttons found in {file_path}")
+        except Exception as exc:
+            print(f"[AssetStudio] extract error: {exc}")
+
     def _load_set_list(self):
         for w in self._set_scroll.winfo_children():
             w.destroy()

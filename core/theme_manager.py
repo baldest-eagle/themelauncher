@@ -110,12 +110,6 @@ class ThemeManager:
             return {"success": False, "message": "Themes directory not configured."}
         os.makedirs(themes_dir, exist_ok=True)
 
-        try:
-            parser = ManifestParser(source_folder)
-            manifest = parser.load()
-        except (FileNotFoundError, ValueError) as exc:
-            return {"success": False, "message": f"Invalid theme folder: {exc}"}
-
         folder_name = os.path.basename(os.path.normpath(source_folder))
         dest_folder = os.path.join(themes_dir, folder_name)
 
@@ -135,7 +129,14 @@ class ThemeManager:
         except Exception as exc:
             return {"success": False, "message": f"Failed to copy theme: {exc}"}
 
-        # Incremental add — no full re-scan
+        manifest_path = os.path.join(dest_folder, "manifest.json")
+        if not os.path.exists(manifest_path):
+            from themelauncher.agents.manifest_generator import ManifestGenerator
+            organizer = ManifestGenerator()
+            result = organizer.generate(dest_folder)
+            if not result.get("success"):
+                return {"success": False, "message": f"Failed to generate manifest: {result.get('message', 'Unknown error')}"}
+
         try:
             parser = ManifestParser(dest_folder)
             manifest = parser.load()
@@ -163,7 +164,6 @@ class ThemeManager:
 
         theme_path = theme.get("path")
         if not theme_path or not os.path.exists(theme_path):
-            # Already gone — just remove from dict
             self.themes.pop(theme_name, None)
             return {"success": True, "message": f'Theme "{theme_name}" already removed from disk.'}
 
@@ -192,7 +192,6 @@ class ThemeManager:
         except Exception as exc:
             return {"success": False, "message": f"Failed to delete theme folder: {exc}"}
 
-        # Incremental remove — no full re-scan
         self.themes.pop(theme_name, None)
 
         if self.active_theme == theme_name:
@@ -233,20 +232,16 @@ class ThemeManager:
                 merged[comp_type] = saved_name if saved_name in valid_names else first_name
 
             elif comp_type in FOLDER_COMPONENT_TYPES:
-                # Folder-type: store the path so Applier can find it
                 folder_path = comp_data.get("path", comp_type)
                 merged[comp_type] = saved.get(comp_type, folder_path)
 
             elif comp_type in ("mica", "oldnewexplorer"):
-                # Guide-type: store "guide" marker
                 merged[comp_type] = saved.get(comp_type, "guide")
 
             elif comp_type == "startallback":
-                # Legacy startallback without variants: store "guide" marker as safety net
                 merged[comp_type] = saved.get(comp_type, "guide")
 
             else:
-                # Unknown type — best-effort: keep saved or store empty string
                 merged[comp_type] = saved.get(comp_type, "")
 
         self.active_components = merged

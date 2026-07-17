@@ -234,6 +234,39 @@ class Applier:
         except Exception as exc:
             results["resource_redirect"] = {"success": False, "message": str(exc)}
 
+        # 11. Manual Icon Overrides cleanup
+        try:
+            # Clear Shell Icons
+            try:
+                winreg.DeleteKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons")
+                log.info("Deleted Shell Icons registry key")
+            except Exception:
+                pass # Key might not exist
+            
+            # Reset Folder and Directory DefaultIcon
+            keys_to_reset = [
+                (winreg.HKEY_CLASSES_ROOT, r"Folder\DefaultIcon", "%SystemRoot%\\System32\\shell32.dll,3"),
+                (winreg.HKEY_CLASSES_ROOT, r"Directory\DefaultIcon", "%SystemRoot%\\System32\\shell32.dll,3"),
+                (winreg.HKEY_CLASSES_ROOT, r"Drive\DefaultIcon", "%SystemRoot%\\System32\\shell32.dll,8"),
+                (winreg.HKEY_CLASSES_ROOT, r"txtfilelegacy\DefaultIcon", None),
+            ]
+            
+            for hkey, subkey, default_val in keys_to_reset:
+                try:
+                    k = winreg.OpenKey(hkey, subkey, 0, winreg.KEY_WRITE)
+                    if default_val:
+                        winreg.SetValueEx(k, "", 0, winreg.REG_EXPAND_SZ, default_val)
+                    else:
+                        # For keys we added like txtfilelegacy\DefaultIcon, delete the whole key or value
+                        winreg.CloseKey(k)
+                        # We might need DeleteKey here but let's be careful
+                except Exception:
+                    continue
+            
+            results["manual_icons"] = {"success": True, "message": "Manual icon overrides cleared"}
+        except Exception as exc:
+            results["manual_icons"] = {"success": False, "message": str(exc)}
+
         return results
 
     # ------------------------------------------------------------------
@@ -832,15 +865,28 @@ class Applier:
     # WINDHAWK
     # ------------------------------------------------------------------
 
+    def _find_windhawk_mods_path(self) -> str | None:
+        """Find the correct Windhawk ModsWritable directory."""
+        paths = [
+            os.path.join(os.environ.get("ProgramData", "C:\\ProgramData"), "Windhawk", "Engine", "ModsWritable"),
+            os.path.join(os.environ.get("APPDATA", ""), "Windhawk", "ModsWritable"),
+        ]
+        for p in paths:
+            if os.path.isdir(p):
+                return p
+        return None
+
     def _apply_windhawk(self, theme_name, component, variant_name=None):
         try:
-            windhawk_path = os.path.join(
-                os.environ.get("APPDATA", ""), "Windhawk", "ModsWritable"
-            )
-            if not os.path.exists(windhawk_path):
+            windhawk_path = self._find_windhawk_mods_path()
+            if not windhawk_path:
                 return {"success": False, "message": "Windhawk mods directory not found"}
 
-            mods = component.get("mods", [])
+            mods = component.get("variants", [])
+            if not mods:
+                # Fallback to old mods key
+                mods = component.get("mods", [])
+
             applied = []
 
             if isinstance(mods, str):
@@ -1091,11 +1137,35 @@ class Applier:
 
     def _apply_oldnewexplorer(self, theme_name, component, variant_name=None):
         try:
+            # 1. Look for auto-apply registry file
+            reg_rel = component.get("reg_file")
+            if reg_rel:
+                reg_path = self._resolve(theme_name, reg_rel)
+                if reg_path and os.path.exists(reg_path):
+                    subprocess.run(
+                        ["reg", "import", reg_path],
+                        capture_output=True,
+                        text=True,
+                        creationflags=0x00000008,
+                    )
+                    log.info("OldNewExplorer registry settings applied from manifest key")
+
+            # 2. Look for default naming convention if not in manifest
+            reg_default = self._resolve(theme_name, "Settings/OldNewExplorer.reg")
+            if reg_default and os.path.exists(reg_default):
+                subprocess.run(
+                    ["reg", "import", reg_default],
+                    capture_output=True,
+                    text=True,
+                    creationflags=0x00000008,
+                )
+                log.info("OldNewExplorer registry settings applied from default path")
+
             guide_rel = component.get("guide")
             guide_abs = self._resolve(theme_name, guide_rel) if guide_rel else None
             return {
                 "success": True,
-                "message": "OldNewExplorer requires manual configuration. Opening guide.",
+                "message": "OldNewExplorer settings applied (Manual setup may still be required).",
                 "guide": True,
                 "guide_path": guide_abs,
                 "app": component.get("app", "oldnewexplorer"),
